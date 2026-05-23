@@ -1,0 +1,16 @@
+À rajouter sur les effets :
+    – saut avec LiquidWalker
+
+Effet à faire :
+    – brainwashing
+
+ajouter nouveau effet:
+    - xp life : la barre de vie disparait et l'xp cmpte comme la vie (1 coeur = 1 barre xp)
+    - magnetisme : attrape les objet au sol de loin
+    - activation : active les truc comme un bloc de redstone
+    - time stop ???
+    - zeus : quand tu tape un mob il se fait frapper par la foudre
+
+ajout d'effet maladie + virus:
+    - contagion zombie
+    - rhume : toute les 5-10sec petite toux qui fait sauter en arriere

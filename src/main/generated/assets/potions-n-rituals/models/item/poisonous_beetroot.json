@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "potions-n-rituals:item/poisonous_beetroot"
+  }
+}

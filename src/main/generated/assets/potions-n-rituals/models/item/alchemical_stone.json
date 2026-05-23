@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "potions-n-rituals:item/alchemical_stone",
+    "layer1": "potions-n-rituals:item/alchemical_stone_overlay"
+  }
+}

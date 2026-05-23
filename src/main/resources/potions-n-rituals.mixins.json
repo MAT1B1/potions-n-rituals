@@ -1,0 +1,29 @@
+{
+  "required": true,
+  "package": "com.matibi.potionsnrituals.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ItemPostHitMixin",
+    "SlotEffectMixin",
+    "brewingNpotion.BrewingStandAccessor",
+    "brewingNpotion.BrewingStandBlockEntityMixin",
+    "brewingNpotion.LingeringPotionItemMixin",
+    "brewingNpotion.SplashPotionItemMixin",
+    "effect.AdhesionMixin",
+    "effect.LiquidWalkerMixin",
+    "effect.XpBoostMixin",
+    "effect.PlayerIgnitionMixin",
+    "effect.VampirismMixin",
+    "effect.ghost_walker.EntityMixin",
+    "effect.ghost_walker.LivingEntityMixin",
+    "effect.ghost_walker.PlayerGhostWalkMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+	}
+}

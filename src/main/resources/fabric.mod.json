@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "potions-n-rituals",
+	"version": "${version}",
+	"name": "Potions & Rituals",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Matibi"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT-License",
+	"icon": "assets/potions-n-rituals/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.matibi.potionsnrituals.PotionsNRituals"
+		],
+		"client": [
+			"com.matibi.potionsnrituals.PotionsNRitualsClient"
+		],
+		"fabric-datagen": [
+			"com.matibi.potionsnrituals.PotionsNRitualsDataGenerator"
+		]
+	},
+	"mixins": [
+		"potions-n-rituals.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

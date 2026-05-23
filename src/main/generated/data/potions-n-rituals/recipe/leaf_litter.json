@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "potions-n-rituals:leaf",
+    "potions-n-rituals:leaf",
+    "potions-n-rituals:leaf",
+    "potions-n-rituals:leaf",
+    "potions-n-rituals:leaf",
+    "potions-n-rituals:leaf",
+    "potions-n-rituals:leaf",
+    "potions-n-rituals:leaf",
+    "potions-n-rituals:leaf"
+  ],
+  "result": {
+    "id": "minecraft:leaf_litter"
+  }
+}

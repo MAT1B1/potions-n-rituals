@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#minecraft:leaves"
+  ],
+  "result": {
+    "count": 9,
+    "id": "potions-n-rituals:leaf"
+  }
+}
