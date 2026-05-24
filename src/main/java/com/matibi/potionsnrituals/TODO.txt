@@ -1,16 +1,23 @@
 À rajouter sur les effets :
     – saut avec LiquidWalker
+    - brulure au soleil avec vampirisme
 
 Effet à faire :
     – brainwashing
 
 ajouter nouveau effet:
-    - xp life : la barre de vie disparait et l'xp cmpte comme la vie (1 coeur = 1 barre xp)
+    - zeus : quand tu tape un mob il se fait frapper par la foudre
+    - love potion -> devient pregnant en regardant et en appuyant sur la hotkey un mob ou villageois (donne naissance au bout de 20min au bebe correspondant au mob regardé)
+    - reality check : le player est ralentit en fonction de la lourdeur de son inventaire
+    - main tremblante : chance de drop ce que t'as dans les mains quand t'attaque
+    - paranoia : entend des bruit de mob hostile (creeper, zombie) souvent
+    - hydrophobe : degat dans l'eau ou sous pluie ou quand bois une potion
+    - ashme : barre de bulles d'oxygène du joueur apparaît, même s'il est sur la terre ferme. Elle se vide lentement au fur et à mesure qu'il court ou qu'il saute, se regenere quand le joueur bouge pas
+    - contagion zombie : au bout de 10min devient meurt et spawn un zombie avec les meme gear
+    - rhume : toute les 5-10sec petite toux qui fait sauter en arriere
+    - empathie : recoit des degat egaux a [30% + 20% * amplifier] de ceux a qui il fait mal
+    - midas : transforme arme, armure, pomme et carotte dans leur version or (dès qu'ils sont dans l'inventaire)
     - magnetisme : attrape les objet au sol de loin
     - activation : active les truc comme un bloc de redstone
-    - time stop ???
-    - zeus : quand tu tape un mob il se fait frapper par la foudre
-
-ajout d'effet maladie + virus:
-    - contagion zombie
-    - rhume : toute les 5-10sec petite toux qui fait sauter en arriere
+    - time stop : stop le temps (pas sur si realisable)
+    - metamorphose : transforme le joueur en un autre mob (avec une hotkey)

@@ -1,36 +1,8 @@
 package com.matibi.potionsnrituals.effect;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
-import com.matibi.potionsnrituals.effect.custom.AdhesionEffect;
-import com.matibi.potionsnrituals.effect.custom.AftermathEffect;
-import com.matibi.potionsnrituals.effect.custom.BerserkEffect;
+import com.matibi.potionsnrituals.effect.custom.*;
 import com.matibi.potionsnrituals.effect.custom.brainwashing.BrainwashingEffect;
-import com.matibi.potionsnrituals.effect.custom.DeathEffect;
-import com.matibi.potionsnrituals.effect.custom.DoubleHealthEffect;
-import com.matibi.potionsnrituals.effect.custom.DwarfEffect;
-import com.matibi.potionsnrituals.effect.custom.terrain.FrostEffect;
-import com.matibi.potionsnrituals.effect.custom.GhostWalkEffect;
-import com.matibi.potionsnrituals.effect.custom.InfinityEffect;
-import com.matibi.potionsnrituals.effect.custom.LiquidWalkerEffect;
-import com.matibi.potionsnrituals.effect.custom.LongCooldownEffect;
-import com.matibi.potionsnrituals.effect.custom.LongLegEffect;
-import com.matibi.potionsnrituals.effect.custom.MaskingEffect;
-import com.matibi.potionsnrituals.effect.custom.NoInteractionEffect;
-import com.matibi.potionsnrituals.effect.custom.OblivionEffect;
-import com.matibi.potionsnrituals.effect.custom.OreSenseEffect;
-import com.matibi.potionsnrituals.effect.custom.PhotosynthesisEffect;
-import com.matibi.potionsnrituals.effect.custom.PurificationEffect;
-import com.matibi.potionsnrituals.effect.custom.ReactivationEffect;
-import com.matibi.potionsnrituals.effect.custom.ResonanceEffect;
-import com.matibi.potionsnrituals.effect.custom.RustEffect;
-import com.matibi.potionsnrituals.effect.custom.SaturationEffect;
-import com.matibi.potionsnrituals.effect.custom.ShortCooldownEffect;
-import com.matibi.potionsnrituals.effect.custom.StunEffect;
-import com.matibi.potionsnrituals.effect.custom.TeleportationEffect;
-import com.matibi.potionsnrituals.effect.custom.ThornsEffect;
-import com.matibi.potionsnrituals.effect.custom.UnstableEffect;
-import com.matibi.potionsnrituals.effect.custom.VampirismEffect;
-import com.matibi.potionsnrituals.effect.custom.XpBoostEffect;
 import com.matibi.potionsnrituals.effect.custom.permanent.PermanentHealthEffect;
 import com.matibi.potionsnrituals.effect.custom.permanent.PermanentSpeedEffect;
 import com.matibi.potionsnrituals.effect.custom.permanent.PermanentStrengthEffect;
@@ -88,7 +60,8 @@ public class ModEffects {
             THORNS          = reg("thorns",             new ThornsEffect()),
             UNSTABLE        = reg("unstable",           new UnstableEffect()),
             VAMPIRISM       = reg("vampirism",          new VampirismEffect()),
-            XP_BOOST        = reg("xp_boost",           new XpBoostEffect());
+            XP_BOOST        = reg("xp_boost",           new XpBoostEffect()),
+            XP_LIFE         = reg("xp_life",            new XpLifeEffect());
 
     private static Holder<MobEffect> reg(String name, MobEffect effect) {
         return Registry.registerForHolder(

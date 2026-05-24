@@ -165,7 +165,10 @@ public class ModPotions {
 
             XP_BOOST                = reg(ModEffects.XP_BOOST,      dur_basic,          0, "xp_boost",      "xp_boost"),
             LONG_XP_BOOST           = reg(ModEffects.XP_BOOST,      dur_long,           0, "xp_boost",      "long_xp_boost"),
-            STRONG_XP_BOOST         = reg(ModEffects.XP_BOOST,      dur_basic,          1, "xp_boost",      "strong_xp_boost");
+            STRONG_XP_BOOST         = reg(ModEffects.XP_BOOST,      dur_basic,          1, "xp_boost",      "strong_xp_boost"),
+
+            XP_LIFE                 = reg(ModEffects.XP_LIFE,       dur_basic,          0, "xp_life",       "xp_life"),
+            LONG_XP_LIFE            = reg(ModEffects.XP_LIFE,       dur_long,           0, "xp_life",       "long_xp_life");
 
     public static void register() {
         PotionsNRituals.LOGGER.info("Registering potions for " + PotionsNRituals.MOD_ID);
@@ -229,6 +232,7 @@ public class ModPotions {
             addMix(builder, Potions.AWKWARD,                 Items.RESIN_CLUMP,          ModPotions.ADHESION);
             addMix(builder, ModPotions.BRAINWASHING,         Items.RABBIT_FOOT,          ModPotions.NO_INTERACTION);
             addMix(builder, Potions.AWKWARD,                 Items.LAPIS_LAZULI,         ModPotions.XP_BOOST);
+            addMix(builder, ModPotions.XP_BOOST,             Items.FERMENTED_SPIDER_EYE, ModPotions.XP_LIFE);
 
             // version longue
             addMix(builder, ModPotions.LEVITATION,           Items.REDSTONE,             ModPotions.LONG_LEVITATION);
@@ -264,6 +268,7 @@ public class ModPotions {
             addMix(builder, ModPotions.ADHESION,             Items.REDSTONE,             ModPotions.LONG_ADHESION);
             addMix(builder, ModPotions.RUST,                 Items.REDSTONE,             ModPotions.LONG_RUST);
             addMix(builder, ModPotions.XP_BOOST,             Items.REDSTONE,             ModPotions.LONG_XP_BOOST);
+            addMix(builder, ModPotions.XP_LIFE,              Items.REDSTONE,             ModPotions.LONG_XP_LIFE);
 
             // version strong
             addMix(builder, ModPotions.ALCOHOL,              Items.GLOWSTONE,            ModPotions.STRONG_ALCOHOL);

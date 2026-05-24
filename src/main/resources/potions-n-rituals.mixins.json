@@ -11,14 +11,16 @@
     "brewingNpotion.SplashPotionItemMixin",
     "effect.AdhesionMixin",
     "effect.LiquidWalkerMixin",
-    "effect.XpBoostMixin",
     "effect.PlayerIgnitionMixin",
     "effect.VampirismMixin",
+    "effect.XpBoostMixin",
     "effect.ghost_walker.EntityMixin",
     "effect.ghost_walker.LivingEntityMixin",
-    "effect.ghost_walker.PlayerGhostWalkMixin"
+    "effect.ghost_walker.PlayerGhostWalkMixin",
+    "effect.XpLife.XpLifeMixin"
   ],
   "client": [
+    "effect.XpLife.GuiMixin"
   ],
   "injectors": {
     "defaultRequire": 1
