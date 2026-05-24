@@ -8,17 +8,24 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(Player.class)
-public abstract class XpBoostMixin {
+public abstract class XpMixin {
     @ModifyVariable(method = "giveExperiencePoints", at = @At("HEAD"), argsOnly = true, name = "i")
     private int pnr$boostXpGain(int i) {
         if (i <= 0) return i;
 
         Player player = (Player) (Object) this;
         MobEffectInstance xpBoost = player.getEffect(ModEffects.XP_BOOST);
-        if (xpBoost == null) return i;
+        MobEffectInstance xpReduction = player.getEffect(ModEffects.XP_REDUCTION);
+        if (xpBoost == null && xpReduction == null) return i;
 
-        int multiplier = 2 + xpBoost.getAmplifier();
-        long boosted = (long) i * multiplier;
-        return boosted > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) boosted;
+        if (xpReduction == null) {
+            int multiplier = 2 + xpBoost.getAmplifier();
+            long boosted = (long) i * multiplier;
+            return boosted > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) boosted;
+        } else {
+            int multiplier = 2 + xpReduction.getAmplifier();
+            long reduced = (long) i / multiplier;
+            return reduced < 0 ? 0 : (int) reduced;
+        }
     }
 }

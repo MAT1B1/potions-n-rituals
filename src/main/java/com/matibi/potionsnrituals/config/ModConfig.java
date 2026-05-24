@@ -149,6 +149,14 @@ public class ModConfig {
 
     public static double health_per_effect = 4.0D;
 
+    public static int pregnancy_duration = 20 * 60 * 20;
+    public static double max_distance_pregnancy = 8.0;
+
+    public static int drop_percentage = 30;
+
+    public static int min_cough = 5;
+    public static int max_cough = 10;
+
     public static boolean isPotionBlacklisted(Holder<Potion> potion) {
         if (blacklist_potions.contains(potion)) return true;
         return potion.value().getEffects().stream()

@@ -1,6 +1,6 @@
 package com.matibi.potionsnrituals;
 
-import com.matibi.potionsnrituals.effect.DisorientInputHandler;
+import com.matibi.potionsnrituals.effect.helper.DisorientInputHandler;
 import com.matibi.potionsnrituals.keybind.KeyInputHandler;
 import com.matibi.potionsnrituals.renderer.OreSenseOverlayRenderer;
 import com.matibi.potionsnrituals.util.ModItemTintSources;

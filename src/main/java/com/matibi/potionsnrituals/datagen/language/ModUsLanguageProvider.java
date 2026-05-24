@@ -43,6 +43,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register(t, "infinity", "Infinity");
         register(t, "long_cooldown", "Long Cooldown");
         register(t, "short_cooldown", "Short Cooldown");
+        register(t, "love", "Love");
         register(t, "masking", "Masking");
         registerReverse(t, "unstable", "Unstable");
         register(t, "vampirism", "Vampirism");
@@ -53,11 +54,13 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register(t, "ghost_walk", "Ghost Walk");
         register(t, "dwarf", "Dwarfism");
         register(t, "photosynthesis", "Photosynthesis");
+        register(t, "pregnant", "Pregnant");
         register(t, "oblivion", "Oblivion");
         register(t, "adhesion", "Adhesion");
         register(t, "rust", "Rust");
         register(t, "xp_boost", "XP Boost");
         register(t, "xp_life", "XP Life");
+        register(t, "zeus", "Zeus Benediction");
 
         registerWithAlchemicalStone(t, "giant", "Giant");
         registerWithAlchemicalStone(t, "resurrection", "Resurrection");
@@ -107,6 +110,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("splash.potionsnrituals.thanks", "Thank you for supporting me LivelyBadGood");
         t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s hits remaining)");
         t.add("key.potions-n-rituals.show_effect_icons", "Show Effect Icons");
+        t.add("key.potions-n-rituals.effect_button", "Effect Button");
         t.add("key.category.potions-n-rituals.main", "Potions & Rituals");
     }
 

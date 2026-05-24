@@ -1,4 +1,4 @@
-package com.matibi.potionsnrituals.effect;
+package com.matibi.potionsnrituals.effect.helper;
 
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.mojang.blaze3d.platform.InputConstants;

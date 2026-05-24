@@ -4,6 +4,8 @@ import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.effect.custom.BerserkEffect;
+import com.matibi.potionsnrituals.effect.helper.ActiveEffectHandler;
+import com.matibi.potionsnrituals.effect.helper.ActiveEffectPayload;
 import com.matibi.potionsnrituals.effect.custom.brainwashing.DisorientMobHandler;
 import com.matibi.potionsnrituals.effect.custom.brainwashing.DisorientVillagerHandler;
 import com.matibi.potionsnrituals.effect.custom.terrain.ResurrectionEffect;
@@ -47,7 +49,9 @@ public class PotionsNRituals implements ModInitializer {
 		DisorientMobHandler.register();
 		DisorientVillagerHandler.register();
 
+		PayloadTypeRegistry.serverboundPlay().register(ActiveEffectPayload.TYPE, ActiveEffectPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(OreSensePayload.TYPE, OreSensePayload.CODEC);
 
+		ActiveEffectHandler.register();
 	}
 }

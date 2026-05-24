@@ -43,6 +43,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         register(t, "infinity", "Infinité", "d'Infinité");
         register(t, "long_cooldown", "Cooldown allongé");
         register(t, "short_cooldown", "Cooldown réduit");
+        register(t, "love", "Amour", "d'Amour");
         register(t, "masking", "Voile d'oubli");
         register(t, "unstable", "Instable", "Instable");
         register(t, "vampirism", "Vampirisme");
@@ -53,11 +54,13 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         register(t, "ghost_walk", "Marche spectrale");
         register(t, "dwarf", "Nanisme");
         register(t, "photosynthesis", "Photosynthèse");
+        register(t, "pregnant", "Enceinte");
         register(t, "oblivion", "Oubli", "d'Oubli");
         register(t, "adhesion", "Adhésion", "d'Adhésion");
         register(t, "rust", "Rouille");
         register(t, "xp_boost", "Boost d'XP");
         register(t, "xp_life", "Vie d'XP");
+        register(t, "zeus", "Bénédiction de Zeus");
 
         registerWithAlchemicalStone(t, "resurrection", "Résurrection");
         registerWithAlchemicalStone(t, "giant", "Géant");
@@ -107,6 +110,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("splash.potionsnrituals.thanks", "Merci de me supporter LivelyBadGood");
         t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s coups restants)");
         t.add("key.potions-n-rituals.show_effect_icons", "Montrer les effets");
+        t.add("key.potions-n-rituals.effect_button", "Bouton d'effet");
         t.add("key.category.potions-n-rituals.main", "Potions & Rituals");
     }
 
