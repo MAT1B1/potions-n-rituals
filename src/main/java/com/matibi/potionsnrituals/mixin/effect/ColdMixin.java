@@ -3,7 +3,6 @@ package com.matibi.potionsnrituals.mixin.effect;
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.effect.custom.ColdEffect;
-import com.matibi.potionsnrituals.effect.helper.IColdPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -14,15 +13,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
-public class ColdMixin implements IColdPlayer {
+public class ColdMixin {
 
     @Unique private int pnr$coughTimer = 0;
     @Unique private int pnr$coughInterval = -1; // -1 = pas encore init
-
-    @Override public int pnr$getCoughTimer() { return pnr$coughTimer; }
-    @Override public void pnr$setCoughTimer(int t) { this.pnr$coughTimer = t; }
-    @Override public int pnr$getCoughInterval() { return pnr$coughInterval; }
-    @Override public void pnr$setCoughInterval(int i) { this.pnr$coughInterval = i; }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void pnr$write(ValueOutput output, CallbackInfo ci) {
