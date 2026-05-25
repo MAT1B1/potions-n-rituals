@@ -1,14 +1,13 @@
 À rajouter sur les effets :
     – saut avec LiquidWalker
+    - cold : tousser en face d'un mob lui passe le rhume
 
 Effet à faire :
     – brainwashing
 
 ajouter nouveau effet:
     - reality check : le player est ralentit en fonction de la lourdeur de son inventaire
-    - paranoia : entend des bruit de mob hostile (creeper, zombie) souvent
     - hydrophobe : degat dans l'eau ou sous pluie ou quand bois une potion
-    - ashme : barre de bulles d'oxygène du joueur apparaît, même s'il est sur la terre ferme. Elle se vide lentement au fur et à mesure qu'il court ou qu'il saute, se regenere quand le joueur bouge pas
     - contagion zombie : au bout de 10min devient meurt et spawn un zombie avec les meme gear
     - empathie : recoit des degat egaux a [30% + 20% * amplifier] de ceux a qui il fait mal
     - midas : transforme arme, armure, pomme et carotte dans leur version or (dès qu'ils sont dans l'inventaire)

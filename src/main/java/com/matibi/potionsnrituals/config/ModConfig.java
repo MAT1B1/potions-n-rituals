@@ -157,6 +157,8 @@ public class ModConfig {
     public static int min_cough_time = 1;
     public static int max_cough_time = 10;
 
+    public static int max_diff = 1;
+
     public static boolean isPotionBlacklisted(Holder<Potion> potion) {
         if (blacklist_potions.contains(potion)) return true;
         return potion.value().getEffects().stream()

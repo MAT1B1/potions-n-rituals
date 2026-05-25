@@ -1,5 +1,6 @@
 package com.matibi.potionsnrituals.util;
 
+import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -40,7 +41,7 @@ public class CombinationUtils {
         });
 
         return ((countBenef.get() + countHarm.get() <= 2) ||
-                (countBenef.get() <= countHarm.get() + 1 && countHarm.get() <= countBenef.get() + 1))
+                (countBenef.get() <= countHarm.get() + ModConfig.max_diff && countHarm.get() <= countBenef.get() + ModConfig.max_diff))
                 ? cleaned
                 : List.of(new MobEffectInstance(ModEffects.UNSTABLE, 1));
     }

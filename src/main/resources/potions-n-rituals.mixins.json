@@ -10,6 +10,7 @@
     "brewingNpotion.LingeringPotionItemMixin",
     "brewingNpotion.SplashPotionItemMixin",
     "effect.AdhesionMixin",
+    "effect.AsthmaMixin",
     "effect.ClumsinessMixin",
     "effect.ColdMixin",
     "effect.LiquidWalkerMixin",

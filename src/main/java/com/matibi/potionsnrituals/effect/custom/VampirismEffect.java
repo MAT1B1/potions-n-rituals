@@ -26,7 +26,7 @@ public class VampirismEffect extends MobEffect {
         ItemStack helmet = mob.getItemBySlot(EquipmentSlot.HEAD);
         if (!helmet.isEmpty()) return super.applyEffectTick(serverLevel, mob, amplification);
 
-        BlockPos pos = mob.getOnPos();
+        BlockPos pos = mob.getOnPos().above();
         int topY = serverLevel.getHeight(Heightmap.Types.WORLD_SURFACE, pos.getX(), pos.getZ());
         if (pos.getY() >= topY)
             mob.setRemainingFireTicks(40);

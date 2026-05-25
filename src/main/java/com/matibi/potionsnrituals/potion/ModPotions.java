@@ -181,7 +181,16 @@ public class ModPotions {
             LONG_ZEUS = reg(ModEffects.ZEUS_BENEDICTION, dur_long, 0, "zeus", "long_zeus"),
 
             COLD = reg(ModEffects.COLD, dur_basic, 0, "cold", "cold"),
-            LONG_COLD = reg(ModEffects.COLD, dur_long, 0, "cold", "long_cold");
+            LONG_COLD = reg(ModEffects.COLD, dur_long, 0, "cold", "long_cold"),
+
+            CLUMSINESS = reg(ModEffects.CLUMSINESS, dur_basic, 0, "clumsiness", "clumsiness"),
+            LONG_CLUMSINESS = reg(ModEffects.CLUMSINESS, dur_long, 0, "clumsiness", "long_clumsiness"),
+
+            ASTHMA = reg(ModEffects.ASTHMA, dur_basic, 0, "asthma", "asthma"),
+            LONG_ASTHMA = reg(ModEffects.ASTHMA, dur_long, 0, "asthma", "long_asthma"),
+
+            PARANOIA = reg(ModEffects.PARANOIA, dur_basic, 0, "paranoia", "paranoia"),
+            LONG_PARANOIA = reg(ModEffects.PARANOIA, dur_long, 0, "paranoia", "long_paranoia");
 
 
     public static void register() {
@@ -293,6 +302,10 @@ public class ModPotions {
             addMix(builder, ModPotions.LONG_XP_BOOST, Items.FERMENTED_SPIDER_EYE, ModPotions.LONG_XP_REDUCTION);
             addLong(builder, ModPotions.XP_LIFE, ModPotions.LONG_XP_LIFE);
             addLong(builder, ModPotions.ZEUS, ModPotions.LONG_ZEUS);
+            addLong(builder, ModPotions.CLUMSINESS, ModPotions.LONG_ZEUS);
+            addLong(builder, ModPotions.ASTHMA, ModPotions.LONG_ASTHMA);
+            addLong(builder, ModPotions.PARANOIA, ModPotions.LONG_PARANOIA);
+            addLong(builder, ModPotions.CLUMSINESS, ModPotions.LONG_CLUMSINESS);
 
             // version strong
             addStrong(builder, ModPotions.ALCOHOL, ModPotions.STRONG_ALCOHOL);

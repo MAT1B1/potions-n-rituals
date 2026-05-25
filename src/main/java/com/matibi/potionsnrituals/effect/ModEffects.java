@@ -67,7 +67,9 @@ public class ModEffects {
             XP_LIFE             = reg("xp_life",            new XpLifeEffect()),
             ZEUS_BENEDICTION    = reg("zeus",               new ZeusBenedictionEffect()),
             CLUMSINESS          = reg("clumsiness",         new ClumsinessEffect()),
-            COLD                = reg("cold",               new ColdEffect());
+            COLD                = reg("cold",               new ColdEffect()),
+            ASTHMA              = reg("asthma",             new AsthmaEffect()),
+            PARANOIA            = reg("paranoia",           new ParanoiaEffect());
 
     private static Holder<MobEffect> reg(String name, MobEffect effect) {
         return Registry.registerForHolder(
