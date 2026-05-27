@@ -24,14 +24,14 @@ public abstract class AdhesionMixin {
 
             if (mob.horizontalCollision && !mob.onGround()) {
                 if (mob.isShiftKeyDown()) {
-                    mob.setDeltaMovement(vel.x * ModConfig.horizontal_damping, 0.0D, vel.z * ModConfig.horizontal_damping);
+                    mob.setDeltaMovement(vel.x * ModConfig.get().horizontal_damping, 0.0D, vel.z * ModConfig.get().horizontal_damping);
                     mob.fallDistance = 0.0F;
                 } else {
-                    double climbSpeed = ModConfig.base_climb + amplifier * ModConfig.climb_per_level;
+                    double climbSpeed = ModConfig.get().base_climb + amplifier * ModConfig.get().climb_per_level;
                     mob.setDeltaMovement(
-                            vel.x * ModConfig.horizontal_damping,
-                            climbSpeed * ModConfig.horizontal_damping,
-                            vel.z * ModConfig.horizontal_damping
+                            vel.x * ModConfig.get().horizontal_damping,
+                            climbSpeed * ModConfig.get().horizontal_damping,
+                            vel.z * ModConfig.get().horizontal_damping
                     );
                     mob.fallDistance = 0.0F;
                 }

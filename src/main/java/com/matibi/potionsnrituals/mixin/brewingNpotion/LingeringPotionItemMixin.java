@@ -19,9 +19,9 @@ public abstract class LingeringPotionItemMixin {
     @Inject(method = "use", at = @At("TAIL"))
     private void applyCooldownOnUse(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         if (cir.getReturnValue().consumesAction()) {
-            int time = ModConfig.lingering_potion_cooldown;
-            if (player.hasEffect(ModEffects.LONG_COOLDOWN)) time = ModConfig.lingering_potion_long_cooldown;
-            if (player.hasEffect(ModEffects.SHORT_COOLDOWN)) time = ModConfig.lingering_potion_short_cooldown;
+            int time = ModConfig.get().lingering_potion_cooldown;
+            if (player.hasEffect(ModEffects.LONG_COOLDOWN)) time = ModConfig.get().lingering_potion_long_cooldown;
+            if (player.hasEffect(ModEffects.SHORT_COOLDOWN)) time = ModConfig.get().lingering_potion_short_cooldown;
             ItemStack stack = player.getItemInHand(hand);
             player.getCooldowns().addCooldown(stack, time);
         }

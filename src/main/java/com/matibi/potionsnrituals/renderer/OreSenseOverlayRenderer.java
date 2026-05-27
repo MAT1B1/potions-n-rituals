@@ -48,8 +48,8 @@ public class OreSenseOverlayRenderer {
     }
 
     private static void render(GuiGraphicsExtractor graphics, DeltaTracker delta) {
-        currentInViewIntensity  = Mth.lerp(ModConfig.lerp_speed, currentInViewIntensity,  targetInViewIntensity);
-        currentOffViewIntensity = Mth.lerp(ModConfig.lerp_speed, currentOffViewIntensity, targetOffViewIntensity);
+        currentInViewIntensity  = Mth.lerp(ModConfig.get().lerp_speed, currentInViewIntensity,  targetInViewIntensity);
+        currentOffViewIntensity = Mth.lerp(ModConfig.get().lerp_speed, currentOffViewIntensity, targetOffViewIntensity);
         currentAngle = lerpAngle(currentAngle, targetAngle, 0.1f);
 
         if (currentInViewIntensity < 0.01f && currentOffViewIntensity < 0.01f) return;
@@ -57,12 +57,12 @@ public class OreSenseOverlayRenderer {
         Minecraft mc = Minecraft.getInstance();
         int w = mc.getWindow().getGuiScaledWidth();
         int h = mc.getWindow().getGuiScaledHeight();
-        int thick = (int)(Math.min(w, h) * ModConfig.thick);
+        int thick = (int)(Math.min(w, h) * ModConfig.get().thick);
 
         // ── Haut / Bas : ore dans le champ de vision ──────────────────────
         if (currentInViewIntensity > 0.01f) {
             currentInViewColor = lerpColor(currentInViewColor, targetInViewColor, 0.05f);
-            float alpha = Mth.clamp(currentInViewIntensity * ModConfig.alpha_max, 0.0f, ModConfig.alpha_max);
+            float alpha = Mth.clamp(currentInViewIntensity * ModConfig.get().alpha_max, 0.0f, ModConfig.get().alpha_max);
             int opaque = (currentInViewColor & 0x00FFFFFF) | ((int)(alpha * 255) << 24);
             int transp = currentInViewColor & 0x00FFFFFF;
 
@@ -73,7 +73,7 @@ public class OreSenseOverlayRenderer {
         // ── Gauche / Droite : ore hors du champ de vision ─────────────────
         if (currentOffViewIntensity > 0.01f) {
             currentOffViewColor = lerpColor(currentOffViewColor, targetOffViewColor, 0.05f);
-            float alpha = Mth.clamp(currentOffViewIntensity * ModConfig.alpha_max, 0.0f, ModConfig.alpha_max);
+            float alpha = Mth.clamp(currentOffViewIntensity * ModConfig.get().alpha_max, 0.0f, ModConfig.get().alpha_max);
             int transp = currentOffViewColor & 0x00FFFFFF;
 
             // sin(angle) > 0 → ore à droite, < 0 → ore à gauche

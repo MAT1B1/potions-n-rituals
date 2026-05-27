@@ -21,11 +21,11 @@ public abstract class PlayerGhostWalkMixin {
         double vy;
 
         if (self.isJumping())
-            vy = ModConfig.ghost_y_movement;
+            vy = ModConfig.get().ghost_y_movement;
         else if (self.isShiftKeyDown())
-            vy = -ModConfig.ghost_y_movement;
+            vy = -ModConfig.get().ghost_y_movement;
         else
-            vy = mov.y * ModConfig.ghost_movement_absorber;
+            vy = mov.y * ModConfig.get().ghost_movement_absorber;
 
         self.setDeltaMovement(mov.x, vy, mov.z);
         self.fallDistance = 0.0f;

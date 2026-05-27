@@ -36,8 +36,8 @@ public class PhotosynthesisEffect extends MobEffect implements TerrainApplicable
             return super.applyEffectTick(world, entity, amplifier);
 
         var hunger = player.getFoodData();
-        hunger.eat(ModConfig.photosynthesis_food,
-                ModConfig.photosynthesis_base_saturation + ModConfig.photosynthesis_saturation_per_level * amplifier);
+        hunger.eat(ModConfig.get().photosynthesis_food,
+                ModConfig.get().photosynthesis_base_saturation + ModConfig.get().photosynthesis_saturation_per_level * amplifier);
 
         double x = player.getX();
         double y = player.getY(0.5);

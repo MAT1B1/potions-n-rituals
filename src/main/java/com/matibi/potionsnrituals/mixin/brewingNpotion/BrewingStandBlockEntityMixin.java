@@ -21,7 +21,7 @@ public abstract class BrewingStandBlockEntityMixin {
         ItemStack fuelStack = accessor.getInventory().get(4);
 
         if (accessor.getFuel() < 20 && fuelStack.is(Items.LAVA_BUCKET)) {
-            accessor.setFuel(Math.min(accessor.getFuel() + ModConfig.blaze_replacer_fuel, 20));
+            accessor.setFuel(Math.min(accessor.getFuel() + ModConfig.get().blaze_replacer_fuel, 20));
             accessor.getInventory().set(4, new ItemStack(Items.BUCKET));
             level.sendBlockUpdated(pos, selfState, selfState, 3);
         }

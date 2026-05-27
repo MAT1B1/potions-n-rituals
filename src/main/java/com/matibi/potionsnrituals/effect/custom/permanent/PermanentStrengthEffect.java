@@ -40,6 +40,6 @@ public class PermanentStrengthEffect extends MobEffect {
 
     private static void applyEffect(LivingEntity target, int amplifier) {
         if (target instanceof Player player)
-            AttributeUtils.changeStrengthBy(player, ModConfig.perm_strength);
+            AttributeUtils.changeStrengthBy(player, ModConfig.get().perm_strength);
     }
 }

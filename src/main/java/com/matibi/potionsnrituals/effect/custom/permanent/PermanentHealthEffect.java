@@ -40,6 +40,6 @@ public class PermanentHealthEffect extends MobEffect {
 
     private static void applyEffect(LivingEntity target, int amplifier) {
         if (target instanceof Player player)
-            AttributeUtils.changeHealthBy(player, ModConfig.perm_heal);
+            AttributeUtils.changeHealthBy(player, ModConfig.get().perm_heal);
     }
 }

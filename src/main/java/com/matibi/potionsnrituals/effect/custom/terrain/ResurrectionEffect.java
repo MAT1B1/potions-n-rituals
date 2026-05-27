@@ -104,7 +104,7 @@ public class ResurrectionEffect extends MobEffect implements TerrainApplicableEf
         MobEffectInstance current = player.getEffect(ModEffects.RESURRECTION);
         if (current == null) return;
 
-        int targetAmp = Math.min(current.getAmplifier() + 1, ModConfig.max_resurrection - 1);
+        int targetAmp = Math.min(current.getAmplifier() + 1, ModConfig.get().max_resurrection - 1);
         if (current.getAmplifier() == targetAmp) return;
 
         applying = true;

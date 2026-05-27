@@ -23,7 +23,7 @@ public class VampirismMixin {
         MobEffectInstance effect = attacker.getEffect(ModEffects.VAMPIRISM);
         if (effect == null) return;
 
-        float healPercent = ModConfig.vampirism_heal + effect.getAmplifier() * ModConfig.vampirism_heal_per_level;
+        float healPercent = ModConfig.get().vampirism_heal + effect.getAmplifier() * ModConfig.get().vampirism_heal_per_level;
         attacker.heal(damage * healPercent);
     }
 }

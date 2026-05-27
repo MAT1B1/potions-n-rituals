@@ -13,8 +13,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 
-import static com.matibi.potionsnrituals.config.ModConfig.isEffectBlacklisted;
-import static com.matibi.potionsnrituals.config.ModConfig.isPotionBlacklisted;
+import com.matibi.potionsnrituals.config.ModConfig;
 
 public class AlchemicalStoneRecipe extends CustomRecipe {
 
@@ -39,9 +38,9 @@ public class AlchemicalStoneRecipe extends CustomRecipe {
                         PotionContents contents = stack.get(DataComponents.POTION_CONTENTS);
                         if (contents != null) {
                             if (contents.potion().isPresent()
-                                    && isPotionBlacklisted(contents.potion().get())) return false;
+                                    && ModConfig.get().isPotionBlacklisted(contents.potion().get())) return false;
                             if (contents.customEffects().stream()
-                                    .anyMatch(e -> isEffectBlacklisted(e.getEffect()))) return false;
+                                    .anyMatch(e -> ModConfig.get().isEffectBlacklisted(e.getEffect()))) return false;
                         }
                     } else if (!stack.is(ModItems.ALCHEMICAL_STONE)) return false;
                 }

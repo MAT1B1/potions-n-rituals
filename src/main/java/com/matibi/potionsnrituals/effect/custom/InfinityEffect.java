@@ -48,7 +48,7 @@ public class InfinityEffect extends MobEffect {
         double cost = 0;
 
         for (MobEffectInstance effect : snapshot) {
-            if (ModConfig.infinity_blacklist.contains(effect.getEffect())) continue;
+            if (ModConfig.get().infinity_blacklist.contains(effect.getEffect())) continue;
             if (effect.getEffect().equals(ModEffects.INFINITY)) continue;
 
             if (!(target instanceof Player) || effect.getDuration() <= 0 ) continue;
@@ -64,6 +64,6 @@ public class InfinityEffect extends MobEffect {
             ));
         }
         if (target instanceof Player player)
-            AttributeUtils.changeHealthBy(player, - cost * ModConfig.health_per_effect);
+            AttributeUtils.changeHealthBy(player, - cost * ModConfig.get().max_health_lost_per_effect);
     }
 }

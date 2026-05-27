@@ -25,7 +25,7 @@ public class AftermathEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(@NonNull ServerLevel world, LivingEntity entity, int amplifier) {
-        float half = entity.getMaxHealth() * ModConfig.health_required_after_aftermath;
+        float half = entity.getMaxHealth() * ModConfig.get().health_required_after_aftermath;
 
         if (entity.getHealth() > half)
             entity.removeEffect(ModEffects.AFTERMATH);

@@ -37,7 +37,7 @@ public class ColdMixin {
         if (self.level().isClientSide()) return;
 
         if (pnr$coughInterval < 0) {
-            int seconds = ModConfig.min_cough_time + self.level().getRandom().nextInt(ModConfig.max_cough_time -  ModConfig.min_cough_time + 1);
+            int seconds = ModConfig.get().min_cough_time + self.level().getRandom().nextInt(ModConfig.get().max_cough_time -  ModConfig.get().min_cough_time + 1);
             pnr$coughInterval = 20 * seconds;
         }
 
@@ -46,7 +46,7 @@ public class ColdMixin {
         if (pnr$coughTimer >= pnr$coughInterval) {
             ColdEffect.doCough(self);
             pnr$coughTimer = 0;
-            int seconds = ModConfig.min_cough_time + self.level().getRandom().nextInt(ModConfig.max_cough_time -  ModConfig.min_cough_time + 1);
+            int seconds = ModConfig.get().min_cough_time + self.level().getRandom().nextInt(ModConfig.get().max_cough_time -  ModConfig.get().min_cough_time + 1);
             pnr$coughInterval = 20 * seconds;
         }
     }

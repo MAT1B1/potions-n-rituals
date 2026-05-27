@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 public class PotionsNRituals implements ModInitializer {
 	public static final String MOD_ID = "potions-n-rituals";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	public static final String YACL_ID = "yet_another_config_lib_v3";
 
 	@Override
 	public void onInitialize() {

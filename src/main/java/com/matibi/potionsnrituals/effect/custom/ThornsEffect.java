@@ -16,7 +16,7 @@ public class ThornsEffect extends MobEffect {
     @Override
     public void onMobHurt(@NonNull ServerLevel world, @NonNull LivingEntity entity, int amplifier, DamageSource source, float amount) {
         if (source.getEntity() instanceof LivingEntity attacker) {
-            float reflected = amount * (ModConfig.base_thorns + amplifier * ModConfig.thorns_per_level);
+            float reflected = amount * (ModConfig.get().base_thorns + amplifier * ModConfig.get().thorns_per_level);
             attacker.hurtServer(world, source, reflected);
         }
     }

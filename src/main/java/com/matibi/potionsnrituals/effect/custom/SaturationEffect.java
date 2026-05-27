@@ -24,7 +24,7 @@ public class SaturationEffect extends MobEffect {
 
         if (player.tickCount % 10 == 0) {
             var food = player.getFoodData();
-            float gain = ModConfig.base_saturation + ModConfig.saturation_per_level * amplifier;
+            float gain = ModConfig.get().base_saturation + ModConfig.get().saturation_per_level * amplifier;
             food.setSaturation(Math.min(food.getFoodLevel(), food.getSaturationLevel() + gain));
         }
         return super.applyEffectTick(world, entity, amplifier);

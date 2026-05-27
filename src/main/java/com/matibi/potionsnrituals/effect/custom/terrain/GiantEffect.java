@@ -93,7 +93,7 @@ public class GiantEffect extends MobEffect implements TerrainApplicableEffect {
         }
 
         if (block instanceof BonemealableBlock fertilizable) {
-            int maxTries = ModConfig.growth_max_tries + amplifier * ModConfig.growth_max_tries_per_level;
+            int maxTries = ModConfig.get().growth_max_tries + amplifier * ModConfig.get().growth_max_tries_per_level;
             int tries = 0;
             while (tries < maxTries) {
                 state = world.getBlockState(pos);

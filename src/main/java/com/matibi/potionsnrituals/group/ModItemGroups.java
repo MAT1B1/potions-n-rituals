@@ -25,8 +25,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.matibi.potionsnrituals.config.ModConfig.isPotionBlacklisted;
-import static com.matibi.potionsnrituals.config.ModConfig.isStoneBlacklisted;
+import com.matibi.potionsnrituals.config.ModConfig;
 
 public class ModItemGroups {
     public static final ResourceKey<CreativeModeTab> ALCHEMY =
@@ -45,7 +44,7 @@ public class ModItemGroups {
                         List<Holder<Potion>> all = BuiltInRegistries.POTION.entrySet().stream()
                                 .map(e -> BuiltInRegistries.POTION.wrapAsHolder(e.getValue()))
                                 .filter(e -> !SKIP.contains(e.value()))
-                                .filter(e -> !isPotionBlacklisted(e))
+                                .filter(e -> !ModConfig.get().isPotionBlacklisted(e))
                                 .sorted(Comparator
                                         .<Holder<Potion>, String>comparing(e -> {
                                             var effects = e.value().getEffects();
@@ -73,7 +72,7 @@ public class ModItemGroups {
                         entries.accept(ModItems.ALCHEMICAL_STONE);
                         ModAlchemicalStone.ALCHEMICAL_STONE_REGISTRY.asHolderIdMap().forEach( entry -> {
                             ItemStack stack = AlchemicalStone.getItemStack(entry);
-                            if (!stack.isEmpty() && !isStoneBlacklisted(entry))
+                            if (!stack.isEmpty() && !ModConfig.get().isStoneBlacklisted(entry))
                                 entries.accept(stack);
                         });
 

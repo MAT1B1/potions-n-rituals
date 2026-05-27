@@ -29,7 +29,7 @@ public class ReactivationEffect extends MobEffect {
 
             mob.addEffect(new MobEffectInstance(
                     instance.getEffect(),
-                    instance.getDuration() * ModConfig.reactivation_duration,
+                    instance.getDuration() * ModConfig.get().reactivation_duration,
                     instance.getAmplifier(),
                     instance.isAmbient(),
                     instance.isVisible(),

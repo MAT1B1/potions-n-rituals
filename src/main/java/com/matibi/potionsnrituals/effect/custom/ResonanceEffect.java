@@ -28,7 +28,7 @@ public class ResonanceEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(@NonNull ServerLevel world, LivingEntity entity, int amplifier) {
-        int maxRadius = ModConfig.resonance_radius + amplifier * ModConfig.resonance_radius_per_level;
+        int maxRadius = ModConfig.get().resonance_radius + amplifier * ModConfig.get().resonance_radius_per_level;
 
         Collection<MobEffectInstance> effects = entity.getActiveEffects().stream()
                 .filter(e -> !e.getEffect().equals(ModEffects.RESONANCE))
@@ -64,17 +64,17 @@ public class ResonanceEffect extends MobEffect {
 
     private static void spawnPulseWave(ServerLevel world, LivingEntity entity, int amplifier,
                                        double maxRadius, int centerColor, int edgeColor) {
-        int period = Math.max(8, ModConfig.pulse_period - amplifier * 2);
+        int period = Math.max(8, ModConfig.get().pulse_period - amplifier * 2);
         double phase = ((world.getGameTime() + (entity.getId() & 7)) % period) / (double) period;
 
         double eased = easeOutSine(phase);
         double r = 0.5 + eased * (maxRadius - 0.5);
 
         double y = entity.getY() + entity.getBbHeight() * 0.55;
-        double step = (Math.PI * 2.0) / ModConfig.pulse_period;
+        double step = (Math.PI * 2.0) / ModConfig.get().pulse_period;
 
-        var pulse = new DustColorTransitionOptions(centerColor, edgeColor, ModConfig.scale_pulse);
-        for (int i = 0; i < ModConfig.pulse_points; i++) {
+        var pulse = new DustColorTransitionOptions(centerColor, edgeColor, ModConfig.get().scale_pulse);
+        for (int i = 0; i < ModConfig.get().pulse_points; i++) {
             double angle = i * step;
             double x = entity.getX() + Math.cos(angle) * r;
             double z = entity.getZ() + Math.sin(angle) * r;
@@ -84,15 +84,15 @@ public class ResonanceEffect extends MobEffect {
 
     private static void spawnOrbitRing(ServerLevel world, LivingEntity entity, int amplifier,
                                        double radius, int baseColor) {
-        double speed = ModConfig.orbit_speed_base + amplifier * 0.02;
+        double speed = ModConfig.get().orbit_speed_base + amplifier * 0.02;
         double t = world.getGameTime() * speed;
 
         double y = entity.getY() + entity.getBbHeight() * 0.6;
         double phaseOffset = (entity.getId() & 15) * 0.25;
-        double step = (Math.PI * 2.0) / ModConfig.orbit_points;
-        var orbit = new DustParticleOptions(baseColor, ModConfig.scale_orbit);
+        double step = (Math.PI * 2.0) / ModConfig.get().orbit_points;
+        var orbit = new DustParticleOptions(baseColor, ModConfig.get().scale_orbit);
 
-        for (int i = 0; i < ModConfig.orbit_points; i++) {
+        for (int i = 0; i < ModConfig.get().orbit_points; i++) {
             double angle = t + phaseOffset + i * step;
             double x = entity.getX() + Math.cos(angle) * radius;
             double z = entity.getZ() + Math.sin(angle) * radius;

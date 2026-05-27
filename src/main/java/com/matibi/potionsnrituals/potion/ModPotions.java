@@ -22,175 +22,175 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 
-import static com.matibi.potionsnrituals.config.ModConfig.*;
+import com.matibi.potionsnrituals.config.ModConfig;
 
 public class ModPotions {
     public static final Holder<Potion>
             // ── Vanilla extended ─────────────────────────────────────────────────────
-            LEVITATION = reg(MobEffects.LEVITATION, dur_very_short, 0, "levitation", "levitation"),
-            LONG_LEVITATION = reg(MobEffects.LEVITATION, dur_short, 0, "levitation", "long_levitation"),
+            LEVITATION = reg(MobEffects.LEVITATION, ModConfig.get().dur_very_short, 0, "levitation", "levitation"),
+            LONG_LEVITATION = reg(MobEffects.LEVITATION, ModConfig.get().dur_short, 0, "levitation", "long_levitation"),
 
-            GLOWING = reg(MobEffects.GLOWING, dur_basic, 0, "glowing", "glowing"),
-            LONG_GLOWING = reg(MobEffects.GLOWING, dur_long, 0, "glowing", "long_glowing"),
+            GLOWING = reg(MobEffects.GLOWING, ModConfig.get().dur_basic, 0, "glowing", "glowing"),
+            LONG_GLOWING = reg(MobEffects.GLOWING, ModConfig.get().dur_long, 0, "glowing", "long_glowing"),
 
-            ALCOHOL = reg(MobEffects.NAUSEA, dur_basic, 0, "alcohol", "alcohol"),
-            LONG_ALCOHOL = reg(MobEffects.NAUSEA, dur_long, 0, "alcohol", "long_alcohol"),
-            STRONG_ALCOHOL = reg(MobEffects.NAUSEA, dur_basic, 1, "alcohol", "strong_alcohol"),
+            ALCOHOL = reg(MobEffects.NAUSEA, ModConfig.get().dur_basic, 0, "alcohol", "alcohol"),
+            LONG_ALCOHOL = reg(MobEffects.NAUSEA, ModConfig.get().dur_long, 0, "alcohol", "long_alcohol"),
+            STRONG_ALCOHOL = reg(MobEffects.NAUSEA, ModConfig.get().dur_basic, 1, "alcohol", "strong_alcohol"),
 
-            DARKNESS = reg(MobEffects.DARKNESS, dur_short, 0, "darkness", "darkness"),
-            LONG_DARKNESS = reg(MobEffects.DARKNESS, dur_basic, 0, "darkness", "long_darkness"),
+            DARKNESS = reg(MobEffects.DARKNESS, ModConfig.get().dur_short, 0, "darkness", "darkness"),
+            LONG_DARKNESS = reg(MobEffects.DARKNESS, ModConfig.get().dur_basic, 0, "darkness", "long_darkness"),
 
-            HASTE = reg(MobEffects.HASTE, dur_basic, 0, "haste", "haste"),
-            LONG_HASTE = reg(MobEffects.HASTE, dur_long, 0, "haste", "long_haste"),
-            STRONG_HASTE = reg(MobEffects.HASTE, dur_basic, 1, "haste", "strong_haste"),
+            HASTE = reg(MobEffects.HASTE, ModConfig.get().dur_basic, 0, "haste", "haste"),
+            LONG_HASTE = reg(MobEffects.HASTE, ModConfig.get().dur_long, 0, "haste", "long_haste"),
+            STRONG_HASTE = reg(MobEffects.HASTE, ModConfig.get().dur_basic, 1, "haste", "strong_haste"),
 
-            MINING_FATIGUE = reg(MobEffects.MINING_FATIGUE, dur_basic, 0, "mining_fatigue", "mining_fatigue"),
-            LONG_MINING_FATIGUE = reg(MobEffects.MINING_FATIGUE, dur_long, 0, "mining_fatigue", "long_mining_fatigue"),
-            STRONG_MINING_FATIGUE = reg(MobEffects.MINING_FATIGUE, dur_basic, 1, "mining_fatigue", "strong_mining_fatigue"),
+            MINING_FATIGUE = reg(MobEffects.MINING_FATIGUE, ModConfig.get().dur_basic, 0, "mining_fatigue", "mining_fatigue"),
+            LONG_MINING_FATIGUE = reg(MobEffects.MINING_FATIGUE, ModConfig.get().dur_long, 0, "mining_fatigue", "long_mining_fatigue"),
+            STRONG_MINING_FATIGUE = reg(MobEffects.MINING_FATIGUE, ModConfig.get().dur_basic, 1, "mining_fatigue", "strong_mining_fatigue"),
 
             // ── Permanent ────────────────────────────────────────────────────────────
-            PERM_HEALTH = reg(ModEffects.PERM_HEALTH, dur_instant, 0, "perm_health", "perm_health"),
-            PERM_SPEED = reg(ModEffects.PERM_SPEED, dur_instant, 0, "perm_speed", "perm_speed"),
-            PERM_STRENGTH = reg(ModEffects.PERM_STRENGTH, dur_instant, 0, "perm_strength", "perm_strength"),
+            PERM_HEALTH = reg(ModEffects.PERM_HEALTH, ModConfig.get().dur_instant, 0, "perm_health", "perm_health"),
+            PERM_SPEED = reg(ModEffects.PERM_SPEED, ModConfig.get().dur_instant, 0, "perm_speed", "perm_speed"),
+            PERM_STRENGTH = reg(ModEffects.PERM_STRENGTH, ModConfig.get().dur_instant, 0, "perm_strength", "perm_strength"),
 
             // ── Terrain ──────────────────────────────────────────────────────────────
-            ACID = reg(ModEffects.ACID, dur_short, 0, "acid", "acid"),
-            LONG_ACID = reg(ModEffects.ACID, dur_basic, 0, "acid", "long_acid"),
-            STRONG_ACID = reg(ModEffects.ACID, dur_short, 1, "acid", "strong_acid"),
+            ACID = reg(ModEffects.ACID, ModConfig.get().dur_short, 0, "acid", "acid"),
+            LONG_ACID = reg(ModEffects.ACID, ModConfig.get().dur_basic, 0, "acid", "long_acid"),
+            STRONG_ACID = reg(ModEffects.ACID, ModConfig.get().dur_short, 1, "acid", "strong_acid"),
 
-            ALCHEMIST = reg(ModEffects.ALCHEMIST, dur_instant, 0, "alchemist", "alchemist"),
+            ALCHEMIST = reg(ModEffects.ALCHEMIST, ModConfig.get().dur_instant, 0, "alchemist", "alchemist"),
 
-            GIANT = reg(ModEffects.GIANT, dur_basic, 0, "giant", "giant"),
-            LONG_GIANT = reg(ModEffects.GIANT, dur_long, 0, "giant", "long_giant"),
-            STRONG_GIANT = reg(ModEffects.GIANT, dur_basic, 1, "giant", "strong_giant"),
+            GIANT = reg(ModEffects.GIANT, ModConfig.get().dur_basic, 0, "giant", "giant"),
+            LONG_GIANT = reg(ModEffects.GIANT, ModConfig.get().dur_long, 0, "giant", "long_giant"),
+            STRONG_GIANT = reg(ModEffects.GIANT, ModConfig.get().dur_basic, 1, "giant", "strong_giant"),
 
-            IGNITION = reg(ModEffects.IGNITION, dur_short, 0, "ignition", "ignition"),
-            LONG_IGNITION = reg(ModEffects.IGNITION, dur_basic, 0, "ignition", "long_ignition"),
+            IGNITION = reg(ModEffects.IGNITION, ModConfig.get().dur_short, 0, "ignition", "ignition"),
+            LONG_IGNITION = reg(ModEffects.IGNITION, ModConfig.get().dur_basic, 0, "ignition", "long_ignition"),
 
-            PETRIFICATION = reg(ModEffects.PETRIFICATION, dur_short, 0, "petrification", "petrification"),
-            LONG_PETRIFICATION = reg(ModEffects.PETRIFICATION, dur_basic, 0, "petrification", "long_petrification"),
-            STRONG_PETRIFICATION = reg(ModEffects.PETRIFICATION, dur_short, 1, "petrification", "strong_petrification"),
+            PETRIFICATION = reg(ModEffects.PETRIFICATION, ModConfig.get().dur_short, 0, "petrification", "petrification"),
+            LONG_PETRIFICATION = reg(ModEffects.PETRIFICATION, ModConfig.get().dur_basic, 0, "petrification", "long_petrification"),
+            STRONG_PETRIFICATION = reg(ModEffects.PETRIFICATION, ModConfig.get().dur_short, 1, "petrification", "strong_petrification"),
 
-            RESURRECTION = reg(ModEffects.RESURRECTION, dur_inf, 0, "resurrection", "resurrection"),
+            RESURRECTION = reg(ModEffects.RESURRECTION, ModConfig.get().dur_inf, 0, "resurrection", "resurrection"),
 
             // ── Normal ───────────────────────────────────────────────────────────────
-            ADHESION = reg(ModEffects.ADHESION, dur_basic, 0, "adhesion", "adhesion"),
-            LONG_ADHESION = reg(ModEffects.ADHESION, dur_long, 0, "adhesion", "long_adhesion"),
+            ADHESION = reg(ModEffects.ADHESION, ModConfig.get().dur_basic, 0, "adhesion", "adhesion"),
+            LONG_ADHESION = reg(ModEffects.ADHESION, ModConfig.get().dur_long, 0, "adhesion", "long_adhesion"),
 
-            BERSERK = reg(ModEffects.BERSERK, dur_short, 0, "berserk", "berserk"),
-            LONG_BERSERK = reg(ModEffects.BERSERK, dur_basic, 0, "berserk", "long_berserk"),
-            STRONG_BERSERK = reg(ModEffects.BERSERK, dur_short, 1, "berserk", "strong_berserk"),
+            BERSERK = reg(ModEffects.BERSERK, ModConfig.get().dur_short, 0, "berserk", "berserk"),
+            LONG_BERSERK = reg(ModEffects.BERSERK, ModConfig.get().dur_basic, 0, "berserk", "long_berserk"),
+            STRONG_BERSERK = reg(ModEffects.BERSERK, ModConfig.get().dur_short, 1, "berserk", "strong_berserk"),
 
-            BRAINWASHING = reg(ModEffects.BRAINWASHING, dur_basic, 0, "brainwashing", "brainwashing"),
-            LONG_BRAINWASHING = reg(ModEffects.BRAINWASHING, dur_long, 0, "brainwashing", "long_brainwashing"),
+            BRAINWASHING = reg(ModEffects.BRAINWASHING, ModConfig.get().dur_basic, 0, "brainwashing", "brainwashing"),
+            LONG_BRAINWASHING = reg(ModEffects.BRAINWASHING, ModConfig.get().dur_long, 0, "brainwashing", "long_brainwashing"),
 
-            DEATH = reg(ModEffects.DEATH, dur_instant, 0, "death", "death"),
+            DEATH = reg(ModEffects.DEATH, ModConfig.get().dur_instant, 0, "death", "death"),
 
-            DOUBLE_HEALTH = reg(ModEffects.DOUBLE_HEALTH, dur_instant, 0, "double_health", "double_health"),
-            STRONG_DOUBLE_HEALTH = reg(ModEffects.DOUBLE_HEALTH, dur_instant, 1, "double_health", "strong_double_health"),
+            DOUBLE_HEALTH = reg(ModEffects.DOUBLE_HEALTH, ModConfig.get().dur_instant, 0, "double_health", "double_health"),
+            STRONG_DOUBLE_HEALTH = reg(ModEffects.DOUBLE_HEALTH, ModConfig.get().dur_instant, 1, "double_health", "strong_double_health"),
 
-            DWARF = reg(ModEffects.DWARF, dur_basic, 0, "dwarf", "dwarf"),
-            LONG_DWARF = reg(ModEffects.DWARF, dur_long, 0, "dwarf", "long_dwarf"),
-            STRONG_DWARF = reg(ModEffects.DWARF, dur_basic, 1, "dwarf", "strong_dwarf"),
+            DWARF = reg(ModEffects.DWARF, ModConfig.get().dur_basic, 0, "dwarf", "dwarf"),
+            LONG_DWARF = reg(ModEffects.DWARF, ModConfig.get().dur_long, 0, "dwarf", "long_dwarf"),
+            STRONG_DWARF = reg(ModEffects.DWARF, ModConfig.get().dur_basic, 1, "dwarf", "strong_dwarf"),
 
-            FROST = reg(ModEffects.FROST, dur_short, 0, "frost", "frost"),
-            LONG_FROST = reg(ModEffects.FROST, dur_basic, 0, "frost", "long_frost"),
+            FROST = reg(ModEffects.FROST, ModConfig.get().dur_short, 0, "frost", "frost"),
+            LONG_FROST = reg(ModEffects.FROST, ModConfig.get().dur_basic, 0, "frost", "long_frost"),
 
-            GHOST_WALK = reg(ModEffects.GHOST_WALK, dur_very_short, 0, "ghost_walk", "ghost_walk"),
-            LONG_GHOST_WALK = reg(ModEffects.GHOST_WALK, dur_short, 0, "ghost_walk", "long_ghost_walk"),
+            GHOST_WALK = reg(ModEffects.GHOST_WALK, ModConfig.get().dur_very_short, 0, "ghost_walk", "ghost_walk"),
+            LONG_GHOST_WALK = reg(ModEffects.GHOST_WALK, ModConfig.get().dur_short, 0, "ghost_walk", "long_ghost_walk"),
 
-            LIQUID_WALKER = reg(ModEffects.LIQUID_WALKER, dur_basic, 0, "liquid_walker", "liquid_walker"),
-            LONG_LIQUID_WALKER = reg(ModEffects.LIQUID_WALKER, dur_long, 0, "liquid_walker", "long_liquid_walker"),
-            STRONG_LIQUID_WALKER = reg(ModEffects.LIQUID_WALKER, dur_basic, 1, "liquid_walker", "strong_liquid_walker"),
+            LIQUID_WALKER = reg(ModEffects.LIQUID_WALKER, ModConfig.get().dur_basic, 0, "liquid_walker", "liquid_walker"),
+            LONG_LIQUID_WALKER = reg(ModEffects.LIQUID_WALKER, ModConfig.get().dur_long, 0, "liquid_walker", "long_liquid_walker"),
+            STRONG_LIQUID_WALKER = reg(ModEffects.LIQUID_WALKER, ModConfig.get().dur_basic, 1, "liquid_walker", "strong_liquid_walker"),
 
-            LONG_COOLDOWN = reg(ModEffects.LONG_COOLDOWN, dur_basic, 0, "long_cooldown", "long_cooldown"),
-            LONG_LONG_COOLDOWN = reg(ModEffects.LONG_COOLDOWN, dur_long, 0, "long_cooldown", "long_long_cooldown"),
+            LONG_COOLDOWN = reg(ModEffects.LONG_COOLDOWN, ModConfig.get().dur_basic, 0, "long_cooldown", "long_cooldown"),
+            LONG_LONG_COOLDOWN = reg(ModEffects.LONG_COOLDOWN, ModConfig.get().dur_long, 0, "long_cooldown", "long_long_cooldown"),
 
-            LONG_LEG = reg(ModEffects.LONG_LEG, dur_basic, 0, "long_leg", "long_leg"),
-            LONG_LONG_LEG = reg(ModEffects.LONG_LEG, dur_long, 0, "long_leg", "long_long_leg"),
+            LONG_LEG = reg(ModEffects.LONG_LEG, ModConfig.get().dur_basic, 0, "long_leg", "long_leg"),
+            LONG_LONG_LEG = reg(ModEffects.LONG_LEG, ModConfig.get().dur_long, 0, "long_leg", "long_long_leg"),
 
-            LOVE = reg(ModEffects.LOVE, dur_basic, 0, "love", "love"),
-            LONG_LOVE = reg(ModEffects.LOVE, dur_long, 0, "love", "long_love"),
+            LOVE = reg(ModEffects.LOVE, ModConfig.get().dur_basic, 0, "love", "love"),
+            LONG_LOVE = reg(ModEffects.LOVE, ModConfig.get().dur_long, 0, "love", "long_love"),
 
-            MASKING = reg(ModEffects.MASKING, dur_instant, 0, "masking", "masking"),
+            MASKING = reg(ModEffects.MASKING, ModConfig.get().dur_instant, 0, "masking", "masking"),
 
-            NO_INTERACTION = reg(ModEffects.NO_INTERACTION, dur_basic, 0, "no_interaction", "no_interaction"),
-            LONG_NO_INTERACTION = reg(ModEffects.NO_INTERACTION, dur_long, 0, "no_interaction", "long_no_interaction"),
+            NO_INTERACTION = reg(ModEffects.NO_INTERACTION, ModConfig.get().dur_basic, 0, "no_interaction", "no_interaction"),
+            LONG_NO_INTERACTION = reg(ModEffects.NO_INTERACTION, ModConfig.get().dur_long, 0, "no_interaction", "long_no_interaction"),
 
-            OBLIVION = reg(ModEffects.OBLIVION, dur_instant, 0, "oblivion", "oblivion"),
+            OBLIVION = reg(ModEffects.OBLIVION, ModConfig.get().dur_instant, 0, "oblivion", "oblivion"),
 
-            ORE_SENSE = reg(ModEffects.ORE_SENSE, dur_basic, 0, "ore_sense", "ore_sense"),
-            LONG_ORE_SENSE = reg(ModEffects.ORE_SENSE, dur_long, 0, "ore_sense", "long_ore_sense"),
-            STRONG_ORE_SENSE = reg(ModEffects.ORE_SENSE, dur_basic, 1, "ore_sense", "strong_ore_sense"),
+            ORE_SENSE = reg(ModEffects.ORE_SENSE, ModConfig.get().dur_basic, 0, "ore_sense", "ore_sense"),
+            LONG_ORE_SENSE = reg(ModEffects.ORE_SENSE, ModConfig.get().dur_long, 0, "ore_sense", "long_ore_sense"),
+            STRONG_ORE_SENSE = reg(ModEffects.ORE_SENSE, ModConfig.get().dur_basic, 1, "ore_sense", "strong_ore_sense"),
 
-            PHOTOSYNTHESIS = reg(ModEffects.PHOTOSYNTHESIS, dur_basic, 0, "photosynthesis", "photosynthesis"),
-            LONG_PHOTOSYNTHESIS = reg(ModEffects.PHOTOSYNTHESIS, dur_long, 0, "photosynthesis", "long_photosynthesis"),
-            STRONG_PHOTOSYNTHESIS = reg(ModEffects.PHOTOSYNTHESIS, dur_basic, 1, "photosynthesis", "strong_photosynthesis"),
+            PHOTOSYNTHESIS = reg(ModEffects.PHOTOSYNTHESIS, ModConfig.get().dur_basic, 0, "photosynthesis", "photosynthesis"),
+            LONG_PHOTOSYNTHESIS = reg(ModEffects.PHOTOSYNTHESIS, ModConfig.get().dur_long, 0, "photosynthesis", "long_photosynthesis"),
+            STRONG_PHOTOSYNTHESIS = reg(ModEffects.PHOTOSYNTHESIS, ModConfig.get().dur_basic, 1, "photosynthesis", "strong_photosynthesis"),
 
-            PURIFICATION = reg(ModEffects.PURIFICATION, dur_basic, 0, "purification", "purification"),
-            LONG_PURIFICATION = reg(ModEffects.PURIFICATION, dur_long, 0, "purification", "long_purification"),
+            PURIFICATION = reg(ModEffects.PURIFICATION, ModConfig.get().dur_basic, 0, "purification", "purification"),
+            LONG_PURIFICATION = reg(ModEffects.PURIFICATION, ModConfig.get().dur_long, 0, "purification", "long_purification"),
 
-            REACTIVATION = reg(ModEffects.REACTIVATION, dur_instant, 0, "reactivation", "reactivation"),
-            STRONG_REACTIVATION = reg(ModEffects.REACTIVATION, dur_instant, 1, "reactivation", "strong_reactivation"),
+            REACTIVATION = reg(ModEffects.REACTIVATION, ModConfig.get().dur_instant, 0, "reactivation", "reactivation"),
+            STRONG_REACTIVATION = reg(ModEffects.REACTIVATION, ModConfig.get().dur_instant, 1, "reactivation", "strong_reactivation"),
 
-            RESONANCE = reg(ModEffects.RESONANCE, dur_basic, 0, "resonance", "resonance"),
-            LONG_RESONANCE = reg(ModEffects.RESONANCE, dur_long, 0, "resonance", "long_resonance"),
-            STRONG_RESONANCE = reg(ModEffects.RESONANCE, dur_basic, 1, "resonance", "strong_resonance"),
+            RESONANCE = reg(ModEffects.RESONANCE, ModConfig.get().dur_basic, 0, "resonance", "resonance"),
+            LONG_RESONANCE = reg(ModEffects.RESONANCE, ModConfig.get().dur_long, 0, "resonance", "long_resonance"),
+            STRONG_RESONANCE = reg(ModEffects.RESONANCE, ModConfig.get().dur_basic, 1, "resonance", "strong_resonance"),
 
-            INFINITY = reg(ModEffects.INFINITY, dur_instant, 0, "infinity", "infinity"),
+            INFINITY = reg(ModEffects.INFINITY, ModConfig.get().dur_instant, 0, "infinity", "infinity"),
 
-            RUST = reg(ModEffects.RUST, dur_short, 0, "rust", "rust"),
-            LONG_RUST = reg(ModEffects.RUST, dur_basic, 0, "rust", "long_rust"),
+            RUST = reg(ModEffects.RUST, ModConfig.get().dur_short, 0, "rust", "rust"),
+            LONG_RUST = reg(ModEffects.RUST, ModConfig.get().dur_basic, 0, "rust", "long_rust"),
 
-            SATURATION = reg(ModEffects.SATURATION, dur_short, 0, "saturation", "saturation"),
-            LONG_SATURATION = reg(ModEffects.SATURATION, dur_basic, 0, "saturation", "long_saturation"),
-            STRONG_SATURATION = reg(ModEffects.SATURATION, dur_short, 1, "saturation", "strong_saturation"),
+            SATURATION = reg(ModEffects.SATURATION, ModConfig.get().dur_short, 0, "saturation", "saturation"),
+            LONG_SATURATION = reg(ModEffects.SATURATION, ModConfig.get().dur_basic, 0, "saturation", "long_saturation"),
+            STRONG_SATURATION = reg(ModEffects.SATURATION, ModConfig.get().dur_short, 1, "saturation", "strong_saturation"),
 
-            SHORT_COOLDOWN = reg(ModEffects.SHORT_COOLDOWN, dur_basic, 0, "short_cooldown", "short_cooldown"),
-            LONG_SHORT_COOLDOWN = reg(ModEffects.SHORT_COOLDOWN, dur_long, 0, "short_cooldown", "long_short_cooldown"),
+            SHORT_COOLDOWN = reg(ModEffects.SHORT_COOLDOWN, ModConfig.get().dur_basic, 0, "short_cooldown", "short_cooldown"),
+            LONG_SHORT_COOLDOWN = reg(ModEffects.SHORT_COOLDOWN, ModConfig.get().dur_long, 0, "short_cooldown", "long_short_cooldown"),
 
             STUN = reg(ModEffects.STUN, 20 * 5, 0, "stun", "stun"),
             LONG_STUN = reg(ModEffects.STUN, 20 * 15, 0, "stun", "long_stun"),
 
-            TELEPORTATION = reg(ModEffects.TELEPORTATION, dur_instant, 0, "teleportation", "teleportation"),
-            STRONG_TELEPORTATION = reg(ModEffects.TELEPORTATION, dur_instant, 1, "teleportation", "strong_teleportation"),
+            TELEPORTATION = reg(ModEffects.TELEPORTATION, ModConfig.get().dur_instant, 0, "teleportation", "teleportation"),
+            STRONG_TELEPORTATION = reg(ModEffects.TELEPORTATION, ModConfig.get().dur_instant, 1, "teleportation", "strong_teleportation"),
 
-            THORNS = reg(ModEffects.THORNS, dur_basic, 0, "thorns", "thorns"),
-            LONG_THORNS = reg(ModEffects.THORNS, dur_long, 0, "thorns", "long_thorns"),
-            STRONG_THORNS = reg(ModEffects.THORNS, dur_basic, 1, "thorns", "strong_thorns"),
+            THORNS = reg(ModEffects.THORNS, ModConfig.get().dur_basic, 0, "thorns", "thorns"),
+            LONG_THORNS = reg(ModEffects.THORNS, ModConfig.get().dur_long, 0, "thorns", "long_thorns"),
+            STRONG_THORNS = reg(ModEffects.THORNS, ModConfig.get().dur_basic, 1, "thorns", "strong_thorns"),
 
-            UNSTABLE = reg(ModEffects.UNSTABLE, dur_instant, 0, "unstable", "unstable"),
-            STRONG_UNSTABLE = reg(ModEffects.UNSTABLE, dur_instant, 1, "unstable", "strong_unstable"),
+            UNSTABLE = reg(ModEffects.UNSTABLE, ModConfig.get().dur_instant, 0, "unstable", "unstable"),
+            STRONG_UNSTABLE = reg(ModEffects.UNSTABLE, ModConfig.get().dur_instant, 1, "unstable", "strong_unstable"),
 
-            VAMPIRISM = reg(ModEffects.VAMPIRISM, dur_basic, 0, "vampirism", "vampirism"),
-            LONG_VAMPIRISM = reg(ModEffects.VAMPIRISM, dur_long, 0, "vampirism", "long_vampirism"),
-            STRONG_VAMPIRISM = reg(ModEffects.VAMPIRISM, dur_basic, 1, "vampirism", "strong_vampirism"),
+            VAMPIRISM = reg(ModEffects.VAMPIRISM, ModConfig.get().dur_basic, 0, "vampirism", "vampirism"),
+            LONG_VAMPIRISM = reg(ModEffects.VAMPIRISM, ModConfig.get().dur_long, 0, "vampirism", "long_vampirism"),
+            STRONG_VAMPIRISM = reg(ModEffects.VAMPIRISM, ModConfig.get().dur_basic, 1, "vampirism", "strong_vampirism"),
 
-            XP_BOOST = reg(ModEffects.XP_BOOST, dur_basic, 0, "xp_boost", "xp_boost"),
-            LONG_XP_BOOST = reg(ModEffects.XP_BOOST, dur_long, 0, "xp_boost", "long_xp_boost"),
-            STRONG_XP_BOOST = reg(ModEffects.XP_BOOST, dur_basic, 1, "xp_boost", "strong_xp_boost"),
+            XP_BOOST = reg(ModEffects.XP_BOOST, ModConfig.get().dur_basic, 0, "xp_boost", "xp_boost"),
+            LONG_XP_BOOST = reg(ModEffects.XP_BOOST, ModConfig.get().dur_long, 0, "xp_boost", "long_xp_boost"),
+            STRONG_XP_BOOST = reg(ModEffects.XP_BOOST, ModConfig.get().dur_basic, 1, "xp_boost", "strong_xp_boost"),
 
-            XP_REDUCTION = reg(ModEffects.XP_REDUCTION, dur_basic, 0, "xp_reduction", "xp_reduction"),
-            LONG_XP_REDUCTION = reg(ModEffects.XP_REDUCTION, dur_long, 0, "xp_reduction", "long_xp_reduction"),
-            STRONG_XP_REDUCTION = reg(ModEffects.XP_REDUCTION, dur_basic, 1, "xp_reduction", "strong_xp_reduction"),
+            XP_REDUCTION = reg(ModEffects.XP_REDUCTION, ModConfig.get().dur_basic, 0, "xp_reduction", "xp_reduction"),
+            LONG_XP_REDUCTION = reg(ModEffects.XP_REDUCTION, ModConfig.get().dur_long, 0, "xp_reduction", "long_xp_reduction"),
+            STRONG_XP_REDUCTION = reg(ModEffects.XP_REDUCTION, ModConfig.get().dur_basic, 1, "xp_reduction", "strong_xp_reduction"),
 
-            XP_LIFE = reg(ModEffects.XP_LIFE, dur_basic, 0, "xp_life", "xp_life"),
-            LONG_XP_LIFE = reg(ModEffects.XP_LIFE, dur_long, 0, "xp_life", "long_xp_life"),
+            XP_LIFE = reg(ModEffects.XP_LIFE, ModConfig.get().dur_basic, 0, "xp_life", "xp_life"),
+            LONG_XP_LIFE = reg(ModEffects.XP_LIFE, ModConfig.get().dur_long, 0, "xp_life", "long_xp_life"),
 
-            ZEUS = reg(ModEffects.ZEUS_BENEDICTION, dur_basic, 0, "zeus", "zeus"),
-            LONG_ZEUS = reg(ModEffects.ZEUS_BENEDICTION, dur_long, 0, "zeus", "long_zeus"),
+            ZEUS = reg(ModEffects.ZEUS_BENEDICTION, ModConfig.get().dur_basic, 0, "zeus", "zeus"),
+            LONG_ZEUS = reg(ModEffects.ZEUS_BENEDICTION, ModConfig.get().dur_long, 0, "zeus", "long_zeus"),
 
-            COLD = reg(ModEffects.COLD, dur_basic, 0, "cold", "cold"),
-            LONG_COLD = reg(ModEffects.COLD, dur_long, 0, "cold", "long_cold"),
+            COLD = reg(ModEffects.COLD, ModConfig.get().dur_basic, 0, "cold", "cold"),
+            LONG_COLD = reg(ModEffects.COLD, ModConfig.get().dur_long, 0, "cold", "long_cold"),
 
-            CLUMSINESS = reg(ModEffects.CLUMSINESS, dur_basic, 0, "clumsiness", "clumsiness"),
-            LONG_CLUMSINESS = reg(ModEffects.CLUMSINESS, dur_long, 0, "clumsiness", "long_clumsiness"),
+            CLUMSINESS = reg(ModEffects.CLUMSINESS, ModConfig.get().dur_basic, 0, "clumsiness", "clumsiness"),
+            LONG_CLUMSINESS = reg(ModEffects.CLUMSINESS, ModConfig.get().dur_long, 0, "clumsiness", "long_clumsiness"),
 
-            ASTHMA = reg(ModEffects.ASTHMA, dur_basic, 0, "asthma", "asthma"),
-            LONG_ASTHMA = reg(ModEffects.ASTHMA, dur_long, 0, "asthma", "long_asthma"),
+            ASTHMA = reg(ModEffects.ASTHMA, ModConfig.get().dur_basic, 0, "asthma", "asthma"),
+            LONG_ASTHMA = reg(ModEffects.ASTHMA, ModConfig.get().dur_long, 0, "asthma", "long_asthma"),
 
-            PARANOIA = reg(ModEffects.PARANOIA, dur_basic, 0, "paranoia", "paranoia"),
-            LONG_PARANOIA = reg(ModEffects.PARANOIA, dur_long, 0, "paranoia", "long_paranoia");
+            PARANOIA = reg(ModEffects.PARANOIA, ModConfig.get().dur_basic, 0, "paranoia", "paranoia"),
+            LONG_PARANOIA = reg(ModEffects.PARANOIA, ModConfig.get().dur_long, 0, "paranoia", "long_paranoia");
 
 
     public static void register() {
@@ -198,7 +198,7 @@ public class ModPotions {
 
         DefaultItemComponentEvents.MODIFY.register(context -> context.modify(item ->
                         item == Items.POTION || item == Items.SPLASH_POTION || item == Items.LINGERING_POTION,
-                (builder, _) -> builder.set(DataComponents.MAX_STACK_SIZE, max_potion_stack)
+                (builder, _) -> builder.set(DataComponents.MAX_STACK_SIZE, ModConfig.get().max_potion_stack)
         ));
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.FOOD_AND_DRINKS).register(output ->
@@ -336,7 +336,7 @@ public class ModPotions {
                                Holder<Potion> input,
                                Item ingredient,
                                Holder<Potion> output) {
-        if (isPotionBlacklisted(input) || isPotionBlacklisted(output)) return;
+        if (ModConfig.get().isPotionBlacklisted(input) || ModConfig.get().isPotionBlacklisted(output)) return;
         builder.addMix(input, ingredient, output);
     }
 

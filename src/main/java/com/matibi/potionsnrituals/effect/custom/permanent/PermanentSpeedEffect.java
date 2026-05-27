@@ -40,6 +40,6 @@ public class PermanentSpeedEffect extends MobEffect {
 
     private static void applyEffect(LivingEntity target, int amplifier) {
         if (target instanceof Player player)
-            AttributeUtils.changeSpeedBy(player, ModConfig.perm_speed);
+            AttributeUtils.changeSpeedBy(player, ModConfig.get().perm_speed);
     }
 }

@@ -49,7 +49,7 @@ public class FrostEffect extends MobEffect implements TerrainApplicableEffect {
 
     @Override
     public void useOnBlock(ServerLevel world, BlockPos block, int duration, int amplifier) {
-        int radius = ModConfig.frost_radius + amplifier * ModConfig.frost_radius_per_level;
+        int radius = ModConfig.get().frost_radius + amplifier * ModConfig.get().frost_radius_per_level;
         BlockPos.betweenClosed(block.offset(-radius, -1, -radius), block.offset(radius, 1, radius))
                 .forEach(pos -> {
                     BlockState state = world.getBlockState(pos);

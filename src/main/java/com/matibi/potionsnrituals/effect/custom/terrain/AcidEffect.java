@@ -35,8 +35,8 @@ public class AcidEffect extends MobEffect implements TerrainApplicableEffect {
 
     @Override
     public void useOnBlock(ServerLevel world, BlockPos center, int duration, int amplifier) {
-        int radius = ModConfig.acid_radius + amplifier * ModConfig.acid_radius_per_level;
-        int depth = ModConfig.acid_depth + amplifier *  ModConfig.acid_depth_per_level;
+        int radius = ModConfig.get().acid_radius + amplifier * ModConfig.get().acid_radius_per_level;
+        int depth = ModConfig.get().acid_depth + amplifier *  ModConfig.get().acid_depth_per_level;
 
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dz = -radius; dz <= radius; dz++) {

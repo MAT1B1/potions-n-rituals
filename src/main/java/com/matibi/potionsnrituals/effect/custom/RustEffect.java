@@ -36,7 +36,7 @@ public class RustEffect extends MobEffect {
             int max = stack.getMaxDamage();
             if (max <= 0) continue;
 
-            int amount = Math.max(ModConfig.rust_min_damage, (int)(max * ModConfig.rust_damage));
+            int amount = Math.max(ModConfig.get().rust_min_damage, (int)(max * ModConfig.get().rust_damage));
             stack.hurtAndBreak(amount, entity, slot);
         }
         return true;

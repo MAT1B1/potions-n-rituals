@@ -17,9 +17,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class SplashPotionItemMixin {
     @Inject(method = "use", at = @At("HEAD"))
     private void applyCooldownOnUse(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        int time = ModConfig.splash_potion_cooldown;
-        if (player.hasEffect(ModEffects.LONG_COOLDOWN)) time = ModConfig.splash_potion_long_cooldown;
-        if (player.hasEffect(ModEffects.SHORT_COOLDOWN)) time = ModConfig.splash_potion_short_cooldown;
+        int time = ModConfig.get().splash_potion_cooldown;
+        if (player.hasEffect(ModEffects.LONG_COOLDOWN)) time = ModConfig.get().splash_potion_long_cooldown;
+        if (player.hasEffect(ModEffects.SHORT_COOLDOWN)) time = ModConfig.get().splash_potion_short_cooldown;
         ItemStack stack = player.getItemInHand(hand);
         player.getCooldowns().addCooldown(stack, time);
     }

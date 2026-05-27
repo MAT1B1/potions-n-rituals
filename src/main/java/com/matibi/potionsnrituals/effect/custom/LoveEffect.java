@@ -23,13 +23,13 @@ public class LoveEffect extends MobEffect {
         if (!(entity instanceof AgeableMob target)) return;
         if (!target.isAlive() || target.isBaby()) return;
         if (player.hasEffect(ModEffects.PREGNANT)) return;
-        if (player.distanceToSqr(target) > ModConfig.max_distance_pregnancy * ModConfig.max_distance_pregnancy) return;
+        if (player.distanceToSqr(target) > ModConfig.get().max_distance_pregnancy * ModConfig.get().max_distance_pregnancy) return;
         if (!player.hasLineOfSight(target)) return;
         if (!isLookingAt(player, target)) return;
 
         ((IPregnantPlayer) player).pnr$setPregnancyMob(target.getType());
 
-        player.addEffect(new MobEffectInstance(ModEffects.PREGNANT, ModConfig.pregnancy_duration, 0));
+        player.addEffect(new MobEffectInstance(ModEffects.PREGNANT, ModConfig.get().pregnancy_duration, 0));
         player.removeEffect(ModEffects.LOVE);
     }
 

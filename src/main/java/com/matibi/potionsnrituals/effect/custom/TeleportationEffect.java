@@ -60,7 +60,7 @@ public class TeleportationEffect extends MobEffect {
             }
         }
 
-        for (int i = 0; i < ModConfig.tp_max_try; i++) {
+        for (int i = 0; i < ModConfig.get().tp_max_try; i++) {
             double radius = 8.0 + world.getRandom().nextDouble() * 8.0;
             double angle = world.getRandom().nextDouble() * 2 * Math.PI;
             double dx = Math.cos(angle) * radius;

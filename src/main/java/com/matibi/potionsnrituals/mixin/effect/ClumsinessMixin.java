@@ -23,7 +23,7 @@ public class ClumsinessMixin {
 
         if (!player.hasEffect(ModEffects.CLUMSINESS)) return;
 
-        if (player.getRandom().nextInt(100) < ModConfig.drop_percentage) {
+        if (player.getRandom().nextInt(100) < ModConfig.get().drop_percentage) {
             player.drop(player.getItemInHand(InteractionHand.MAIN_HAND), true);
         }
     }

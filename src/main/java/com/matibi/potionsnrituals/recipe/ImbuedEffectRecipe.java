@@ -83,7 +83,7 @@ public class ImbuedEffectRecipe extends CustomRecipe {
         MobEffectInstance chosen = effects.getFirst();
         ItemStack result = weapon.copyWithCount(1);
 
-        int hits = ModConfig.default_hit + chosen.getDuration() / (20 * 60) * 2;
+        int hits = ModConfig.get().default_hit + chosen.getDuration() / (20 * 60) * 2;
 
         result.set(ModDataComponents.IMBUED_EFFECT,
                 new ImbuedEffect(chosen.getEffect(), hits, chosen.getAmplifier()));

@@ -40,7 +40,7 @@ public class OblivionEffect extends MobEffect {
 
         var inventory = player.getInventory();
         var random = world.getRandom();
-        int count = (int) (inventory.getContainerSize() * ModConfig.inventory_forgotten);
+        int count = (int) (inventory.getContainerSize() * ModConfig.get().inventory_forgotten);
 
         for (int i = 0; i < count; i++) {
             int slot = random.nextInt(inventory.getContainerSize());

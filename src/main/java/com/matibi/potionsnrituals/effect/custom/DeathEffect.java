@@ -54,18 +54,18 @@ public class DeathEffect extends MobEffect {
         float maxHealth = target.getMaxHealth();
         float currentHealth = target.getHealth();
 
-        if (currentHealth > maxHealth * ModConfig.boss_death_damage)
-            target.setHealth(maxHealth * ModConfig.boss_death_damage);
+        if (currentHealth > maxHealth * ModConfig.get().boss_death_damage)
+            target.setHealth(maxHealth * ModConfig.get().boss_death_damage);
 
         if (attacker instanceof LivingEntity livingAttacker)
-            livingAttacker.hurtServer(world, world.damageSources().magic(), livingAttacker.getMaxHealth() * ModConfig.boss_death_backlash);
+            livingAttacker.hurtServer(world, world.damageSources().magic(), livingAttacker.getMaxHealth() * ModConfig.get().boss_death_backlash);
     }
 
     private static void handleUndead(ServerLevel world, @Nullable Entity attacker, LivingEntity target) {
-        target.setHealth(target.getMaxHealth() * ModConfig.undead_death_heal);
+        target.setHealth(target.getMaxHealth() * ModConfig.get().undead_death_heal);
 
         if (attacker instanceof LivingEntity livingAttacker)
-            livingAttacker.hurtServer(world, world.damageSources().magic(), livingAttacker.getMaxHealth() * ModConfig.undead_death_backlash);
+            livingAttacker.hurtServer(world, world.damageSources().magic(), livingAttacker.getMaxHealth() * ModConfig.get().undead_death_backlash);
     }
 
     private static void killTarget(ServerLevel world, @Nullable Entity attacker, LivingEntity target) {

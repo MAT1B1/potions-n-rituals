@@ -25,14 +25,14 @@ public class OreSenseEffect extends MobEffect {
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        return duration % ModConfig.ore_scan_interval == 0;
+        return duration % ModConfig.get().ore_scan_interval == 0;
     }
 
     @Override
     public boolean applyEffectTick(@NonNull ServerLevel world, @NonNull LivingEntity entity, int amplifier) {
         if (!(entity instanceof ServerPlayer player)) return true;
 
-        int range = ModConfig.ore_scan_range + amplifier * ModConfig.ore_scan_range_per_level;
+        int range = ModConfig.get().ore_scan_range + amplifier * ModConfig.get().ore_scan_range_per_level;
 
         ScanResult inView  = scanForOres(world, player, range, true);
         ScanResult offView = scanForOres(world, player, range, false);
@@ -55,7 +55,7 @@ public class OreSenseEffect extends MobEffect {
         BlockPos playerPos = player.blockPosition();
 
         double closestDistSq = Double.MAX_VALUE;
-        int closestColor = ModConfig.ore_color;
+        int closestColor = ModConfig.get().ore_color;
         BlockPos closestPos = null;
 
         for (BlockPos pos : BlockPos.betweenClosed(
@@ -79,7 +79,7 @@ public class OreSenseEffect extends MobEffect {
         }
 
         if (closestPos == null)
-            return new ScanResult(0.0f, ModConfig.ore_color, null);
+            return new ScanResult(0.0f, ModConfig.get().ore_color, null);
 
         double dist = Math.sqrt(closestDistSq);
         float intensity = (float) Math.clamp(1.0 - (dist - 1.0) / (range - 1.0), 0.0, 1.0);
@@ -98,29 +98,29 @@ public class OreSenseEffect extends MobEffect {
     }
 
     private static int getOreColor(BlockState state) {
-        if (state.is(BlockTags.COAL_ORES))      return ModConfig.coal_color;
-        if (state.is(BlockTags.IRON_ORES))      return ModConfig.iron_color;
-        if (state.is(BlockTags.GOLD_ORES))      return ModConfig.gold_color;
-        if (state.is(BlockTags.DIAMOND_ORES))   return ModConfig.diamond_color;
-        if (state.is(BlockTags.EMERALD_ORES))   return ModConfig.emerald_color;
-        if (state.is(BlockTags.LAPIS_ORES))     return ModConfig.lapis_color;
-        if (state.is(BlockTags.REDSTONE_ORES))  return ModConfig.redstone_color;
-        if (state.is(BlockTags.COPPER_ORES))    return ModConfig.copper_color;
-        if (state.is(Blocks.ANCIENT_DEBRIS))    return ModConfig.ancient_debris_color;
-        if (state.is(Blocks.NETHER_QUARTZ_ORE)) return ModConfig.quartz_color;
+        if (state.is(BlockTags.COAL_ORES))      return ModConfig.get().coal_color;
+        if (state.is(BlockTags.IRON_ORES))      return ModConfig.get().iron_color;
+        if (state.is(BlockTags.GOLD_ORES))      return ModConfig.get().gold_color;
+        if (state.is(BlockTags.DIAMOND_ORES))   return ModConfig.get().diamond_color;
+        if (state.is(BlockTags.EMERALD_ORES))   return ModConfig.get().emerald_color;
+        if (state.is(BlockTags.LAPIS_ORES))     return ModConfig.get().lapis_color;
+        if (state.is(BlockTags.REDSTONE_ORES))  return ModConfig.get().redstone_color;
+        if (state.is(BlockTags.COPPER_ORES))    return ModConfig.get().copper_color;
+        if (state.is(Blocks.ANCIENT_DEBRIS))    return ModConfig.get().ancient_debris_color;
+        if (state.is(Blocks.NETHER_QUARTZ_ORE)) return ModConfig.get().quartz_color;
         return -1;
     }
 
     @Override
     public void onEffectRemoved(@NonNull MobEffectInstance effectInstance, @NonNull LivingEntity entity) {
         if (!(entity instanceof ServerPlayer player)) return;
-        ServerPlayNetworking.send(player, new OreSensePayload(0.0f, ModConfig.ore_color, 0.0f, ModConfig.ore_color, 0.0f));
+        ServerPlayNetworking.send(player, new OreSensePayload(0.0f, ModConfig.get().ore_color, 0.0f, ModConfig.get().ore_color, 0.0f));
     }
 
     @Override
     public void onMobRemoved(@NonNull ServerLevel level, @NonNull LivingEntity mob, int amplifier, Entity.@NonNull RemovalReason reason) {
         if (!(mob instanceof ServerPlayer player)) return;
-        ServerPlayNetworking.send(player, new OreSensePayload(0.0f, ModConfig.ore_color, 0.0f, ModConfig.ore_color, 0.0f));
+        ServerPlayNetworking.send(player, new OreSensePayload(0.0f, ModConfig.get().ore_color, 0.0f, ModConfig.get().ore_color, 0.0f));
 
         super.onMobRemoved(level, mob, amplifier, reason);
     }

@@ -45,10 +45,10 @@ public class UnstableEffect extends MobEffect {
     private static void applyEffect(ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
         RandomSource r = world.getRandom();
 
-        float explodeChance = ModConfig.unstable_explosion_chance + amplifier * ModConfig.unstable_explosion_chance_per_level;
+        float explodeChance = ModConfig.get().unstable_explosion_chance + amplifier * ModConfig.get().unstable_explosion_chance_per_level;
 
         if (r.nextFloat() < explodeChance) {
-            float power = ModConfig.unstable_explosion_power + amplifier * ModConfig.unstable_explosion_power_per_level;
+            float power = ModConfig.get().unstable_explosion_power + amplifier * ModConfig.get().unstable_explosion_power_per_level;
             world.explode(
                     target,
                     target.getX(), target.getY(), target.getZ(),
@@ -62,9 +62,9 @@ public class UnstableEffect extends MobEffect {
             world.sendParticles(ParticleTypes.EXPLOSION, target.getX(), target.getY(0.5), target.getZ(),
                     1, 0.0, 0.0, 0.0, 0.0);
         } else {
-            Holder<MobEffect> pick = ModConfig.unstable_pool.get(r.nextInt(ModConfig.unstable_pool.size()));
+            Holder<MobEffect> pick = ModConfig.get().unstable_pool.get(r.nextInt(ModConfig.get().unstable_pool.size()));
 
-            int seconds = ModConfig.unstable_effect_seconds + amplifier * ModConfig.unstable_effect_seconds_per_level;
+            int seconds = ModConfig.get().unstable_effect_seconds + amplifier * ModConfig.get().unstable_effect_seconds_per_level;
             int level = pick == MobEffects.WITHER ? Math.max(0, amplifier - 1) : amplifier;
 
             target.addEffect(new MobEffectInstance(pick, seconds * 20, level, false, true, true));

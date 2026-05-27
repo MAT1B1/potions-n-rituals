@@ -37,13 +37,13 @@ public abstract class PlayerIgnitionMixin {
         LargeFireball fireball = new LargeFireball(
                 player.level(),
                 player,
-                look.multiply(ModConfig.fireball_speed, ModConfig.fireball_speed, ModConfig.fireball_speed),
+                look.multiply(ModConfig.get().fireball_speed, ModConfig.get().fireball_speed, ModConfig.get().fireball_speed),
                 1
         );
         fireball.setPos(pos.x, pos.y, pos.z);
         player.level().addFreshEntity(fireball);
 
-        ignitionFireballCooldown = ModConfig.fireball_cooldown;
+        ignitionFireballCooldown = ModConfig.get().fireball_cooldown;
     }
 
     @Inject(method = "tick", at = @At("HEAD"))

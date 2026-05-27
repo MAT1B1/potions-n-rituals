@@ -24,7 +24,7 @@ import java.util.Optional;
 public class SyringeItem extends Item {
 
     public SyringeItem(Properties properties) {
-        super(properties.durability(ModConfig.syringe_durability));
+        super(properties.durability(ModConfig.get().syringe_durability));
     }
 
     @Override
@@ -35,8 +35,8 @@ public class SyringeItem extends Item {
 
         if (contents == null) return InteractionResult.FAIL;
 
-        player.hurtServer(sw, sw.damageSources().mobAttack(player), ModConfig.syringe_damage);
-        stack.hurtAndBreak(ModConfig.syringe_durability_loss, player, EquipmentSlot.MAINHAND);
+        player.hurtServer(sw, sw.damageSources().mobAttack(player), ModConfig.get().syringe_damage);
+        stack.hurtAndBreak(ModConfig.get().syringe_durability_loss, player, EquipmentSlot.MAINHAND);
 
         if (contents.hasEffects()) {
             contents.getAllEffects().forEach(instance -> {
@@ -66,7 +66,7 @@ public class SyringeItem extends Item {
         PotionContents contents = stack.get(DataComponents.POTION_CONTENTS);
         if (contents == null) return;
 
-        stack.hurtAndBreak(ModConfig.syringe_durability_loss, attacker, EquipmentSlot.MAINHAND);
+        stack.hurtAndBreak(ModConfig.get().syringe_durability_loss, attacker, EquipmentSlot.MAINHAND);
 
         if (contents.hasEffects()) {
             contents.getAllEffects().forEach(target::addEffect);
@@ -87,7 +87,7 @@ public class SyringeItem extends Item {
 
         new ArrayList<>(entity.getActiveEffects()).forEach(instance -> {
             int oldDur = instance.getDuration();
-            int transfer = Math.min(oldDur, ModConfig.syringe_max_transfer_duration_ticks);
+            int transfer = Math.min(oldDur, ModConfig.get().syringe_max_transfer_duration_ticks);
             int remaining = Math.max(0, oldDur - transfer);
 
             entity.removeEffect(instance.getEffect());

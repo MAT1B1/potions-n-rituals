@@ -41,7 +41,7 @@ public class CombinationUtils {
         });
 
         return ((countBenef.get() + countHarm.get() <= 2) ||
-                (countBenef.get() <= countHarm.get() + ModConfig.max_diff && countHarm.get() <= countBenef.get() + ModConfig.max_diff))
+                (countBenef.get() <= countHarm.get() + ModConfig.get().max_diff && countHarm.get() <= countBenef.get() + ModConfig.get().max_diff))
                 ? cleaned
                 : List.of(new MobEffectInstance(ModEffects.UNSTABLE, 1));
     }
