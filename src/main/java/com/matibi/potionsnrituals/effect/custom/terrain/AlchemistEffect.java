@@ -1,6 +1,6 @@
 package com.matibi.potionsnrituals.effect.custom.terrain;
 
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
 
-public class AlchemistEffect extends MobEffect implements TerrainApplicableEffect {
+public class AlchemistEffect extends MobEffect implements TerrainEffect {
     public AlchemistEffect() {
         super(MobEffectCategory.BENEFICIAL, 0xd1c70d);
     }

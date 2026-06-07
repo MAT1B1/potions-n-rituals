@@ -1,7 +1,7 @@
 package com.matibi.potionsnrituals.effect.custom.terrain;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -11,7 +11,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.block.Blocks;
 
-public class PetrificationEffect extends MobEffect implements TerrainApplicableEffect {
+public class PetrificationEffect extends MobEffect implements TerrainEffect {
     public PetrificationEffect() {
         super(MobEffectCategory.HARMFUL, 0xA8A8A8);
 

@@ -7,12 +7,20 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class ModFrenchLanguageProvider extends FabricLanguageProvider {
 
+    private final Map<String, String> additionalTranslations;
+
     public ModFrenchLanguageProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        this(dataOutput, registryLookup, Map.of());
+    }
+
+    public ModFrenchLanguageProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup, Map<String, String> additionalTranslations) {
         super(dataOutput, "fr_fr", registryLookup);
+        this.additionalTranslations = additionalTranslations;
     }
 
     @Override
@@ -261,6 +269,33 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
 
         t.add("option.potions-n-rituals.cold.min_cough_time", "Temps de toux minimum");
         t.add("option.potions-n-rituals.cold.max_cough_time", "Temps de toux maximum");
+
+        // Écran ModConfig — Options des effets actifs
+        t.add("group.potions-n-rituals.active_effect", "Effet Actif");
+        t.add("option.potions-n-rituals.active_effect.medusa_range", "Portée de Méduse");
+        t.add("option.potions-n-rituals.active_effect.teleport_range", "Portée de téléportation");
+        t.add("option.potions-n-rituals.active_effect.zeus_range", "Portée de Zeus");
+        t.add("option.potions-n-rituals.active_effect.zeus_range_per_level", "Portée de Zeus par niveau");
+        t.add("option.potions-n-rituals.active_effect.zeus_short_cooldown", "Cooldown court de Zeus (ticks)");
+        t.add("option.potions-n-rituals.active_effect.zeus_cooldown", "Cooldown de Zeus (ticks)");
+        t.add("option.potions-n-rituals.active_effect.zeus_long_cooldown", "Cooldown long de Zeus (ticks)");
+        t.add("option.potions-n-rituals.active_effect.teleport_range_per_level", "Portée de téléportation par niveau");
+        t.add("option.potions-n-rituals.active_effect.teleport_short_cooldown", "Cooldown court téléportation (ticks)");
+        t.add("option.potions-n-rituals.active_effect.teleport_cooldown", "Cooldown téléportation (ticks)");
+        t.add("option.potions-n-rituals.active_effect.teleport_long_cooldown", "Cooldown long téléportation (ticks)");
+
+        t.add("effect.potions-n-rituals.active_teleportation", "Téléportation active");
+        t.add("item.minecraft.potion.effect.active_teleportation", "Potion de téléportation active");
+        t.add("item.minecraft.splash_potion.effect.active_teleportation", "Potion jetable de téléportation active");
+        t.add("item.minecraft.lingering_potion.effect.active_teleportation", "Potion persistante de téléportation active");
+        t.add("item.minecraft.tipped_arrow.effect.active_teleportation", "Flèche de téléportation active");
+        t.add("item.potions-n-rituals.syringe.effect.potions-n-rituals.active_teleportation", "Seringue de téléportation active");
+        t.add("option.potions-n-rituals.active_effect.medusa_range_per_level", "Portée de Méduse par niveau");
+        t.add("option.potions-n-rituals.active_effect.medusa_short_cooldown", "Cooldown court de Méduse (ticks)");
+        t.add("option.potions-n-rituals.active_effect.medusa_cooldown", "Cooldown de Méduse (ticks)");
+        t.add("option.potions-n-rituals.active_effect.medusa_long_cooldown", "Cooldown long de Méduse (ticks)");
+
+        this.additionalTranslations.forEach(t::add);
     }
 
     private void registerWithAlchemicalStone(TranslationBuilder t, String id, String name) {

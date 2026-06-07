@@ -8,7 +8,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
-public record ActiveEffectPayload(int entityId, String effectType) implements CustomPacketPayload {
+public record ActiveEffectPayload(int entityId, Identifier effectType, int amplifier) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<ActiveEffectPayload> TYPE =
             new CustomPacketPayload.Type<>(
                     Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "active_effect")
@@ -17,7 +17,8 @@ public record ActiveEffectPayload(int entityId, String effectType) implements Cu
     public static final StreamCodec<RegistryFriendlyByteBuf, ActiveEffectPayload> CODEC =
             StreamCodec.composite(
                     ByteBufCodecs.VAR_INT, ActiveEffectPayload::entityId,
-                    ByteBufCodecs.STRING_UTF8, ActiveEffectPayload::effectType,
+                    Identifier.STREAM_CODEC, ActiveEffectPayload::effectType,
+                    ByteBufCodecs.VAR_INT, ActiveEffectPayload::amplifier,
                     ActiveEffectPayload::new
             );
 

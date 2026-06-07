@@ -1,7 +1,7 @@
 package com.matibi.potionsnrituals.effect.custom.terrain;
 
 import com.matibi.potionsnrituals.config.ModConfig;
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -15,7 +15,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import org.jspecify.annotations.NonNull;
 
-public class AcidEffect extends MobEffect implements TerrainApplicableEffect {
+public class AcidEffect extends MobEffect implements TerrainEffect {
     private static final ParticleOptions ACID_DUST = new DustParticleOptions(0x7FFF00, 1.0f);
 
     public AcidEffect() {

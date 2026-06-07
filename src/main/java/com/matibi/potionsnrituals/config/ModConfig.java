@@ -200,6 +200,25 @@ public class ModConfig {
     @SerialEntry public int min_cough_time = 1;
     @SerialEntry public int max_cough_time = 10;
 
+    // ── Active Effect ───────────────────────────────────────────────────────────────
+    @SerialEntry public double medusa_range = 20.0;
+    @SerialEntry public double medusa_range_per_level = 5.0;
+    @SerialEntry public int medusa_short_cooldown = 20;
+    @SerialEntry public int medusa_cooldown = 20 * 5;
+    @SerialEntry public int medusa_long_cooldown = 20 * 10;
+
+    @SerialEntry public double active_teleport_range = 64.0;
+    @SerialEntry public double active_teleport_range_per_level = 16.0;
+    @SerialEntry public int active_teleport_short_cooldown = 20;
+    @SerialEntry public int active_teleport_cooldown = 20 * 5;
+    @SerialEntry public int active_teleport_long_cooldown = 20 * 10;
+
+    @SerialEntry public double zeus_range = 64.0;
+    @SerialEntry public double zeus_range_per_level = 16.0;
+    @SerialEntry public int zeus_short_cooldown = 20;
+    @SerialEntry public int zeus_cooldown = 20 * 5;
+    @SerialEntry public int zeus_long_cooldown = 20 * 10;
+
     // ── Static accessor (replaces old static fields) ────────────────────────────────────
     public static ModConfig get() {
         return HANDLER.instance();

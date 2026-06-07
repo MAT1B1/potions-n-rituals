@@ -1,7 +1,7 @@
 package com.matibi.potionsnrituals.effect.custom.terrain;
 
 import com.matibi.potionsnrituals.effect.ModEffects;
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -18,7 +18,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IgnitionEffect extends MobEffect implements TerrainApplicableEffect {
+public class IgnitionEffect extends MobEffect implements TerrainEffect {
     private static final Map<Block, Block> SMELTABLE = new HashMap<>();
 
     static {

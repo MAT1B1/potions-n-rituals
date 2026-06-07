@@ -1,7 +1,7 @@
 package com.matibi.potionsnrituals.item.alchemicalStone;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 import com.matibi.potionsnrituals.item.ModItems;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -48,7 +48,7 @@ public record AlchemicalStone(Identifier id, Holder<MobEffect> effect, int ampli
     public static ItemStack getItemStack(Holder<MobEffect> effect, int amplifier, int number) {
         Identifier effectId = BuiltInRegistries.MOB_EFFECT.getKey(effect.value());
 
-        if (effect.value() instanceof TerrainApplicableEffect &&
+        if (effect.value() instanceof TerrainEffect &&
                 effectId != null &&
                 effectId.getNamespace().equals(PotionsNRituals.MOD_ID)) {
 

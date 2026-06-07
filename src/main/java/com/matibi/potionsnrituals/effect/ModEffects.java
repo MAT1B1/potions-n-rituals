@@ -2,6 +2,10 @@ package com.matibi.potionsnrituals.effect;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.custom.*;
+import com.matibi.potionsnrituals.effect.custom.active.ActiveTeleportationEffect;
+import com.matibi.potionsnrituals.effect.custom.active.LoveEffect;
+import com.matibi.potionsnrituals.effect.custom.active.MedusaBenedictionEffect;
+import com.matibi.potionsnrituals.effect.custom.active.ZeusBenedictionEffect;
 import com.matibi.potionsnrituals.effect.custom.brainwashing.BrainwashingEffect;
 import com.matibi.potionsnrituals.effect.custom.permanent.PermanentHealthEffect;
 import com.matibi.potionsnrituals.effect.custom.permanent.PermanentSpeedEffect;
@@ -66,6 +70,8 @@ public class ModEffects {
             XP_REDUCTION        = reg("xp_reduction",       new XpReductionEffect()),
             XP_LIFE             = reg("xp_life",            new XpLifeEffect()),
             ZEUS_BENEDICTION    = reg("zeus",               new ZeusBenedictionEffect()),
+            MEDUSA_BENEDICTION  = reg("medusa_benediction", new MedusaBenedictionEffect()),
+            ACTIVE_TELEPORTATION = reg("active_teleportation", new ActiveTeleportationEffect()),
             CLUMSINESS          = reg("clumsiness",         new ClumsinessEffect()),
             COLD                = reg("cold",               new ColdEffect()),
             ASTHMA              = reg("asthma",             new AsthmaEffect()),

@@ -2,7 +2,7 @@ package com.matibi.potionsnrituals.effect.custom.terrain;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.config.ModConfig;
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-public class GiantEffect extends MobEffect implements TerrainApplicableEffect {
+public class GiantEffect extends MobEffect implements TerrainEffect {
     public GiantEffect() {
         super(MobEffectCategory.NEUTRAL, 0x228B22);
 

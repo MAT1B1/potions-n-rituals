@@ -3,7 +3,7 @@ package com.matibi.potionsnrituals.effect.custom.terrain;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.effect.ModEffects;
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-public class ResurrectionEffect extends MobEffect implements TerrainApplicableEffect {
+public class ResurrectionEffect extends MobEffect implements TerrainEffect {
 
     private static boolean applying = false;
     private static boolean first = false;

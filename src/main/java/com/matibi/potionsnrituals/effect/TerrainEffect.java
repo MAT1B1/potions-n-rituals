@@ -4,7 +4,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 
-public interface TerrainApplicableEffect {
+public interface TerrainEffect {
 
     default void useOnBlock(ServerLevel world, BlockPos block, int duration, int amplifier) {}
 

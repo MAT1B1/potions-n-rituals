@@ -2,7 +2,7 @@ package com.matibi.potionsnrituals.effect.custom.terrain;
 
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.effect.ModEffects;
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
@@ -17,7 +17,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Objects;
 
-public class FrostEffect extends MobEffect implements TerrainApplicableEffect {
+public class FrostEffect extends MobEffect implements TerrainEffect {
     public FrostEffect() {
         super(MobEffectCategory.HARMFUL, 0x80D8FF);
     }

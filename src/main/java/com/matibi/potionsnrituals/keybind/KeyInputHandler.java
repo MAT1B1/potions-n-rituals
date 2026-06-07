@@ -1,6 +1,6 @@
 package com.matibi.potionsnrituals.keybind;
 
-import com.matibi.potionsnrituals.effect.ModEffects;
+import com.matibi.potionsnrituals.effect.ActiveEffect;
 import com.matibi.potionsnrituals.effect.helper.ActiveEffectPayload;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -8,7 +8,9 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.phys.EntityHitResult;
 import org.lwjgl.glfw.GLFW;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
@@ -42,15 +44,19 @@ public class KeyInputHandler {
                         && ClientPlayNetworking.canSend(ActiveEffectPayload.TYPE)) {
 
                     LocalPlayer player = client.player;
-                    String effectType = null;
-
                     if (player == null) return;
-                    if (player.hasEffect(ModEffects.LOVE)) effectType = "love";
 
-                    if (effectType != null) {
+                    for (MobEffectInstance instance : player.getActiveEffects()) {
+                        Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(instance.getEffect().value());
+                        if (id == null) continue;
+                        if (!(instance.getEffect().value() instanceof ActiveEffect)) continue;
+
                         ClientPlayNetworking.send(new ActiveEffectPayload(
-                                hitResult.getEntity().getId(), effectType
+                                hitResult.getEntity().getId(),
+                                id,
+                                instance.getAmplifier()
                         ));
+                        break;
                     }
                 }
             }

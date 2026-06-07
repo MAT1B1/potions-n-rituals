@@ -13,9 +13,9 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NonNull;
 
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 
-public class PhotosynthesisEffect extends MobEffect implements TerrainApplicableEffect {
+public class PhotosynthesisEffect extends MobEffect implements TerrainEffect {
     public PhotosynthesisEffect() {
         super(MobEffectCategory.BENEFICIAL, 0x55FF55);
     }

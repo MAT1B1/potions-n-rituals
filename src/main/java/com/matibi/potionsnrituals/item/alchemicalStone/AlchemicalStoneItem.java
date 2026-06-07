@@ -1,6 +1,6 @@
 package com.matibi.potionsnrituals.item.alchemicalStone;
 
-import com.matibi.potionsnrituals.effect.TerrainApplicableEffect;
+import com.matibi.potionsnrituals.effect.TerrainEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -43,7 +43,7 @@ public class AlchemicalStoneItem extends PotionItem {
         if (contents == null || !contents.hasEffects()) return InteractionResult.FAIL;
 
         for (MobEffectInstance effect : contents.getAllEffects()) {
-            if (effect.getEffect().value() instanceof TerrainApplicableEffect terrainEffect) {
+            if (effect.getEffect().value() instanceof TerrainEffect terrainEffect) {
                 if (terrainEffect.isBlockNonApplicable(serverLevel, pos) && player != null)
                     player.sendOverlayMessage(
                             Component.translatable("item.potions-n-rituals.alchemical_stone.block_not_good"));
