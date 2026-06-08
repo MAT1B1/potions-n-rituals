@@ -3,6 +3,7 @@
   "package": "com.matibi.potionsnrituals.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
+    "ActiveEffectMixin",
     "ItemPostHitMixin",
     "SlotEffectMixin",
     "brewingNpotion.BrewingStandAccessor",

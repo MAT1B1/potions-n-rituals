@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 
 public interface ActiveEffect {
 
-    void useOnKeybind(ServerLevel world, Player player, int duration, int amplifier);
+    boolean useOnKeybind(ServerLevel world, Player player, int duration, int amplifier);
 
     default int[] getCooldowns(int amplifier) {
         return new int[]{0, 0, 0};

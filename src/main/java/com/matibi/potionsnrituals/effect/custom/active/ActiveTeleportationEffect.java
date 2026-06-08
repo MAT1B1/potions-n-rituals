@@ -20,12 +20,12 @@ public class ActiveTeleportationEffect extends MobEffect implements ActiveEffect
     }
 
     @Override
-    public void useOnKeybind(ServerLevel world, Player player, int duration, int amplifier) {
-        if (!(player instanceof ServerPlayer serverPlayer)) return;
+    public boolean useOnKeybind(ServerLevel world, Player player, int duration, int amplifier) {
+        if (!(player instanceof ServerPlayer serverPlayer)) return false;
 
         double range = ModConfig.get().active_teleport_range + ModConfig.get().active_teleport_range_per_level * amplifier;
         BlockHitResult hit = ActiveEffectUtils.getLookedAtBlock(serverPlayer, range);
-        if (hit.getType() == HitResult.Type.MISS) return;
+        if (hit.getType() == HitResult.Type.MISS) return false;
 
         BlockPos pos = hit.getBlockPos().relative(hit.getDirection());
 
@@ -40,6 +40,7 @@ public class ActiveTeleportationEffect extends MobEffect implements ActiveEffect
                 false
         );
         world.broadcastEntityEvent(serverPlayer, (byte) 46);
+        return true;
     }
 
     @Override

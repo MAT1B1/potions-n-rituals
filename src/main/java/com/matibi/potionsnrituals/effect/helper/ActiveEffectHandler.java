@@ -3,9 +3,9 @@ package com.matibi.potionsnrituals.effect.helper;
 import com.matibi.potionsnrituals.effect.ActiveEffect;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 
 import java.util.*;
@@ -26,11 +26,11 @@ public class ActiveEffectHandler {
                     int[] cooldowns = active.getCooldowns(amplifier);
                     int cooldownTicks = cooldowns[Math.min(amplifier, cooldowns.length - 1)];
 
-                    if (cooldownTicks > 0) {
+                    boolean success = active.useOnKeybind(player.level(), player, 0, amplifier);
+
+                    if (success && cooldownTicks > 0) {
                         setCooldown(player, effectId, cooldownTicks);
                     }
-
-                    active.useOnKeybind(player.level(), player, 0, amplifier);
                 })
         );
 
@@ -49,5 +49,7 @@ public class ActiveEffectHandler {
     private static void setCooldown(ServerPlayer player, Identifier effectId, int ticks) {
         COOLDOWNS.computeIfAbsent(player.getUUID(), _ -> new HashMap<>())
                 .put(effectId, player.level().getGameTime() + ticks);
+
+        ServerPlayNetworking.send(player, new CooldownSyncPayload(effectId, ticks));
     }
 }

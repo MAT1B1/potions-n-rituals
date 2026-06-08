@@ -20,19 +20,20 @@ public class LoveEffect extends MobEffect implements ActiveEffect {
     }
 
     @Override
-    public void useOnKeybind(ServerLevel world, Player player, int duration, int amplifier) {
-        if (!(player instanceof ServerPlayer user)) return;
-        if (!user.hasEffect(ModEffects.LOVE)) return;
-        if (user.hasEffect(ModEffects.PREGNANT)) return;
+    public boolean useOnKeybind(ServerLevel world, Player player, int duration, int amplifier) {
+        if (!(player instanceof ServerPlayer user)) return false;
+        if (!user.hasEffect(ModEffects.LOVE)) return false;
+        if (user.hasEffect(ModEffects.PREGNANT)) return false;
 
         LivingEntity target = ActiveEffectUtils.getLookedAtEntity(user, ModConfig.get().max_distance_pregnancy);
-        if (!(target instanceof AgeableMob ageable)) return;
-        if (!ageable.isAlive() || ageable.isBaby()) return;
-        if (!user.hasLineOfSight(target)) return;
+        if (!(target instanceof AgeableMob ageable)) return false;
+        if (!ageable.isAlive() || ageable.isBaby()) return false;
+        if (!user.hasLineOfSight(target)) return false;
 
         ((IPregnantPlayer) user).pnr$setPregnancyMob(ageable.getType());
 
         user.addEffect(new MobEffectInstance(ModEffects.PREGNANT, ModConfig.get().pregnancy_duration, 0));
         user.removeEffect(ModEffects.LOVE);
+        return true;
     }
 }

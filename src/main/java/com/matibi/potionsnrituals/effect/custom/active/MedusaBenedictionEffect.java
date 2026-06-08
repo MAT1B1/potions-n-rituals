@@ -18,14 +18,15 @@ public class MedusaBenedictionEffect extends MobEffect implements ActiveEffect {
     }
 
     @Override
-    public void useOnKeybind(ServerLevel world, Player player, int duration, int amplifier) {
-        if (!(player instanceof ServerPlayer serverPlayer)) return;
+    public boolean useOnKeybind(ServerLevel world, Player player, int duration, int amplifier) {
+        if (!(player instanceof ServerPlayer serverPlayer)) return false;
 
         double range = ModConfig.get().medusa_range + ModConfig.get().medusa_range_per_level * amplifier;
         LivingEntity target = ActiveEffectUtils.getLookedAtEntity(serverPlayer, range);
-        if (target == null) return;
+        if (target == null) return false;
 
         target.addEffect(new MobEffectInstance(ModEffects.PETRIFICATION, 20 * 45, amplifier, false, false, true));
+        return true;
     }
 
     @Override

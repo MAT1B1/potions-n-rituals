@@ -6,6 +6,7 @@ import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.effect.custom.BerserkEffect;
 import com.matibi.potionsnrituals.effect.helper.ActiveEffectHandler;
 import com.matibi.potionsnrituals.effect.helper.ActiveEffectPayload;
+import com.matibi.potionsnrituals.effect.helper.CooldownSyncPayload;
 
 import com.matibi.potionsnrituals.effect.custom.brainwashing.DisorientMobHandler;
 import com.matibi.potionsnrituals.effect.custom.brainwashing.DisorientVillagerHandler;
@@ -53,6 +54,7 @@ public class PotionsNRituals implements ModInitializer {
 
 		PayloadTypeRegistry.serverboundPlay().register(ActiveEffectPayload.TYPE, ActiveEffectPayload.CODEC);
 		PayloadTypeRegistry.clientboundPlay().register(OreSensePayload.TYPE, OreSensePayload.CODEC);
+		PayloadTypeRegistry.clientboundPlay().register(CooldownSyncPayload.TYPE, CooldownSyncPayload.CODEC);
 
 		ActiveEffectHandler.register();
 	}

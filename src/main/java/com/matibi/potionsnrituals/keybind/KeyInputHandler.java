@@ -11,7 +11,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.phys.EntityHitResult;
 import org.lwjgl.glfw.GLFW;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 
@@ -40,24 +39,22 @@ public class KeyInputHandler {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (EFFECT_BUTTON.consumeClick()) {
-                if (client.hitResult instanceof EntityHitResult hitResult
-                        && ClientPlayNetworking.canSend(ActiveEffectPayload.TYPE)) {
+                if (!ClientPlayNetworking.canSend(ActiveEffectPayload.TYPE)) return;
 
-                    LocalPlayer player = client.player;
-                    if (player == null) return;
+                LocalPlayer player = client.player;
+                if (player == null) return;
 
-                    for (MobEffectInstance instance : player.getActiveEffects()) {
-                        Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(instance.getEffect().value());
-                        if (id == null) continue;
-                        if (!(instance.getEffect().value() instanceof ActiveEffect)) continue;
+                for (MobEffectInstance instance : player.getActiveEffects()) {
+                    Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(instance.getEffect().value());
+                    if (id == null) continue;
+                    if (!(instance.getEffect().value() instanceof ActiveEffect)) continue;
 
-                        ClientPlayNetworking.send(new ActiveEffectPayload(
-                                hitResult.getEntity().getId(),
-                                id,
-                                instance.getAmplifier()
-                        ));
-                        break;
-                    }
+                    ClientPlayNetworking.send(new ActiveEffectPayload(
+                            0,
+                            id,
+                            instance.getAmplifier()
+                    ));
+                    break;
                 }
             }
         });
