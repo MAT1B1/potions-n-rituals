@@ -34,6 +34,8 @@
   "book.potions-n-rituals.alchemist_book.getting_started.syringe.recipe.text": "Combine a glass bottle with an iron nugget to craft a syringe.\n",
   "book.potions-n-rituals.alchemist_book.getting_started.syringe.recipe.title": "Crafting",
   "book.potions-n-rituals.alchemist_book.name": "Alchemist's Guide",
+  "book.potions-n-rituals.alchemist_book.potions.description": "A list of all Potions.",
+  "book.potions-n-rituals.alchemist_book.potions.name": "Potions",
   "book.potions-n-rituals.alchemist_book.tooltip": "A guide to the arcane arts of alchemy.",
   "category.potions-n-rituals.mob_effects": "Mob Effects",
   "category.potions-n-rituals.potions_and_items": "Potions & Items",
