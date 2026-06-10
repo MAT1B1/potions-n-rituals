@@ -25,16 +25,16 @@ public class PotionsNRitualsDataGenerator implements DataGeneratorEntrypoint {
 		var frFrBookCache = new LanguageProviderCache("fr_fr");
 
 		pack.addProvider((FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registries) ->
-			new BookProvider(output, registries, PotionsNRituals.MOD_ID,
-				List.of(new AlchemistBookProvider(PotionsNRituals.MOD_ID, enUsBookCache, frFrBookCache))));
-
-		pack.addProvider(ModModelProvider::new);
-		pack.addProvider(ModItemTagProvider::new);
-		pack.addProvider(ModRecipeProvider::new);
+				new BookProvider(output, registries, PotionsNRituals.MOD_ID,
+						List.of(new AlchemistBookProvider(PotionsNRituals.MOD_ID, enUsBookCache, frFrBookCache))));
 
 		pack.addProvider((FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registries) ->
 				new ModUsLanguageProvider(output, registries, enUsBookCache.data()));
 		pack.addProvider((FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registries) ->
 				new ModFrenchLanguageProvider(output, registries, frFrBookCache.data()));
+
+		pack.addProvider(ModModelProvider::new);
+		pack.addProvider(ModItemTagProvider::new);
+		pack.addProvider(ModRecipeProvider::new);
 	}
 }

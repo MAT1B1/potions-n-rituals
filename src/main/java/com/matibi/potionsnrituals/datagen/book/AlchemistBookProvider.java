@@ -5,7 +5,6 @@ import com.klikli_dev.modonomicon.api.datagen.SingleBookSubProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookModel;
 import com.klikli_dev.modonomicon.book.BookDisplayMode;
 import com.matibi.potionsnrituals.datagen.book.alchemist.GettingStartedCategory;
-import com.matibi.potionsnrituals.datagen.book.alchemist.PotionsCategory;
 import net.minecraft.resources.Identifier;
 
 public class AlchemistBookProvider extends SingleBookSubProvider {
@@ -35,7 +34,6 @@ public class AlchemistBookProvider extends SingleBookSubProvider {
     @Override
     protected void generateCategories() {
         this.add(new GettingStartedCategory(this).generate());
-        this.add(new PotionsCategory(this).generate());
     }
 
     @Override

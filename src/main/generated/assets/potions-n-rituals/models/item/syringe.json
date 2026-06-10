@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "potions-n-rituals:item/syringe",
-    "layer1": "potions-n-rituals:item/syringe_overlay"
-  }
-}
