@@ -203,9 +203,9 @@ public class ModConfig {
     // ── Active Effect ───────────────────────────────────────────────────────────────
     @SerialEntry public double medusa_range = 20.0;
     @SerialEntry public double medusa_range_per_level = 5.0;
-    @SerialEntry public int medusa_short_cooldown = 20;
-    @SerialEntry public int medusa_cooldown = 20 * 5;
-    @SerialEntry public int medusa_long_cooldown = 20 * 10;
+    @SerialEntry public int medusa_short_cooldown = 20 * 5;
+    @SerialEntry public int medusa_cooldown = 20 * 10;
+    @SerialEntry public int medusa_long_cooldown = 20 * 20;
 
     @SerialEntry public double active_teleport_range = 64.0;
     @SerialEntry public double active_teleport_range_per_level = 16.0;

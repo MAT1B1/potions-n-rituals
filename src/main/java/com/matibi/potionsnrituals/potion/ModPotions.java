@@ -192,8 +192,8 @@ public class ModPotions {
             PARANOIA = reg(ModEffects.PARANOIA, ModConfig.get().dur_basic, 0, "paranoia", "paranoia"),
             LONG_PARANOIA = reg(ModEffects.PARANOIA, ModConfig.get().dur_long, 0, "paranoia", "long_paranoia"),
 
-            MEDUSA = reg(ModEffects.MEDUSA_BENEDICTION, ModConfig.get().dur_basic, 0, "medusa_benediction", "medusa"),
-            LONG_MEDUSA = reg(ModEffects.MEDUSA_BENEDICTION, ModConfig.get().dur_long, 0, "medusa_benediction", "long_medusa"),
+            MEDUSA = reg(ModEffects.MEDUSA_BENEDICTION, ModConfig.get().dur_basic, 0, "medusa", "medusa"),
+            LONG_MEDUSA = reg(ModEffects.MEDUSA_BENEDICTION, ModConfig.get().dur_long, 0, "medusa", "long_medusa"),
 
             ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TELEPORTATION, ModConfig.get().dur_basic, 0, "active_teleportation", "active_teleport"),
             LONG_ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TELEPORTATION, ModConfig.get().dur_long, 0, "active_teleportation", "long_active_teleport");

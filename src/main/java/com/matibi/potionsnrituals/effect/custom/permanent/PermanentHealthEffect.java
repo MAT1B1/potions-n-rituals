@@ -2,6 +2,7 @@ package com.matibi.potionsnrituals.effect.custom.permanent;
 
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.util.AttributeUtils;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;

@@ -69,6 +69,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         register(t, "xp_boost", "Boost d'XP");
         register(t, "xp_life", "Vie d'XP");
         register(t, "zeus", "Bénédiction de Zeus");
+        register(t, "medusa", "Bénédiction de Méduse");
         register(t, "xp_reduction", "Réduction d'XP");
         register(t, "clumsiness", "Maladresse");
         register(t, "cold", "Rhume");
@@ -83,9 +84,9 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         registerWithAlchemicalStone(t, "alchemist", "Alchimiste", "de l'Alchimiste");
         registerWithAlchemicalStone(t, "frost", "Givre");
 
-        registerElixir(t, "permanent_health", "Vie");
-        registerElixir(t, "permanent_speed", "Vitesse");
-        registerElixir(t, "permanent_strength", "Force");
+        registerElixir(t, "perm_health", "Vie");
+        registerElixir(t, "perm_speed", "Vitesse");
+        registerElixir(t, "perm_strength", "Force");
 
         t.add("item.potions-n-rituals.poisonous_carrot", "Carotte empoisonnée");
         t.add("item.potions-n-rituals.poisonous_beetroot", "Betterave empoisonnée");

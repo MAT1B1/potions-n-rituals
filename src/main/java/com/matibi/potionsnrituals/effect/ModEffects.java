@@ -21,13 +21,13 @@ public class ModEffects {
 
     public static final Holder<MobEffect>
             // ── PERMANENT ─────────────────────────────────────────────────────────────
-            PERM_HEALTH         = reg("permanent_health",   new PermanentHealthEffect()),
-            PERM_SPEED          = reg("permanent_speed",    new PermanentSpeedEffect()),
-            PERM_STRENGTH       = reg("permanent_strength", new PermanentStrengthEffect()),
+            PERM_HEALTH         = reg("perm_health",   new PermanentHealthEffect()),
+            PERM_SPEED          = reg("perm_speed",    new PermanentSpeedEffect()),
+            PERM_STRENGTH       = reg("perm_strength", new PermanentStrengthEffect()),
 
             // ── TERRAIN ───────────────────────────────────────────────────────────────
             ACID                = reg("acid",               new AcidEffect()),
-            ALCHEMIST           = reg("alchemist",         new AlchemistEffect()),
+            ALCHEMIST           = reg("alchemist",          new AlchemistEffect()),
             GIANT               = reg("giant",              new GiantEffect()),
             IGNITION            = reg("ignition",           new IgnitionEffect()),
             PETRIFICATION       = reg("petrification",      new PetrificationEffect()),
@@ -70,7 +70,7 @@ public class ModEffects {
             XP_REDUCTION        = reg("xp_reduction",       new XpReductionEffect()),
             XP_LIFE             = reg("xp_life",            new XpLifeEffect()),
             ZEUS_BENEDICTION    = reg("zeus",               new ZeusBenedictionEffect()),
-            MEDUSA_BENEDICTION  = reg("medusa_benediction", new MedusaBenedictionEffect()),
+            MEDUSA_BENEDICTION  = reg("medusa",             new MedusaBenedictionEffect()),
             ACTIVE_TELEPORTATION = reg("active_teleportation", new ActiveTeleportationEffect()),
             CLUMSINESS          = reg("clumsiness",         new ClumsinessEffect()),
             COLD                = reg("cold",               new ColdEffect()),

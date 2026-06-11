@@ -71,6 +71,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register(t, "xp_boost", "XP Boost");
         register(t, "xp_life", "XP Life");
         register(t, "zeus", "Zeus Benediction");
+        register(t, "medusa", "Medusa Benediction");
         register(t, "xp_reduction", "XP Reduction");
         register(t, "clumsiness", "Clumsiness");
         register(t, "cold", "Cold");
@@ -85,9 +86,9 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         registerWithAlchemicalStone(t, "alchemist", "Alchemist");
         registerWithAlchemicalStone(t, "frost", "Frost");
 
-        registerElixir(t, "permanent_health", "Health");
-        registerElixir(t, "permanent_speed", "Speed");
-        registerElixir(t, "permanent_strength", "Strength");
+        registerElixir(t, "perm_health", "Health");
+        registerElixir(t, "perm_speed", "Speed");
+        registerElixir(t, "perm_strength", "Strength");
 
         t.add("item.potions-n-rituals.poisonous_carrot", "Poisonous Carrot");
         t.add("item.potions-n-rituals.poisonous_beetroot", "Poisonous Beetroot");
