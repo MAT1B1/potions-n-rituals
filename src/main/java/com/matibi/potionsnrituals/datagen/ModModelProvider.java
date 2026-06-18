@@ -1,6 +1,5 @@
 package com.matibi.potionsnrituals.datagen;
 
-import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.util.ModItemTintSources;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;

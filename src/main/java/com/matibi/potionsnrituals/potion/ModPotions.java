@@ -23,7 +23,6 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 
 import com.matibi.potionsnrituals.config.ModConfig;
-import net.minecraft.world.level.block.WeatheringCopper;
 
 public class ModPotions {
     public static final Holder<Potion>
