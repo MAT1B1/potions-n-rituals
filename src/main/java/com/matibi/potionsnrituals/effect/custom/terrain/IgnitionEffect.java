@@ -30,7 +30,7 @@ public class IgnitionEffect extends MobEffect implements TerrainEffect {
         SMELTABLE.put(Blocks.CLAY, Blocks.BRICKS);
         SMELTABLE.put(Blocks.WET_SPONGE, Blocks.SPONGE);
         SMELTABLE.put(Blocks.RAW_IRON_BLOCK, Blocks.IRON_BLOCK);
-        SMELTABLE.put(Blocks.RAW_COPPER_BLOCK, Blocks.COPPER_BLOCK);
+        SMELTABLE.put(Blocks.RAW_COPPER_BLOCK, Blocks.COPPER_BLOCK.weathering().unaffected());
         SMELTABLE.put(Blocks.RAW_GOLD_BLOCK, Blocks.GOLD_BLOCK);
     }
 

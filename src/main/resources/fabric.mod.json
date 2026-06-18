@@ -32,13 +32,13 @@
 		"potions-n-rituals.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.19.2",
-		"minecraft": "~26.1.2",
+		"fabricloader": ">=${loader_version}",
+		"minecraft": "~${minecraft_version}",
 		"java": ">=25",
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"modmenu": ">=18.0.0-beta.1",
-		"yet-another-config-lib": ">=3.9.3+26.1-fabric"
+		"modmenu": ">=${modmenu_version}",
+		"yet-another-config-lib": ">=${yacl_version}"
 	}
 }

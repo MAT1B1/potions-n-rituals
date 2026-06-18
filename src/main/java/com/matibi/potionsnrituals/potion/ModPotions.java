@@ -23,6 +23,7 @@ import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
 
 import com.matibi.potionsnrituals.config.ModConfig;
+import net.minecraft.world.level.block.WeatheringCopper;
 
 public class ModPotions {
     public static final Holder<Potion>
@@ -258,7 +259,7 @@ public class ModPotions {
             addMix(builder, Potions.AWKWARD, Items.LEAF_LITTER, ModPotions.PHOTOSYNTHESIS);
             addMix(builder, Potions.AWKWARD, Items.PITCHER_PLANT, ModPotions.OBLIVION);
             addMix(builder, Potions.AWKWARD, Items.GHAST_TEAR, ModPotions.GHOST_WALK);
-            addMix(builder, Potions.AWKWARD, Items.LIGHTNING_ROD, ModPotions.STUN);
+            addMix(builder, Potions.AWKWARD, Items.LIGHTNING_ROD.weathering().unaffected(), ModPotions.STUN);
             addMix(builder, Potions.AWKWARD, ModItems.OXYDATION, ModPotions.RUST);
             addMix(builder, Potions.AWKWARD, Items.RESIN_CLUMP, ModPotions.ADHESION);
             addMix(builder, ModPotions.BRAINWASHING, Items.RABBIT_FOOT, ModPotions.NO_INTERACTION);
@@ -355,7 +356,7 @@ public class ModPotions {
     private static void addStrong(PotionBrewing.Builder builder,
               Holder<Potion> input,
               Holder<Potion> output) {
-        addMix(builder, input, Items.GLOWSTONE, output);
+        addMix(builder, input, Items.GLOWSTONE_DUST, output);
     }
 
     private static Holder<Potion> reg(Holder<MobEffect> effect,

@@ -105,8 +105,10 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.alchemical_stone.effect.mixed", "Multi-effect Alchemical Stone");
         registerVanillaReverse(t, "mixed", "Multi-effect");
 
-        t.add("item.potions-n-rituals.syringe", "Syringe");
-        t.add("item.potions-n-rituals.syringe.effect.isEmpty", "Syringe");
+		t.add("item.potions-n-rituals.syringe", "Syringe");
+		t.add("item.potions-n-rituals.syringe.effect.isEmpty", "Syringe");
+
+		t.add("block.potions-n-rituals.brewing_cauldron", "Brewing Cauldron");
 
         BuiltInRegistries.MOB_EFFECT.entrySet().forEach(entry -> {
             Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(entry.getValue());

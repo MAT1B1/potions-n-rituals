@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.BlockHitResult;
@@ -27,7 +27,8 @@ public class ZeusBenedictionEffect extends MobEffect implements ActiveEffect {
         BlockHitResult hit = ActiveEffectUtils.getLookedAtBlock(serverPlayer, range);
         if (hit.getType() == HitResult.Type.MISS) return false;
 
-        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(world, EntitySpawnReason.TRIGGERED);
+        LightningBolt lightning = EntityTypes.LIGHTNING_BOLT
+                .create(world, EntitySpawnReason.TRIGGERED);
         if (lightning != null) {
             lightning.setPos(hit.getBlockPos().getX(), hit.getBlockPos().getY(), hit.getBlockPos().getZ());
             world.addFreshEntity(lightning);

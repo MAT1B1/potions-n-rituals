@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "potions-n-rituals:alchemist_core"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_witch_finger": {
+      "conditions": {
+        "items": [
+          {
+            "items": "potions-n-rituals:witch_finger"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_witch_finger"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "potions-n-rituals:alchemist_core"
+    ]
+  }
+}

@@ -16,16 +16,16 @@ public class DoubleHealthEffect extends MobEffect {
     }
 
     @Override
-    public boolean isInstantenous() {
+    public boolean isInstantaneous() {
         return true;
     }
 
     @Override
-    public void applyInstantenousEffect(@NonNull ServerLevel level, @Nullable Entity effectEntity,
+    public void applyInstantaneousEffect(@NonNull ServerLevel level, @Nullable Entity effectEntity,
                                         @Nullable Entity attacker, @NonNull LivingEntity target,
                                         int amplifier, double proximity) {
         applyDoubleHealth(target, amplifier);
-        super.applyInstantenousEffect(level, effectEntity, attacker, target, amplifier, proximity);
+        super.applyInstantaneousEffect(level, effectEntity, attacker, target, amplifier, proximity);
     }
 
     @Override

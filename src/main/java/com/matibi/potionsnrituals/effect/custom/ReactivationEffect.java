@@ -17,12 +17,12 @@ public class ReactivationEffect extends MobEffect {
     }
 
     @Override
-    public boolean isInstantenous() {
+    public boolean isInstantaneous() {
         return true;
     }
 
     @Override
-    public void applyInstantenousEffect(@NonNull ServerLevel level, @Nullable Entity source, @Nullable Entity owner, LivingEntity mob, int amplification, double scale) {
+    public void applyInstantaneousEffect(@NonNull ServerLevel level, @Nullable Entity source, @Nullable Entity owner, LivingEntity mob, int amplification, double scale) {
         for (MobEffectInstance instance : mob.getActiveEffects()) {
             if (instance.getEffect().value() == this || instance.getEffect().equals(ModEffects.RESURRECTION))
                 continue;
@@ -36,6 +36,6 @@ public class ReactivationEffect extends MobEffect {
                     instance.showIcon()
             ));
         }
-        super.applyInstantenousEffect(level, source, owner, mob, amplification, scale);
+        super.applyInstantaneousEffect(level, source, owner, mob, amplification, scale);
     }
 }

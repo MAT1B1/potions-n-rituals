@@ -6,7 +6,7 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NonNull;
@@ -17,7 +17,7 @@ public class DeathEffect extends MobEffect {
     }
 
     @Override
-    public boolean isInstantenous() {
+    public boolean isInstantaneous() {
         return true;
     }
 
@@ -33,9 +33,9 @@ public class DeathEffect extends MobEffect {
     }
 
     @Override
-    public void applyInstantenousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
+    public void applyInstantaneousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
         applyEffect(world, effectEntity, attacker, target, amplifier);
-        super.applyInstantenousEffect(world, effectEntity, attacker, target, amplifier, proximity);
+        super.applyInstantaneousEffect(world, effectEntity, attacker, target, amplifier, proximity);
     }
 
     private static void applyEffect(ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, LivingEntity target, int amplifier) {
@@ -78,10 +78,10 @@ public class DeathEffect extends MobEffect {
 
     private static boolean isBoss(LivingEntity e) {
         var type = e.getType();
-        return type == EntityType.WITHER
-                || type == EntityType.ENDER_DRAGON
-                || type == EntityType.WARDEN
-                || type == EntityType.ELDER_GUARDIAN;
+        return type == EntityTypes.WITHER
+                || type == EntityTypes.ENDER_DRAGON
+                || type == EntityTypes.WARDEN
+                || type == EntityTypes.ELDER_GUARDIAN;
     }
 
     private static boolean isUndead(LivingEntity e) {

@@ -23,7 +23,7 @@ public abstract class ItemPostHitMixin {
         ImbuedEffect imbued = itemStack.get(ModDataComponents.IMBUED_EFFECT);
         if (imbued == null) return;
 
-        int duration = imbued.effect().value().isInstantenous() ? 1 : 20 * 10;
+        int duration = imbued.effect().value().isInstantaneous() ? 1 : 20 * 10;
 
         mob.addEffect(new MobEffectInstance(
                 imbued.effect(), duration, imbued.amplifier()));

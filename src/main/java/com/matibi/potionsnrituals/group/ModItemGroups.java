@@ -64,7 +64,7 @@ public class ModItemGroups {
                                 )
                                 .toList();
 
-
+                        entries.accept(Items.GLASS_BOTTLE);
                         addPotionType(Items.POTION, entries, all);
                         addPotionType(Items.SPLASH_POTION, entries, all);
                         addPotionType(Items.LINGERING_POTION, entries, all);

@@ -2,7 +2,6 @@ package com.matibi.potionsnrituals.effect.custom.permanent;
 
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.util.AttributeUtils;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -18,7 +17,7 @@ public class PermanentHealthEffect extends MobEffect {
     }
 
     @Override
-    public boolean isInstantenous() {
+    public boolean isInstantaneous() {
         return true;
     }
 
@@ -34,9 +33,9 @@ public class PermanentHealthEffect extends MobEffect {
     }
 
     @Override
-    public void applyInstantenousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
+    public void applyInstantaneousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
         applyEffect(target, amplifier);
-        super.applyInstantenousEffect(world, effectEntity, attacker, target, amplifier, proximity);
+        super.applyInstantaneousEffect(world, effectEntity, attacker, target, amplifier, proximity);
     }
 
     private static void applyEffect(LivingEntity target, int amplifier) {

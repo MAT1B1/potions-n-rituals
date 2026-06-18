@@ -17,7 +17,7 @@ public class PermanentStrengthEffect extends MobEffect {
     }
 
     @Override
-    public boolean isInstantenous() {
+    public boolean isInstantaneous() {
         return true;
     }
 
@@ -33,9 +33,9 @@ public class PermanentStrengthEffect extends MobEffect {
     }
 
     @Override
-    public void applyInstantenousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
+    public void applyInstantaneousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
         applyEffect(target, amplifier);
-        super.applyInstantenousEffect(world, effectEntity, attacker, target, amplifier, proximity);
+        super.applyInstantaneousEffect(world, effectEntity, attacker, target, amplifier, proximity);
     }
 
     private static void applyEffect(LivingEntity target, int amplifier) {

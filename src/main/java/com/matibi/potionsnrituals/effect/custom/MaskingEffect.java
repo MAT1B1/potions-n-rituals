@@ -16,13 +16,13 @@ public class MaskingEffect extends MobEffect {
     public MaskingEffect() {super(MobEffectCategory.NEUTRAL, 0x444444);}
 
     @Override
-    public boolean isInstantenous() {
+    public boolean isInstantaneous() {
         return true;
     }
 
     @Override
-    public void applyInstantenousEffect(@NonNull ServerLevel level, @Nullable Entity source, @Nullable Entity owner, @NonNull LivingEntity mob, int amplification, double scale) {
-        super.applyInstantenousEffect(level, source, owner, mob, amplification, scale);
+    public void applyInstantaneousEffect(@NonNull ServerLevel level, @Nullable Entity source, @Nullable Entity owner, @NonNull LivingEntity mob, int amplification, double scale) {
+        super.applyInstantaneousEffect(level, source, owner, mob, amplification, scale);
 
         List<MobEffectInstance> effects = mob.getActiveEffects().stream()
                 .filter(e -> !e.getEffect().equals(ModEffects.MASKING)

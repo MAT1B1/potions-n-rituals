@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -98,13 +99,19 @@ public class OreSenseEffect extends MobEffect {
     }
 
     private static int getOreColor(BlockState state) {
-        if (state.is(BlockTags.COAL_ORES))      return ModConfig.get().coal_color;
+        Block block = state.getBlock();
+        if (block == Blocks.COAL_ORE || block == Blocks.DEEPSLATE_COAL_ORE)
+            return ModConfig.get().coal_color;
         if (state.is(BlockTags.IRON_ORES))      return ModConfig.get().iron_color;
         if (state.is(BlockTags.GOLD_ORES))      return ModConfig.get().gold_color;
-        if (state.is(BlockTags.DIAMOND_ORES))   return ModConfig.get().diamond_color;
-        if (state.is(BlockTags.EMERALD_ORES))   return ModConfig.get().emerald_color;
-        if (state.is(BlockTags.LAPIS_ORES))     return ModConfig.get().lapis_color;
-        if (state.is(BlockTags.REDSTONE_ORES))  return ModConfig.get().redstone_color;
+        if (block == Blocks.DIAMOND_ORE || block == Blocks.DEEPSLATE_DIAMOND_ORE)
+            return ModConfig.get().diamond_color;
+        if (block == Blocks.EMERALD_ORE || block == Blocks.DEEPSLATE_EMERALD_ORE)
+            return ModConfig.get().emerald_color;
+        if (block == Blocks.LAPIS_ORE || block == Blocks.DEEPSLATE_LAPIS_ORE)
+            return ModConfig.get().lapis_color;
+        if (block == Blocks.REDSTONE_ORE || block == Blocks.DEEPSLATE_REDSTONE_ORE)
+            return ModConfig.get().redstone_color;
         if (state.is(BlockTags.COPPER_ORES))    return ModConfig.get().copper_color;
         if (state.is(Blocks.ANCIENT_DEBRIS))    return ModConfig.get().ancient_debris_color;
         if (state.is(Blocks.NETHER_QUARTZ_ORE)) return ModConfig.get().quartz_color;

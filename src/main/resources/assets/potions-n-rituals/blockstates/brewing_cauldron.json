@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "potions-n-rituals:block/brewing_cauldron"
+    },
+    "lit=true": {
+      "model": "potions-n-rituals:block/brewing_cauldron_lit"
+    }
+  }
+}

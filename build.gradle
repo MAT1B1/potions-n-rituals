@@ -40,17 +40,20 @@ dependencies {
 
 	implementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
 	implementation "com.terraformersmc:modmenu:${project.modmenu_version}"
-	implementation ("com.klikli_dev:modonomicon-${minecraft_version}-fabric:${modonomicon_version}") {
-		transitive = false
-	}
 }
 
 processResources {
-	def version = project.version
-	inputs.property "version", version
+	def props = [
+			"version": project.mod_version,
+			"loader_version": project.loader_version,
+			"minecraft_version": project.minecraft_version,
+			"modmenu_version": project.modmenu_version,
+			"yacl_version": project.yacl_version
+	]
+	inputs.properties props
 
 	filesMatching("fabric.mod.json") {
-		expand "version": version
+		expand props
 	}
 }
 

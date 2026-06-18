@@ -22,7 +22,7 @@ public class AlchemistEffect extends MobEffect implements TerrainEffect {
     }
 
     @Override
-    public boolean isInstantenous() {
+    public boolean isInstantaneous() {
         return true;
     }
 
@@ -38,9 +38,9 @@ public class AlchemistEffect extends MobEffect implements TerrainEffect {
     }
 
     @Override
-    public void applyInstantenousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
+    public void applyInstantaneousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
         applyEffect(world, effectEntity, attacker, target, amplifier, proximity);
-        super.applyInstantenousEffect(world, effectEntity, attacker, target, amplifier, proximity);
+        super.applyInstantaneousEffect(world, effectEntity, attacker, target, amplifier, proximity);
     }
 
     private static void applyEffect(ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {

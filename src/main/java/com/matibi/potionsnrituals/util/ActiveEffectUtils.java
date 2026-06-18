@@ -29,6 +29,24 @@ public class ActiveEffectUtils {
         return hitResult != null && hitResult.getEntity() instanceof LivingEntity le ? le : null;
     }
 
+    public static LivingEntity getLookedAtEntity(LivingEntity entity, double range) {
+        Vec3 start = entity.getEyePosition();
+        Vec3 lookVec = entity.getLookAngle();
+        Vec3 end = start.add(lookVec.scale(range));
+        AABB area = entity.getBoundingBox().expandTowards(lookVec.scale(range)).inflate(1.0);
+
+        EntityHitResult hitResult = ProjectileUtil.getEntityHitResult(
+                entity,
+                start,
+                end,
+                area,
+                e -> e != entity && e instanceof LivingEntity le && le.isAlive(),
+                range * range
+        );
+
+        return hitResult != null && hitResult.getEntity() instanceof LivingEntity le ? le : null;
+    }
+
     public static BlockHitResult getLookedAtBlock(ServerPlayer player, double range) {
         Vec3 start = player.getEyePosition();
         Vec3 end = start.add(player.getViewVector(1.0F).scale(range));

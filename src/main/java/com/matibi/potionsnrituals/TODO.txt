@@ -15,3 +15,8 @@ ajouter nouveau effet:
     - activation : active les truc comme un bloc de redstone
     - time stop : stop le temps (pas sur si realisable)
     - metamorphose : transforme le joueur en un autre mob (avec une hotkey)
+
+principe alchimiques:
+Le Soufre (△) : L'âme, le principe masculin, actif, combustible et chaud.
+Le Mercure ($$) : L'esprit, le principe féminin, passif, fluide, volatile et changeant.
+Le Sel (⊖) : Le corps, le principe d'union, la stabilité, la matière physique qui permet au Soufre et au Mercure de s'incarner.

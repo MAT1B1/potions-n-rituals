@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": "potions-n-rituals:alchemist_core",
+    "S": "minecraft:cobblestone"
+  },
+  "pattern": [
+    "SSS",
+    "SAS",
+    "SSS"
+  ],
+  "result": {
+    "count": 8,
+    "id": "potions-n-rituals:alchemical_stone"
+  }
+}
