@@ -1,6 +1,5 @@
 package com.matibi.potionsnrituals.mixin.brewingNpotion;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;

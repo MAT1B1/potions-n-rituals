@@ -80,7 +80,7 @@ public class BerserkEffect extends MobEffect {
     }
 
     public static void registerDeathHandler() {
-        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) -> {
+        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, _) -> {
             if (!(entity instanceof Player player)) return true;
             if (!player.hasEffect(ModEffects.BERSERK)) return true;
             if (damageSource.is(DamageTypes.FELL_OUT_OF_WORLD))

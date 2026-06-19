@@ -13,7 +13,6 @@ import net.minecraft.advancements.predicates.LocationPredicate;
 import net.minecraft.advancements.triggers.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
