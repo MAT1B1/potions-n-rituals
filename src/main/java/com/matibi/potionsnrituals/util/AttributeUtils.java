@@ -1,15 +1,15 @@
-package com.matibi.potionsnrituals.util;
+﻿package com.matibi.potionsnrituals.util;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 
 public class AttributeUtils {
-    private static final Identifier HEALTH_BONUS_ID = Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "max_health_bonus");
-    private static final Identifier STRENGTH_BONUS_ID = Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "strength_bonus");
-    private static final Identifier SPEED_BONUS_ID = Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "speed_bonus");
+    private static final Identifier HEALTH_BONUS_ID = ModUtils.id("max_health_bonus");
+    private static final Identifier STRENGTH_BONUS_ID = ModUtils.id("strength_bonus");
+    private static final Identifier SPEED_BONUS_ID = ModUtils.id("speed_bonus");
 
     public static void changeHealthBy(Player player, double delta) {
         var attr = player.getAttribute(Attributes.MAX_HEALTH);

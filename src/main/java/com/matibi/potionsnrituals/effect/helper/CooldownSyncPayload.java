@@ -1,6 +1,6 @@
-package com.matibi.potionsnrituals.effect.helper;
+﻿package com.matibi.potionsnrituals.effect.helper;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -11,7 +11,7 @@ import org.jspecify.annotations.NonNull;
 public record CooldownSyncPayload(Identifier effectId, int cooldownTicks) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<CooldownSyncPayload> TYPE =
             new CustomPacketPayload.Type<>(
-                    Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "cooldown_sync")
+                    ModUtils.id("cooldown_sync")
             );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, CooldownSyncPayload> CODEC =

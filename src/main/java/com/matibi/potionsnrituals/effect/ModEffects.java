@@ -1,4 +1,4 @@
-package com.matibi.potionsnrituals.effect;
+﻿package com.matibi.potionsnrituals.effect;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.custom.*;
@@ -11,10 +11,10 @@ import com.matibi.potionsnrituals.effect.custom.permanent.PermanentHealthEffect;
 import com.matibi.potionsnrituals.effect.custom.permanent.PermanentSpeedEffect;
 import com.matibi.potionsnrituals.effect.custom.permanent.PermanentStrengthEffect;
 import com.matibi.potionsnrituals.effect.custom.terrain.*;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 
 public class ModEffects {
@@ -75,12 +75,14 @@ public class ModEffects {
             CLUMSINESS          = reg("clumsiness",         new ClumsinessEffect()),
             COLD                = reg("cold",               new ColdEffect()),
             ASTHMA              = reg("asthma",             new AsthmaEffect()),
-            PARANOIA            = reg("paranoia",           new ParanoiaEffect());
+            PARANOIA            = reg("paranoia",           new ParanoiaEffect()),
+            HYDROPHOBIA         = reg("hydrophobia",        new HydrophobiaEffect()),
+            ZOMBIE_CONTAGION    = reg("zombie_contagion",   new ZombieContagionEffect());
 
     private static Holder<MobEffect> reg(String name, MobEffect effect) {
         return Registry.registerForHolder(
                 BuiltInRegistries.MOB_EFFECT,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, name),
+                ModUtils.id(name),
                 effect
         );
     }

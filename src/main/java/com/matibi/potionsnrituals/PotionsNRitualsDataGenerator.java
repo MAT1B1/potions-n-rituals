@@ -1,5 +1,6 @@
 package com.matibi.potionsnrituals;
 
+import com.matibi.potionsnrituals.datagen.ModAdvancementProvider;
 import com.matibi.potionsnrituals.datagen.ModItemTagProvider;
 import com.matibi.potionsnrituals.datagen.ModModelProvider;
 import com.matibi.potionsnrituals.datagen.ModRecipeProvider;
@@ -16,6 +17,7 @@ public class PotionsNRitualsDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModModelProvider::new);
 		pack.addProvider(ModItemTagProvider::new);
 		pack.addProvider(ModRecipeProvider::new);
+		pack.addProvider(ModAdvancementProvider::new);
 
 		pack.addProvider(ModUsLanguageProvider::new);
 		pack.addProvider(ModFrenchLanguageProvider::new);

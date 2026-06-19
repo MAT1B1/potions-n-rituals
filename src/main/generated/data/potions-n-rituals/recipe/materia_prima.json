@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "potions-n-rituals:salt",
+    "potions-n-rituals:sulfur_ball",
+    "potions-n-rituals:mercury_ball",
+    "minecraft:water_bucket",
+    "minecraft:lava_bucket",
+    "minecraft:dirt",
+    "minecraft:glass_bottle",
+    "minecraft:golden_dandelion",
+    "minecraft:rotten_flesh"
+  ],
+  "result": {
+    "count": 8,
+    "id": "potions-n-rituals:materia_prima"
+  }
+}

@@ -78,6 +78,9 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register(t, "asthma", "Asthma");
         register(t, "paranoia", "Paranoia");
 
+        register(t, "hydrophobia", "Hydrophobia");
+        register(t, "zombie_contagion", "Zombie Contagion");
+
         registerWithAlchemicalStone(t, "giant", "Giant");
         registerWithAlchemicalStone(t, "resurrection", "Resurrection");
         registerWithAlchemicalStone(t, "petrification", "Petrification");
@@ -92,7 +95,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
 
         t.add("item.potions-n-rituals.poisonous_carrot", "Poisonous Carrot");
         t.add("item.potions-n-rituals.poisonous_beetroot", "Poisonous Beetroot");
-        t.add("item.potions-n-rituals.alchemist_core", "Alchemist Core");
+        t.add("item.potions-n-rituals.materia_prima", "Materia Prima");
         t.add("item.potions-n-rituals.claw", "Claw");
         t.add("item.potions-n-rituals.zombie_brain", "Zombie Brain");
         t.add("item.potions-n-rituals.leaf", "Leaf");
@@ -100,6 +103,9 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.blood_bag", "Blood Bag");
         t.add("item.potions-n-rituals.oxydation", "Oxidation Fragment");
         t.add("item.potions-n-rituals.charged_copper", "Charged Copper");
+        t.add("item.potions-n-rituals.sulfur_ball", "Sulfur Ball");
+        t.add("item.potions-n-rituals.mercury_ball", "Mercury Ball");
+        t.add("item.potions-n-rituals.salt", "Salt");
         t.add("item.potions-n-rituals.alchemical_stone", "Alchemical Stone");
         t.add("item.potions-n-rituals.alchemical_stone.effect.empty", "Alchemical Stone");
         t.add("item.potions-n-rituals.alchemical_stone.effect.mixed", "Multi-effect Alchemical Stone");
@@ -124,6 +130,18 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.alchemical_stone.block_only", "Runes can only be used on blocks");
         t.add("item.potions-n-rituals.alchemical_stone.block_not_good", "The block is not compatible");
         t.add("itemGroup.potions-n-rituals.alchemy", "Alchemy");
+
+        t.add("advancements.potions-n-rituals.root.title", "Potions & Rituals");
+        t.add("advancements.potions-n-rituals.root.description", "The art of alchemy");
+        t.add("advancements.potions-n-rituals.nigredo.title", "Nigredo");
+        t.add("advancements.potions-n-rituals.nigredo.description", "Delve into chaos and create the Primordial Matter");
+        t.add("advancements.potions-n-rituals.albedo.title", "Albedo");
+        t.add("advancements.potions-n-rituals.albedo.description", "Wash away impurities and brew your first potions");
+        t.add("advancements.potions-n-rituals.citrinitas.title", "Citrinitas");
+        t.add("advancements.potions-n-rituals.citrinitas.description", "Channel Nether energies to forge your first talismans and artifacts");
+        t.add("advancements.potions-n-rituals.rubedo.title", "Rubedo");
+        t.add("advancements.potions-n-rituals.rubedo.description", "Achieve absolute perfection by performing great worldly rituals");
+
         t.add("splash.potionsnrituals.magic", "Alchemy is power!!!");
         t.add("splash.potionsnrituals.thanks", "Thank you for supporting me LivelyBadGood");
         t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s hits remaining)");

@@ -1,16 +1,16 @@
-package com.matibi.potionsnrituals.group;
+﻿package com.matibi.potionsnrituals.group;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.item.alchemicalStone.AlchemicalStone;
 import com.matibi.potionsnrituals.item.alchemicalStone.ModAlchemicalStone;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -29,11 +29,11 @@ import com.matibi.potionsnrituals.config.ModConfig;
 
 public class ModItemGroups {
     public static final ResourceKey<CreativeModeTab> ALCHEMY =
-            ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "alchemy"));
+            ResourceKey.create(Registries.CREATIVE_MODE_TAB, ModUtils.id("alchemy"));
 
     public static final CreativeModeTab ALCHEMY_GROUP = Registry.register(
             BuiltInRegistries.CREATIVE_MODE_TAB,
-            Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "alchemy"),
+            ModUtils.id("alchemy"),
             FabricCreativeModeTab.builder()
                     .icon(() -> new ItemStack(Items.POTION))
                     .title(Component.translatable("itemGroup.potions-n-rituals.alchemy"))
@@ -64,6 +64,14 @@ public class ModItemGroups {
                                 )
                                 .toList();
 
+                        entries.accept(ModItems.MATERIA_PRIMA);
+                        entries.accept(ModItems.SULFUR_BALL);
+                        entries.accept(ModItems.MERCURY_BALL);
+                        entries.accept(ModItems.SALT);
+
+                        entries.accept(ModItems.SYRINGE);
+                        entries.accept(ModItems.BLOOD_BAG);
+
                         entries.accept(Items.GLASS_BOTTLE);
                         addPotionType(Items.POTION, entries, all);
                         addPotionType(Items.SPLASH_POTION, entries, all);
@@ -75,9 +83,6 @@ public class ModItemGroups {
                             if (!stack.isEmpty() && !ModConfig.get().isStoneBlacklisted(entry))
                                 entries.accept(stack);
                         });
-
-                        entries.accept(ModItems.SYRINGE);
-                        entries.accept(ModItems.BLOOD_BAG);
                     })
                     .build()
     );

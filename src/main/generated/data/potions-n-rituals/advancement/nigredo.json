@@ -1,0 +1,32 @@
+{
+  "parent": "potions-n-rituals:root",
+  "criteria": {
+    "has_materia_prima": {
+      "conditions": {
+        "items": [
+          {
+            "items": "potions-n-rituals:materia_prima"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.potions-n-rituals.nigredo.description"
+    },
+    "icon": {
+      "id": "potions-n-rituals:materia_prima"
+    },
+    "title": {
+      "translate": "advancements.potions-n-rituals.nigredo.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_materia_prima"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

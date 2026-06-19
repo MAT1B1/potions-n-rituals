@@ -1,7 +1,6 @@
-package com.matibi.potionsnrituals.effect.custom;
+﻿package com.matibi.potionsnrituals.effect.custom;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
-import net.minecraft.resources.Identifier;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -13,14 +12,14 @@ public class LongLegEffect extends MobEffect {
 
         this.addAttributeModifier(
                 Attributes.STEP_HEIGHT,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "long_legs_step"),
+                ModUtils.id("long_legs_step"),
                 0.4D,
                 AttributeModifier.Operation.ADD_VALUE
         );
 
         this.addAttributeModifier(
                 Attributes.MOVEMENT_SPEED,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "long_legs_speed"),
+                ModUtils.id("long_legs_speed"),
                 0.1D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_BASE
         );

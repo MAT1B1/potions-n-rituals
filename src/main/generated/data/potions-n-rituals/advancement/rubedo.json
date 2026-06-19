@@ -1,0 +1,33 @@
+{
+  "parent": "potions-n-rituals:citrinitas",
+  "criteria": {
+    "has_end_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:end_stone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.potions-n-rituals.rubedo.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "id": "minecraft:end_stone"
+    },
+    "title": {
+      "translate": "advancements.potions-n-rituals.rubedo.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_end_stone"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

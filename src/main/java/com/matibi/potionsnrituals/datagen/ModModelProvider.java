@@ -30,10 +30,13 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.ZOMBIE_BRAIN,
                 ModItems.POISONOUS_BEETROOT,
                 ModItems.POISONOUS_CARROT,
-                ModItems.ALCHEMIST_CORE,
+                ModItems.MATERIA_PRIMA,
                 ModItems.CHARGED_COPPER,
                 ModItems.OXYDATION,
-                ModItems.BLOOD_BAG
+                ModItems.BLOOD_BAG,
+                ModItems.SULFUR_BALL,
+                ModItems.MERCURY_BALL,
+                ModItems.SALT
         );
 
         items.forEach(item -> gen.generateFlatItem(item, ModelTemplates.FLAT_ITEM));

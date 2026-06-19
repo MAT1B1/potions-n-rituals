@@ -1,12 +1,11 @@
-package com.matibi.potionsnrituals.util;
+﻿package com.matibi.potionsnrituals.util;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.util.ModUtils;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -19,7 +18,7 @@ public class ModItemTintSources {
 
     public static void register() {
         ItemTintSources.ID_MAPPER.put(
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "tint_potion"),
+                ModUtils.id("tint_potion"),
                 TINT_POTION_CODEC
         );
     }

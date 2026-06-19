@@ -8,13 +8,16 @@ import com.matibi.potionsnrituals.recipe.FoodWithEffectRecipe;
 import com.matibi.potionsnrituals.recipe.ImbuedEffectRecipe;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.advancements.predicates.FluidPredicate;
+import net.minecraft.advancements.predicates.LocationPredicate;
+import net.minecraft.advancements.triggers.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SpecialRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.material.Fluids;
 import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
@@ -30,31 +33,63 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         return new RecipeProvider(registries, output) {
             @Override
             public void buildRecipes() {
-                shapeless(RecipeCategory.BREWING, ModItems.ALCHEMIST_CORE, 8)
-                        .requires(Items.POISONOUS_POTATO)
-                        .requires(ModItems.POISONOUS_CARROT)
-                        .requires(ModItems.POISONOUS_BEETROOT)
-                        .requires(Items.BROWN_MUSHROOM)
-                        .requires(Items.RED_MUSHROOM)
-                        .requires(Items.FERMENTED_SPIDER_EYE)
-                        .requires(Items.BONE_MEAL)
+                SimpleCookingRecipeBuilder.smelting(
+                        Ingredient.of(Items.CINNABAR),
+                        RecipeCategory.MISC,
+                        CookingBookCategory.MISC,
+                        ModItems.MERCURY_BALL,
+                        0.7F,
+                        200)
+                    .unlockedBy("has_cinnabar", has(Items.CINNABAR))
+                    .save(output);
+                SimpleCookingRecipeBuilder.smelting(
+                        Ingredient.of(Items.SULFUR),
+                        RecipeCategory.MISC,
+                        CookingBookCategory.MISC,
+                        ModItems.SULFUR_BALL,
+                        0.7F,
+                        200)
+                    .unlockedBy("has_sulfur", has(Items.SULFUR))
+                    .save(output);
+                SimpleCookingRecipeBuilder.smelting(
+                        Ingredient.of(Items.WATER_BUCKET),
+                        RecipeCategory.MISC,
+                        CookingBookCategory.MISC,
+                        ModItems.SALT,
+                        0.35F,
+                        200)
+                    .unlockedBy("in_water", PlayerTrigger.TriggerInstance.located(
+                        LocationPredicate.Builder.location()
+                            .setFluid(FluidPredicate.Builder.fluid()
+                                .of(Fluids.WATER))
+                    ))
+                    .save(output);
+
+                shapeless(RecipeCategory.MISC, ModItems.MATERIA_PRIMA, 8)
+                        .requires(ModItems.SALT)
+                        .requires(ModItems.SULFUR_BALL)
+                        .requires(ModItems.MERCURY_BALL)
+                        .requires(Items.WATER_BUCKET)
+                        .requires(Items.LAVA_BUCKET)
+                        .requires(Items.DIRT)
+                        .requires(Items.GLASS_BOTTLE)
+                        .requires(Items.GOLDEN_DANDELION)
                         .requires(Items.ROTTEN_FLESH)
-                        .requires(ModItems.WITCH_S_FINGER)
-                        .unlockedBy(getHasName(ModItems.WITCH_S_FINGER), has(ModItems.WITCH_S_FINGER))
+                        .unlockedBy(getHasName(ModItems.SULFUR_BALL), has(ModItems.SULFUR_BALL))
                         .save(output);
 
                 shaped(RecipeCategory.BREWING, ModItems.ALCHEMICAL_STONE, 8)
                         .pattern("SSS").pattern("SAS").pattern("SSS")
-                        .define('A', ModItems.ALCHEMIST_CORE)
+                        .define('A', ModItems.MATERIA_PRIMA)
                         .define('S', Items.COBBLESTONE)
-                        .unlockedBy(getHasName(ModItems.ALCHEMIST_CORE), has(ModItems.ALCHEMIST_CORE))
+                        .unlockedBy(getHasName(ModItems.MATERIA_PRIMA), has(ModItems.MATERIA_PRIMA))
                         .save(output);
 
                 shaped(RecipeCategory.BREWING, ModItems.ALCHEMICAL_STONE, 8)
                         .pattern("SSS").pattern("SAS").pattern("SSS")
                         .define('A', Items.NETHER_WART)
                         .define('S', Items.COBBLESTONE)
-                        .unlockedBy(getHasName(ModItems.ALCHEMIST_CORE), has(ModItems.ALCHEMIST_CORE))
+                        .unlockedBy(getHasName(ModItems.MATERIA_PRIMA), has(ModItems.MATERIA_PRIMA))
                         .save(output, "alchemical_stone_from_nether_wart");
 
                 shapeless(RecipeCategory.BREWING, ModItems.SYRINGE)

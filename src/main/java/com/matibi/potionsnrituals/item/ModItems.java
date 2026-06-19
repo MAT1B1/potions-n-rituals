@@ -1,15 +1,15 @@
-package com.matibi.potionsnrituals.item;
+﻿package com.matibi.potionsnrituals.item;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.alchemicalStone.AlchemicalStoneItem;
 import com.matibi.potionsnrituals.item.syringe.SyringeItem;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -23,7 +23,10 @@ import org.jspecify.annotations.NonNull;
 public class ModItems {
 
     public static final Item
-            ALCHEMIST_CORE = registerFoil("alchemist_core", Rarity.UNCOMMON),
+            MATERIA_PRIMA = registerFoil("materia_prima", Rarity.UNCOMMON),
+            MERCURY_BALL = registerSimple("mercury_ball"),
+            SULFUR_BALL = registerSimple("sulfur_ball"),
+            SALT = registerSimple("salt"),
 
             LEAF = registerSimple("leaf"),
 
@@ -101,14 +104,14 @@ public class ModItems {
     private static Item.Properties props(String id) {
         return new Item.Properties().setId(ResourceKey.create(
                 Registries.ITEM,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, id)
+                ModUtils.id(id)
         ));
     }
 
     private static Item register(String id, Item item) {
         return Registry.register(
                 BuiltInRegistries.ITEM,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, id),
+                ModUtils.id(id),
                 item
         );
     }
@@ -125,7 +128,7 @@ public class ModItems {
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
                 .register(output -> {
-                    output.insertAfter(Items.NETHER_WART, ModItems.ALCHEMIST_CORE);
+                    output.insertAfter(Items.NETHER_WART, ModItems.MATERIA_PRIMA);
                     output.insertAfter(Items.PHANTOM_MEMBRANE,
                             ModItems.CLAW,
                             ModItems.WITCH_S_FINGER,

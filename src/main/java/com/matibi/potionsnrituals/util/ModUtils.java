@@ -1,4 +1,4 @@
-package com.matibi.potionsnrituals.util;
+﻿package com.matibi.potionsnrituals.util;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import net.minecraft.resources.Identifier;

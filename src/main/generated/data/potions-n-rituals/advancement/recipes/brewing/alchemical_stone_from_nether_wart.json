@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_alchemist_core": {
+    "has_materia_prima": {
       "conditions": {
         "items": [
           {
-            "items": "potions-n-rituals:alchemist_core"
+            "items": "potions-n-rituals:materia_prima"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_alchemist_core"
+      "has_materia_prima"
     ]
   ],
   "rewards": {

@@ -1,7 +1,6 @@
-package com.matibi.potionsnrituals.effect.custom;
+﻿package com.matibi.potionsnrituals.effect.custom;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
-import net.minecraft.resources.Identifier;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -13,25 +12,25 @@ public class NoInteractionEffect extends MobEffect {
 
         this.addAttributeModifier(
                 Attributes.BLOCK_INTERACTION_RANGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "no_interaction_block_range"),
+                ModUtils.id("no_interaction_block_range"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.ENTITY_INTERACTION_RANGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "no_interaction_entity_range"),
+                ModUtils.id("no_interaction_entity_range"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.ATTACK_DAMAGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "no_interaction_attack_damage"),
+                ModUtils.id("no_interaction_attack_damage"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.ATTACK_KNOCKBACK,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "no_interaction_knockback"),
+                ModUtils.id("no_interaction_knockback"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );

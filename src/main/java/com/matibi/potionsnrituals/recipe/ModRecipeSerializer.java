@@ -1,9 +1,8 @@
-package com.matibi.potionsnrituals.recipe;
+﻿package com.matibi.potionsnrituals.recipe;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class ModRecipeSerializer {
@@ -22,7 +21,7 @@ public class ModRecipeSerializer {
 
     private static void reg(String id, RecipeSerializer<?> serializer) {
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, id),
+                ModUtils.id(id),
                 serializer);
     }
 

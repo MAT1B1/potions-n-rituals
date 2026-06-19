@@ -1,11 +1,10 @@
-package com.matibi.potionsnrituals.datacomponent;
+﻿package com.matibi.potionsnrituals.datacomponent;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
-
 import java.util.function.UnaryOperator;
 
 public final class ModDataComponents {
@@ -25,7 +24,7 @@ public final class ModDataComponents {
     private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> op) {
         return Registry.register(
                 BuiltInRegistries.DATA_COMPONENT_TYPE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, id),
+                ModUtils.id(id),
                 op.apply(DataComponentType.builder()).build()
         );
     }

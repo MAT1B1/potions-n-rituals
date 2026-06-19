@@ -1,6 +1,6 @@
-package com.matibi.potionsnrituals.effect.helper;
+﻿package com.matibi.potionsnrituals.effect.helper;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -11,7 +11,7 @@ import org.jspecify.annotations.NonNull;
 public record ActiveEffectPayload(int entityId, Identifier effectType, int amplifier) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<ActiveEffectPayload> TYPE =
             new CustomPacketPayload.Type<>(
-                    Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "active_effect")
+                    ModUtils.id("active_effect")
             );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ActiveEffectPayload> CODEC =

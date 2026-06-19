@@ -76,6 +76,9 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         register(t, "asthma", "Asthme", "d'Asthme");
         register(t, "paranoia", "Paranoïa");
 
+        register(t, "hydrophobia", "Hydrophobie");
+        register(t, "zombie_contagion", "Contagion zombie");
+
         registerWithAlchemicalStone(t, "resurrection", "Résurrection");
         registerWithAlchemicalStone(t, "giant", "Géant");
         registerWithAlchemicalStone(t, "petrification", "Pétrification");
@@ -90,7 +93,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
 
         t.add("item.potions-n-rituals.poisonous_carrot", "Carotte empoisonnée");
         t.add("item.potions-n-rituals.poisonous_beetroot", "Betterave empoisonnée");
-        t.add("item.potions-n-rituals.alchemist_core", "Noyau d'Alchimiste");
+        t.add("item.potions-n-rituals.materia_prima", "Materia Prima");
         t.add("item.potions-n-rituals.claw", "Griffe");
         t.add("item.potions-n-rituals.zombie_brain", "Cerveau de zombie");
         t.add("item.potions-n-rituals.leaf", "Feuille");
@@ -98,6 +101,9 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.blood_bag", "Poche de sang");
         t.add("item.potions-n-rituals.oxydation", "Fragment d'oxydation");
         t.add("item.potions-n-rituals.charged_copper", "Cuivre chargé");
+        t.add("item.potions-n-rituals.sulfur_ball", "Boule de Sulfure");
+        t.add("item.potions-n-rituals.mercury_ball", "Boule de Mercure");
+        t.add("item.potions-n-rituals.salt", "Sel");
         t.add("item.potions-n-rituals.alchemical_stone", "Pierre alchimique");
         t.add("item.potions-n-rituals.alchemical_stone.effect.empty", "Pierre alchimique");
         t.add("item.potions-n-rituals.alchemical_stone.effect.mixed", "Pierre alchimique multi-effets");
@@ -120,6 +126,18 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.alchemical_stone.block_only", "Les pierres alchimiques ne peuvent être utilisées que sur des blocs");
         t.add("item.potions-n-rituals.alchemical_stone.block_not_good", "Le bloc n'est pas compatible");
         t.add("itemGroup.potions-n-rituals.alchemy", "Alchimie");
+
+        t.add("advancements.potions-n-rituals.root.title", "Potions & Rituels");
+        t.add("advancements.potions-n-rituals.root.description", "L'art de l'alchimie");
+        t.add("advancements.potions-n-rituals.nigredo.title", "Nigredo");
+        t.add("advancements.potions-n-rituals.nigredo.description", "Plongez dans le chaos et créez la Matière Première");
+        t.add("advancements.potions-n-rituals.albedo.title", "Albedo");
+        t.add("advancements.potions-n-rituals.albedo.description", "Lavez l'impureté et distillez vos premières potions");
+        t.add("advancements.potions-n-rituals.citrinitas.title", "Citrinitas");
+        t.add("advancements.potions-n-rituals.citrinitas.description", "Canalisez l'énergie du Nether pour forger talismans et artefacts");
+        t.add("advancements.potions-n-rituals.rubedo.title", "Rubedo");
+        t.add("advancements.potions-n-rituals.rubedo.description", "Atteignez la perfection absolue en accomplissant les grands rituels");
+
         t.add("splash.potionsnrituals.magic", "L'Alchimie c'est le pouvoir !!!");
         t.add("splash.potionsnrituals.thanks", "Merci de me supporter LivelyBadGood");
         t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s coups restants)");

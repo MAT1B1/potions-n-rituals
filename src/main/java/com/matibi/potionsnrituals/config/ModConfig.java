@@ -196,6 +196,15 @@ public class ModConfig {
     // ── Clumsiness ────────────────────────────────────────────────────────────
     @SerialEntry public int drop_percentage = 30;
 
+    // ── Hydrophobia ───────────────────────────────────────────────────────────
+    @SerialEntry public float hydrophobia_damage = 1.0f;
+    @SerialEntry public float hydrophobia_damage_per_level = 0.5f;
+    @SerialEntry public float hydrophobia_potion_damage = 4.0f;
+    @SerialEntry public float hydrophobia_potion_damage_per_level = 2.0f;
+
+    // ── Zombie Contagion ──────────────────────────────────────────────────────
+    @SerialEntry public int zombie_contagion_duration = 20 * 60 * 10;
+
     // ── Cough ─────────────────────────────────────────────────────────────────
     @SerialEntry public int min_cough_time = 1;
     @SerialEntry public int max_cough_time = 10;

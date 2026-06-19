@@ -1,11 +1,10 @@
-package com.matibi.potionsnrituals.network;
+﻿package com.matibi.potionsnrituals.network;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
 
 public record OreSensePayload(
@@ -15,7 +14,7 @@ public record OreSensePayload(
 
     public static final CustomPacketPayload.Type<OreSensePayload> TYPE =
             new CustomPacketPayload.Type<>(
-                    Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "ore_sense")
+                    ModUtils.id("ore_sense")
             );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, OreSensePayload> CODEC =

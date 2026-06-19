@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "key": {
-    "A": "potions-n-rituals:alchemist_core",
+    "A": "potions-n-rituals:materia_prima",
     "S": "minecraft:cobblestone"
   },
   "pattern": [

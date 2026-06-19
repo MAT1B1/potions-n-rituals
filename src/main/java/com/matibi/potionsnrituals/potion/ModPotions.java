@@ -1,8 +1,9 @@
-package com.matibi.potionsnrituals.potion;
+﻿package com.matibi.potionsnrituals.potion;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.ModItems;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
 import net.fabricmc.fabric.api.registry.FabricPotionBrewingBuilder;
@@ -10,7 +11,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -196,7 +196,13 @@ public class ModPotions {
             LONG_MEDUSA = reg(ModEffects.MEDUSA_BENEDICTION, ModConfig.get().dur_long, 0, "medusa", "long_medusa"),
 
             ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TELEPORTATION, ModConfig.get().dur_basic, 0, "active_teleportation", "active_teleport"),
-            LONG_ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TELEPORTATION, ModConfig.get().dur_long, 0, "active_teleportation", "long_active_teleport");
+            LONG_ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TELEPORTATION, ModConfig.get().dur_long, 0, "active_teleportation", "long_active_teleport"),
+
+            HYDROPHOBIA = reg(ModEffects.HYDROPHOBIA, ModConfig.get().dur_basic, 0, "hydrophobia", "hydrophobia"),
+            LONG_HYDROPHOBIA = reg(ModEffects.HYDROPHOBIA, ModConfig.get().dur_long, 0, "hydrophobia", "long_hydrophobia"),
+            STRONG_HYDROPHOBIA = reg(ModEffects.HYDROPHOBIA, ModConfig.get().dur_basic, 1, "hydrophobia", "strong_hydrophobia"),
+
+            ZOMBIE_CONTAGION = reg(ModEffects.ZOMBIE_CONTAGION, ModConfig.get().zombie_contagion_duration, 0, "zombie_contagion", "zombie_contagion");
 
 
     public static void register() {
@@ -214,7 +220,7 @@ public class ModPotions {
 
         FabricPotionBrewingBuilder.BUILD.register(builder -> {
             // changement de base, mais moins efficace que de farmer des nether wart
-            addMix(builder, Potions.WATER, ModItems.ALCHEMIST_CORE, Potions.AWKWARD);
+            addMix(builder, Potions.WATER, ModItems.MATERIA_PRIMA, Potions.AWKWARD);
 
             // potions accessible early
             addMix(builder, Potions.AWKWARD, Items.MAGMA_BLOCK, Potions.FIRE_RESISTANCE);
@@ -234,7 +240,7 @@ public class ModPotions {
             addMix(builder, ModPotions.SHORT_COOLDOWN, Items.SUNFLOWER, ModPotions.REACTIVATION);
             addMix(builder, Potions.AWKWARD, Items.MILK_BUCKET, ModPotions.PURIFICATION);
             addMix(builder, Potions.TURTLE_MASTER, Items.OBSIDIAN, ModPotions.PETRIFICATION);
-            addMix(builder, Potions.AWKWARD, Items.ROTTEN_FLESH, ModPotions.ACID);
+            addMix(builder, Potions.POISON, Items.ROTTEN_FLESH, ModPotions.ACID);
             addMix(builder, Potions.FIRE_RESISTANCE, Items.FERMENTED_SPIDER_EYE, ModPotions.IGNITION);
             addMix(builder, Potions.AWKWARD, Items.ENDER_PEARL, ModPotions.TELEPORTATION);
             addMix(builder, Potions.AWKWARD, Items.CACTUS, ModPotions.THORNS);
@@ -266,6 +272,10 @@ public class ModPotions {
             addMix(builder, ModPotions.XP_BOOST, Items.FERMENTED_SPIDER_EYE, ModPotions.XP_REDUCTION);
             addMix(builder, ModPotions.XP_BOOST, Items.GLISTERING_MELON_SLICE, ModPotions.XP_LIFE);
             addMix(builder, Potions.AWKWARD, ModItems.CHARGED_COPPER, ModPotions.ZEUS);
+            addMix(builder, ModPotions.STRONG_PETRIFICATION, ModItems.WITCH_S_FINGER, ModPotions.MEDUSA);
+            addMix(builder, ModPotions.TELEPORTATION, ModItems.SULFUR_BALL, ModPotions.ACTIVE_TELEPORT);
+            addMix(builder, Potions.WATER_BREATHING, Items.FERMENTED_SPIDER_EYE, ModPotions.HYDROPHOBIA);
+            addMix(builder, Potions.AWKWARD, Items.ROTTEN_FLESH, ModPotions.ZOMBIE_CONTAGION);
 
             // version longue
             addLong(builder, ModPotions.LEVITATION, ModPotions.LONG_LEVITATION);
@@ -312,6 +322,10 @@ public class ModPotions {
             addLong(builder, ModPotions.ASTHMA, ModPotions.LONG_ASTHMA);
             addLong(builder, ModPotions.PARANOIA, ModPotions.LONG_PARANOIA);
             addLong(builder, ModPotions.CLUMSINESS, ModPotions.LONG_CLUMSINESS);
+            addLong(builder, ModPotions.MEDUSA, ModPotions.LONG_MEDUSA);
+            addLong(builder, ModPotions.ACTIVE_TELEPORT, ModPotions.LONG_ACTIVE_TELEPORT);
+
+            addLong(builder, ModPotions.HYDROPHOBIA, ModPotions.LONG_HYDROPHOBIA);
 
             // version strong
             addStrong(builder, ModPotions.ALCOHOL, ModPotions.STRONG_ALCOHOL);
@@ -335,6 +349,8 @@ public class ModPotions {
             addStrong(builder, ModPotions.HASTE, ModPotions.STRONG_HASTE);
             addStrong(builder, ModPotions.XP_BOOST, ModPotions.STRONG_XP_BOOST);
             addStrong(builder, ModPotions.XP_REDUCTION, ModPotions.STRONG_XP_REDUCTION);
+
+            addStrong(builder, ModPotions.HYDROPHOBIA, ModPotions.STRONG_HYDROPHOBIA);
         });
     }
 
@@ -365,7 +381,7 @@ public class ModPotions {
                                       String id) {
         return Registry.registerForHolder(
                 BuiltInRegistries.POTION,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, id),
+                ModUtils.id(id),
                 new Potion(name, new MobEffectInstance(effect, duration, amplifier))
         );
     }

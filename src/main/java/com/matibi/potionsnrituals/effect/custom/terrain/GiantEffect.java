@@ -1,10 +1,9 @@
-package com.matibi.potionsnrituals.effect.custom.terrain;
+﻿package com.matibi.potionsnrituals.effect.custom.terrain;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.effect.TerrainEffect;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -19,52 +18,52 @@ public class GiantEffect extends MobEffect implements TerrainEffect {
 
         this.addAttributeModifier(
                 Attributes.SCALE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "giant_scale"),
+                ModUtils.id("giant_scale"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.JUMP_STRENGTH,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "giant_jump"),
+                ModUtils.id("giant_jump"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.ATTACK_DAMAGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "giant_dmg"),
+                ModUtils.id("giant_dmg"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.ATTACK_SPEED,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "giant_atk_speed"),
+                ModUtils.id("giant_atk_speed"),
                 -0.5D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
 
         this.addAttributeModifier(
                 Attributes.BLOCK_INTERACTION_RANGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "giant_block_range"),
+                ModUtils.id("giant_block_range"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.ENTITY_INTERACTION_RANGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "giant_entity_range"),
+                ModUtils.id("giant_entity_range"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
 
         this.addAttributeModifier(
                 Attributes.STEP_HEIGHT,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "giant_step_height"),
+                ModUtils.id("giant_step_height"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
 
         this.addAttributeModifier(
                 Attributes.MOVEMENT_SPEED,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "giant_mvt_speed"),
+                ModUtils.id("giant_mvt_speed"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );

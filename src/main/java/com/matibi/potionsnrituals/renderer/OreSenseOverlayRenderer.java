@@ -1,15 +1,14 @@
-package com.matibi.potionsnrituals.renderer;
+﻿package com.matibi.potionsnrituals.renderer;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.network.OreSensePayload;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 public class OreSenseOverlayRenderer {
@@ -42,7 +41,7 @@ public class OreSenseOverlayRenderer {
 
         HudElementRegistry.attachElementBefore(
                 VanillaHudElements.MISC_OVERLAYS,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "ore_sense_overlay"),
+                ModUtils.id("ore_sense_overlay"),
                 OreSenseOverlayRenderer::render
         );
     }

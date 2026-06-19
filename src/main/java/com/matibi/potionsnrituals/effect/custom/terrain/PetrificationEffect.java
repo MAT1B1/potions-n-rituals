@@ -1,9 +1,8 @@
-package com.matibi.potionsnrituals.effect.custom.terrain;
+﻿package com.matibi.potionsnrituals.effect.custom.terrain;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.TerrainEffect;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -17,55 +16,55 @@ public class PetrificationEffect extends MobEffect implements TerrainEffect {
 
         this.addAttributeModifier(
                 Attributes.MOVEMENT_SPEED,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "petrification_movement"),
+                ModUtils.id("petrification_movement"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.KNOCKBACK_RESISTANCE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "petrification_knockback"),
+                ModUtils.id("petrification_knockback"),
                 1.0D,
                 AttributeModifier.Operation.ADD_VALUE
         );
         this.addAttributeModifier(
                 Attributes.ATTACK_DAMAGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "petrification_attack_damage"),
+                ModUtils.id("petrification_attack_damage"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.JUMP_STRENGTH,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "petrification_jump"),
+                ModUtils.id("petrification_jump"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.BLOCK_BREAK_SPEED,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "petrification_break_block"),
+                ModUtils.id("petrification_break_block"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.BLOCK_INTERACTION_RANGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "petrification_interaction"),
+                ModUtils.id("petrification_interaction"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.ENTITY_INTERACTION_RANGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "petrification_entity_interaction"),
+                ModUtils.id("petrification_entity_interaction"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.GRAVITY,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "petrification_gravity"),
+                ModUtils.id("petrification_gravity"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
         this.addAttributeModifier(
                 Attributes.MOVEMENT_EFFICIENCY,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "petrification_movement_efficiency"),
+                ModUtils.id("petrification_movement_efficiency"),
                 -1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );

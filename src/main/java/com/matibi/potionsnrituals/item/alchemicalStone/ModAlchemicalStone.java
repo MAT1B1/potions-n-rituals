@@ -1,7 +1,8 @@
-package com.matibi.potionsnrituals.item.alchemicalStone;
+﻿package com.matibi.potionsnrituals.item.alchemicalStone;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.ModEffects;
+import com.matibi.potionsnrituals.util.ModUtils;
 import com.mojang.serialization.Lifecycle;
 import net.minecraft.core.Holder;
 import net.minecraft.core.MappedRegistry;
@@ -14,7 +15,7 @@ import net.minecraft.world.effect.MobEffect;
 public class ModAlchemicalStone {
 
     public static final ResourceKey<Registry<AlchemicalStone>> ALCHEMICAL_STONE_REGISTRY_KEY =
-            ResourceKey.createRegistryKey(Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "alchemical_stone"));
+            ResourceKey.createRegistryKey(ModUtils.id("alchemical_stone"));
 
     public static final MappedRegistry<AlchemicalStone> ALCHEMICAL_STONE_REGISTRY = new MappedRegistry<>(
             ALCHEMICAL_STONE_REGISTRY_KEY,
@@ -34,7 +35,7 @@ public class ModAlchemicalStone {
             STRONG_FROST = register("strong_frost", ModEffects.FROST, 1);
 
     public static Holder<AlchemicalStone> register(String name, Holder<MobEffect> effect, int amplifier) {
-        Identifier id = Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, name + "_alchemical_stone");
+        Identifier id = ModUtils.id(name + "_alchemical_stone");
         ResourceKey<AlchemicalStone> key = ResourceKey.create(ALCHEMICAL_STONE_REGISTRY_KEY, id);
         AlchemicalStone stone = new AlchemicalStone(id, effect, amplifier);
         return ALCHEMICAL_STONE_REGISTRY.register(key, stone, RegistrationInfo.BUILT_IN);

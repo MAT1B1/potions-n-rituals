@@ -1,9 +1,8 @@
-package com.matibi.potionsnrituals.effect.custom;
+﻿package com.matibi.potionsnrituals.effect.custom;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.ModEffects;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
@@ -22,32 +21,32 @@ public class BerserkEffect extends MobEffect {
         super(MobEffectCategory.NEUTRAL, 0xba0006);
 
         this.addAttributeModifier(Attributes.JUMP_STRENGTH,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "berserk_jump"),
+                ModUtils.id("berserk_jump"),
                 0.15D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
         this.addAttributeModifier(Attributes.MOVEMENT_SPEED,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "berserk_mvt"),
+                ModUtils.id("berserk_mvt"),
                 0.15D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
         this.addAttributeModifier(Attributes.ATTACK_SPEED,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "berserk_atk_speed"),
+                ModUtils.id("berserk_atk_speed"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
         this.addAttributeModifier(Attributes.ATTACK_DAMAGE,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "berserk_atk_dmg"),
+                ModUtils.id("berserk_atk_dmg"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
         this.addAttributeModifier(Attributes.MINING_EFFICIENCY,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "berserk_mining_efficiency"),
+                ModUtils.id("berserk_mining_efficiency"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
         this.addAttributeModifier(Attributes.BLOCK_BREAK_SPEED,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "berserk_mining_speed"),
+                ModUtils.id("berserk_mining_speed"),
                 1.0D,
                 AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
     }

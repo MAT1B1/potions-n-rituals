@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sulfur_ball": {
+      "conditions": {
+        "items": [
+          {
+            "items": "potions-n-rituals:sulfur_ball"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "potions-n-rituals:materia_prima"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sulfur_ball"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "potions-n-rituals:materia_prima"
+    ]
+  }
+}

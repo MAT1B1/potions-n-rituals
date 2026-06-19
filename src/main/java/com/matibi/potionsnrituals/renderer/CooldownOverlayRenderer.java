@@ -1,7 +1,7 @@
-package com.matibi.potionsnrituals.renderer;
+﻿package com.matibi.potionsnrituals.renderer;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.helper.CooldownSyncPayload;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
@@ -31,7 +31,7 @@ public class CooldownOverlayRenderer {
 
         HudElementRegistry.attachElementBefore(
                 VanillaHudElements.MISC_OVERLAYS,
-                Identifier.fromNamespaceAndPath(PotionsNRituals.MOD_ID, "cooldown_overlay"),
+                ModUtils.id("cooldown_overlay"),
                 CooldownOverlayRenderer::render
         );
     }

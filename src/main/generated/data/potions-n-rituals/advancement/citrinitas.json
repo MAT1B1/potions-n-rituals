@@ -1,0 +1,33 @@
+{
+  "parent": "potions-n-rituals:albedo",
+  "criteria": {
+    "has_quartz": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:quartz"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.potions-n-rituals.citrinitas.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "minecraft:quartz"
+    },
+    "title": {
+      "translate": "advancements.potions-n-rituals.citrinitas.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_quartz"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "potions-n-rituals:nigredo",
+  "criteria": {
+    "has_potion": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:potion"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.potions-n-rituals.albedo.description"
+    },
+    "icon": {
+      "id": "minecraft:potion"
+    },
+    "title": {
+      "translate": "advancements.potions-n-rituals.albedo.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_potion"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
