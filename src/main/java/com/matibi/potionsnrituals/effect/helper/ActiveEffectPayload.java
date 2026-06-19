@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.effect.helper;
+package com.matibi.potionsnrituals.effect.helper;
 
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;

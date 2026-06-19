@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.effect.custom.terrain;
+package com.matibi.potionsnrituals.effect.custom.terrain;
 
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.effect.TerrainEffect;

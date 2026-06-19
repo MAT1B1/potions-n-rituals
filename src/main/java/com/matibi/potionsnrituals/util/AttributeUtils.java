@@ -1,6 +1,5 @@
-﻿package com.matibi.potionsnrituals.util;
+package com.matibi.potionsnrituals.util;
 
-import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;

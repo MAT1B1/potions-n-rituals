@@ -1,6 +1,5 @@
-﻿package com.matibi.potionsnrituals.util;
+package com.matibi.potionsnrituals.util;
 
-import com.matibi.potionsnrituals.util.ModUtils;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.color.item.ItemTintSources;

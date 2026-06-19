@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.network;
+package com.matibi.potionsnrituals.network;
 
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;

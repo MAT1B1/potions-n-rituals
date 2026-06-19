@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.datacomponent;
+package com.matibi.potionsnrituals.datacomponent;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.util.ModUtils;

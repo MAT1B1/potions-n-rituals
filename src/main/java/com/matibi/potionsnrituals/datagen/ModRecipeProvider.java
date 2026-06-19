@@ -98,17 +98,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Items.GLASS_BOTTLE), has(Items.GLASS_BOTTLE))
                         .save(output);
 
-                shapeless(RecipeCategory.MISC, ModItems.LEAF, 9)
-                        .requires(ItemTags.LEAVES)
-                        .unlockedBy("has_leaves", has(ItemTags.LEAVES))
-                        .save(output);
-
-                shapeless(RecipeCategory.MISC, Items.LEAF_LITTER)
-                        .requires(ModItems.LEAF, 9)
-                        .unlockedBy(getHasName(ModItems.LEAF), has(ModItems.LEAF))
-                        .save(output);
-
-
                 SpecialRecipeBuilder.special(FoodWithEffectRecipe::new)
                         .save(output, "potions-n-rituals:food_with_effect_recipe");
                 SpecialRecipeBuilder.special(AlchemicalStoneRecipe::new)

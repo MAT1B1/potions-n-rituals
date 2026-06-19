@@ -70,14 +70,16 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         register(t, "xp_life", "Vie d'XP");
         register(t, "zeus", "Bénédiction de Zeus");
         register(t, "medusa", "Bénédiction de Méduse");
+        register(t, "midas", "Bénédiction de Midas");
         register(t, "xp_reduction", "Réduction d'XP");
         register(t, "clumsiness", "Maladresse");
         register(t, "cold", "Rhume");
         register(t, "asthma", "Asthme", "d'Asthme");
         register(t, "paranoia", "Paranoïa");
-
         register(t, "hydrophobia", "Hydrophobie");
-        register(t, "zombie_contagion", "Contagion zombie");
+        register(t, "zombie_contagion", "Contagion de Zombie");
+        register(t, "empathy", "Empathie", "d'Empathie");
+        register(t, "magnetism", "Magnétisme");
 
         registerWithAlchemicalStone(t, "resurrection", "Résurrection");
         registerWithAlchemicalStone(t, "giant", "Géant");

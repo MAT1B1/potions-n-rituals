@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.recipe;
+package com.matibi.potionsnrituals.recipe;
 
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.Registry;

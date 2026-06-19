@@ -94,6 +94,10 @@ public class ModConfig {
     @SerialEntry public float vampirism_heal = 0.20f;
     @SerialEntry public float vampirism_heal_per_level = 0.10f;
 
+    // ── Empathy ───────────────────────────────────────────────────────────────
+    @SerialEntry public float empathy_dmg = 0.30f;
+    @SerialEntry public float empathy_dmg_per_level = 0.20f;
+
     // ── Acid ──────────────────────────────────────────────────────────────────
     @SerialEntry public int acid_radius = 1;
     @SerialEntry public int acid_depth = 1;
@@ -201,6 +205,11 @@ public class ModConfig {
     @SerialEntry public float hydrophobia_damage_per_level = 0.5f;
     @SerialEntry public float hydrophobia_potion_damage = 4.0f;
     @SerialEntry public float hydrophobia_potion_damage_per_level = 2.0f;
+
+    // ── Magnetism ─────────────────────────────────────────────────────────────
+    @SerialEntry public float magnetism_range = 5.0f;
+    @SerialEntry public float magnetism_range_per_level = 5.0f;
+    @SerialEntry public double magnetism_pull_strength = 0.1D;
 
     // ── Zombie Contagion ──────────────────────────────────────────────────────
     @SerialEntry public int zombie_contagion_duration = 20 * 60 * 10;

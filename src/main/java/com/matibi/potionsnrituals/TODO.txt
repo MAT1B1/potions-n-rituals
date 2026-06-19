@@ -6,9 +6,7 @@ Effet à faire :
 
 ajouter nouveau effet:
     - reality check : le player est ralentit en fonction de la lourdeur de son inventaire
-    - empathie : recoit des degat egaux a [30% + 20% * amplifier] de ceux a qui il fait mal
-    - midas : transforme arme, armure, pomme et carotte dans leur version or (dès qu'ils sont dans l'inventaire)
-    - magnetisme : attrape les objet au sol de loin
+
     - activation : active les truc comme un bloc de redstone
     - time stop : stop le temps (pas sur si realisable)
     - metamorphose : transforme le joueur en un autre mob (avec une hotkey)

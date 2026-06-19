@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.effect.custom;
+package com.matibi.potionsnrituals.effect.custom;
 
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.util.ModUtils;

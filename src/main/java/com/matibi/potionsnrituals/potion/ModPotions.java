@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.potion;
+package com.matibi.potionsnrituals.potion;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.ModEffects;
@@ -195,6 +195,9 @@ public class ModPotions {
             MEDUSA = reg(ModEffects.MEDUSA_BENEDICTION, ModConfig.get().dur_basic, 0, "medusa", "medusa"),
             LONG_MEDUSA = reg(ModEffects.MEDUSA_BENEDICTION, ModConfig.get().dur_long, 0, "medusa", "long_medusa"),
 
+            MIDAS = reg(ModEffects.MIDAS_BENEDICTION, ModConfig.get().dur_basic, 0, "midas", "midas"),
+            LONG_MIDAS = reg(ModEffects.MIDAS_BENEDICTION, ModConfig.get().dur_long, 0, "midas", "long_midas"),
+
             ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TELEPORTATION, ModConfig.get().dur_basic, 0, "active_teleportation", "active_teleport"),
             LONG_ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TELEPORTATION, ModConfig.get().dur_long, 0, "active_teleportation", "long_active_teleport"),
 
@@ -202,7 +205,11 @@ public class ModPotions {
             LONG_HYDROPHOBIA = reg(ModEffects.HYDROPHOBIA, ModConfig.get().dur_long, 0, "hydrophobia", "long_hydrophobia"),
             STRONG_HYDROPHOBIA = reg(ModEffects.HYDROPHOBIA, ModConfig.get().dur_basic, 1, "hydrophobia", "strong_hydrophobia"),
 
-            ZOMBIE_CONTAGION = reg(ModEffects.ZOMBIE_CONTAGION, ModConfig.get().zombie_contagion_duration, 0, "zombie_contagion", "zombie_contagion");
+            ZOMBIE_CONTAGION = reg(ModEffects.ZOMBIE_CONTAGION, ModConfig.get().zombie_contagion_duration, 0, "zombie_contagion", "zombie_contagion"),
+
+            MAGNETISM = reg(ModEffects.MAGNETISM, ModConfig.get().dur_basic, 0, "magnetism", "magnetism"),
+            LONG_MAGNETISM = reg(ModEffects.MAGNETISM, ModConfig.get().dur_long, 0, "magnetism", "long_magnetism"),
+            STRONG_MAGNETISM = reg(ModEffects.MAGNETISM, ModConfig.get().dur_basic, 1, "magnetism", "strong_magnetism");
 
 
     public static void register() {
@@ -226,6 +233,9 @@ public class ModPotions {
             addMix(builder, Potions.AWKWARD, Items.MAGMA_BLOCK, Potions.FIRE_RESISTANCE);
             addMix(builder, Potions.AWKWARD, Items.GOLDEN_APPLE, Potions.REGENERATION);
             addMix(builder, Potions.AWKWARD, Items.FIREWORK_STAR, Potions.STRENGTH);
+            addMix(builder, Potions.AWKWARD, ModItems.POISONOUS_CARROT, Potions.POISON);
+            addMix(builder, Potions.AWKWARD, ModItems.POISONOUS_BEETROOT, Potions.POISON);
+            addMix(builder, Potions.AWKWARD, Items.POISONOUS_POTATO, Potions.POISON);
 
             // potion custom
             addMix(builder, Potions.SLOW_FALLING, Items.FEATHER, ModPotions.LEVITATION);
@@ -264,18 +274,20 @@ public class ModPotions {
             addMix(builder, Potions.AWKWARD, Items.LEAF_LITTER, ModPotions.PHOTOSYNTHESIS);
             addMix(builder, Potions.AWKWARD, Items.PITCHER_PLANT, ModPotions.OBLIVION);
             addMix(builder, Potions.AWKWARD, Items.GHAST_TEAR, ModPotions.GHOST_WALK);
-            addMix(builder, Potions.AWKWARD, Items.LIGHTNING_ROD.weathering().unaffected(), ModPotions.STUN);
+            addMix(builder, Potions.AWKWARD, ModItems.CHARGED_COPPER, ModPotions.STUN);
             addMix(builder, Potions.AWKWARD, ModItems.OXYDATION, ModPotions.RUST);
             addMix(builder, Potions.AWKWARD, Items.RESIN_CLUMP, ModPotions.ADHESION);
             addMix(builder, ModPotions.BRAINWASHING, Items.RABBIT_FOOT, ModPotions.NO_INTERACTION);
             addMix(builder, Potions.AWKWARD, Items.LAPIS_LAZULI, ModPotions.XP_BOOST);
             addMix(builder, ModPotions.XP_BOOST, Items.FERMENTED_SPIDER_EYE, ModPotions.XP_REDUCTION);
             addMix(builder, ModPotions.XP_BOOST, Items.GLISTERING_MELON_SLICE, ModPotions.XP_LIFE);
-            addMix(builder, Potions.AWKWARD, ModItems.CHARGED_COPPER, ModPotions.ZEUS);
-            addMix(builder, ModPotions.STRONG_PETRIFICATION, ModItems.WITCH_S_FINGER, ModPotions.MEDUSA);
             addMix(builder, ModPotions.TELEPORTATION, ModItems.SULFUR_BALL, ModPotions.ACTIVE_TELEPORT);
             addMix(builder, Potions.WATER_BREATHING, Items.FERMENTED_SPIDER_EYE, ModPotions.HYDROPHOBIA);
             addMix(builder, Potions.AWKWARD, Items.ROTTEN_FLESH, ModPotions.ZOMBIE_CONTAGION);
+            addMix(builder, Potions.AWKWARD, Items.IRON_INGOT, ModPotions.MAGNETISM);
+            addMix(builder, ModPotions.STRONG_PETRIFICATION, ModItems.MATERIA_PRIMA, ModPotions.MEDUSA);
+            addMix(builder, ModPotions.ALCHEMIST, ModItems.MATERIA_PRIMA, ModPotions.MIDAS);
+            addMix(builder, ModPotions.STUN, ModItems.MATERIA_PRIMA, ModPotions.ZEUS);
 
             // version longue
             addLong(builder, ModPotions.LEVITATION, ModPotions.LONG_LEVITATION);
@@ -324,8 +336,9 @@ public class ModPotions {
             addLong(builder, ModPotions.CLUMSINESS, ModPotions.LONG_CLUMSINESS);
             addLong(builder, ModPotions.MEDUSA, ModPotions.LONG_MEDUSA);
             addLong(builder, ModPotions.ACTIVE_TELEPORT, ModPotions.LONG_ACTIVE_TELEPORT);
-
             addLong(builder, ModPotions.HYDROPHOBIA, ModPotions.LONG_HYDROPHOBIA);
+            addLong(builder, ModPotions.MAGNETISM, ModPotions.LONG_MAGNETISM);
+            addLong(builder, ModPotions.MIDAS, ModPotions.LONG_MIDAS);
 
             // version strong
             addStrong(builder, ModPotions.ALCOHOL, ModPotions.STRONG_ALCOHOL);
@@ -349,8 +362,8 @@ public class ModPotions {
             addStrong(builder, ModPotions.HASTE, ModPotions.STRONG_HASTE);
             addStrong(builder, ModPotions.XP_BOOST, ModPotions.STRONG_XP_BOOST);
             addStrong(builder, ModPotions.XP_REDUCTION, ModPotions.STRONG_XP_REDUCTION);
-
             addStrong(builder, ModPotions.HYDROPHOBIA, ModPotions.STRONG_HYDROPHOBIA);
+            addStrong(builder, ModPotions.MAGNETISM, ModPotions.STRONG_MAGNETISM);
         });
     }
 

@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.item;
+package com.matibi.potionsnrituals.item;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.ModEffects;
@@ -27,42 +27,30 @@ public class ModItems {
             MERCURY_BALL = registerSimple("mercury_ball"),
             SULFUR_BALL = registerSimple("sulfur_ball"),
             SALT = registerSimple("salt"),
-
-            LEAF = registerSimple("leaf"),
-
             CLAW = registerSimple("claw"),
-
             BLOOD_BAG = registerSimple("blood_bag"),
-
             CHARGED_COPPER = registerSimple("charged_copper"),
-
             OXYDATION = registerSimple("oxydation"),
-
             ZOMBIE_BRAIN = registerFoodWithEffect(
                 "zombie_brain", 1, 0.1f, true,
                 new MobEffectInstance(ModEffects.BRAINWASHING, 200, 0), 0.5f
             ),
-
             WITCH_S_FINGER =
                 registerFood("witch_finger", 1, 0.1f, false),
-
             POISONOUS_CARROT = registerFoodWithEffect(
                 "poisonous_carrot", 1, 0.2f, true,
                 new MobEffectInstance(MobEffects.POISON, 120, 1), 0.6f
             ),
-
             POISONOUS_BEETROOT = registerFoodWithEffect(
                 "poisonous_beetroot", 1, 0.2f, true,
                 new MobEffectInstance(MobEffects.POISON, 120, 1), 0.6f
             ),
-
             SYRINGE = register("syringe",
                 new SyringeItem(props("syringe")
                     .stacksTo(16)
                     .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
                 )
             ),
-
             ALCHEMICAL_STONE = register("alchemical_stone",
                 new AlchemicalStoneItem(props("alchemical_stone")
                     .stacksTo(16)

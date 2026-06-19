@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.effect;
+package com.matibi.potionsnrituals.effect;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.custom.*;
@@ -77,7 +77,10 @@ public class ModEffects {
             ASTHMA              = reg("asthma",             new AsthmaEffect()),
             PARANOIA            = reg("paranoia",           new ParanoiaEffect()),
             HYDROPHOBIA         = reg("hydrophobia",        new HydrophobiaEffect()),
-            ZOMBIE_CONTAGION    = reg("zombie_contagion",   new ZombieContagionEffect());
+            ZOMBIE_CONTAGION    = reg("zombie_contagion",   new ZombieContagionEffect()),
+            EMPATHY             = reg("empathy",            new EmpathyEffect()),
+            MAGNETISM           = reg("magnetism",          new MagnetismEffect()),
+            MIDAS_BENEDICTION   = reg("midas",              new MidasBenedictionEffect());
 
     private static Holder<MobEffect> reg(String name, MobEffect effect) {
         return Registry.registerForHolder(

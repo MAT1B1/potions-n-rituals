@@ -72,14 +72,16 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register(t, "xp_life", "XP Life");
         register(t, "zeus", "Zeus Benediction");
         register(t, "medusa", "Medusa Benediction");
+        register(t, "midas", "Midas Benediction");
         register(t, "xp_reduction", "XP Reduction");
         register(t, "clumsiness", "Clumsiness");
         register(t, "cold", "Cold");
         register(t, "asthma", "Asthma");
         register(t, "paranoia", "Paranoia");
-
         register(t, "hydrophobia", "Hydrophobia");
         register(t, "zombie_contagion", "Zombie Contagion");
+        register(t, "empathy", "Empathy");
+        register(t, "magnetism", "Magnetism");
 
         registerWithAlchemicalStone(t, "giant", "Giant");
         registerWithAlchemicalStone(t, "resurrection", "Resurrection");

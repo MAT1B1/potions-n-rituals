@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.datagen;
+package com.matibi.potionsnrituals.datagen;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.item.ModItems;

@@ -25,7 +25,7 @@ public class MidasBenedictionEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(@NonNull ServerLevel world, @NonNull LivingEntity entity, int amplifier) {
         if (!(entity instanceof ServerPlayer player) || player.isCreative())
-            return super.applyEffectTick(world, entity, amplifier);
+            return true;
 
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack stack = player.getInventory().getItem(i);
@@ -34,11 +34,13 @@ public class MidasBenedictionEffect extends MobEffect {
             Item replacement = getGoldVariant(stack);
             if (replacement == null || replacement == stack.getItem()) continue;
 
-            ItemStack newStack = new ItemStack(replacement, stack.getCount());
+            ItemStack newStack = stack.transmuteCopy(replacement, stack.getCount());
+
             if (stack.isDamageableItem()) {
                 float ratio = (float)(stack.getMaxDamage() - stack.getDamageValue()) / stack.getMaxDamage();
                 newStack.setDamageValue((int)(newStack.getMaxDamage() * (1f - ratio)));
             }
+
             player.getInventory().setItem(i, newStack);
         }
 
@@ -47,8 +49,13 @@ public class MidasBenedictionEffect extends MobEffect {
 
     private static Item getGoldVariant(ItemStack stack) {
         Item item = stack.getItem();
+
+        // Sécurité : Si l'item est déjà en or, on ne fait rien
+        if (isAlreadyGold(item)) return null;
+
         if (item == Items.APPLE) return Items.GOLDEN_APPLE;
         if (item == Items.CARROT) return Items.GOLDEN_CARROT;
+
         if (stack.is(ItemTags.SWORDS)) return Items.GOLDEN_SWORD;
         if (stack.is(ItemTags.AXES)) return Items.GOLDEN_AXE;
         if (stack.is(ItemTags.PICKAXES)) return Items.GOLDEN_PICKAXE;
@@ -58,6 +65,16 @@ public class MidasBenedictionEffect extends MobEffect {
         if (stack.is(ItemTags.CHEST_ARMOR)) return Items.GOLDEN_CHESTPLATE;
         if (stack.is(ItemTags.LEG_ARMOR)) return Items.GOLDEN_LEGGINGS;
         if (stack.is(ItemTags.FOOT_ARMOR)) return Items.GOLDEN_BOOTS;
+
         return null;
+    }
+
+    private static boolean isAlreadyGold(Item item) {
+        return item == Items.GOLDEN_APPLE || item == Items.GOLDEN_CARROT ||
+                item == Items.GOLDEN_SWORD || item == Items.GOLDEN_AXE ||
+                item == Items.GOLDEN_PICKAXE || item == Items.GOLDEN_SHOVEL ||
+                item == Items.GOLDEN_HOE || item == Items.GOLDEN_HELMET ||
+                item == Items.GOLDEN_CHESTPLATE || item == Items.GOLDEN_LEGGINGS ||
+                item == Items.GOLDEN_BOOTS;
     }
 }

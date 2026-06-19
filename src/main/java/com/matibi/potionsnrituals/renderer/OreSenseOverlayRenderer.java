@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.renderer;
+package com.matibi.potionsnrituals.renderer;
 
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.network.OreSensePayload;

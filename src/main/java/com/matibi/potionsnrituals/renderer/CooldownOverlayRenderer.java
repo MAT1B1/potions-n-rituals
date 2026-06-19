@@ -1,4 +1,4 @@
-﻿package com.matibi.potionsnrituals.renderer;
+package com.matibi.potionsnrituals.renderer;
 
 import com.matibi.potionsnrituals.effect.helper.CooldownSyncPayload;
 import com.matibi.potionsnrituals.util.ModUtils;
