@@ -295,6 +295,20 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("option.potions-n-rituals.cold.min_cough_time", "Min Cough Time");
         t.add("option.potions-n-rituals.cold.max_cough_time", "Max Cough Time");
 
+        t.add("option.potions-n-rituals.empathy.damage", "Damage");
+        t.add("option.potions-n-rituals.empathy.damage_per_level", "Damage Per Level");
+
+        t.add("option.potions-n-rituals.hydrophobia.damage", "Damage");
+        t.add("option.potions-n-rituals.hydrophobia.damage_per_level", "Damage Per Level");
+        t.add("option.potions-n-rituals.hydrophobia.potion_damage", "Potion Damage");
+        t.add("option.potions-n-rituals.hydrophobia.potion_damage_per_level", "Potion Damage Per Level");
+
+        t.add("option.potions-n-rituals.magnetism.range", "Range");
+        t.add("option.potions-n-rituals.magnetism.range_per_level", "Range Per Level");
+        t.add("option.potions-n-rituals.magnetism.pull_strength", "Pull Strength");
+
+        t.add("option.potions-n-rituals.zombie_contagion.duration", "Duration (ticks)");
+
         //ModConfig Screen — Active Effect Options
         t.add("group.potions-n-rituals.active_effect", "Active Effect");
         t.add("option.potions-n-rituals.active_effect.medusa_range", "Medusa Range");

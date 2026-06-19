@@ -291,6 +291,20 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("option.potions-n-rituals.cold.min_cough_time", "Temps de toux minimum");
         t.add("option.potions-n-rituals.cold.max_cough_time", "Temps de toux maximum");
 
+        t.add("option.potions-n-rituals.empathy.damage", "Dégâts");
+        t.add("option.potions-n-rituals.empathy.damage_per_level", "Dégâts par niveau");
+
+        t.add("option.potions-n-rituals.hydrophobia.damage", "Dégâts");
+        t.add("option.potions-n-rituals.hydrophobia.damage_per_level", "Dégâts par niveau");
+        t.add("option.potions-n-rituals.hydrophobia.potion_damage", "Dégâts des potions");
+        t.add("option.potions-n-rituals.hydrophobia.potion_damage_per_level", "Dégâts des potions par niveau");
+
+        t.add("option.potions-n-rituals.magnetism.range", "Portée");
+        t.add("option.potions-n-rituals.magnetism.range_per_level", "Portée par niveau");
+        t.add("option.potions-n-rituals.magnetism.pull_strength", "Force d'attraction");
+
+        t.add("option.potions-n-rituals.zombie_contagion.duration", "Durée (ticks)");
+
         // Écran ModConfig — Options des effets actifs
         t.add("group.potions-n-rituals.active_effect", "Effet Actif");
         t.add("option.potions-n-rituals.active_effect.medusa_range", "Portée de Méduse");
