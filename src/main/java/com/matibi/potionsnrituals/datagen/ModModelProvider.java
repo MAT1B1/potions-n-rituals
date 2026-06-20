@@ -36,7 +36,8 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.BLOOD_BAG,
                 ModItems.SULFUR_BALL,
                 ModItems.MERCURY_BALL,
-                ModItems.SALT
+                ModItems.SALT,
+                ModItems.ALCHEMICAL_TOME
         );
 
         items.forEach(item -> gen.generateFlatItem(item, ModelTemplates.FLAT_ITEM));

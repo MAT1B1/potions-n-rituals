@@ -110,6 +110,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.sulfur_ball", "Sulfur Ball");
         t.add("item.potions-n-rituals.mercury_ball", "Mercury Ball");
         t.add("item.potions-n-rituals.salt", "Salt");
+        t.add("item.potions-n-rituals.alchemical_tome", "Alchemical Tome");
         t.add("item.potions-n-rituals.alchemical_stone", "Alchemical Stone");
         t.add("item.potions-n-rituals.alchemical_stone.effect.empty", "Alchemical Stone");
         t.add("item.potions-n-rituals.alchemical_stone.effect.mixed", "Multi-effect Alchemical Stone");

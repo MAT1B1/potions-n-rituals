@@ -56,6 +56,9 @@ public class ModItems {
                     .stacksTo(16)
                     .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
                 )
+            ),
+            ALCHEMICAL_TOME = register("alchemical_tome",
+                new CustomBookItem(props("alchemical_tome").stacksTo(1))
             );
 
     private static Item registerSimple(String id) {
@@ -112,6 +115,11 @@ public class ModItems {
                     output.insertAfter(Items.BEETROOT, ModItems.POISONOUS_BEETROOT);
                     output.insertAfter(Items.CARROT, ModItems.POISONOUS_CARROT);
                     output.insertAfter(Items.ROTTEN_FLESH, ModItems.ZOMBIE_BRAIN);
+                });
+
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
+                .register(output -> {
+                    output.insertAfter(Items.BOOK, ModItems.ALCHEMICAL_TOME);
                 });
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
