@@ -1,14 +1,17 @@
 package com.matibi.potionsnrituals.screen;
 
+import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.ItemStack;
+import org.apache.commons.lang3.mutable.MutableFloat;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
@@ -52,13 +55,17 @@ public class CustomBookScreen extends Screen {
     private static final int ARROW_BOTTOM_OFFSET = 25;
 
     private final List<BookPage> pages;
-    private int spreadIndex; // index de la page GAUCHE du spread courant, toujours pair
+    private int spreadIndex;
 
     private BookPage currentLeft;
-    private BookPage currentRight; // peut être null si nombre impair sur dernier spread
+    private BookPage currentRight;
 
     private List<FormattedCharSequence> leftBodyLines;
     private List<FormattedCharSequence> rightBodyLines;
+
+    // Calcul dynamique des positions Y pour la détection précise de la souris
+    private int leftTextStartY;
+    private int rightTextStartY;
 
     public CustomBookScreen(Component title, List<BookPage> pages) {
         super(title);
@@ -115,6 +122,7 @@ public class CustomBookScreen extends Screen {
             updateCurrentSpread();
         }
     }
+
     @Override
     public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractRenderState(graphics, mouseX, mouseY, a);
@@ -124,10 +132,55 @@ public class CustomBookScreen extends Screen {
 
         graphics.blit(RenderPipelines.GUI_TEXTURED, BOOK_TEXTURE, x, y, 0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
 
-        drawPage(graphics, currentLeft, leftBodyLines, x + OUTER_MARGIN, y + TEXT_MARGIN_Y);
-        drawPage(graphics, currentRight, rightBodyLines, x + HALF_WIDTH + INNER_MARGIN, y + TEXT_MARGIN_Y);
+        // Page Gauche
+        int leftX = x + OUTER_MARGIN;
+        this.leftTextStartY = calculateTextStartY(currentLeft, y + TEXT_MARGIN_Y);
+        Style hoveredStyleLeft = getStyleAt(mouseX, mouseY, leftX, leftTextStartY, leftBodyLines);
+        drawPage(graphics, currentLeft, leftBodyLines, leftX, y + TEXT_MARGIN_Y, hoveredStyleLeft);
+
+        // Page Droite
+        int rightX = x + HALF_WIDTH + INNER_MARGIN;
+        this.rightTextStartY = calculateTextStartY(currentRight, y + TEXT_MARGIN_Y);
+        Style hoveredStyleRight = getStyleAt(mouseX, mouseY, rightX, rightTextStartY, rightBodyLines);
+        drawPage(graphics, currentRight, rightBodyLines, rightX, y + TEXT_MARGIN_Y, hoveredStyleRight);
 
         drawArrows(graphics, x, y, mouseX, mouseY);
+    }
+
+    private int calculateTextStartY(@Nullable BookPage page, int startY) {
+        if (page == null) return startY;
+        int cursorY = startY;
+        if (page.title() != null) {
+            cursorY += LINE_HEIGHT + TITLE_GAP;
+        }
+        if (!page.images().isEmpty()) {
+            cursorY = simulateDrawImages(page.images()) + IMAGE_BLOCK_GAP;
+        }
+        return cursorY;
+    }
+
+    private int simulateDrawImages(List<BookPage.PageImage> images) {
+        int count = images.size();
+        int slotWidth = count == 2 ? (PAGE_CONTENT_WIDTH - IMAGE_GAP) / 2 : PAGE_CONTENT_WIDTH;
+        int maxDrawHeight = 0;
+        int maxCaptionLineCount = 0;
+
+        for (BookPage.PageImage img : images) {
+            float ratio = (float) img.height() / img.width();
+            int w = Math.min(slotWidth, img.width());
+            int h = Math.min(MAX_IMAGE_HEIGHT, Math.round(w * ratio));
+            if (h == MAX_IMAGE_HEIGHT) {
+                w = Math.round(h / ratio);
+            }
+            maxDrawHeight = Math.max(maxDrawHeight, h);
+
+            String caption = img.caption();
+            if (caption != null && !caption.isEmpty()) {
+                maxCaptionLineCount = Math.max(maxCaptionLineCount, this.font.split(Component.literal(caption), slotWidth).size());
+            }
+        }
+        int captionBlockHeight = maxCaptionLineCount > 0 ? CAPTION_GAP + maxCaptionLineCount * LINE_HEIGHT : 0;
+        return maxDrawHeight + captionBlockHeight;
     }
 
     private void drawArrows(GuiGraphicsExtractor graphics, int x, int y, int mouseX, int mouseY) {
@@ -167,14 +220,39 @@ public class CustomBookScreen extends Screen {
             goNext();
             return true;
         }
+
+        // Gestion des liens au clic sur la page gauche
+        Style styleLeft = getStyleAt(mouseX, mouseY, x + OUTER_MARGIN, leftTextStartY, leftBodyLines);
+        if (handleStyleClick(styleLeft)) return true;
+
+        // Gestion des liens au clic sur la page droite
+        if (currentRight != null) {
+            Style styleRight = getStyleAt(mouseX, mouseY, x + HALF_WIDTH + INNER_MARGIN, rightTextStartY, rightBodyLines);
+            if (handleStyleClick(styleRight)) return true;
+        }
+
         return super.mouseClicked(event, doubleClick);
+    }
+
+    private boolean handleStyleClick(@Nullable Style style) {
+        if (style != null && style.getClickEvent() != null) {
+            ClickEvent clickEvent = style.getClickEvent();
+            if (clickEvent instanceof ClickEvent.ChangePage(int targetPage)) {
+                if (targetPage >= 0 && targetPage < pages.size()) {
+                    this.spreadIndex = (targetPage % 2 == 0) ? targetPage : targetPage - 1;
+                    updateCurrentSpread();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private boolean isInside(double mouseX, double mouseY, int rx, int ry, int rw, int rh) {
         return mouseX >= rx && mouseX < rx + rw && mouseY >= ry && mouseY < ry + rh;
     }
 
-    private void drawPage(GuiGraphicsExtractor graphics, @Nullable BookPage page, List<FormattedCharSequence> bodyLines, int pageX, int startY) {
+    private void drawPage(GuiGraphicsExtractor graphics, @Nullable BookPage page, List<FormattedCharSequence> bodyLines, int pageX, int startY, @Nullable Style hoveredStyle) {
         if (page == null) return;
 
         int cursorY = startY;
@@ -189,7 +267,19 @@ public class CustomBookScreen extends Screen {
         }
 
         for (FormattedCharSequence line : bodyLines) {
-            graphics.text(this.font, line, pageX, cursorY, TEXT_COLOR, false);
+            FormattedCharSequence finalLine = line;
+
+            // Si un style de lien vers une page est survolé, on force dynamiquement son soulignement
+            if (hoveredStyle != null && hoveredStyle.getClickEvent() instanceof ClickEvent.ChangePage(int page2)) {
+                finalLine = (sink) -> line.accept((index, style, codePoint) -> {
+                    if (style.getClickEvent() instanceof ClickEvent.ChangePage(int page1) && page1 == page2) {
+                        return sink.accept(index, style.withUnderlined(true), codePoint);
+                    }
+                    return sink.accept(index, style, codePoint);
+                });
+            }
+
+            graphics.text(this.font, finalLine, pageX, cursorY, TEXT_COLOR, false);
             cursorY += LINE_HEIGHT;
         }
     }
@@ -215,7 +305,6 @@ public class CustomBookScreen extends Screen {
             maxDrawHeight = Math.max(maxDrawHeight, h);
         }
 
-        // wrap légende sur largeur du SLOT (pas de l'image) — autorise plusieurs lignes
         @SuppressWarnings("unchecked")
         List<FormattedCharSequence>[] captionLines = new List[count];
         int maxCaptionLineCount = 0;
@@ -240,7 +329,6 @@ public class CustomBookScreen extends Screen {
             int imgY = startY + (maxDrawHeight - h);
 
             if (img.itemStack() != null) {
-                // item vanilla = icône native 16x16, scale pour atteindre taille voulue (w·h)
                 float scaleX = w / 16f;
                 float scaleY = h / 16f;
                 graphics.pose().pushMatrix();
@@ -254,7 +342,7 @@ public class CustomBookScreen extends Screen {
                 graphics.pose().pushMatrix();
                 graphics.pose().translate(imgX, imgY);
                 graphics.pose().scale(scaleX, scaleY);
-                if (img.texture != null)
+                if (img.texture() != null)
                     graphics.blit(RenderPipelines.GUI_TEXTURED, img.texture(), 0, 0, 0, 0, img.width(), img.height(), img.width(), img.height());
                 graphics.pose().popMatrix();
             }
@@ -274,36 +362,37 @@ public class CustomBookScreen extends Screen {
         return startY + maxDrawHeight + captionBlockHeight;
     }
 
+    @Nullable
+    private Style getStyleAt(double mouseX, double mouseY, int pageX, int startY, List<FormattedCharSequence> bodyLines) {
+        int cursorY = startY;
+        for (FormattedCharSequence line : bodyLines) {
+            if (mouseY >= cursorY && mouseY < cursorY + LINE_HEIGHT) {
+                if (mouseX >= pageX && mouseX < pageX + PAGE_CONTENT_WIDTH) {
+                    int relativeX = (int) (mouseX - pageX);
+
+                    Style[] foundStyle = new Style[]{null};
+                    MutableFloat currentWidth = new MutableFloat();
+
+                    line.accept((_, style, codePoint) -> {
+                        String character = new String(Character.toChars(codePoint));
+                        float charWidth = this.font.width(character);
+
+                        if (currentWidth.addAndGet(charWidth) > relativeX) {
+                            foundStyle[0] = style;
+                            return false;
+                        }
+                        return true;
+                    });
+                    return foundStyle[0];
+                }
+            }
+            cursorY += LINE_HEIGHT;
+        }
+        return null;
+    }
+
     @Override
     public boolean isPauseScreen() {
         return false;
-    }
-
-    public record BookPage(@Nullable Component title, List<PageImage> images, @Nullable Component bodyText) {
-
-        public BookPage {
-            if (images == null) images = List.of();
-            if (images.size() > 2) {
-                throw new IllegalArgumentException("Max 2 images par page, reçu: " + images.size());
-            }
-            images = List.copyOf(images);
-        }
-
-        public record PageImage(@Nullable Identifier texture, @Nullable ItemStack itemStack, int width, int height, @Nullable String caption) {
-
-            public PageImage {
-                if ((texture == null) == (itemStack == null)) {
-                    throw new IllegalArgumentException("PageImage doit avoir soit texture, soit itemStack — pas les deux, pas aucun");
-                }
-            }
-
-            public static PageImage fromTexture(Identifier texture, int width, int height, @Nullable String caption) {
-                return new PageImage(texture, null, width, height, caption);
-            }
-
-            public static PageImage fromItem(ItemStack stack, @Nullable String caption) {
-                return new PageImage(null, stack, 64, 64, caption);
-            }
-        }
     }
 }
