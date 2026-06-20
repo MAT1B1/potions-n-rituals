@@ -94,20 +94,20 @@ public class BookStructure {
     }
 
     private Component generateSummaryText(List<Object> rootElements) {
-        var text = Component.literal("Cliquez sur une section pour débuter :\n\n");
+        var text = Component.translatable("Cliquez sur une section pour débuter :\n\n");
 
         for (Object element : rootElements) {
             if (element instanceof Chapter chat) {
                 Integer chatIndex = anchorToPageIndex.get("chapter_" + chat.title);
                 if (chatIndex != null) {
-                    text.append(Component.literal("§3" + chat.title + "§r\n")
+                    text.append(Component.translatable("§3" + chat.title + "§r\n")
                             .withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(chatIndex))));
                 }
 
                 for (Chapter subChat : chat.subChapters) {
                     Integer subIndex = anchorToPageIndex.get("subchapter_" + subChat.title);
                     if (subIndex != null) {
-                        text.append(Component.literal("  §7- " + subChat.title + "§r\n")
+                        text.append(Component.translatable("  §7- " + subChat.title + "§r\n")
                                 .withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(subIndex))));
                     }
                 }

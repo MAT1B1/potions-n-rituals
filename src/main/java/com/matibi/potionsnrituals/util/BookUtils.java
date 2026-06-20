@@ -41,20 +41,20 @@ public class BookUtils {
     @Environment(EnvType.CLIENT)
     public static BookPage createStandardPage(String id, String title, String body) {
         if (body != null)
-            return new BookPage(id, Component.literal(title), List.of(), Component.literal(body));
-        return new BookPage(id, Component.literal(title), List.of(), null);
+            return new BookPage(id, Component.translatable(title), List.of(), Component.translatable(body));
+        return new BookPage(id, Component.translatable(title), List.of(), null);
     }
 
     @Environment(EnvType.CLIENT)
     public static BookPage createPotionPage(Holder<Potion> potion, String body) {
         return new BookPage(
                 BookUtils.getIdString(potion),
-                Component.literal("§l" + BookUtils.getName(potion)),
+                Component.translatable("§l" + BookUtils.getName(potion)),
                 List.of(
                         BookPage.PageImage.fromItem(BookUtils.getItemStack(potion), null),
                         BookPage.PageImage.fromTexture(BookUtils.getEffectTexture(potion), 64, 64, null)
                 ),
-                Component.literal(body)
+                Component.translatable(body)
         );
     }
 }
