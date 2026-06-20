@@ -21,11 +21,6 @@ public record BookPage(@Nullable String id, @Nullable Component title, List<Page
         images = List.copyOf(images);
     }
 
-    public BookPage addTo(BookStructure.Chapter chapter) {
-        chapter.addPage(this);
-        return this;
-    }
-
     public record PageImage(@Nullable Identifier texture, @Nullable ItemStack itemStack, int width, int height, @Nullable String caption) {
 
         public PageImage {

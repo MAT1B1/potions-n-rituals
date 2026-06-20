@@ -10,7 +10,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
@@ -24,9 +23,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class CustomBookItem extends Item {
 
@@ -45,37 +42,26 @@ public class CustomBookItem extends Item {
     @Environment(EnvType.CLIENT)
     private void openScreen() {
         BookStructure book = new BookStructure(Component.translatable("item.potions-n-rituals.alchemical_tome"))
-                .chapter("Alchimie")
-                    .addPage(createStandardPage("intro", "§lSommaire Alchimique", ""))
-                    .addPage(BookPage.Empty("blank"))
-                    .addPage(createPotionPage(ModPotions.ADHESION, "The §4Great Work..."))
+            .tableofcontents("Sommaire Alchimique")
 
-                    .subChapter("Phases Avancées")
-                        .addPage(createStandardPage("albedo_page", "§oAlbedo", "Reduce matter..."))
-                        .addPage(createStandardPage("citrinitas_page", "§nCitrinitas", "Channel Nether..."))
-                    .endSubChapter()
+            .page(BookPage.Empty("blank"))
 
-                .chapter("Autre Onglet")
-                    .addPage(createStandardPage("autre", "Titre", "Contenu..."))
-                .build();
+            .chapter("Alchimie", c -> c
+                .page(createPotionPage(ModPotions.ADHESION, "The §4Great Work§r of Alchemy begins with §5Nigredo§r."))
 
-        List<BookPage> flatPages = new ArrayList<>(book.getFlatPages());
-        Map<String, Integer> anchorMap = book.getAnchorMap();
+                .subChapter("Avancée", sub -> sub
+                    .page(createStandardPage("albedo_page", "§oAlbedo", "Reduce matter to its primordial form — Materia Prima — through chaos and decay."))
+                    .page(createStandardPage("citrinitas_page", "§nCitrinitas", "Channel Nether energies to §kforge§r talismans and §martifacts§r."))
+                )
+            )
 
-        int indexAdhesion = anchorMap.getOrDefault(id(ModPotions.ADHESION), 1);
-        int indexAlbedo = anchorMap.getOrDefault("albedo_page", 2);
+            .chapter("Autre Onglet", c -> c
+                .page(createStandardPage("autre", "Titre", "Contenu..."))
+            )
+            .build();
 
-        Component titreAdhesion = flatPages.get(indexAdhesion).title() != null ? flatPages.get(indexAdhesion).title() : Component.literal("Adhésion");
-        Component titreAlbedo = flatPages.get(indexAlbedo).title() != null ? flatPages.get(indexAlbedo).title() : Component.literal("Albedo");
-        if (titreAlbedo != null && titreAdhesion != null) {
-            Component introBodyText = Component.literal("Bienvenue dans votre grimoire. Cliquez sur un sujet pour débuter :\n\n")
-                    .append(Component.literal("§3➤ ").append(titreAdhesion).append("§r\n").withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(indexAdhesion))))
-                    .append(Component.literal("§3➤ ").append(titreAlbedo).append("§r").withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(indexAlbedo))));
-
-            flatPages.set(0, new BookPage("intro", flatPages.getFirst().title(), flatPages.getFirst().images(), introBodyText));
-        }
         Minecraft.getInstance().setScreenAndShow(
-                new CustomBookScreen(book.getBookTitle(), flatPages)
+                new CustomBookScreen(book.getBookTitle(), book.getFlatPages())
         );
     }
 
@@ -83,7 +69,7 @@ public class CustomBookItem extends Item {
     private BookPage createStandardPage(String id, String title, String body) {
         if (body != null)
             return new BookPage(id, Component.literal(title), List.of(), Component.literal(body));
-        return  new BookPage(id, Component.literal(title), List.of(), null);
+        return new BookPage(id, Component.literal(title), List.of(), null);
     }
 
     @Environment(EnvType.CLIENT)
