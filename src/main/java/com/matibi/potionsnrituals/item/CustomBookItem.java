@@ -3,7 +3,6 @@ package com.matibi.potionsnrituals.item;
 import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.potion.PotionIconHelper;
 import com.matibi.potionsnrituals.screen.CustomBookScreen;
-import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
