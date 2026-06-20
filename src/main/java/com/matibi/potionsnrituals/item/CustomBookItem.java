@@ -24,6 +24,37 @@ import org.jspecify.annotations.NonNull;
 import java.util.List;
 
 public class CustomBookItem extends Item {
+    // ==========================================
+    //   MINECRAFT FORMATTING CODES (COLOR & STYLE)
+    // ==========================================
+    // Note : Toujours mettre la couleur AVANT le style (ex: §6§l pour Or + Gras)
+    //
+    // --- STYLES ---
+    // §l : Gras (Bold)
+    // §o : Italique (Italic)
+    // §n : Souligné (Underline)
+    // §m : Barré (Strikethrough)
+    // §k : Obscurci / Magique (Obfuscated)
+    // §r : Réinitialiser tout le formatage (Reset)
+    //
+    // --- COULEURS ---
+    // §0 : Noir (Black)
+    // §1 : Bleu foncé (Dark Blue)
+    // §2 : Vert foncé (Dark Green)
+    // §3 : Turquoise foncé (Dark Aqua)
+    // §4 : Rouge foncé (Dark Red)
+    // §5 : Violet (Dark Purple)
+    // §6 : Or (Gold)
+    // §7 : Gris clair (Gray)
+    // §8 : Gris foncé (Dark Gray)
+    // §9 : Bleu (Blue)
+    // §a : Vert clair (Green)
+    // §b : Turquoise clair (Aqua)
+    // §c : Rouge clair (Red)
+    // §d : Rose / Magenta (Light Purple)
+    // §e : Jaune (Yellow)
+    // §f : Blanc (White)
+    // ==========================================
 
     public CustomBookItem(Properties properties) {
         super(properties);
@@ -41,24 +72,24 @@ public class CustomBookItem extends Item {
     private void openScreen() {
         List<CustomBookScreen.BookPage> pages = List.of(
                 new CustomBookScreen.BookPage(
-                        name(ModPotions.ADHESION),
-                        List.of(CustomBookScreen.BookPage.PageImage.fromItem(fromPotion(ModPotions.ADHESION), null),
+                        Component.literal("§l" + name(ModPotions.ADHESION)),
+                        List.of(
+                                CustomBookScreen.BookPage.PageImage.fromItem(fromPotion(ModPotions.ADHESION), null),
                                 CustomBookScreen.BookPage.PageImage.fromTexture(
-                                effectTexture(ModPotions.ADHESION), 64, 64, null)
+                                        effectTexture(ModPotions.ADHESION), 64, 64, null)
                         ),
-                        "The Great Work of Alchemy begins with Nigredo, the blackening."
+                        Component.literal("The §4Great Work§r of Alchemy begins with §5Nigredo§r.")
                 ),
                 new CustomBookScreen.BookPage(
-                        "Albedo",
+                        Component.literal("§oAlbedo"),
                         List.of(),
-                        "Reduce matter to its primordial form — Materia Prima — through chaos and decay."
+                                Component.literal("Reduce matter to its primordial form — Materia Prima — through chaos and decay.")
                 ),
                 new CustomBookScreen.BookPage(
-                        "Citrinitas",
+                        Component.literal("§nCitrinitas"),
                         List.of(),
-                        "Channel Nether energies to forge talismans and artifacts."
+                                Component.literal("Channel Nether energies to §kforge§r talismans and §martifacts§r.")
                 )
-                // ^ 3 pages = impair → dernier spread aura page droite vide, automatique
         );
 
         Minecraft.getInstance().setScreenAndShow(

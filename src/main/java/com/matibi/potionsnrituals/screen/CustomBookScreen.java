@@ -84,14 +84,14 @@ public class CustomBookScreen extends Screen {
     }
 
     private List<FormattedCharSequence> wrapBody(@Nullable BookPage page) {
-        if (page == null || page.bodyText() == null || page.bodyText().isEmpty()) {
+        if (page == null || page.bodyText() == null) {
             return List.of();
         }
-        return this.font.split(Component.literal(page.bodyText()), PAGE_CONTENT_WIDTH);
+        return this.font.split(page.bodyText(), PAGE_CONTENT_WIDTH);
     }
 
-    private FormattedCharSequence toLine(String s) {
-        return this.font.split(Component.literal(s), Integer.MAX_VALUE).getFirst();
+    private FormattedCharSequence toLine(Component component) {
+        return this.font.split(component, Integer.MAX_VALUE).getFirst();
     }
 
     private boolean hasPrevSpread() {
@@ -179,7 +179,7 @@ public class CustomBookScreen extends Screen {
 
         int cursorY = startY;
 
-        if (page.title() != null && !page.title().isEmpty()) {
+        if (page.title() != null) {
             graphics.text(this.font, toLine(page.title()), pageX, cursorY, TITLE_COLOR, false);
             cursorY += LINE_HEIGHT + TITLE_GAP;
         }
@@ -279,7 +279,7 @@ public class CustomBookScreen extends Screen {
         return false;
     }
 
-    public record BookPage(@Nullable String title, List<PageImage> images, @Nullable String bodyText) {
+    public record BookPage(@Nullable Component title, List<PageImage> images, @Nullable Component bodyText) {
 
         public BookPage {
             if (images == null) images = List.of();
