@@ -82,6 +82,8 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register(t, "zombie_contagion", "Zombie Contagion");
         register(t, "empathy", "Empathy");
         register(t, "magnetism", "Magnetism");
+        register(t, "reality_check", "Reality Check");
+        register(t, "active_tp", "Active teleportation");
 
         registerWithAlchemicalStone(t, "giant", "Giant");
         registerWithAlchemicalStone(t, "resurrection", "Resurrection");
@@ -155,6 +157,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("title.potions-n-rituals.config", "Potions & Rituals");
         t.add("category.potions-n-rituals.potions_and_items", "Potions & Items");
         t.add("category.potions-n-rituals.mob_effects", "Mob Effects");
+        t.add("category.potions-n-rituals.active_effects", "Active Effects");
 
         //ModConfig Screen — Option Groups
         t.add("group.potions-n-rituals.lingering_potion_cooldown", "Lingering Potion Cooldown");
@@ -309,30 +312,25 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
 
         t.add("option.potions-n-rituals.zombie_contagion.duration", "Duration (ticks)");
 
+        t.add("option.potions-n-rituals.reality_check.max_slowdown", "Max Slowdown");
+
         //ModConfig Screen — Active Effect Options
-        t.add("group.potions-n-rituals.active_effect", "Active Effect");
+        //ModConfig Screen — Active Effect Options (TAB 3)
         t.add("option.potions-n-rituals.active_effect.medusa_range", "Medusa Range");
+        t.add("option.potions-n-rituals.active_effect.medusa_range_per_level", "Medusa Range Per Level");
+        t.add("option.potions-n-rituals.active_effect.medusa_short_cooldown", "Medusa Short Cooldown (ticks)");
+        t.add("option.potions-n-rituals.active_effect.medusa_cooldown", "Medusa Cooldown (ticks)");
+        t.add("option.potions-n-rituals.active_effect.medusa_long_cooldown", "Medusa Long Cooldown (ticks)");
         t.add("option.potions-n-rituals.active_effect.teleport_range", "Teleport Range");
+        t.add("option.potions-n-rituals.active_effect.teleport_range_per_level", "Teleport Range Per Level");
+        t.add("option.potions-n-rituals.active_effect.teleport_short_cooldown", "Teleport Short Cooldown (ticks)");
+        t.add("option.potions-n-rituals.active_effect.teleport_cooldown", "Teleport Cooldown (ticks)");
+        t.add("option.potions-n-rituals.active_effect.teleport_long_cooldown", "Teleport Long Cooldown (ticks)");
         t.add("option.potions-n-rituals.active_effect.zeus_range", "Zeus Range");
         t.add("option.potions-n-rituals.active_effect.zeus_range_per_level", "Zeus Range Per Level");
         t.add("option.potions-n-rituals.active_effect.zeus_short_cooldown", "Zeus Short Cooldown (ticks)");
         t.add("option.potions-n-rituals.active_effect.zeus_cooldown", "Zeus Cooldown (ticks)");
         t.add("option.potions-n-rituals.active_effect.zeus_long_cooldown", "Zeus Long Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.teleport_range_per_level", "Teleport Range Per Level");
-        t.add("option.potions-n-rituals.active_effect.teleport_short_cooldown", "Teleport Short Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.teleport_cooldown", "Teleport Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.teleport_long_cooldown", "Teleport Long Cooldown (ticks)");
-
-        t.add("effect.potions-n-rituals.active_teleportation", "Active Teleportation");
-        t.add("item.minecraft.potion.effect.active_teleportation", "Potion of Active Teleportation");
-        t.add("item.minecraft.splash_potion.effect.active_teleportation", "Splash Potion of Active Teleportation");
-        t.add("item.minecraft.lingering_potion.effect.active_teleportation", "Lingering Potion of Active Teleportation");
-        t.add("item.minecraft.tipped_arrow.effect.active_teleportation", "Arrow of Active Teleportation");
-        t.add("item.potions-n-rituals.syringe.effect.potions-n-rituals.active_teleportation", "Syringe of Active Teleportation");
-        t.add("option.potions-n-rituals.active_effect.medusa_range_per_level", "Medusa Range Per Level");
-        t.add("option.potions-n-rituals.active_effect.medusa_short_cooldown", "Medusa Short Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.medusa_cooldown", "Medusa Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.medusa_long_cooldown", "Medusa Long Cooldown (ticks)");
 
         this.additionalTranslations.forEach(t::add);
     }

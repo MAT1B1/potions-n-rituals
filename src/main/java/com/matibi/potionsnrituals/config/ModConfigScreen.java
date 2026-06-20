@@ -775,9 +775,28 @@ public class ModConfigScreen implements ModMenuApi {
                                         .build())
                                 .build())
 
-                        // ─── Active Effect ─────────────────────────────────────────────────
+                        // ─── Reality Check ──────────────────────────────────────────────────
                         .group(OptionGroup.createBuilder()
-                                .name(Component.translatable("group.potions-n-rituals.active_effect"))
+                                .name(Component.translatable("effect.potions-n-rituals.reality_check"))
+                                .collapsed(true)
+                                .option(Option.<Double>createBuilder()
+                                        .name(Component.translatable("option.potions-n-rituals.reality_check.max_slowdown"))
+                                        .binding(0.7, () -> ModConfig.get().reality_check_max_slowdown, v -> ModConfig.get().reality_check_max_slowdown = v)
+                                        .controller(DoubleFieldControllerBuilder::create)
+                                        .build())
+                                .build())
+
+                        .build())
+
+                // ═══════════════════════════════════════════════════════════
+                // TAB 3 — Active Effects
+                // ═══════════════════════════════════════════════════════════
+                .category(ConfigCategory.createBuilder()
+                        .name(Component.translatable("category.potions-n-rituals.active_effects"))
+
+                        // ─── Medusa ─────────────────────────────────────────────────────────
+                        .group(OptionGroup.createBuilder()
+                                .name(Component.translatable("effect.potions-n-rituals.medusa"))
                                 .collapsed(true)
                                 .option(Option.<Double>createBuilder()
                                         .name(Component.translatable("option.potions-n-rituals.active_effect.medusa_range"))
@@ -804,6 +823,12 @@ public class ModConfigScreen implements ModMenuApi {
                                         .binding(600, () -> ModConfig.get().medusa_long_cooldown, v -> ModConfig.get().medusa_long_cooldown = v)
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .build())
+                                .build())
+
+                        // ─── Teleport ───────────────────────────────────────────────────────
+                        .group(OptionGroup.createBuilder()
+                                .name(Component.translatable("effect.potions-n-rituals.teleportation"))
+                                .collapsed(true)
                                 .option(Option.<Double>createBuilder()
                                         .name(Component.translatable("option.potions-n-rituals.active_effect.teleport_range"))
                                         .binding(64.0, () -> ModConfig.get().active_teleport_range, v -> ModConfig.get().active_teleport_range = v)
@@ -829,6 +854,12 @@ public class ModConfigScreen implements ModMenuApi {
                                         .binding(600, () -> ModConfig.get().active_teleport_long_cooldown, v -> ModConfig.get().active_teleport_long_cooldown = v)
                                         .controller(IntegerFieldControllerBuilder::create)
                                         .build())
+                                .build())
+
+                        // ─── Zeus ───────────────────────────────────────────────────────────
+                        .group(OptionGroup.createBuilder()
+                                .name(Component.translatable("effect.potions-n-rituals.zeus"))
+                                .collapsed(true)
                                 .option(Option.<Double>createBuilder()
                                         .name(Component.translatable("option.potions-n-rituals.active_effect.zeus_range"))
                                         .binding(64.0, () -> ModConfig.get().zeus_range, v -> ModConfig.get().zeus_range = v)

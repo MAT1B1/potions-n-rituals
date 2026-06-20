@@ -198,8 +198,8 @@ public class ModPotions {
             MIDAS = reg(ModEffects.MIDAS_BENEDICTION, ModConfig.get().dur_basic, 0, "midas", "midas"),
             LONG_MIDAS = reg(ModEffects.MIDAS_BENEDICTION, ModConfig.get().dur_long, 0, "midas", "long_midas"),
 
-            ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TELEPORTATION, ModConfig.get().dur_basic, 0, "active_teleportation", "active_teleport"),
-            LONG_ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TELEPORTATION, ModConfig.get().dur_long, 0, "active_teleportation", "long_active_teleport"),
+            ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TP, ModConfig.get().dur_basic, 0, "active_tp", "active_tp"),
+            LONG_ACTIVE_TELEPORT = reg(ModEffects.ACTIVE_TP, ModConfig.get().dur_long, 0, "active_tp", "long_active_tp"),
 
             HYDROPHOBIA = reg(ModEffects.HYDROPHOBIA, ModConfig.get().dur_basic, 0, "hydrophobia", "hydrophobia"),
             LONG_HYDROPHOBIA = reg(ModEffects.HYDROPHOBIA, ModConfig.get().dur_long, 0, "hydrophobia", "long_hydrophobia"),
@@ -209,7 +209,10 @@ public class ModPotions {
 
             MAGNETISM = reg(ModEffects.MAGNETISM, ModConfig.get().dur_basic, 0, "magnetism", "magnetism"),
             LONG_MAGNETISM = reg(ModEffects.MAGNETISM, ModConfig.get().dur_long, 0, "magnetism", "long_magnetism"),
-            STRONG_MAGNETISM = reg(ModEffects.MAGNETISM, ModConfig.get().dur_basic, 1, "magnetism", "strong_magnetism");
+            STRONG_MAGNETISM = reg(ModEffects.MAGNETISM, ModConfig.get().dur_basic, 1, "magnetism", "strong_magnetism"),
+
+            REALITY_CHECK = reg(ModEffects.REALITY_CHECK, ModConfig.get().dur_basic, 0, "reality_check", "reality_check"),
+            LONG_REALITY_CHECK = reg(ModEffects.REALITY_CHECK, ModConfig.get().dur_long, 0, "reality_check", "long_reality_check");
 
 
     public static void register() {
@@ -339,6 +342,7 @@ public class ModPotions {
             addLong(builder, ModPotions.HYDROPHOBIA, ModPotions.LONG_HYDROPHOBIA);
             addLong(builder, ModPotions.MAGNETISM, ModPotions.LONG_MAGNETISM);
             addLong(builder, ModPotions.MIDAS, ModPotions.LONG_MIDAS);
+            addLong(builder, ModPotions.REALITY_CHECK, ModPotions.LONG_REALITY_CHECK);
 
             // version strong
             addStrong(builder, ModPotions.ALCOHOL, ModPotions.STRONG_ALCOHOL);

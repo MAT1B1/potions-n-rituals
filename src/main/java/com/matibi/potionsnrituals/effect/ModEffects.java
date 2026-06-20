@@ -71,7 +71,7 @@ public class ModEffects {
             XP_LIFE             = reg("xp_life",            new XpLifeEffect()),
             ZEUS_BENEDICTION    = reg("zeus",               new ZeusBenedictionEffect()),
             MEDUSA_BENEDICTION  = reg("medusa",             new MedusaBenedictionEffect()),
-            ACTIVE_TELEPORTATION = reg("active_teleportation", new ActiveTeleportationEffect()),
+            ACTIVE_TP           = reg("active_tp",          new ActiveTeleportationEffect()),
             CLUMSINESS          = reg("clumsiness",         new ClumsinessEffect()),
             COLD                = reg("cold",               new ColdEffect()),
             ASTHMA              = reg("asthma",             new AsthmaEffect()),
@@ -80,7 +80,8 @@ public class ModEffects {
             ZOMBIE_CONTAGION    = reg("zombie_contagion",   new ZombieContagionEffect()),
             EMPATHY             = reg("empathy",            new EmpathyEffect()),
             MAGNETISM           = reg("magnetism",          new MagnetismEffect()),
-            MIDAS_BENEDICTION   = reg("midas",              new MidasBenedictionEffect());
+            MIDAS_BENEDICTION   = reg("midas",              new MidasBenedictionEffect()),
+            REALITY_CHECK       = reg("reality_check",      new RealityCheckEffect());
 
     private static Holder<MobEffect> reg(String name, MobEffect effect) {
         return Registry.registerForHolder(

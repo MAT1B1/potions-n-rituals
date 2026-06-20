@@ -218,6 +218,9 @@ public class ModConfig {
     @SerialEntry public int min_cough_time = 1;
     @SerialEntry public int max_cough_time = 10;
 
+    // ── Reality Check ──────────────────────────────────────────────────────────
+    @SerialEntry public double reality_check_max_slowdown = 0.7D;
+
     // ── Active Effect ───────────────────────────────────────────────────────────────
     @SerialEntry public double medusa_range = 20.0;
     @SerialEntry public double medusa_range_per_level = 5.0;
