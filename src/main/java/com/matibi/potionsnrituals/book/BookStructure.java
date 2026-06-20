@@ -12,7 +12,8 @@ public class BookStructure {
     private final Component bookTitle;
     private final List<BookPage> flatPages = new ArrayList<>();
     private final Map<String, Integer> anchorToPageIndex = new HashMap<>();
-    private final List<Object> rootElements = new ArrayList<>();
+
+    private final List<Consumer<List<Object>>> rootBuilders = new ArrayList<>();
 
     private boolean hasAutoSummary = false;
     private String summaryTitle = "Sommaire";
@@ -28,14 +29,16 @@ public class BookStructure {
     }
 
     public BookStructure page(BookPage page) {
-        this.rootElements.add(page);
+        this.rootBuilders.add(elements -> elements.add(page));
         return this;
     }
 
     public BookStructure chapter(String title, Consumer<Chapter> configuration) {
-        Chapter chapter = new Chapter(title);
-        configuration.accept(chapter);
-        this.rootElements.add(chapter);
+        this.rootBuilders.add(elements -> {
+            Chapter chapter = new Chapter(title);
+            configuration.accept(chapter);
+            elements.add(chapter);
+        });
         return this;
     }
 
@@ -43,8 +46,13 @@ public class BookStructure {
         this.flatPages.clear();
         this.anchorToPageIndex.clear();
 
+        List<Object> rootElements = new ArrayList<>();
         if (hasAutoSummary) {
             flatPages.add(BookPage.Empty("summary_placeholder"));
+        }
+
+        for (Consumer<List<Object>> builder : rootBuilders) {
+            builder.accept(rootElements);
         }
 
         for (Object element : rootElements) {
@@ -60,7 +68,7 @@ public class BookStructure {
         }
 
         if (hasAutoSummary) {
-            Component summaryBody = generateSummaryText();
+            Component summaryBody = generateSummaryText(rootElements);
             flatPages.set(0, new BookPage("summary", Component.literal(summaryTitle), List.of(), summaryBody));
         }
 
@@ -85,21 +93,21 @@ public class BookStructure {
         }
     }
 
-    private Component generateSummaryText() {
+    private Component generateSummaryText(List<Object> rootElements) {
         var text = Component.literal("Cliquez sur une section pour débuter :\n\n");
 
         for (Object element : rootElements) {
             if (element instanceof Chapter chat) {
                 Integer chatIndex = anchorToPageIndex.get("chapter_" + chat.title);
                 if (chatIndex != null) {
-                    text.append(Component.literal("§3➤ " + chat.title + "§r\n")
+                    text.append(Component.literal("§3" + chat.title + "§r\n")
                             .withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(chatIndex))));
                 }
 
                 for (Chapter subChat : chat.subChapters) {
                     Integer subIndex = anchorToPageIndex.get("subchapter_" + subChat.title);
                     if (subIndex != null) {
-                        text.append(Component.literal("  §7-- " + subChat.title + "§r\n")
+                        text.append(Component.literal("  §7- " + subChat.title + "§r\n")
                                 .withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(subIndex))));
                     }
                 }

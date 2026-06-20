@@ -1,15 +1,20 @@
 package com.matibi.potionsnrituals.item;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.book.BookPage;
+import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.alchemicalStone.AlchemicalStoneItem;
 import com.matibi.potionsnrituals.item.syringe.SyringeItem;
+import com.matibi.potionsnrituals.potion.ModPotions;
+import com.matibi.potionsnrituals.util.BookUtils;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -58,7 +63,24 @@ public class ModItems {
                 )
             ),
             ALCHEMICAL_TOME = register("alchemical_tome",
-                new CustomBookItem(props("alchemical_tome").stacksTo(1))
+                new CustomBookItem(props("alchemical_tome").stacksTo(1),
+                    new BookStructure(Component.translatable("item.potions-n-rituals.alchemical_tome"))
+                        .tableofcontents("Sommaire Alchimique")
+
+                        .page(BookPage.Empty("blank"))
+
+                        .chapter("Alchimie", c -> c
+                            .page(BookUtils.createPotionPage(ModPotions.ADHESION, "The §4Great Work§r of Alchemy begins with §5Nigredo§r."))
+
+                            .subChapter("Avancée", sub -> sub
+                                .page(BookUtils.createStandardPage("albedo_page", "§oAlbedo", "Reduce matter to its primordial form — Materia Prima — through chaos and decay."))
+                                .page(BookUtils.createStandardPage("citrinitas_page", "§nCitrinitas", "Channel Nether energies to §kforge§r talismans and §martifacts§r."))
+                            )
+                        )
+
+                        .chapter("Autre Onglet", c -> c
+                            .page(BookUtils.createStandardPage("autre", "Titre", "Contenu..."))
+                        ))
             );
 
     private static Item registerSimple(String id) {
