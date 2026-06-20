@@ -21,10 +21,6 @@ public class BookStructure {
         this.bookTitle = bookTitle;
     }
 
-    public BookStructure(String bookTitle) {
-        this.bookTitle = Component.literal(bookTitle);
-    }
-
     public BookStructure tableofcontents(String title) {
         this.hasAutoSummary = true;
         this.summaryTitle = title;
@@ -114,9 +110,7 @@ public class BookStructure {
 
     public Component getBookTitle() { return bookTitle; }
     public List<BookPage> getFlatPages() { return flatPages; }
-    public Map<String, Integer> getAnchorMap() { return anchorToPageIndex; }
 
-    // --- CLASSE SÉPARÉE ET NETTE POUR LES CHAPITRES ---
     public static class Chapter {
         private final String title;
         private final List<BookPage> pages = new ArrayList<>();
@@ -131,11 +125,10 @@ public class BookStructure {
             return this;
         }
 
-        public Chapter subChapter(String title, Consumer<Chapter> configuration) {
+        public void subChapter(String title, Consumer<Chapter> configuration) {
             Chapter sub = new Chapter(title);
             configuration.accept(sub);
             this.subChapters.add(sub);
-            return this;
         }
     }
 }
