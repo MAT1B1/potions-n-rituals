@@ -9,6 +9,8 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -351,14 +353,23 @@ public class CustomBookScreen extends Screen {
         int leftX = x + OUTER_MARGIN;
         this.leftTextStartY = calculateTextStartY(currentLeft, y + TEXT_MARGIN_Y);
         Style hoveredStyleLeft = getStyleAt(mouseX, mouseY, leftX, leftTextStartY, leftBodyLines);
-        drawPage(graphics, currentLeft, leftBodyLines, leftX, y + TEXT_MARGIN_Y, hoveredStyleLeft);
+        ItemStack hoveredLeftItem = drawPage(graphics, currentLeft, leftBodyLines, leftX, y + TEXT_MARGIN_Y, hoveredStyleLeft, mouseX, mouseY);
 
         int rightX = x + HALF_WIDTH + INNER_MARGIN;
         this.rightTextStartY = calculateTextStartY(currentRight, y + TEXT_MARGIN_Y);
         Style hoveredStyleRight = getStyleAt(mouseX, mouseY, rightX, rightTextStartY, rightBodyLines);
-        drawPage(graphics, currentRight, rightBodyLines, rightX, y + TEXT_MARGIN_Y, hoveredStyleRight);
+        ItemStack hoveredRightItem = drawPage(graphics, currentRight, rightBodyLines, rightX, y + TEXT_MARGIN_Y, hoveredStyleRight, mouseX, mouseY);
 
         drawArrows(graphics, x, y, mouseX, mouseY);
+
+        // Bulle flottante avec le nom de l'item -> dessinée en tout dernier, par-dessus le reste.
+        ItemStack hoveredRecipeItem = hoveredLeftItem != null ? hoveredLeftItem : hoveredRightItem;
+        if (hoveredRecipeItem != null) {
+            List<ClientTooltipComponent> tooltipLines = List.of(
+                    ClientTooltipComponent.create(hoveredRecipeItem.getHoverName().getVisualOrderText())
+            );
+            graphics.tooltip(this.font, tooltipLines, mouseX, mouseY, DefaultTooltipPositioner.INSTANCE, null);
+        }
     }
 
     private void bookmarkBookmarksAnimation(int i, float target, float a) {
@@ -552,8 +563,8 @@ public class CustomBookScreen extends Screen {
         return mouseX >= rx && mouseX < rx + rw && mouseY >= ry && mouseY < ry + rh;
     }
 
-    private void drawPage(GuiGraphicsExtractor graphics, @Nullable BookPage page, List<FormattedCharSequence> bodyLines, int pageX, int startY, @Nullable Style hoveredStyle) {
-        if (page == null) return;
+    private @Nullable ItemStack drawPage(GuiGraphicsExtractor graphics, @Nullable BookPage page, List<FormattedCharSequence> bodyLines, int pageX, int startY, @Nullable Style hoveredStyle, int mouseX, int mouseY) {
+        if (page == null) return null;
 
         int cursorY = startY;
 
@@ -567,13 +578,14 @@ public class CustomBookScreen extends Screen {
             cursorY += TITLE_GAP;
         }
 
+        ItemStack hoveredItem = null;
         switch (page) {
             case BookPage.ImagePage imgPage -> {
                 if (!imgPage.images().isEmpty())
                     drawImages(graphics, imgPage.images(), pageX, cursorY);
             }
             case BookPage.RecipePage recPage ->
-                    drawRecipeLayout(graphics, recPage.recipe(), pageX, cursorY);
+                    hoveredItem = drawRecipeLayout(graphics, recPage.recipe(), pageX, cursorY, mouseX, mouseY);
             default -> {}
         }
 
@@ -587,9 +599,12 @@ public class CustomBookScreen extends Screen {
                 cursorY += LINE_HEIGHT;
             }
         }
+
+        return hoveredItem;
     }
 
-    private void drawRecipeLayout(GuiGraphicsExtractor graphics, BookPage.Recipe recipe, int pageX, int startY) {
+    private @Nullable ItemStack drawRecipeLayout(GuiGraphicsExtractor graphics, BookPage.Recipe recipe, int pageX, int startY, int mouseX, int mouseY) {
+        ItemStack hovered = null;
         int arrowColor = 0xFF8B8B8B;
         int slotSize = 20;
         float bigScale = 1.3f;
@@ -626,6 +641,10 @@ public class CustomBookScreen extends Screen {
                                 graphics.pose().scale(scale, scale);
                                 graphics.item(stack, 0, 0);
                                 graphics.pose().popMatrix();
+
+                                if (isInside(mouseX, mouseY, slotX, slotY, slotSize, slotSize)) {
+                                    hovered = stack;
+                                }
                             }
                         }
                     }
@@ -650,6 +669,10 @@ public class CustomBookScreen extends Screen {
                 graphics.pose().scale(scale * bigScale, scale * bigScale);
                 graphics.item(recipe.output(), 0, 0);
                 graphics.pose().popMatrix();
+
+                if (!recipe.output().isEmpty() && isInside(mouseX, mouseY, outputX, outputY, actualBigSize, actualBigSize)) {
+                    hovered = recipe.output();
+                }
             }
             case FURNACE -> {
                 int totalWidth = slotSize + arrowWidth + 8 + actualBigSize + 8 + arrowWidth + slotSize;
@@ -669,6 +692,10 @@ public class CustomBookScreen extends Screen {
                     graphics.pose().scale(scale * bigScale, scale * bigScale);
                     graphics.item(recipe.inputs().getFirst(), 0, 0);
                     graphics.pose().popMatrix();
+
+                    if (isInside(mouseX, mouseY, startX, slotY, actualBigSize, actualBigSize)) {
+                        hovered = recipe.inputs().getFirst();
+                    }
                 }
 
                 int leftArrowX = startX + slotSize + 11;
@@ -701,6 +728,10 @@ public class CustomBookScreen extends Screen {
                 graphics.pose().scale(scale * bigScale, scale * bigScale);
                 graphics.item(recipe.output(), 0, 0);
                 graphics.pose().popMatrix();
+
+                if (!recipe.output().isEmpty() && isInside(mouseX, mouseY, outputX, outputY, actualBigSize, actualBigSize)) {
+                    hovered = recipe.output();
+                }
             }
             case BREWING -> {
                 int totalWidth = slotSize + arrowWidth + 8 + actualBigSize + 8 + arrowWidth + slotSize;
@@ -724,6 +755,10 @@ public class CustomBookScreen extends Screen {
                     graphics.pose().scale(scale * bigScale, scale * bigScale);
                     graphics.item(recipe.inputs().getFirst(), 0, 0);
                     graphics.pose().popMatrix();
+
+                    if (isInside(mouseX, mouseY, startX, input1Y, actualBigSize, actualBigSize)) {
+                        hovered = recipe.inputs().getFirst();
+                    }
                 }
 
                 graphics.pose().pushMatrix();
@@ -738,6 +773,10 @@ public class CustomBookScreen extends Screen {
                     graphics.pose().scale(scale * bigScale, scale * bigScale);
                     graphics.item(recipe.inputs().get(1), 0, 0);
                     graphics.pose().popMatrix();
+
+                    if (isInside(mouseX, mouseY, startX, input2Y, actualBigSize, actualBigSize)) {
+                        hovered = recipe.inputs().get(1);
+                    }
                 }
 
                 int leftArrowX = startX + slotSize + 12;
@@ -769,8 +808,14 @@ public class CustomBookScreen extends Screen {
                 graphics.pose().scale(scale * bigScale, scale * bigScale);
                 graphics.item(recipe.output(), 0, 0);
                 graphics.pose().popMatrix();
+
+                if (!recipe.output().isEmpty() && isInside(mouseX, mouseY, outputX, outputY, actualBigSize, actualBigSize)) {
+                    hovered = recipe.output();
+                }
             }
         }
+
+        return hovered;
     }
 
     private void drawImages(GuiGraphicsExtractor graphics, List<BookPage.Image> images, int pageX, int startY) {
