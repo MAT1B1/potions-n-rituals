@@ -267,10 +267,8 @@ public class CustomBookScreen extends Screen {
         int leftBoxX = leftRestX + (BM_TEX_BORDER_1 - BM_TEX_BORDER_2) / 2;
         int leftBoxY = leftBmhY + (BM_TEX_BORDER_1 + BM_TEX_BORDER_2) / 2 - BM_TEX_BORDER_1;
 
-        boolean hoverLeftBm = mouseX >= leftBoxX - (int) bookmarkAnimations[0]
-                && mouseX < x
-                && mouseY >= leftBoxY
-                && mouseY < leftBoxY + BM_TEX_BORDER_1;
+        int leftBmHoverX = leftBoxX - (int) bookmarkAnimations[0];
+        boolean hoverLeftBm = isInside(mouseX, mouseY, leftBmHoverX, leftBoxY, x - leftBmHoverX, BM_TEX_BORDER_1);
 
         float targetExtLeft = hoverLeftBm ? (leftVisibleHover - leftVisibleRest) : 0f;
         bookmarkAnimations[0] = Mth.lerp(a * 0.22f, bookmarkAnimations[0], targetExtLeft);
@@ -294,10 +292,8 @@ public class CustomBookScreen extends Screen {
         int addBoxX = addRestX + (BM_TEX_BORDER_1 - BM_TEX_BORDER_2) / 2;
         int addBoxY = addBmhY + (BM_TEX_BORDER_2 - BM_TEX_BORDER_1) / 2;
 
-        boolean hoverAddBm = mouseX >= addBoxX - (int) bookmarkAnimations[1]
-                && mouseX < x
-                && mouseY >= addBoxY
-                && mouseY < addBoxY + BM_TEX_BORDER_1;
+        int addBmHoverX = addBoxX - (int) bookmarkAnimations[1];
+        boolean hoverAddBm = isInside(mouseX, mouseY, addBmHoverX, addBoxY, x - addBmHoverX, BM_TEX_BORDER_1);
 
         float targetExtAdd = hoverAddBm ? (leftVisibleHover - leftVisibleRest) : 0f;
         bookmarkAnimations[1] = Mth.lerp(a * 0.22f, bookmarkAnimations[1], targetExtAdd);
@@ -323,9 +319,8 @@ public class CustomBookScreen extends Screen {
             PersonalBookmark bookmark = personalBookmarks.get(i);
             int bmX = bmStartX + (i * bmGapX);
             int bmRestY = y - topVisibleRest;
-            boolean hoverPerso = mouseX >= bmX && mouseX < bmX + BM_TEX_BORDER_1
-                    && mouseY >= bmRestY - (int)bookmarkAnimations[2 + i]
-                    && mouseY < y;
+            int bmHoverY = bmRestY - (int) bookmarkAnimations[2 + i];
+            boolean hoverPerso = isInside(mouseX, mouseY, bmX, bmHoverY, BM_TEX_BORDER_1, y - bmHoverY);
             boolean onThisPage = bookmark.pageIndex() == this.spreadIndex;
             boolean showDelete = hoverPerso && onThisPage;
 
@@ -398,10 +393,8 @@ public class CustomBookScreen extends Screen {
         int leftBoxX = leftRestX + (BM_TEX_BORDER_1 - BM_TEX_BORDER_2) / 2;
         int leftBoxY = leftBmhY + (BM_TEX_BORDER_1 + BM_TEX_BORDER_2) / 2 - BM_TEX_BORDER_1;
 
-        if (mouseX >= leftBoxX - (int) bookmarkAnimations[0]
-                && mouseX < x
-                && mouseY >= leftBoxY
-                && mouseY < leftBoxY + BM_TEX_BORDER_1) {
+        int leftBmClickX = leftBoxX - (int) bookmarkAnimations[0];
+        if (isInside(mouseX, mouseY, leftBmClickX, leftBoxY, x - leftBmClickX, BM_TEX_BORDER_1)) {
             jumpToPage(0);
             return true;
         }
@@ -411,10 +404,8 @@ public class CustomBookScreen extends Screen {
         int addRestX = x - leftVisibleRest;
         int addBoxX = addRestX + (BM_TEX_BORDER_1 - BM_TEX_BORDER_2) / 2;
         int addBoxY = addBmhY + (BM_TEX_BORDER_2 - BM_TEX_BORDER_1) / 2;
-        if (mouseX >= addBoxX - (int) bookmarkAnimations[1]
-                && mouseX < x
-                && mouseY >= addBoxY
-                && mouseY < addBoxY + BM_TEX_BORDER_1) {
+        int addBmClickX = addBoxX - (int) bookmarkAnimations[1];
+        if (isInside(mouseX, mouseY, addBmClickX, addBoxY, x - addBmClickX, BM_TEX_BORDER_1)) {
             if (personalBookmarks.size() < PersonalBookmark.ALLOWED_COLORS.length
                     && personalBookmarks.stream().noneMatch(bm -> bm.pageIndex() == this.spreadIndex)) {
                 personalBookmarks.add(new PersonalBookmark(this.spreadIndex, pickAvailableColor()));
@@ -431,10 +422,8 @@ public class CustomBookScreen extends Screen {
         int bmRestY = y - topVisibleRest;
         for (int i = 0; i < personalCount; i++) {
             int bmX = bmStartX + (i * bmGapX);
-            if (mouseX >= bmX
-                    && mouseX < bmX + BM_TEX_BORDER_1
-                    && mouseY >= bmRestY - (int)bookmarkAnimations[2 + i]
-                    && mouseY < y) {
+            int bmClickY = bmRestY - (int) bookmarkAnimations[2 + i];
+            if (isInside(mouseX, mouseY, bmX, bmClickY, BM_TEX_BORDER_1, y - bmClickY)) {
                 PersonalBookmark bookmark = personalBookmarks.get(i);
                 int targetPage = bookmark.pageIndex();
                 if (targetPage == this.spreadIndex)
