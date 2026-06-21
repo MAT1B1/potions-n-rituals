@@ -151,9 +151,8 @@ public class ModItems {
                 });
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
-                .register(output -> {
-                    output.insertAfter(Items.BOOK, ModItems.ALCHEMICAL_TOME);
-                });
+                .register(output ->
+                        output.insertAfter(Items.BOOK, ModItems.ALCHEMICAL_TOME));
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
                 .register(output -> {
