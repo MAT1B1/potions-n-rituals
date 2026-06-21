@@ -12,12 +12,14 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomBookScreen extends Screen {
@@ -59,6 +61,15 @@ public class CustomBookScreen extends Screen {
     private static final int ARROW_TEX_HEIGHT = 13;
     private static final int ARROW_BOTTOM_OFFSET = 25;
 
+    // Constantes et textures pour les Marque-pages (Bookmarks)
+    private static final Identifier BOOKMARK_TEXTURE = ModUtils.id("textures/gui/bookmark.png");
+    private static final int BM_TEX_BORDER_1 = 24;
+    private static final int BM_TEX_BORDER_2 = 73;
+
+   private final List<Integer> personalBookmarks = new ArrayList<>();
+   private final float[] bookmarkAnimations = new float[6];
+   private static final int[] PERSO_COLORS = { 0xFF5555FF, 0xFFAA00AA, 0xFFFFAA00, 0xFF55FFFF }; // Bleu, Violet, Or, Aqua
+
     private List<BookPage> paginatedPages;
     private final List<BookPage> originalPages;
     private final int[] originalToPaginatedIndex;
@@ -79,7 +90,7 @@ public class CustomBookScreen extends Screen {
             throw new IllegalArgumentException("pages ne peut pas être vide");
         }
         this.originalPages = List.copyOf(pages);
-        this.originalToPaginatedIndex = new int[this.originalPages.size()]; // <-- AJOUTEZ CETTE LIGNE
+        this.originalToPaginatedIndex = new int[this.originalPages.size()];
         this.spreadIndex = 0;
     }
 
@@ -96,8 +107,6 @@ public class CustomBookScreen extends Screen {
 
         for (int i = 0; i < this.originalPages.size(); i++) {
             BookPage originalPage = this.originalPages.get(i);
-
-            // On enregistre ici l'index de la page physique où commence cette page originale
             this.originalToPaginatedIndex[i] = result.size();
 
             Component text = getPageBodyText(originalPage);
@@ -124,11 +133,8 @@ public class CustomBookScreen extends Screen {
                 while (index < remainingLines.size()) {
                     int end = Math.min(index + linesPerPageLater, remainingLines.size());
                     List<FormattedCharSequence> subLines = remainingLines.subList(index, end);
-
                     Component remainingTextComponent = linesToComponent(subLines);
-
                     result.add(new BookPage.TextPage(null, null, remainingTextComponent));
-
                     index = end;
                 }
             }
@@ -220,21 +226,208 @@ public class CustomBookScreen extends Screen {
         int x = (this.width - BG_WIDTH) / 2;
         int y = (this.height - BG_HEIGHT) / 2;
 
+        // --- 1. DESSIN DES MARQUE-PAGES GAUCHES (Derrière le livre) ---
+        int leftVisibleRest = 4;
+        int leftVisibleHover = 14;
+
+        // ==========================================
+        // A. SOMMAIRE (Bord Gauche Haut - Rouge)
+        // ==========================================
+        int leftBmhY = y + 15;
+        int leftRestX = x - leftVisibleRest;
+
+        int leftBoxX = leftRestX + (BM_TEX_BORDER_1 - BM_TEX_BORDER_2) / 2;
+        int leftBoxY = leftBmhY + (BM_TEX_BORDER_1 + BM_TEX_BORDER_2) / 2 - BM_TEX_BORDER_1;
+
+        boolean hoverLeftBm = mouseX >= leftBoxX - (int) bookmarkAnimations[0]
+                && mouseX < x
+                && mouseY >= leftBoxY
+                && mouseY < leftBoxY + BM_TEX_BORDER_1;
+
+        float targetExtLeft = hoverLeftBm ? (leftVisibleHover - leftVisibleRest) : 0f;
+        bookmarkAnimations[0] = Mth.lerp(a * 0.22f, bookmarkAnimations[0], targetExtLeft);
+        int finalLeftX = leftRestX - (int) bookmarkAnimations[0];
+
+        graphics.pose().pushMatrix();
+        graphics.pose().translate(finalLeftX, leftBmhY);
+        graphics.pose().translate(BM_TEX_BORDER_1 / 2f, BM_TEX_BORDER_2 / 2f);
+        graphics.pose().rotate((float) Math.toRadians(-90));
+        graphics.pose().translate(-BM_TEX_BORDER_1 / 2f, -BM_TEX_BORDER_2 / 2f);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, BOOKMARK_TEXTURE, 0, 0, 0, 0, BM_TEX_BORDER_1, BM_TEX_BORDER_2, BM_TEX_BORDER_1, BM_TEX_BORDER_2, 0xFFFF5555);
+        graphics.pose().popMatrix();
+
+
+        // ==========================================
+        // B. BOUTON AJOUTER "+" (Bord Gauche Bas - Vert)
+        // ==========================================
+        int addBmhY = y + 92;
+        int addRestX = x - leftVisibleRest;
+
+        int addBoxX = addRestX + (BM_TEX_BORDER_1 - BM_TEX_BORDER_2) / 2;
+        int addBoxY = addBmhY + (BM_TEX_BORDER_2 - BM_TEX_BORDER_1) / 2;
+
+        boolean hoverAddBm = mouseX >= addBoxX - (int) bookmarkAnimations[1]
+                && mouseX < x
+                && mouseY >= addBoxY
+                && mouseY < addBoxY + BM_TEX_BORDER_1;
+
+        float targetExtAdd = hoverAddBm ? (leftVisibleHover - leftVisibleRest) : 0f;
+        bookmarkAnimations[1] = Mth.lerp(a * 0.22f, bookmarkAnimations[1], targetExtAdd);
+        int finalAddX = addRestX - (int) bookmarkAnimations[1];
+
+        graphics.pose().pushMatrix();
+        graphics.pose().translate(finalAddX, addBmhY);
+        graphics.pose().translate(BM_TEX_BORDER_1 / 2f, BM_TEX_BORDER_2 / 2f);
+        graphics.pose().rotate((float) Math.toRadians(-90));
+        graphics.pose().translate(-BM_TEX_BORDER_1 / 2f, -BM_TEX_BORDER_2 / 2f);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, BOOKMARK_TEXTURE, 0, 0, 0, 0, BM_TEX_BORDER_1, BM_TEX_BORDER_2, BM_TEX_BORDER_1, BM_TEX_BORDER_2, 0xFF55FF55);
+        graphics.pose().popMatrix();
+
+
+        // --- 2. DESSIN DES MARQUE-PAGES DU DESSUS (Derrière le livre) ---
+        int topVisibleRest = 24;  // Nombre de pixels visibles au repos
+        int topVisibleHover = 36; // Nombre de pixels visibles au survol
+
+        int personalCount = personalBookmarks.size();
+        int bmStartX = x + 35;
+        int bmGapX = 30;
+        for (int i = 0; i < personalCount; i++) {
+            int bmX = bmStartX + (i * bmGapX);
+            int bmRestY = y - topVisibleRest;
+            boolean hoverPerso = mouseX >= bmX && mouseX < bmX + BM_TEX_BORDER_1
+                    && mouseY >= bmRestY - (int)bookmarkAnimations[2 + i]
+                    && mouseY < y;
+            float targetExtPerso = hoverPerso ? (topVisibleHover - topVisibleRest) : 0f;
+            bookmarkBookmarksAnimation(i, targetExtPerso, a);
+            int finalPersoY = bmRestY - (int)bookmarkAnimations[2 + i];
+            graphics.blit(RenderPipelines.GUI_TEXTURED, BOOKMARK_TEXTURE, bmX, finalPersoY, 0, 0, BM_TEX_BORDER_1, BM_TEX_BORDER_2, BM_TEX_BORDER_1, BM_TEX_BORDER_2, PERSO_COLORS[i]);
+        }
+
+        // --- 3. DESSIN DE LA TEXTURE DU LIVRE PRINCIPAL (Par-dessus) ---
         graphics.blit(RenderPipelines.GUI_TEXTURED, BOOK_TEXTURE, x, y, 0, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT, TEXTURE_WIDTH, TEXTURE_HEIGHT);
 
-        // Page Gauche
+        // --- 4. TEXTE DU BOUTON "+" ---
+        int plusX = finalAddX - 10;
+        int plusY = addBmhY + (BM_TEX_BORDER_2 / 2) - 3;
+        graphics.text(this.font, "+", plusX, plusY, 0xFFFFFFFF, true);
+
+        // Rendu des pages internes
         int leftX = x + OUTER_MARGIN;
         this.leftTextStartY = calculateTextStartY(currentLeft, y + TEXT_MARGIN_Y);
         Style hoveredStyleLeft = getStyleAt(mouseX, mouseY, leftX, leftTextStartY, leftBodyLines);
         drawPage(graphics, currentLeft, leftBodyLines, leftX, y + TEXT_MARGIN_Y, hoveredStyleLeft);
 
-        // Page Droite
         int rightX = x + HALF_WIDTH + INNER_MARGIN;
         this.rightTextStartY = calculateTextStartY(currentRight, y + TEXT_MARGIN_Y);
         Style hoveredStyleRight = getStyleAt(mouseX, mouseY, rightX, rightTextStartY, rightBodyLines);
         drawPage(graphics, currentRight, rightBodyLines, rightX, y + TEXT_MARGIN_Y, hoveredStyleRight);
 
         drawArrows(graphics, x, y, mouseX, mouseY);
+    }
+
+    private void bookmarkBookmarksAnimation(int i, float target, float a) {
+        bookmarkAnimations[2 + i] = Mth.lerp(a * 0.22f, bookmarkAnimations[2 + i], target);
+    }
+
+    @Override
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        double mouseX = event.x();
+        double mouseY = event.y();
+        int x = (this.width - BG_WIDTH) / 2;
+        int y = (this.height - BG_HEIGHT) / 2;
+
+        int arrowY = y + BG_HEIGHT - ARROW_BOTTOM_OFFSET;
+        int arrow_margin = OUTER_MARGIN + 10;
+        int leftArrowX = x + arrow_margin;
+        int rightArrowX = x + BG_WIDTH - arrow_margin - ARROW_TEX_WIDTH;
+
+        if (hasPrevSpread() && isInside(mouseX, mouseY, leftArrowX, arrowY, ARROW_TEX_WIDTH, ARROW_TEX_HEIGHT)) {
+            goPrev();
+            return true;
+        }
+        if (hasNextSpread() && isInside(mouseX, mouseY, rightArrowX, arrowY, ARROW_TEX_WIDTH, ARROW_TEX_HEIGHT)) {
+            goNext();
+            return true;
+        }
+
+        // INTERCEPTION CLIC : Marque-page Sommaire (Gauche Haut)
+        int leftVisibleRest = 4;
+        int leftBmhY = y + 15;
+        int leftRestX = x - leftVisibleRest;
+        int leftBoxX = leftRestX + (BM_TEX_BORDER_1 - BM_TEX_BORDER_2) / 2;
+        int leftBoxY = leftBmhY + (BM_TEX_BORDER_1 + BM_TEX_BORDER_2) / 2 - BM_TEX_BORDER_1;
+
+        if (mouseX >= leftBoxX - (int) bookmarkAnimations[0]
+                && mouseX < x
+                && mouseY >= leftBoxY
+                && mouseY < leftBoxY + BM_TEX_BORDER_1) {
+            jumpToPage(0);
+            return true;
+        }
+
+        // INTERCEPTION CLIC : Marque-page Création / "+" (Gauche Bas)
+        int addBmhY = y + 92;
+        int addRestX = x - leftVisibleRest;
+        int addBoxX = addRestX + (BM_TEX_BORDER_1 - BM_TEX_BORDER_2) / 2;
+        int addBoxY = addBmhY + (BM_TEX_BORDER_2 - BM_TEX_BORDER_1) / 2;
+        if (mouseX >= addBoxX - (int) bookmarkAnimations[1]
+                && mouseX < x
+                && mouseY >= addBoxY
+                && mouseY < addBoxY + BM_TEX_BORDER_1) {
+            if (personalBookmarks.size() < 4 && !personalBookmarks.contains(this.spreadIndex)) {
+                personalBookmarks.add(this.spreadIndex);
+            }
+            return true;
+        }
+
+        // INTERCEPTION CLIC : Marque-pages Personnels (Haut)
+        int personalCount = personalBookmarks.size();
+        int bmStartX = x + 35;
+        int bmGapX = 30;
+        int topVisibleRest = 24;
+        int bmRestY = y - topVisibleRest;
+        for (int i = 0; i < personalCount; i++) {
+            int bmX = bmStartX + (i * bmGapX);
+            if (mouseX >= bmX
+                    && mouseX < bmX + BM_TEX_BORDER_1
+                    && mouseY >= bmRestY - (int)bookmarkAnimations[2 + i]
+                    && mouseY < y) {
+                jumpToPage(personalBookmarks.get(i));
+                return true;
+            }
+        }
+
+        Style styleLeft = getStyleAt(mouseX, mouseY, x + OUTER_MARGIN, leftTextStartY, leftBodyLines);
+        if (handleStyleClick(styleLeft)) return true;
+
+        if (currentRight != null) {
+            Style styleRight = getStyleAt(mouseX, mouseY, x + HALF_WIDTH + INNER_MARGIN, rightTextStartY, rightBodyLines);
+            if (handleStyleClick(styleRight)) return true;
+        }
+
+        return super.mouseClicked(event, doubleClick);
+    }
+
+    private void jumpToPage(int targetPage) {
+        if (targetPage >= 0 && targetPage < paginatedPages.size()) {
+            this.spreadIndex = (targetPage % 2 == 0) ? targetPage : targetPage - 1;
+            updateCurrentSpread();
+        }
+    }
+
+    private boolean handleStyleClick(@Nullable Style style) {
+        if (style != null && style.getClickEvent() != null) {
+            ClickEvent clickEvent = style.getClickEvent();
+            if (clickEvent instanceof ClickEvent.ChangePage(int targetPage)) {
+                if (targetPage >= 0 && targetPage < originalToPaginatedIndex.length) {
+                    int realPage = originalToPaginatedIndex[targetPage];
+                    this.spreadIndex = (realPage % 2 == 0) ? realPage : realPage - 1;
+                    updateCurrentSpread();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private int calculateTextStartY(@Nullable BookPage page, int startY) {
@@ -309,53 +502,6 @@ public class CustomBookScreen extends Screen {
         }
     }
 
-    @Override
-    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
-        double mouseX = event.x();
-        double mouseY = event.y();
-        int x = (this.width - BG_WIDTH) / 2;
-        int y = (this.height - BG_HEIGHT) / 2;
-        int arrowY = y + BG_HEIGHT - ARROW_BOTTOM_OFFSET;
-        int arrow_margin = OUTER_MARGIN + 10;
-        int leftArrowX = x + arrow_margin;
-        int rightArrowX = x + BG_WIDTH - arrow_margin - ARROW_TEX_WIDTH;
-
-        if (hasPrevSpread() && isInside(mouseX, mouseY, leftArrowX, arrowY, ARROW_TEX_WIDTH, ARROW_TEX_HEIGHT)) {
-            goPrev();
-            return true;
-        }
-        if (hasNextSpread() && isInside(mouseX, mouseY, rightArrowX, arrowY, ARROW_TEX_WIDTH, ARROW_TEX_HEIGHT)) {
-            goNext();
-            return true;
-        }
-
-        Style styleLeft = getStyleAt(mouseX, mouseY, x + OUTER_MARGIN, leftTextStartY, leftBodyLines);
-        if (handleStyleClick(styleLeft)) return true;
-
-        if (currentRight != null) {
-            Style styleRight = getStyleAt(mouseX, mouseY, x + HALF_WIDTH + INNER_MARGIN, rightTextStartY, rightBodyLines);
-            if (handleStyleClick(styleRight)) return true;
-        }
-
-        return super.mouseClicked(event, doubleClick);
-    }
-
-    private boolean handleStyleClick(@Nullable Style style) {
-        if (style != null && style.getClickEvent() != null) {
-            ClickEvent clickEvent = style.getClickEvent();
-            if (clickEvent instanceof ClickEvent.ChangePage(int targetPage)) {
-                if (targetPage >= 0 && targetPage < originalToPaginatedIndex.length) {
-                    int realPage = originalToPaginatedIndex[targetPage];
-
-                    this.spreadIndex = (realPage % 2 == 0) ? realPage : realPage - 1;
-                    updateCurrentSpread();
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
     private boolean isInside(double mouseX, double mouseY, int rx, int ry, int rw, int rh) {
         return mouseX >= rx && mouseX < rx + rw && mouseY >= ry && mouseY < ry + rh;
     }
@@ -395,20 +541,6 @@ public class CustomBookScreen extends Screen {
                 cursorY += LINE_HEIGHT;
             }
         }
-    }
-
-    private static FormattedCharSequence getSequence(@Nullable Style hoveredStyle, FormattedCharSequence line) {
-        FormattedCharSequence finalLine = line;
-
-        if (hoveredStyle != null && hoveredStyle.getClickEvent() instanceof ClickEvent.ChangePage(int page2)) {
-            finalLine = (sink) -> line.accept((index, style, codePoint) -> {
-                if (style.getClickEvent() instanceof ClickEvent.ChangePage(int page1) && page1 == page2) {
-                    return sink.accept(index, style.withUnderlined(true), codePoint);
-                }
-                return sink.accept(index, style, codePoint);
-            });
-        }
-        return finalLine;
     }
 
     private void drawRecipeLayout(GuiGraphicsExtractor graphics, BookPage.Recipe recipe, int pageX, int startY) {
@@ -705,8 +837,22 @@ public class CustomBookScreen extends Screen {
         return null;
     }
 
+    private static FormattedCharSequence getSequence(@Nullable Style hoveredStyle, FormattedCharSequence line) {
+        FormattedCharSequence finalLine = line;
+
+        if (hoveredStyle != null && hoveredStyle.getClickEvent() instanceof ClickEvent.ChangePage(int page2)) {
+            finalLine = (sink) -> line.accept((index, style, codePoint) -> {
+                if (style.getClickEvent() instanceof ClickEvent.ChangePage(int page1) && page1 == page2)
+                    return sink.accept(index, style.withUnderlined(true), codePoint);
+                return sink.accept(index, style, codePoint);
+            });
+        }
+        return finalLine;
+    }
+
     @Override
     public boolean isPauseScreen() {
         return false;
     }
 }
+
