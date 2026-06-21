@@ -55,19 +55,27 @@ public sealed interface BookPage permits
     ) implements BookPage {}
 
     // --- Sous-Records utilitaires (Images et Recettes) ---
-    record Image(@Nullable Identifier texture, @Nullable ItemStack itemStack, int width, int height, @Nullable String caption) {
+    record Image(@Nullable Identifier texture, @Nullable ItemStack itemStack, int width, int height, @Nullable String caption, int bgColor) {
         public Image {
             if ((texture == null) == (itemStack == null)) {
                 throw new IllegalArgumentException("Image doit avoir soit texture, soit itemStack — pas les deux, pas aucun");
             }
         }
 
-        public static Image fromTexture(Identifier texture, int width, int height, @Nullable String caption) {
-            return new Image(texture, null, width, height, caption);
+        public static Image fromTexture(Identifier texture, int width, int height, @Nullable String caption, int bgColor) {
+            return new Image(texture, null, width, height, caption, bgColor);
         }
 
-        public static Image fromItem(ItemStack stack, @Nullable String caption) {
-            return new Image(null, stack, 64, 64, caption);
+        public static Image fromTexture(Identifier texture, int width, int height) {
+            return new Image(texture, null, width, height, null, 0x00000000);
+        }
+
+        public static Image fromItem(ItemStack stack, @Nullable String caption, int bgColor) {
+            return new Image(null, stack, 64, 64, caption, bgColor);
+        }
+
+        public static Image fromItem(ItemStack stack) {
+            return new Image(null, stack, 64, 64, null, 0x00000000);
         }
     }
 

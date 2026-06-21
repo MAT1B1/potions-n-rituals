@@ -8,6 +8,7 @@ import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
@@ -43,7 +44,7 @@ public class CustomBookScreen extends Screen {
     private static final int CAPTION_COLOR = 0xFF3A3A3A;
 
     private static final int TITLE_GAP = 6;
-    private static final int IMAGE_GAP = 4;
+    private static final int IMAGE_GAP = 8;
     private static final int CAPTION_GAP = 2;
     private static final int IMAGE_BLOCK_GAP = 6;
     private static final int MAX_IMAGE_HEIGHT = 50;
@@ -58,7 +59,9 @@ public class CustomBookScreen extends Screen {
     private static final int ARROW_TEX_HEIGHT = 13;
     private static final int ARROW_BOTTOM_OFFSET = 25;
 
-    private final List<BookPage> pages;
+    private List<BookPage> paginatedPages;
+    private final List<BookPage> originalPages;
+    private final int[] originalToPaginatedIndex;
     private int spreadIndex;
 
     private BookPage currentLeft;
@@ -75,19 +78,100 @@ public class CustomBookScreen extends Screen {
         if (pages == null || pages.isEmpty()) {
             throw new IllegalArgumentException("pages ne peut pas être vide");
         }
-        this.pages = List.copyOf(pages);
+        this.originalPages = List.copyOf(pages);
+        this.originalToPaginatedIndex = new int[this.originalPages.size()]; // <-- AJOUTEZ CETTE LIGNE
         this.spreadIndex = 0;
     }
 
     @Override
     protected void init() {
         super.init();
+        this.paginatedPages = computePagination();
         updateCurrentSpread();
     }
 
+    private List<BookPage> computePagination() {
+        List<BookPage> result = new java.util.ArrayList<>();
+        int maxTotalHeight = BG_HEIGHT - (TEXT_MARGIN_Y * 2) - 10;
+
+        for (int i = 0; i < this.originalPages.size(); i++) {
+            BookPage originalPage = this.originalPages.get(i);
+
+            // On enregistre ici l'index de la page physique où commence cette page originale
+            this.originalToPaginatedIndex[i] = result.size();
+
+            Component text = getPageBodyText(originalPage);
+            List<FormattedCharSequence> allLines = text != null ? this.font.split(text, PAGE_CONTENT_WIDTH) : List.of();
+
+            int startY = TEXT_MARGIN_Y;
+            int textStartY = calculateTextStartY(originalPage, startY);
+            int occupiedHeight = textStartY - startY;
+            int availableHeightForFirstPage = maxTotalHeight - occupiedHeight;
+
+            int linesForFirstPage = Math.max(0, availableHeightForFirstPage / LINE_HEIGHT);
+
+            if (allLines.size() <= linesForFirstPage) {
+                result.add(originalPage);
+            } else {
+                List<FormattedCharSequence> firstPageLines = allLines.subList(0, linesForFirstPage);
+                List<FormattedCharSequence> remainingLines = allLines.subList(linesForFirstPage, allLines.size());
+
+                result.add(reconstructPageWithLines(originalPage, firstPageLines));
+
+                int linesPerPageLater = maxTotalHeight / LINE_HEIGHT;
+
+                int index = 0;
+                while (index < remainingLines.size()) {
+                    int end = Math.min(index + linesPerPageLater, remainingLines.size());
+                    List<FormattedCharSequence> subLines = remainingLines.subList(index, end);
+
+                    Component remainingTextComponent = linesToComponent(subLines);
+
+                    result.add(new BookPage.TextPage(null, null, remainingTextComponent));
+
+                    index = end;
+                }
+            }
+        }
+        return result;
+    }
+
+    private @Nullable Component getPageBodyText(BookPage page) {
+        return switch (page) {
+            case BookPage.TextPage t -> t.bodyText();
+            case BookPage.ImagePage i -> i.bodyText();
+            case BookPage.RecipePage r -> r.bodyText();
+            case BookPage.EmptyPage _ -> null;
+        };
+    }
+
+    private BookPage reconstructPageWithLines(BookPage page, List<FormattedCharSequence> lines) {
+        Component newText = linesToComponent(lines);
+        return switch (page) {
+            case BookPage.TextPage t -> new BookPage.TextPage(t.id(), t.title(), newText);
+            case BookPage.ImagePage i -> new BookPage.ImagePage(i.id(), i.title(), i.images(), newText);
+            case BookPage.RecipePage r -> new BookPage.RecipePage(r.id(), r.title(), r.recipe(), newText);
+            case BookPage.EmptyPage e -> e;
+        };
+    }
+
+    private Component linesToComponent(List<FormattedCharSequence> lines) {
+        MutableComponent base = Component.empty();
+        for (int i = 0; i < lines.size(); i++) {
+            lines.get(i).accept((_, style, codePoint) -> {
+                base.append(Component.literal(new String(Character.toChars(codePoint))).withStyle(style));
+                return true;
+            });
+            if (i < lines.size() - 1) {
+                base.append("\n");
+            }
+        }
+        return base;
+    }
+
     private void updateCurrentSpread() {
-        this.currentLeft = pages.get(spreadIndex);
-        this.currentRight = (spreadIndex + 1 < pages.size()) ? pages.get(spreadIndex + 1) : null;
+        this.currentLeft = paginatedPages.get(spreadIndex);
+        this.currentRight = (spreadIndex + 1 < paginatedPages.size()) ? paginatedPages.get(spreadIndex + 1) : null;
 
         this.leftBodyLines = wrapBody(currentLeft);
         this.rightBodyLines = wrapBody(currentRight);
@@ -107,16 +191,12 @@ public class CustomBookScreen extends Screen {
         return this.font.split(text, PAGE_CONTENT_WIDTH);
     }
 
-    private FormattedCharSequence toLine(Component component) {
-        return this.font.split(component, Integer.MAX_VALUE).getFirst();
-    }
-
     private boolean hasPrevSpread() {
         return spreadIndex - 2 >= 0;
     }
 
     private boolean hasNextSpread() {
-        return spreadIndex + 2 < pages.size();
+        return spreadIndex + 2 < paginatedPages.size();
     }
 
     private void goPrev() {
@@ -160,8 +240,11 @@ public class CustomBookScreen extends Screen {
     private int calculateTextStartY(@Nullable BookPage page, int startY) {
         if (page == null) return startY;
         int cursorY = startY;
-        if (page.title() != null) {
-            cursorY += LINE_HEIGHT + TITLE_GAP;
+
+        Component title = page.title();
+        if (title != null) {
+            int titleLines = this.font.split(title, PAGE_CONTENT_WIDTH).size();
+            cursorY += (titleLines * LINE_HEIGHT) + TITLE_GAP;
         }
 
         cursorY = switch (page) {
@@ -197,9 +280,6 @@ public class CustomBookScreen extends Screen {
             float ratio = (float) img.height() / img.width();
             int w = Math.min(slotWidth, img.width());
             int h = Math.min(MAX_IMAGE_HEIGHT, Math.round(w * ratio));
-            if (h == MAX_IMAGE_HEIGHT) {
-                w = Math.round(h / ratio);
-            }
             maxDrawHeight = Math.max(maxDrawHeight, h);
 
             String caption = img.caption();
@@ -264,8 +344,10 @@ public class CustomBookScreen extends Screen {
         if (style != null && style.getClickEvent() != null) {
             ClickEvent clickEvent = style.getClickEvent();
             if (clickEvent instanceof ClickEvent.ChangePage(int targetPage)) {
-                if (targetPage >= 0 && targetPage < pages.size()) {
-                    this.spreadIndex = (targetPage % 2 == 0) ? targetPage : targetPage - 1;
+                if (targetPage >= 0 && targetPage < originalToPaginatedIndex.length) {
+                    int realPage = originalToPaginatedIndex[targetPage];
+
+                    this.spreadIndex = (realPage % 2 == 0) ? realPage : realPage - 1;
                     updateCurrentSpread();
                     return true;
                 }
@@ -283,19 +365,23 @@ public class CustomBookScreen extends Screen {
 
         int cursorY = startY;
 
-        if (page.title() != null) {
-            graphics.text(this.font, toLine(page.title()), pageX, cursorY, TITLE_COLOR, false);
-            cursorY += LINE_HEIGHT + TITLE_GAP;
+        Component title = page.title();
+        if (title != null) {
+            List<FormattedCharSequence> titleLines = this.font.split(title, PAGE_CONTENT_WIDTH);
+            for (FormattedCharSequence titleLine : titleLines) {
+                graphics.text(this.font, titleLine, pageX, cursorY, TITLE_COLOR, false);
+                cursorY += LINE_HEIGHT;
+            }
+            cursorY += TITLE_GAP;
         }
 
         switch (page) {
             case BookPage.ImagePage imgPage -> {
-                if (!imgPage.images().isEmpty()) {
+                if (!imgPage.images().isEmpty())
                     drawImages(graphics, imgPage.images(), pageX, cursorY);
-                }
             }
             case BookPage.RecipePage recPage ->
-                drawRecipeLayout(graphics, recPage.recipe(), pageX, cursorY);
+                    drawRecipeLayout(graphics, recPage.recipe(), pageX, cursorY);
             default -> {}
         }
 
@@ -543,7 +629,7 @@ public class CustomBookScreen extends Screen {
             }
         }
 
-        int cursorX = pageX;
+        int cursorX = pageX - (count - 1) * IMAGE_GAP / 2;
         int captionStartY = startY + maxDrawHeight + CAPTION_GAP;
 
         for (int i = 0; i < count; i++) {
@@ -552,6 +638,12 @@ public class CustomBookScreen extends Screen {
             int h = drawH[i];
             int imgX = cursorX + (slotWidth - w) / 2;
             int imgY = startY + (maxDrawHeight - h);
+
+            if ((img.bgColor() & 0xFF000000) != 0) {
+                graphics.fill(imgX - 1, imgY, imgX + w + 1, imgY + h, img.bgColor());
+                graphics.fill(imgX, imgY - 1, imgX + w, imgY, img.bgColor());
+                graphics.fill(imgX, imgY + h, imgX + w, imgY + h + 1, img.bgColor());
+            }
 
             if (img.itemStack() != null) {
                 float scaleX = w / 16f;

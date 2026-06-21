@@ -1,10 +1,10 @@
 package com.matibi.potionsnrituals.util;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.book.BookPage;
+import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.potion.PotionIconHelper;
 import com.mojang.serialization.JsonOps;
 import net.fabricmc.api.EnvType;
@@ -14,25 +14,31 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.context.ContextMap;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.*;
 
 import java.io.Reader;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public class BookUtils {
     public static String getIdString(Holder<Potion> potion) {
@@ -52,9 +58,19 @@ public class BookUtils {
         return res.substring(1, res.length() - 1);
     }
 
+    public static String getEffectName(Holder<Potion> potion) {
+        List<MobEffectInstance> effects = potion.value().getEffects();
+        if (effects.isEmpty()) {
+            return "Unknown";
+        }
+        MobEffect effect = effects.getFirst().getEffect().value();
+        return Component.translatable(effect.getDescriptionId()).getString();
+    }
+
     public static Identifier getEffectTexture(Holder<Potion> potion) {
         Identifier id = PotionIconHelper.getEffectSpriteId(getItemStack(potion));
-        return id == null ? null : id.withPrefix("textures/").withSuffix(".png");
+        return id == null ? ModUtils.id("textures/mob_effect/" + getIdString(potion) + ".png")
+                : id.withPrefix("textures/").withSuffix(".png");
     }
 
     @Environment(EnvType.CLIENT)
@@ -69,14 +85,28 @@ public class BookUtils {
     @Environment(EnvType.CLIENT)
     public static BookPage createPotionPage(Holder<Potion> potion, String body) {
         return new BookPage.ImagePage(
-                BookUtils.getIdString(potion),
-                Component.translatable("§l" + BookUtils.getName(potion)),
+               getIdString(potion),
+                Component.translatable("§l" + getName(potion)),
                 List.of(
-                        BookPage.Image.fromItem(BookUtils.getItemStack(potion), null),
-                        BookPage.Image.fromTexture(BookUtils.getEffectTexture(potion), 64, 64, null)
+                        BookPage.Image.fromItem(getItemStack(potion)),
+                        BookPage.Image.fromTexture(getEffectTexture(potion), 64, 64, null, 0xFFE6D8BA)
                 ),
                 body != null ? Component.translatable(body) : null
         );
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void createPotionChapter(BookStructure.Chapter sub, Holder<Potion> potion,
+                                           String resume, String explanation, String brew) {
+        String id = getIdString(potion);
+        sub .page(createPotionPage(potion, resume))
+            .page(createStandardPage(id + "_explanation", "How it works", explanation))
+            .page(createBrewingPage(
+                    id + "_brewing",
+                    "How to obtain",
+                    potion,
+                    brew))
+            .page(new BookPage.EmptyPage());
     }
 
     @Environment(EnvType.CLIENT)
@@ -170,57 +200,60 @@ public class BookUtils {
     }
 
     @Environment(EnvType.CLIENT)
-    public static BookPage createBrewingPage(String pageId, String title, Holder<Potion> outputPotion, String description) {
+    public static BookPage createBrewingPage(String pageId, String title, Holder<Potion> potion, String description) {
         Minecraft mc = Minecraft.getInstance();
         ClientLevel level = mc.level;
         if (level == null) return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
 
-        ItemStack itemStack = getItemStack(outputPotion);
-        Item item = itemStack.getItem();
-        Optional<ResourceKey<Item>> optid = item.getDefaultInstance().typeHolder().unwrapKey();
-        if (optid.isEmpty()) return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
-
-        Identifier recipeId = optid.get().identifier();
         ItemStack ingredient = ItemStack.EMPTY;
-        ItemStack inputPotion = ItemStack.EMPTY;
+        ItemStack inputPotion = new ItemStack(Items.POTION);
+        inputPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(Potions.WATER));
+
+        ItemStack outputPotion = new ItemStack(Items.POTION);
+        outputPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(potion));
+
+        PotionBrewing brewingRegistry = level.potionBrewing();
 
         try {
-            Path generatedPath = FabricLoader.getInstance().getGameDir()
-                    .getParent()
-                    .resolve("src/main/generated/data")
-                    .resolve(recipeId.getNamespace())
-                    .resolve("recipe")
-                    .resolve(recipeId.getPath() + ".json");
+            Field field = PotionBrewing.class.getDeclaredField("potionMixes");
+            field.setAccessible(true);
+            List<?> mixes = (List<?>) field.get(brewingRegistry);
 
-            if (Files.exists(generatedPath)) {
-                try (Reader reader = Files.newBufferedReader(generatedPath)) {
-                    JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
+            for (Object mixObj : mixes) {
+                Method toMethod = mixObj.getClass().getDeclaredMethod("to");
+                toMethod.setAccessible(true);
+                Holder<?> toHolder = (Holder<?>) toMethod.invoke(mixObj);
 
-                    if (json.has("ingredient")) {
-                        JsonObject ingObj = json.getAsJsonObject("ingredient");
-                        if (ingObj.has("item")) {
-                            Item ingItem = BuiltInRegistries.ITEM.get(Identifier.parse(ingObj.get("item").getAsString()))
-                                    .map(Holder.Reference::value)
-                                    .orElse(Items.AIR);
-                            ingredient = new ItemStack(ingItem);
-                        }
-                    }
+                if (toHolder.equals(potion)) {
+                    Method fromMethod = mixObj.getClass().getDeclaredMethod("from");
+                    fromMethod.setAccessible(true);
 
-                    if (json.has("input")) {
-                        JsonObject inputObj = json.getAsJsonObject("input");
-                        if (inputObj.has("item")) {
-                            Item inputItem = BuiltInRegistries.ITEM.get(Identifier.parse(inputObj.get("item").getAsString()))
-                                    .map(Holder.Reference::value)
-                                    .orElse(Items.AIR);
-                            inputPotion = new ItemStack(inputItem);
-                        }
-                    }
+                    @SuppressWarnings("unchecked")
+                    Holder<Potion> fromHolder = (Holder<Potion>) (Holder) fromMethod.invoke(mixObj);
+
+                    inputPotion = new ItemStack(Items.POTION);
+                    inputPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(fromHolder));
+
+                    Method ingredientMethod = mixObj.getClass().getDeclaredMethod("ingredient");
+                    ingredientMethod.setAccessible(true);
+                    Ingredient ing = (Ingredient) ingredientMethod.invoke(mixObj);
+
+                    Method itemsMethod = Ingredient.class.getDeclaredMethod("items");
+                    itemsMethod.setAccessible(true);
+
+                    @SuppressWarnings("unchecked")
+                    Stream<Holder<Item>> itemStream = (Stream<Holder<Item>>) itemsMethod.invoke(ing);
+
+                    Optional<Holder<Item>> firstItem = itemStream.findFirst();
+                    if (firstItem.isPresent())
+                        ingredient = new ItemStack(firstItem.get().value());
+                    break;
                 }
             }
         } catch (Exception e) {
-            PotionsNRituals.LOGGER.warn("[POTIONS] Erreur lors du parsing manuel du JSON de brewing pour {}", recipeId);
+            PotionsNRituals.LOGGER.error("[POTIONS] Impossible d'accéder aux recettes d'alambic via Reflection", e);
         }
 
-        return new BookPage.RecipePage(pageId, Component.literal(title), BookPage.Recipe.brewing(ingredient, inputPotion, itemStack), Component.literal(description));
+        return new BookPage.RecipePage(pageId, Component.literal(title), BookPage.Recipe.brewing(ingredient, inputPotion, outputPotion), Component.literal(description));
     }
 }

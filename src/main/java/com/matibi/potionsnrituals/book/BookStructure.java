@@ -76,10 +76,8 @@ public class BookStructure {
     }
 
     private void flattenChapter(Chapter chapter, boolean isRoot) {
-        if (!chapter.pages.isEmpty()) {
-            String prefix = isRoot ? "chapter_" : "subchapter_";
-            anchorToPageIndex.put(prefix + chapter.title, flatPages.size());
-        }
+        String prefix = isRoot ? "chapter_" : "subchapter_";
+        anchorToPageIndex.put(prefix + chapter.title, flatPages.size());
 
         for (BookPage page : chapter.pages) {
             int index = flatPages.size();
@@ -100,14 +98,14 @@ public class BookStructure {
             if (element instanceof Chapter chat) {
                 Integer chatIndex = anchorToPageIndex.get("chapter_" + chat.title);
                 if (chatIndex != null) {
-                    text.append(Component.translatable("§3" + chat.title + "§r\n")
+                    text.append(Component.translatable("§4" + chat.title + "§r\n")
                             .withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(chatIndex))));
                 }
 
                 for (Chapter subChat : chat.subChapters) {
                     Integer subIndex = anchorToPageIndex.get("subchapter_" + subChat.title);
                     if (subIndex != null) {
-                        text.append(Component.translatable("  §7- " + subChat.title + "§r\n")
+                        text.append(Component.translatable("§8- " + subChat.title + "§r\n")
                                 .withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(subIndex))));
                     }
                 }
@@ -133,10 +131,11 @@ public class BookStructure {
             return this;
         }
 
-        public void subChapter(String title, Consumer<Chapter> configuration) {
+        public Chapter subChapter(String title, Consumer<Chapter> configuration) {
             Chapter sub = new Chapter(title);
             configuration.accept(sub);
             this.subChapters.add(sub);
+            return this;
         }
     }
 }

@@ -14,10 +14,40 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.function.Supplier;
 
-public class CustomBookItem extends Item {
+// ==========================================
+// CODES DE COULEUR MINECRAFT (SECTION SIGN §)
+// ==========================================
+// §0 : Noir
+// §1 : Bleu foncé
+// §2 : Vert foncé
+// §3 : Turquoise (Cyan)
+// §4 : Rouge foncé
+// §5 : Violet
+// §6 : Or (Orange)
+// §7 : Gris clair
+// §8 : Gris foncé
+// §9 : Bleu clair
+// §a : Vert clair
+// §b : Aqua
+// §c : Rouge clair
+// §d : Rose
+// §e : Jaune
+// §f : Blanc
+
+// ==========================================
+// CODES DE FORMAT / STYLE MINECRAFT
+// ==========================================
+// §k : Aléatoire / Obscurci (Texte qui défile)
+// §l : Gras
+// §m : Barré
+// §n : Souligné
+// §o : Italique
+// §r : Reset (Réinitialise toutes les couleurs et styles précédents)
+
+public class CustomBook extends Item {
     private final Supplier<BookStructure> bookSupplier;
 
-    public CustomBookItem(Properties properties, Supplier<BookStructure> bookSupplier) {
+    public CustomBook(Properties properties, Supplier<BookStructure> bookSupplier) {
         super(properties);
         this.bookSupplier = bookSupplier;
     }

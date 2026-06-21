@@ -1,12 +1,10 @@
 package com.matibi.potionsnrituals.item;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
-import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.alchemicalStone.AlchemicalStoneItem;
 import com.matibi.potionsnrituals.item.syringe.SyringeItem;
-import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.util.BookUtils;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -62,43 +60,21 @@ public class ModItems {
                     .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
                 )
             ),
-            ALCHEMICAL_TOME = register("alchemical_tome",
-                new CustomBookItem(props("alchemical_tome").stacksTo(1), () ->
-                    new BookStructure(Component.translatable("item.potions-n-rituals.alchemical_tome"))
-                        .tableOfContents("Sommaire Alchimique")
+            BASIC_GUIDE = register("alchemy_guide_basic",
+                    new CustomBook(props("alchemy_guide_basic").stacksTo(1), () ->
+                            new BookStructure(Component.translatable("item.potions-n-rituals.alchemy_guide_basic"))
+                                    .tableOfContents("Sommaire")
 
-                        .page(new BookPage.EmptyPage())
-                        .page(BookUtils.createCraftingPage(
-                                "materia_prima_craft",
-                                "Materia Prima",
-                                ModItems.MATERIA_PRIMA,
-                                "Obtenue automatiquement depuis les registres de recettes du jeu."
-                        ))
-                        .page(BookUtils.createFurnacePage(
-                                "mercury_ball_smelt",
-                                "Materia Prima",
-                                ModItems.MERCURY_BALL,
-                                "Obtenue automatiquement depuis les registres de recettes du jeu."
-                        ))
-                        .page(BookUtils.createBrewingPage(
-                                "adhesion_brewing",
-                                "Brewing",
-                                ModPotions.ADHESION,
-                                "Obtenue automatiquement depuis les registres de recettes du jeu."
-                        ))
-                        .chapter("Alchimie", c -> c
-                            .page(BookUtils.createPotionPage(ModPotions.ADHESION, "The §4Great Work§r of Alchemy begins with §5Nigredo§r."))
-
-                            .subChapter("Avancée", sub -> sub
-                                .page(BookUtils.createStandardPage("albedo_page", "§oAlbedo", "Reduce matter to its primordial form — Materia Prima — through chaos and decay."))
-                                .page(BookUtils.createStandardPage("citrinitas_page", "§nCitrinitas", "Channel Nether energies to §kforge§r talismans and §martifacts§r."))
-                            )
-                        )
-
-                        .chapter("Autre Onglet", c -> c
-                            .page(BookUtils.createStandardPage("autre", "Titre", "Contenu..."))
-                        ))
-            );
+                                    .chapter("Creation de la matière première", c -> c
+                                            .page(BookUtils.createFurnacePage("sulfur", "The trinity", ModItems.SULFUR_BALL, ""))
+                                            .page(BookUtils.createFurnacePage("mercury", "The trinity", ModItems.MERCURY_BALL, ""))
+                                            .page(BookUtils.createFurnacePage("salt", "The trinity", ModItems.SALT, ""))
+                                            .page(BookUtils.createCraftingPage("materia_prima", "How to Obtain",
+                                                    ModItems.MATERIA_PRIMA, ""))
+                                    )
+                    )
+            ),
+            NIGREDO_GUIDE = register("alchemy_guide_nigredo", new NigredoBook());
 
     private static Item registerSimple(String id) {
         return register(id, new Item(props(id)));
@@ -158,7 +134,7 @@ public class ModItems {
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)
                 .register(output ->
-                        output.insertAfter(Items.BOOK, ModItems.ALCHEMICAL_TOME));
+                        output.insertAfter(Items.BOOK, ModItems.BASIC_GUIDE));
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.INGREDIENTS)
                 .register(output -> {

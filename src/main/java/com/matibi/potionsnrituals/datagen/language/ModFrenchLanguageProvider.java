@@ -108,7 +108,8 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.sulfur_ball", "Boule de Sulfure");
         t.add("item.potions-n-rituals.mercury_ball", "Boule de Mercure");
         t.add("item.potions-n-rituals.salt", "Sel");
-        t.add("item.potions-n-rituals.alchemical_tome", "Tome Alchimique");
+        t.add("item.potions-n-rituals.alchemy_guide_basic", "Les Fondements de l'Alchimie");
+        t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Chroniques du Chaos");
         t.add("item.potions-n-rituals.alchemical_stone", "Pierre alchimique");
         t.add("item.potions-n-rituals.alchemical_stone.effect.empty", "Pierre alchimique");
         t.add("item.potions-n-rituals.alchemical_stone.effect.mixed", "Pierre alchimique multi-effets");

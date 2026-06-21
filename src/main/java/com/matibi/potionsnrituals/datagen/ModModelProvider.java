@@ -37,7 +37,8 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.SULFUR_BALL,
                 ModItems.MERCURY_BALL,
                 ModItems.SALT,
-                ModItems.ALCHEMICAL_TOME
+                ModItems.BASIC_GUIDE,
+                ModItems.NIGREDO_GUIDE
         );
 
         items.forEach(item -> gen.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
