@@ -61,14 +61,23 @@ public class CustomBookScreen extends Screen {
     private static final int ARROW_TEX_HEIGHT = 13;
     private static final int ARROW_BOTTOM_OFFSET = 25;
 
-    // Constantes et textures pour les Marque-pages (Bookmarks)
     private static final Identifier BOOKMARK_TEXTURE = ModUtils.id("textures/gui/bookmark.png");
     private static final int BM_TEX_BORDER_1 = 24;
     private static final int BM_TEX_BORDER_2 = 73;
 
-   private final List<Integer> personalBookmarks = new ArrayList<>();
-   private final float[] bookmarkAnimations = new float[6];
-   private static final int[] PERSO_COLORS = { 0xFF5555FF, 0xFFAA00AA, 0xFFFFAA00, 0xFF55FFFF }; // Bleu, Violet, Or, Aqua
+    private record PersonalBookmark(int pageIndex, int color) {}
+
+    private final List<PersonalBookmark> personalBookmarks = new ArrayList<>();
+    private final float[] bookmarkAnimations = new float[6];
+    private static final int[] PERSO_COLORS = { 0xFF5555FF, 0xFFAA00AA, 0xFFFFAA00, 0xFF55FFFF }; // Bleu, Violet, Or, Aqua
+
+    private int pickAvailableColor() {
+        for (int color : PERSO_COLORS) {
+            boolean used = personalBookmarks.stream().anyMatch(bm -> bm.color() == color);
+            if (!used) return color;
+        }
+        return PERSO_COLORS[0]; // ne devrait jamais arriver (max = PERSO_COLORS.length)
+    }
 
     private List<BookPage> paginatedPages;
     private final List<BookPage> originalPages;
@@ -292,15 +301,28 @@ public class CustomBookScreen extends Screen {
         int bmStartX = x + 35;
         int bmGapX = 30;
         for (int i = 0; i < personalCount; i++) {
+            PersonalBookmark bookmark = personalBookmarks.get(i);
             int bmX = bmStartX + (i * bmGapX);
             int bmRestY = y - topVisibleRest;
             boolean hoverPerso = mouseX >= bmX && mouseX < bmX + BM_TEX_BORDER_1
                     && mouseY >= bmRestY - (int)bookmarkAnimations[2 + i]
                     && mouseY < y;
+            boolean onThisPage = bookmark.pageIndex() == this.spreadIndex;
+            boolean showDelete = hoverPerso && onThisPage;
+
             float targetExtPerso = hoverPerso ? (topVisibleHover - topVisibleRest) : 0f;
             bookmarkBookmarksAnimation(i, targetExtPerso, a);
             int finalPersoY = bmRestY - (int)bookmarkAnimations[2 + i];
-            graphics.blit(RenderPipelines.GUI_TEXTURED, BOOKMARK_TEXTURE, bmX, finalPersoY, 0, 0, BM_TEX_BORDER_1, BM_TEX_BORDER_2, BM_TEX_BORDER_1, BM_TEX_BORDER_2, PERSO_COLORS[i]);
+
+            int bmColor = showDelete ? 0xFFDD3333 : bookmark.color();
+            graphics.blit(RenderPipelines.GUI_TEXTURED, BOOKMARK_TEXTURE, bmX, finalPersoY, 0, 0, BM_TEX_BORDER_1, BM_TEX_BORDER_2, BM_TEX_BORDER_1, BM_TEX_BORDER_2, bmColor);
+
+            if (showDelete) {
+                int visibleHeight = topVisibleRest + (int) bookmarkAnimations[2 + i];
+                int crossX = bmX + (BM_TEX_BORDER_1 - this.font.width("✕")) / 2 + 1;
+                int crossY = y - (visibleHeight / 2) - 4;
+                graphics.text(this.font, "✕", crossX, crossY, 0xFFFFFFFF, false);
+            }
         }
 
         // --- 3. DESSIN DE LA TEXTURE DU LIVRE PRINCIPAL (Par-dessus) ---
@@ -374,8 +396,9 @@ public class CustomBookScreen extends Screen {
                 && mouseX < x
                 && mouseY >= addBoxY
                 && mouseY < addBoxY + BM_TEX_BORDER_1) {
-            if (personalBookmarks.size() < 4 && !personalBookmarks.contains(this.spreadIndex)) {
-                personalBookmarks.add(this.spreadIndex);
+            if (personalBookmarks.size() < PERSO_COLORS.length
+                    && personalBookmarks.stream().noneMatch(bm -> bm.pageIndex() == this.spreadIndex)) {
+                personalBookmarks.add(new PersonalBookmark(this.spreadIndex, pickAvailableColor()));
             }
             return true;
         }
@@ -392,7 +415,12 @@ public class CustomBookScreen extends Screen {
                     && mouseX < bmX + BM_TEX_BORDER_1
                     && mouseY >= bmRestY - (int)bookmarkAnimations[2 + i]
                     && mouseY < y) {
-                jumpToPage(personalBookmarks.get(i));
+                PersonalBookmark bookmark = personalBookmarks.get(i);
+                int targetPage = bookmark.pageIndex();
+                if (targetPage == this.spreadIndex)
+                    removePersonalBookmark(i);
+                else
+                    jumpToPage(targetPage);
                 return true;
             }
         }
@@ -413,6 +441,14 @@ public class CustomBookScreen extends Screen {
             this.spreadIndex = (targetPage % 2 == 0) ? targetPage : targetPage - 1;
             updateCurrentSpread();
         }
+    }
+
+    private void removePersonalBookmark(int index) {
+        personalBookmarks.remove(index);
+        for (int k = index; k < personalBookmarks.size(); k++) {
+            bookmarkAnimations[2 + k] = bookmarkAnimations[2 + k + 1];
+        }
+        bookmarkAnimations[2 + personalBookmarks.size()] = 0f;
     }
 
     private boolean handleStyleClick(@Nullable Style style) {
@@ -855,4 +891,3 @@ public class CustomBookScreen extends Screen {
         return false;
     }
 }
-
