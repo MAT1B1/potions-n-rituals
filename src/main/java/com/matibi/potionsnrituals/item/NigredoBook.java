@@ -26,7 +26,7 @@ public class NigredoBook extends CustomBook {
                                         .subChapter(BookUtils.getEffectName(ModPotions.LEVITATION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.LEVITATION,
                                                         "\n\n§5Gravity is merely a suggestion.§r",
-                                                        "The ground surrenders from beneath your feet. A sensation of absolute weightlessness—perfect for escaping the mire of the world, though a sudden end to the effect guarantees a cruel reunion with the earth.",
+                                                        "A sensation of absolute weightlessness—perfect for escaping the mire of the world, though a sudden end to the effect guarantees a cruel reunion with the earth.",
                                                         "§7Feather + Slow Falling")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.GLOWING), sub ->
