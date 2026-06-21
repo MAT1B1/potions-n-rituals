@@ -5,6 +5,9 @@ import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.codec.ByteBufCodecs;
+
+import java.util.List;
 import java.util.function.UnaryOperator;
 
 public final class ModDataComponents {
@@ -20,6 +23,11 @@ public final class ModDataComponents {
             builder -> builder
                     .persistent(BloodType.CODEC)
                     .networkSynchronized(BloodType.STREAM_CODEC));
+
+    public static final DataComponentType<List<PersonalBookmark>> PERSONAL_BOOKMARKS = register("personal_bookmarks",
+            builder -> builder
+                    .persistent(PersonalBookmark.CODEC.listOf())
+                    .networkSynchronized(PersonalBookmark.STREAM_CODEC.apply(ByteBufCodecs.list())));
 
     private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> op) {
         return Registry.register(

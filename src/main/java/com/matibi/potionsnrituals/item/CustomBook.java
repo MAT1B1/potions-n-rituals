@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 
@@ -55,16 +56,16 @@ public class CustomBook extends Item {
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
         if (level.isClientSide())
-            openScreen();
+            openScreen(player.getItemInHand(hand));
         return InteractionResult.SUCCESS;
     }
 
     @Environment(EnvType.CLIENT)
-    private void openScreen() {
+    private void openScreen(ItemStack stack) {
         BookStructure compiledBook = this.bookSupplier.get().build();
 
         Minecraft.getInstance().setScreenAndShow(
-                new CustomBookScreen(compiledBook.getBookTitle(), compiledBook.getFlatPages())
+                new CustomBookScreen(compiledBook.getBookTitle(), compiledBook.getFlatPages(), stack)
         );
     }
 }

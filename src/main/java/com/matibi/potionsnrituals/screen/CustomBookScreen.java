@@ -1,6 +1,8 @@
 package com.matibi.potionsnrituals.screen;
 
 import com.matibi.potionsnrituals.book.BookPage;
+import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
+import com.matibi.potionsnrituals.datacomponent.PersonalBookmark;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
@@ -65,9 +67,8 @@ public class CustomBookScreen extends Screen {
     private static final int BM_TEX_BORDER_1 = 24;
     private static final int BM_TEX_BORDER_2 = 73;
 
-    private record PersonalBookmark(int pageIndex, int color) {}
-
-    private final List<PersonalBookmark> personalBookmarks = new ArrayList<>();
+    private final ItemStack stack;
+    private final List<PersonalBookmark> personalBookmarks;
     private final float[] bookmarkAnimations = new float[6];
     private static final int[] PERSO_COLORS = { 0xFF5555FF, 0xFFAA00AA, 0xFFFFAA00, 0xFF55FFFF }; // Bleu, Violet, Or, Aqua
 
@@ -93,7 +94,7 @@ public class CustomBookScreen extends Screen {
     private int leftTextStartY;
     private int rightTextStartY;
 
-    public CustomBookScreen(Component title, List<BookPage> pages) {
+    public CustomBookScreen(Component title, List<BookPage> pages, ItemStack stack) {
         super(title);
         if (pages == null || pages.isEmpty()) {
             throw new IllegalArgumentException("pages ne peut pas être vide");
@@ -101,6 +102,12 @@ public class CustomBookScreen extends Screen {
         this.originalPages = List.copyOf(pages);
         this.originalToPaginatedIndex = new int[this.originalPages.size()];
         this.spreadIndex = 0;
+        this.stack = stack;
+        this.personalBookmarks = new ArrayList<>(stack.getOrDefault(ModDataComponents.PERSONAL_BOOKMARKS, List.of()));
+    }
+
+    private void syncBookmarksToStack() {
+        this.stack.set(ModDataComponents.PERSONAL_BOOKMARKS, List.copyOf(personalBookmarks));
     }
 
     @Override
@@ -399,6 +406,7 @@ public class CustomBookScreen extends Screen {
             if (personalBookmarks.size() < PERSO_COLORS.length
                     && personalBookmarks.stream().noneMatch(bm -> bm.pageIndex() == this.spreadIndex)) {
                 personalBookmarks.add(new PersonalBookmark(this.spreadIndex, pickAvailableColor()));
+                syncBookmarksToStack();
             }
             return true;
         }
@@ -449,6 +457,7 @@ public class CustomBookScreen extends Screen {
             bookmarkAnimations[2 + k] = bookmarkAnimations[2 + k + 1];
         }
         bookmarkAnimations[2 + personalBookmarks.size()] = 0f;
+        syncBookmarksToStack();
     }
 
     private boolean handleStyleClick(@Nullable Style style) {
