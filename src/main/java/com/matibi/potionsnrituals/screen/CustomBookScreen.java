@@ -11,6 +11,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.mutable.MutableFloat;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -46,6 +48,8 @@ public class CustomBookScreen extends Screen {
     private static final int IMAGE_BLOCK_GAP = 6;
     private static final int MAX_IMAGE_HEIGHT = 50;
 
+    private static final Identifier SLOT_TEXTURE = Identifier.withDefaultNamespace("textures/gui/sprites/container/slot.png");
+
     private static final Identifier ARROW_BACK_TEXTURE = Identifier.withDefaultNamespace("textures/gui/sprites/widget/page_backward.png");
     private static final Identifier ARROW_BACK_HIGHLIGHTED = Identifier.withDefaultNamespace("textures/gui/sprites/widget/page_backward_highlighted.png");
     private static final Identifier ARROW_FORWARD_TEXTURE = Identifier.withDefaultNamespace("textures/gui/sprites/widget/page_forward.png");
@@ -63,7 +67,6 @@ public class CustomBookScreen extends Screen {
     private List<FormattedCharSequence> leftBodyLines;
     private List<FormattedCharSequence> rightBodyLines;
 
-    // Calcul dynamique des positions Y pour la détection précise de la souris
     private int leftTextStartY;
     private int rightTextStartY;
 
@@ -91,10 +94,17 @@ public class CustomBookScreen extends Screen {
     }
 
     private List<FormattedCharSequence> wrapBody(@Nullable BookPage page) {
-        if (page == null || page.bodyText() == null) {
-            return List.of();
-        }
-        return this.font.split(page.bodyText(), PAGE_CONTENT_WIDTH);
+        if (page == null) return List.of();
+
+        Component text = switch (page) {
+            case BookPage.TextPage t -> t.bodyText();
+            case BookPage.ImagePage i -> i.bodyText();
+            case BookPage.RecipePage r -> r.bodyText();
+            case BookPage.EmptyPage _ -> null;
+        };
+
+        if (text == null) return List.of();
+        return this.font.split(text, PAGE_CONTENT_WIDTH);
     }
 
     private FormattedCharSequence toLine(Component component) {
@@ -153,19 +163,31 @@ public class CustomBookScreen extends Screen {
         if (page.title() != null) {
             cursorY += LINE_HEIGHT + TITLE_GAP;
         }
-        if (!page.images().isEmpty()) {
-            cursorY = simulateDrawImages(page.images()) + IMAGE_BLOCK_GAP;
-        }
+
+        cursorY = switch (page) {
+            case BookPage.ImagePage imgPage -> {
+                if (!imgPage.images().isEmpty()) {
+                    yield cursorY + simulateDrawImages(imgPage.images()) + IMAGE_BLOCK_GAP;
+                }
+                yield cursorY;
+            }
+            case BookPage.RecipePage recPage -> {
+                int recipeHeight = recPage.recipe().type() == BookPage.Recipe.Type.CRAFTING ? 56 : 40;
+                yield cursorY + recipeHeight + 12;
+            }
+            default -> cursorY;
+        };
+
         return cursorY;
     }
 
-    private int simulateDrawImages(List<BookPage.PageImage> images) {
+    private int simulateDrawImages(List<BookPage.Image> images) {
         int count = images.size();
         int slotWidth = count == 2 ? (PAGE_CONTENT_WIDTH - IMAGE_GAP) / 2 : PAGE_CONTENT_WIDTH;
         int maxDrawHeight = 0;
         int maxCaptionLineCount = 0;
 
-        for (BookPage.PageImage img : images) {
+        for (BookPage.Image img : images) {
             float ratio = (float) img.height() / img.width();
             int w = Math.min(slotWidth, img.width());
             int h = Math.min(MAX_IMAGE_HEIGHT, Math.round(w * ratio));
@@ -221,11 +243,9 @@ public class CustomBookScreen extends Screen {
             return true;
         }
 
-        // Gestion des liens au clic sur la page gauche
         Style styleLeft = getStyleAt(mouseX, mouseY, x + OUTER_MARGIN, leftTextStartY, leftBodyLines);
         if (handleStyleClick(styleLeft)) return true;
 
-        // Gestion des liens au clic sur la page droite
         if (currentRight != null) {
             Style styleRight = getStyleAt(mouseX, mouseY, x + HALF_WIDTH + INNER_MARGIN, rightTextStartY, rightBodyLines);
             if (handleStyleClick(styleRight)) return true;
@@ -262,29 +282,212 @@ public class CustomBookScreen extends Screen {
             cursorY += LINE_HEIGHT + TITLE_GAP;
         }
 
-        if (!page.images().isEmpty()) {
-            cursorY = drawImages(graphics, page.images(), pageX, cursorY) + IMAGE_BLOCK_GAP;
+        switch (page) {
+            case BookPage.ImagePage imgPage -> {
+                if (!imgPage.images().isEmpty()) {
+                    drawImages(graphics, imgPage.images(), pageX, cursorY);
+                }
+            }
+            case BookPage.RecipePage recPage ->
+                drawRecipeLayout(graphics, recPage.recipe(), pageX, cursorY);
+            default -> {}
         }
 
+        cursorY = calculateTextStartY(page, startY);
+
         for (FormattedCharSequence line : bodyLines) {
-            FormattedCharSequence finalLine = line;
+            FormattedCharSequence finalLine = getSequence(hoveredStyle, line);
 
-            // Si un style de lien vers une page est survolé, on force dynamiquement son soulignement
-            if (hoveredStyle != null && hoveredStyle.getClickEvent() instanceof ClickEvent.ChangePage(int page2)) {
-                finalLine = (sink) -> line.accept((index, style, codePoint) -> {
-                    if (style.getClickEvent() instanceof ClickEvent.ChangePage(int page1) && page1 == page2) {
-                        return sink.accept(index, style.withUnderlined(true), codePoint);
-                    }
-                    return sink.accept(index, style, codePoint);
-                });
+            if (cursorY < startY + BG_HEIGHT - TEXT_MARGIN_Y - 10) {
+                graphics.text(this.font, finalLine, pageX, cursorY, TEXT_COLOR, false);
+                cursorY += LINE_HEIGHT;
             }
-
-            graphics.text(this.font, finalLine, pageX, cursorY, TEXT_COLOR, false);
-            cursorY += LINE_HEIGHT;
         }
     }
 
-    private int drawImages(GuiGraphicsExtractor graphics, List<BookPage.PageImage> images, int pageX, int startY) {
+    private static FormattedCharSequence getSequence(@Nullable Style hoveredStyle, FormattedCharSequence line) {
+        FormattedCharSequence finalLine = line;
+
+        if (hoveredStyle != null && hoveredStyle.getClickEvent() instanceof ClickEvent.ChangePage(int page2)) {
+            finalLine = (sink) -> line.accept((index, style, codePoint) -> {
+                if (style.getClickEvent() instanceof ClickEvent.ChangePage(int page1) && page1 == page2) {
+                    return sink.accept(index, style.withUnderlined(true), codePoint);
+                }
+                return sink.accept(index, style, codePoint);
+            });
+        }
+        return finalLine;
+    }
+
+    private void drawRecipeLayout(GuiGraphicsExtractor graphics, BookPage.Recipe recipe, int pageX, int startY) {
+        int arrowColor = 0xFF8B8B8B;
+        int slotSize = 20;
+        float bigScale = 1.3f;
+        float scale = slotSize / 18.0f;
+
+        int itemOffset = Math.round(scale);
+        int gridWidth = 3 * slotSize;
+        int actualBigSize = Math.round(18 * scale * bigScale);
+        int bigItemOffset = Math.round(scale * bigScale);
+        int arrowWidth = 6;
+
+        switch (recipe.type()) {
+            case CRAFTING -> {
+                int totalWidth = gridWidth + 8 + arrowWidth + 8 + actualBigSize;
+                int startX = pageX + 4 + (PAGE_CONTENT_WIDTH - totalWidth) / 2;
+
+                for (int row = 0; row < 3; row++) {
+                    for (int col = 0; col < 3; col++) {
+                        int index = row * 3 + col;
+                        int slotX = startX + (col * slotSize);
+                        int slotY = startY + (row * slotSize);
+
+                        graphics.pose().pushMatrix();
+                        graphics.pose().translate(slotX, slotY);
+                        graphics.pose().scale(scale, scale);
+                        graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
+                        graphics.pose().popMatrix();
+
+                        if (index < recipe.inputs().size()) {
+                            ItemStack stack = recipe.inputs().get(index);
+                            if (stack != null && !stack.isEmpty()) {
+                                graphics.pose().pushMatrix();
+                                graphics.pose().translate(slotX + itemOffset, slotY + itemOffset);
+                                graphics.pose().scale(scale, scale);
+                                graphics.item(stack, 0, 0);
+                                graphics.pose().popMatrix();
+                            }
+                        }
+                    }
+                }
+
+                int arrowX = startX + gridWidth + 8;
+                int arrowY = startY + slotSize + (slotSize / 2) - 5;
+
+                graphics.text(this.font, "➔", arrowX, arrowY, arrowColor, false);
+
+                int outputX = arrowX + 14;
+                int outputY = startY + slotSize - ((actualBigSize - slotSize) / 2);
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(outputX, outputY);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
+                graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
+                graphics.pose().popMatrix();
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(outputX + bigItemOffset, outputY + bigItemOffset);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
+                graphics.item(recipe.output(), 0, 0);
+                graphics.pose().popMatrix();
+            }
+            case FURNACE -> {
+                int totalWidth = slotSize + arrowWidth + 8 + actualBigSize + 8 + arrowWidth + slotSize;
+                int startX = pageX + (PAGE_CONTENT_WIDTH - totalWidth) / 2 - 7;
+                int centerY = startY + 20;
+                int slotY = centerY - (slotSize / 2);
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(startX, slotY);
+                graphics.pose().scale(scale, scale);
+                graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
+                graphics.pose().popMatrix();
+
+                if (!recipe.inputs().isEmpty() && !recipe.inputs().getFirst().isEmpty()) {
+                    graphics.pose().pushMatrix();
+                    graphics.pose().translate(startX + itemOffset, slotY + itemOffset);
+                    graphics.pose().scale(scale, scale);
+                    graphics.item(recipe.inputs().getFirst(), 0, 0);
+                    graphics.pose().popMatrix();
+                }
+
+                int leftArrowX = startX + slotSize + 7;
+                int arrowTextY = centerY - 4;
+                graphics.text(this.font, "➔", leftArrowX, arrowTextY, arrowColor, false);
+
+                int furnaceX = leftArrowX + arrowWidth + 7;
+                int furnaceY = centerY - (actualBigSize / 2);
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(furnaceX, furnaceY);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
+                graphics.item(new ItemStack(Blocks.FURNACE), 0, 0);
+                graphics.pose().popMatrix();
+
+                int rightArrowX = furnaceX + actualBigSize + 4;
+                graphics.text(this.font, "➔", rightArrowX, arrowTextY, arrowColor, false);
+
+                int outputX = rightArrowX + arrowWidth + 9;
+                int outputY = centerY - (slotSize / 2);
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(outputX, outputY);
+                graphics.pose().scale(scale, scale);
+                graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
+                graphics.pose().popMatrix();
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(outputX + itemOffset, outputY + itemOffset);
+                graphics.pose().scale(scale, scale);
+                graphics.item(recipe.output(), 0, 0);
+                graphics.pose().popMatrix();
+            }
+            case BREWING -> {
+                int totalWidth = slotSize + arrowWidth + 8 + actualBigSize + 8 + arrowWidth + slotSize;
+                int startX = pageX + (PAGE_CONTENT_WIDTH - totalWidth) / 2;
+                int centerY = startY + 20;
+
+                int slotY = centerY - (slotSize / 2);
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(startX, slotY);
+                graphics.pose().scale(scale, scale);
+                graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
+                graphics.pose().popMatrix();
+
+                if (!recipe.inputs().isEmpty() && !recipe.inputs().getFirst().isEmpty()) {
+                    graphics.pose().pushMatrix();
+                    graphics.pose().translate(startX + itemOffset, slotY + itemOffset);
+                    graphics.pose().scale(scale, scale);
+                    graphics.item(recipe.inputs().getFirst(), 0, 0);
+                    graphics.pose().popMatrix();
+                }
+
+                int leftArrowX = startX + slotSize + 2;
+                int arrowTextY = centerY - 4;
+                graphics.text(this.font, "➔", leftArrowX, arrowTextY, arrowColor, false);
+
+                int brewingX = leftArrowX + arrowWidth + 8;
+                int brewingY = centerY - (actualBigSize / 2);
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(brewingX, brewingY);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
+                graphics.item(new ItemStack(Blocks.BREWING_STAND), 0, 0);
+                graphics.pose().popMatrix();
+
+                int rightArrowX = brewingX + actualBigSize + 5;
+                graphics.text(this.font, "➔", rightArrowX, arrowTextY, arrowColor, false);
+
+                int outputX = rightArrowX + arrowWidth + 2;
+                int outputY = centerY - (actualBigSize / 2);
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(outputX, outputY);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
+                graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
+                graphics.pose().popMatrix();
+
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(outputX + bigItemOffset, outputY + bigItemOffset);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
+                graphics.item(recipe.output(), 0, 0);
+                graphics.pose().popMatrix();
+            }
+        }
+    }
+
+    private void drawImages(GuiGraphicsExtractor graphics, List<BookPage.Image> images, int pageX, int startY) {
         int count = images.size();
         int slotWidth = count == 2 ? (PAGE_CONTENT_WIDTH - IMAGE_GAP) / 2 : PAGE_CONTENT_WIDTH;
 
@@ -293,7 +496,7 @@ public class CustomBookScreen extends Screen {
         int[] drawH = new int[count];
 
         for (int i = 0; i < count; i++) {
-            BookPage.PageImage img = images.get(i);
+            BookPage.Image img = images.get(i);
             float ratio = (float) img.height() / img.width();
             int w = Math.min(slotWidth, img.width());
             int h = Math.min(MAX_IMAGE_HEIGHT, Math.round(w * ratio));
@@ -322,7 +525,7 @@ public class CustomBookScreen extends Screen {
         int captionStartY = startY + maxDrawHeight + CAPTION_GAP;
 
         for (int i = 0; i < count; i++) {
-            BookPage.PageImage img = images.get(i);
+            BookPage.Image img = images.get(i);
             int w = drawW[i];
             int h = drawH[i];
             int imgX = cursorX + (slotWidth - w) / 2;
@@ -357,9 +560,6 @@ public class CustomBookScreen extends Screen {
 
             cursorX += slotWidth + IMAGE_GAP;
         }
-
-        int captionBlockHeight = maxCaptionLineCount > 0 ? CAPTION_GAP + maxCaptionLineCount * LINE_HEIGHT : 0;
-        return startY + maxDrawHeight + captionBlockHeight;
     }
 
     @Nullable

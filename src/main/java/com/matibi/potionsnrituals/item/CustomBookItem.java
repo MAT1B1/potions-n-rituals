@@ -12,25 +12,26 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 
-public class CustomBookItem extends Item {
-    private final BookStructure bookStructure;
+import java.util.function.Supplier;
 
-    public CustomBookItem(Properties properties, BookStructure structure) {
+public class CustomBookItem extends Item {
+    private final Supplier<BookStructure> bookSupplier;
+
+    public CustomBookItem(Properties properties, Supplier<BookStructure> bookSupplier) {
         super(properties);
-        bookStructure = structure;
+        this.bookSupplier = bookSupplier;
     }
 
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
-        if (level.isClientSide()) {
+        if (level.isClientSide())
             openScreen();
-        }
         return InteractionResult.SUCCESS;
     }
 
     @Environment(EnvType.CLIENT)
     private void openScreen() {
-        BookStructure compiledBook = this.bookStructure.build();
+        BookStructure compiledBook = this.bookSupplier.get().build();
 
         Minecraft.getInstance().setScreenAndShow(
                 new CustomBookScreen(compiledBook.getBookTitle(), compiledBook.getFlatPages())

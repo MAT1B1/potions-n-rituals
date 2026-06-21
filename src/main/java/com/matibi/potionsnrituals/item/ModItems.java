@@ -63,12 +63,23 @@ public class ModItems {
                 )
             ),
             ALCHEMICAL_TOME = register("alchemical_tome",
-                new CustomBookItem(props("alchemical_tome").stacksTo(1),
+                new CustomBookItem(props("alchemical_tome").stacksTo(1), () ->
                     new BookStructure(Component.translatable("item.potions-n-rituals.alchemical_tome"))
-                        .tableofcontents("Sommaire Alchimique")
+                        .tableOfContents("Sommaire Alchimique")
 
-                        .page(BookPage.Empty("blank"))
-
+                        .page(new BookPage.EmptyPage())
+                        .page(BookUtils.createCraftingPage(
+                                "materia_prima_craft",
+                                "Materia Prima",
+                                ModItems.MATERIA_PRIMA,
+                                "Obtenue automatiquement depuis les registres de recettes du jeu."
+                        ))
+                        .page(BookUtils.createFurnacePage(
+                                "mercury_ball_smelt",
+                                "Materia Prima",
+                                ModItems.MERCURY_BALL,
+                                "Obtenue automatiquement depuis les registres de recettes du jeu."
+                        ))
                         .chapter("Alchimie", c -> c
                             .page(BookUtils.createPotionPage(ModPotions.ADHESION, "The §4Great Work§r of Alchemy begins with §5Nigredo§r."))
 

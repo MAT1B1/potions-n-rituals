@@ -22,7 +22,7 @@ public class BookStructure {
         this.bookTitle = bookTitle;
     }
 
-    public BookStructure tableofcontents(String title) {
+    public BookStructure tableOfContents(String title) {
         this.hasAutoSummary = true;
         this.summaryTitle = title;
         return this;
@@ -48,7 +48,7 @@ public class BookStructure {
 
         List<Object> rootElements = new ArrayList<>();
         if (hasAutoSummary) {
-            flatPages.add(BookPage.Empty("summary_placeholder"));
+            flatPages.add(new BookPage.EmptyPage());
         }
 
         for (Consumer<List<Object>> builder : rootBuilders) {
@@ -69,7 +69,7 @@ public class BookStructure {
 
         if (hasAutoSummary) {
             Component summaryBody = generateSummaryText(rootElements);
-            flatPages.set(0, new BookPage("summary", Component.literal(summaryTitle), List.of(), summaryBody));
+            flatPages.set(0, new BookPage.TextPage("summary", Component.literal(summaryTitle), summaryBody));
         }
 
         return this;

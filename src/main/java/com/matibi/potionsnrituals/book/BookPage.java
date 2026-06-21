@@ -7,34 +7,87 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
-public record BookPage(@Nullable String id, @Nullable Component title, List<PageImage> images, @Nullable Component bodyText) {
+public sealed interface BookPage permits
+        BookPage.EmptyPage,
+        BookPage.ImagePage,
+        BookPage.RecipePage,
+        BookPage.TextPage
+{
+    @Nullable String id();
+    @Nullable Component title();
 
-    public static BookPage Empty(String id) {
-        return new BookPage(id, null, List.of(), null);
-    }
+    record TextPage(
+            @Nullable String id,
+            @Nullable Component title,
+            @Nullable Component bodyText
+    ) implements BookPage {}
 
-    public BookPage {
-        if (images == null) images = List.of();
-        if (images.size() > 2) {
-            throw new IllegalArgumentException("Max 2 images par page, reçu: " + images.size());
+    record ImagePage(
+            @Nullable String id,
+            @Nullable Component title,
+            List<Image> images,
+            @Nullable Component bodyText
+    ) implements BookPage {
+        public ImagePage {
+            if (images == null) images = List.of();
+            if (images.size() > 2) throw new IllegalArgumentException("Max 2 images par page, reçu: " + images.size());
+            images = List.copyOf(images);
         }
-        images = List.copyOf(images);
     }
 
-    public record PageImage(@Nullable Identifier texture, @Nullable ItemStack itemStack, int width, int height, @Nullable String caption) {
+    record EmptyPage(String id) implements BookPage {
 
-        public PageImage {
+        public EmptyPage() {
+            this("blank_" + System.nanoTime());
+        }
+
+        @Override
+        public @Nullable Component title() {
+            return null;
+        }
+    }
+
+    record RecipePage(
+            @Nullable String id,
+            @Nullable Component title,
+            Recipe recipe,
+            @Nullable Component bodyText
+    ) implements BookPage {}
+
+    // --- Sous-Records utilitaires (Images et Recettes) ---
+    record Image(@Nullable Identifier texture, @Nullable ItemStack itemStack, int width, int height, @Nullable String caption) {
+        public Image {
             if ((texture == null) == (itemStack == null)) {
-                throw new IllegalArgumentException("PageImage doit avoir soit texture, soit itemStack — pas les deux, pas aucun");
+                throw new IllegalArgumentException("Image doit avoir soit texture, soit itemStack — pas les deux, pas aucun");
             }
         }
 
-        public static PageImage fromTexture(Identifier texture, int width, int height, @Nullable String caption) {
-            return new PageImage(texture, null, width, height, caption);
+        public static Image fromTexture(Identifier texture, int width, int height, @Nullable String caption) {
+            return new Image(texture, null, width, height, caption);
         }
 
-        public static PageImage fromItem(ItemStack stack, @Nullable String caption) {
-            return new PageImage(null, stack, 64, 64, caption);
+        public static Image fromItem(ItemStack stack, @Nullable String caption) {
+            return new Image(null, stack, 64, 64, caption);
+        }
+    }
+
+    record Recipe(Recipe.Type type, List<ItemStack> inputs, ItemStack output) {
+        public enum Type {
+            CRAFTING,
+            FURNACE,
+            BREWING
+        }
+
+        public static Recipe crafting(List<ItemStack> inputs, ItemStack output) {
+            return new Recipe(Recipe.Type.CRAFTING, inputs, output);
+        }
+
+        public static Recipe furnace(ItemStack input, ItemStack output) {
+            return new Recipe(Recipe.Type.FURNACE, List.of(input), output);
+        }
+
+        public static Recipe brewing(ItemStack ingredient, ItemStack potionInput, ItemStack potionOutput) {
+            return new Recipe(Recipe.Type.BREWING, List.of(ingredient, potionInput), potionOutput);
         }
     }
 }
