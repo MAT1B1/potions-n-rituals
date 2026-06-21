@@ -5,9 +5,6 @@ import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.effect.custom.BerserkEffect;
 import com.matibi.potionsnrituals.effect.helper.ActiveEffectHandler;
-import com.matibi.potionsnrituals.effect.helper.ActiveEffectPayload;
-import com.matibi.potionsnrituals.effect.helper.CooldownSyncPayload;
-
 import com.matibi.potionsnrituals.effect.custom.brainwashing.DisorientMobHandler;
 import com.matibi.potionsnrituals.effect.custom.brainwashing.DisorientVillagerHandler;
 import com.matibi.potionsnrituals.effect.custom.terrain.ResurrectionEffect;
@@ -15,12 +12,10 @@ import com.matibi.potionsnrituals.group.ModItemGroups;
 import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.item.alchemicalStone.ModAlchemicalStone;
 import com.matibi.potionsnrituals.network.ModNetworking;
-import com.matibi.potionsnrituals.network.OreSensePayload;
 import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.recipe.ModRecipeSerializer;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
