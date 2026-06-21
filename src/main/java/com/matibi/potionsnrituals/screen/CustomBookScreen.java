@@ -3,18 +3,24 @@ package com.matibi.potionsnrituals.screen;
 import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.datacomponent.PersonalBookmark;
+import com.matibi.potionsnrituals.network.UpdateBookmarksPayload;
 import com.matibi.potionsnrituals.util.ModUtils;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.commons.lang3.mutable.MutableFloat;
@@ -63,21 +69,22 @@ public class CustomBookScreen extends Screen {
     private static final int ARROW_TEX_HEIGHT = 13;
     private static final int ARROW_BOTTOM_OFFSET = 25;
 
+    // Constantes et textures pour les Marque-pages (Bookmarks)
     private static final Identifier BOOKMARK_TEXTURE = ModUtils.id("textures/gui/bookmark.png");
     private static final int BM_TEX_BORDER_1 = 24;
     private static final int BM_TEX_BORDER_2 = 73;
 
     private final ItemStack stack;
+    private final InteractionHand hand;
     private final List<PersonalBookmark> personalBookmarks;
     private final float[] bookmarkAnimations = new float[6];
-    private static final int[] PERSO_COLORS = { 0xFF5555FF, 0xFFAA00AA, 0xFFFFAA00, 0xFF55FFFF }; // Bleu, Violet, Or, Aqua
 
     private int pickAvailableColor() {
-        for (int color : PERSO_COLORS) {
+        for (int color : PersonalBookmark.ALLOWED_COLORS) {
             boolean used = personalBookmarks.stream().anyMatch(bm -> bm.color() == color);
             if (!used) return color;
         }
-        return PERSO_COLORS[0]; // ne devrait jamais arriver (max = PERSO_COLORS.length)
+        return PersonalBookmark.ALLOWED_COLORS[0]; // ne devrait jamais arriver (max = PersonalBookmark.ALLOWED_COLORS.length)
     }
 
     private List<BookPage> paginatedPages;
@@ -94,7 +101,7 @@ public class CustomBookScreen extends Screen {
     private int leftTextStartY;
     private int rightTextStartY;
 
-    public CustomBookScreen(Component title, List<BookPage> pages, ItemStack stack) {
+    public CustomBookScreen(Component title, List<BookPage> pages, ItemStack stack, InteractionHand hand) {
         super(title);
         if (pages == null || pages.isEmpty()) {
             throw new IllegalArgumentException("pages ne peut pas être vide");
@@ -103,11 +110,14 @@ public class CustomBookScreen extends Screen {
         this.originalToPaginatedIndex = new int[this.originalPages.size()];
         this.spreadIndex = 0;
         this.stack = stack;
+        this.hand = hand;
         this.personalBookmarks = new ArrayList<>(stack.getOrDefault(ModDataComponents.PERSONAL_BOOKMARKS, List.of()));
     }
 
     private void syncBookmarksToStack() {
-        this.stack.set(ModDataComponents.PERSONAL_BOOKMARKS, List.copyOf(personalBookmarks));
+        List<PersonalBookmark> snapshot = List.copyOf(personalBookmarks);
+        this.stack.set(ModDataComponents.PERSONAL_BOOKMARKS, snapshot); // feedback immédiat côté client
+        ClientPlayNetworking.send(new UpdateBookmarksPayload(this.hand, snapshot)); // copie autoritaire -> sauvegardée
     }
 
     @Override
@@ -194,6 +204,8 @@ public class CustomBookScreen extends Screen {
     private void updateCurrentSpread() {
         this.currentLeft = paginatedPages.get(spreadIndex);
         this.currentRight = (spreadIndex + 1 < paginatedPages.size()) ? paginatedPages.get(spreadIndex + 1) : null;
+
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BOOK_PAGE_TURN, 1.0F));
 
         this.leftBodyLines = wrapBody(currentLeft);
         this.rightBodyLines = wrapBody(currentRight);
@@ -403,7 +415,7 @@ public class CustomBookScreen extends Screen {
                 && mouseX < x
                 && mouseY >= addBoxY
                 && mouseY < addBoxY + BM_TEX_BORDER_1) {
-            if (personalBookmarks.size() < PERSO_COLORS.length
+            if (personalBookmarks.size() < PersonalBookmark.ALLOWED_COLORS.length
                     && personalBookmarks.stream().noneMatch(bm -> bm.pageIndex() == this.spreadIndex)) {
                 personalBookmarks.add(new PersonalBookmark(this.spreadIndex, pickAvailableColor()));
                 syncBookmarksToStack();

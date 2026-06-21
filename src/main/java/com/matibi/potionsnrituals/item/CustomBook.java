@@ -56,16 +56,16 @@ public class CustomBook extends Item {
     @Override
     public @NonNull InteractionResult use(@NonNull Level level, @NonNull Player player, @NonNull InteractionHand hand) {
         if (level.isClientSide())
-            openScreen(player.getItemInHand(hand));
+            openScreen(player.getItemInHand(hand), hand);
         return InteractionResult.SUCCESS;
     }
 
     @Environment(EnvType.CLIENT)
-    private void openScreen(ItemStack stack) {
+    private void openScreen(ItemStack stack, InteractionHand hand) {
         BookStructure compiledBook = this.bookSupplier.get().build();
 
         Minecraft.getInstance().setScreenAndShow(
-                new CustomBookScreen(compiledBook.getBookTitle(), compiledBook.getFlatPages(), stack)
+                new CustomBookScreen(compiledBook.getBookTitle(), compiledBook.getFlatPages(), stack, hand)
         );
     }
 }

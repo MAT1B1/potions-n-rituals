@@ -14,6 +14,7 @@ import com.matibi.potionsnrituals.effect.custom.terrain.ResurrectionEffect;
 import com.matibi.potionsnrituals.group.ModItemGroups;
 import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.item.alchemicalStone.ModAlchemicalStone;
+import com.matibi.potionsnrituals.network.ModNetworking;
 import com.matibi.potionsnrituals.network.OreSensePayload;
 import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.recipe.ModRecipeSerializer;
@@ -31,7 +32,7 @@ public class PotionsNRituals implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Hello Fabric world!");
-		//ModNetworking.init();
+		ModNetworking.register();
 		ModPotions.register();
 		ModEffects.register();
 		ModItems.register();
@@ -53,10 +54,6 @@ public class PotionsNRituals implements ModInitializer {
 		BerserkEffect.registerDeathHandler();
 		DisorientMobHandler.register();
 		DisorientVillagerHandler.register();
-
-		PayloadTypeRegistry.serverboundPlay().register(ActiveEffectPayload.TYPE, ActiveEffectPayload.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(OreSensePayload.TYPE, OreSensePayload.CODEC);
-		PayloadTypeRegistry.clientboundPlay().register(CooldownSyncPayload.TYPE, CooldownSyncPayload.CODEC);
 
 		ActiveEffectHandler.register();
 	}
