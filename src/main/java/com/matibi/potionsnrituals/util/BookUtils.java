@@ -1,6 +1,7 @@
 package com.matibi.potionsnrituals.util;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.book.BookPage;
@@ -13,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -167,32 +169,58 @@ public class BookUtils {
         return new BookPage.RecipePage(pageId, Component.literal(title), BookPage.Recipe.furnace(input, output), Component.literal(description));
     }
 
-    /*@Environment(EnvType.CLIENT)
-    public static BookPage createBrewingPage(String pageId, String title, Item item, String description) {
+    @Environment(EnvType.CLIENT)
+    public static BookPage createBrewingPage(String pageId, String title, Holder<Potion> outputPotion, String description) {
         Minecraft mc = Minecraft.getInstance();
         ClientLevel level = mc.level;
         if (level == null) return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
 
-        Recipe<?> recipe = loadRecipeFromJson(item);
-        if (recipe == null || recipe.display().isEmpty()) {
-            return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
+        ItemStack itemStack = getItemStack(outputPotion);
+        Item item = itemStack.getItem();
+        Optional<ResourceKey<Item>> optid = item.getDefaultInstance().typeHolder().unwrapKey();
+        if (optid.isEmpty()) return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
+
+        Identifier recipeId = optid.get().identifier();
+        ItemStack ingredient = ItemStack.EMPTY;
+        ItemStack inputPotion = ItemStack.EMPTY;
+
+        try {
+            Path generatedPath = FabricLoader.getInstance().getGameDir()
+                    .getParent()
+                    .resolve("src/main/generated/data")
+                    .resolve(recipeId.getNamespace())
+                    .resolve("recipe")
+                    .resolve(recipeId.getPath() + ".json");
+
+            if (Files.exists(generatedPath)) {
+                try (Reader reader = Files.newBufferedReader(generatedPath)) {
+                    JsonObject json = JsonParser.parseReader(reader).getAsJsonObject();
+
+                    if (json.has("ingredient")) {
+                        JsonObject ingObj = json.getAsJsonObject("ingredient");
+                        if (ingObj.has("item")) {
+                            Item ingItem = BuiltInRegistries.ITEM.get(Identifier.parse(ingObj.get("item").getAsString()))
+                                    .map(Holder.Reference::value)
+                                    .orElse(Items.AIR);
+                            ingredient = new ItemStack(ingItem);
+                        }
+                    }
+
+                    if (json.has("input")) {
+                        JsonObject inputObj = json.getAsJsonObject("input");
+                        if (inputObj.has("item")) {
+                            Item inputItem = BuiltInRegistries.ITEM.get(Identifier.parse(inputObj.get("item").getAsString()))
+                                    .map(Holder.Reference::value)
+                                    .orElse(Items.AIR);
+                            inputPotion = new ItemStack(inputItem);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            PotionsNRituals.LOGGER.warn("[POTIONS] Erreur lors du parsing manuel du JSON de brewing pour {}", recipeId);
         }
 
-        RecipeDisplay display = recipe.display().getFirst();
-        if (!(display instanceof BrewingRecipeDisplay brewingDisplay)) {
-            return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
-        }
-
-        ContextMap contextMap = SlotDisplayContext.fromLevel(level);
-        ItemStack output = brewingDisplay.result().resolveForFirstStack(contextMap);
-
-        List<ItemStack> inputs = new ArrayList<>();
-        SlotDisplay ingredientSlot = brewingDisplay.ingredient();
-        inputs.add(ingredientSlot instanceof SlotDisplay.Empty ? ItemStack.EMPTY : ingredientSlot.resolveForFirstStack(contextMap));
-
-        SlotDisplay inputPotionSlot = brewingDisplay.input();
-        inputs.add(inputPotionSlot instanceof SlotDisplay.Empty ? ItemStack.EMPTY : inputPotionSlot.resolveForFirstStack(contextMap));
-
-        return new BookPage.RecipePage(pageId, Component.literal(title), BookPage.Recipe.brewing(inputs, output), Component.literal(description));
-    }*/
+        return new BookPage.RecipePage(pageId, Component.literal(title), BookPage.Recipe.brewing(ingredient, inputPotion, itemStack), Component.literal(description));
+    }
 }

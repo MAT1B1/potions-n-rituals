@@ -80,6 +80,12 @@ public class ModItems {
                                 ModItems.MERCURY_BALL,
                                 "Obtenue automatiquement depuis les registres de recettes du jeu."
                         ))
+                        .page(BookUtils.createBrewingPage(
+                                "adhesion_brewing",
+                                "Brewing",
+                                ModPotions.ADHESION,
+                                "Obtenue automatiquement depuis les registres de recettes du jeu."
+                        ))
                         .chapter("Alchimie", c -> c
                             .page(BookUtils.createPotionPage(ModPotions.ADHESION, "The §4Great Work§r of Alchemy begins with §5Nigredo§r."))
 

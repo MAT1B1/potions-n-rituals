@@ -172,7 +172,13 @@ public class CustomBookScreen extends Screen {
                 yield cursorY;
             }
             case BookPage.RecipePage recPage -> {
-                int recipeHeight = recPage.recipe().type() == BookPage.Recipe.Type.CRAFTING ? 56 : 40;
+                int recipeHeight;
+                switch (recPage.recipe().type()) {
+                    case CRAFTING -> recipeHeight = 56;
+                    case FURNACE ->  recipeHeight = 22;
+                    case BREWING -> recipeHeight = 50;
+                    default -> recipeHeight = 40;
+                }
                 yield cursorY + recipeHeight + 12;
             }
             default -> cursorY;
@@ -384,29 +390,29 @@ public class CustomBookScreen extends Screen {
             case FURNACE -> {
                 int totalWidth = slotSize + arrowWidth + 8 + actualBigSize + 8 + arrowWidth + slotSize;
                 int startX = pageX + (PAGE_CONTENT_WIDTH - totalWidth) / 2 - 7;
-                int centerY = startY + 20;
+                int centerY = startY + 10;
                 int slotY = centerY - (slotSize / 2);
 
                 graphics.pose().pushMatrix();
                 graphics.pose().translate(startX, slotY);
-                graphics.pose().scale(scale, scale);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
                 graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
                 graphics.pose().popMatrix();
 
                 if (!recipe.inputs().isEmpty() && !recipe.inputs().getFirst().isEmpty()) {
                     graphics.pose().pushMatrix();
                     graphics.pose().translate(startX + itemOffset, slotY + itemOffset);
-                    graphics.pose().scale(scale, scale);
+                    graphics.pose().scale(scale * bigScale, scale * bigScale);
                     graphics.item(recipe.inputs().getFirst(), 0, 0);
                     graphics.pose().popMatrix();
                 }
 
-                int leftArrowX = startX + slotSize + 7;
-                int arrowTextY = centerY - 4;
+                int leftArrowX = startX + slotSize + 11;
+                int arrowTextY = centerY + 1;
                 graphics.text(this.font, "➔", leftArrowX, arrowTextY, arrowColor, false);
 
-                int furnaceX = leftArrowX + arrowWidth + 7;
-                int furnaceY = centerY - (actualBigSize / 2);
+                int furnaceX = leftArrowX + arrowWidth + 6;
+                int furnaceY = centerY - (slotSize / 2);
 
                 graphics.pose().pushMatrix();
                 graphics.pose().translate(furnaceX, furnaceY);
@@ -414,50 +420,66 @@ public class CustomBookScreen extends Screen {
                 graphics.item(new ItemStack(Blocks.FURNACE), 0, 0);
                 graphics.pose().popMatrix();
 
-                int rightArrowX = furnaceX + actualBigSize + 4;
+                int rightArrowX = furnaceX + actualBigSize + 2;
                 graphics.text(this.font, "➔", rightArrowX, arrowTextY, arrowColor, false);
 
-                int outputX = rightArrowX + arrowWidth + 9;
+                int outputX = rightArrowX + arrowWidth + 7;
                 int outputY = centerY - (slotSize / 2);
 
                 graphics.pose().pushMatrix();
                 graphics.pose().translate(outputX, outputY);
-                graphics.pose().scale(scale, scale);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
                 graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
                 graphics.pose().popMatrix();
 
                 graphics.pose().pushMatrix();
                 graphics.pose().translate(outputX + itemOffset, outputY + itemOffset);
-                graphics.pose().scale(scale, scale);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
                 graphics.item(recipe.output(), 0, 0);
                 graphics.pose().popMatrix();
             }
             case BREWING -> {
                 int totalWidth = slotSize + arrowWidth + 8 + actualBigSize + 8 + arrowWidth + slotSize;
                 int startX = pageX + (PAGE_CONTENT_WIDTH - totalWidth) / 2;
-                int centerY = startY + 20;
 
-                int slotY = centerY - (slotSize / 2);
+                int centerY = startY + 25;
+                int arrowTextY = centerY - 2;
+
+                int input1Y = centerY - actualBigSize - 2;
+                int input2Y = centerY + 2;
 
                 graphics.pose().pushMatrix();
-                graphics.pose().translate(startX, slotY);
-                graphics.pose().scale(scale, scale);
+                graphics.pose().translate(startX, input1Y);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
                 graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
                 graphics.pose().popMatrix();
 
                 if (!recipe.inputs().isEmpty() && !recipe.inputs().getFirst().isEmpty()) {
                     graphics.pose().pushMatrix();
-                    graphics.pose().translate(startX + itemOffset, slotY + itemOffset);
-                    graphics.pose().scale(scale, scale);
+                    graphics.pose().translate(startX + itemOffset, input1Y + itemOffset);
+                    graphics.pose().scale(scale * bigScale, scale * bigScale);
                     graphics.item(recipe.inputs().getFirst(), 0, 0);
                     graphics.pose().popMatrix();
                 }
 
-                int leftArrowX = startX + slotSize + 2;
-                int arrowTextY = centerY - 4;
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(startX, input2Y);
+                graphics.pose().scale(scale * bigScale, scale * bigScale);
+                graphics.blit(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, 0, 0, 0, 0, 18, 18, 18, 18);
+                graphics.pose().popMatrix();
+
+                if (recipe.inputs().size() > 1 && !recipe.inputs().get(1).isEmpty()) {
+                    graphics.pose().pushMatrix();
+                    graphics.pose().translate(startX + itemOffset, input2Y + itemOffset);
+                    graphics.pose().scale(scale * bigScale, scale * bigScale);
+                    graphics.item(recipe.inputs().get(1), 0, 0);
+                    graphics.pose().popMatrix();
+                }
+
+                int leftArrowX = startX + slotSize + 12;
                 graphics.text(this.font, "➔", leftArrowX, arrowTextY, arrowColor, false);
 
-                int brewingX = leftArrowX + arrowWidth + 8;
+                int brewingX = leftArrowX + arrowWidth + 2;
                 int brewingY = centerY - (actualBigSize / 2);
 
                 graphics.pose().pushMatrix();
@@ -466,10 +488,10 @@ public class CustomBookScreen extends Screen {
                 graphics.item(new ItemStack(Blocks.BREWING_STAND), 0, 0);
                 graphics.pose().popMatrix();
 
-                int rightArrowX = brewingX + actualBigSize + 5;
+                int rightArrowX = brewingX + actualBigSize - 1;
                 graphics.text(this.font, "➔", rightArrowX, arrowTextY, arrowColor, false);
 
-                int outputX = rightArrowX + arrowWidth + 2;
+                int outputX = rightArrowX + arrowWidth + 7;
                 int outputY = centerY - (actualBigSize / 2);
 
                 graphics.pose().pushMatrix();
