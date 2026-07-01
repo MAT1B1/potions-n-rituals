@@ -1,6 +1,5 @@
 package com.matibi.potionsnrituals.datacomponent;
 
-import com.matibi.potionsnrituals.item.custom.TalismanItem;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
