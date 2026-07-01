@@ -735,7 +735,7 @@ public class CustomBookScreen extends Screen {
             }
             case BREWING -> {
                 int totalWidth = slotSize + arrowWidth + 8 + actualBigSize + 8 + arrowWidth + slotSize;
-                int startX = pageX + (PAGE_CONTENT_WIDTH - totalWidth) / 2;
+                int startX = pageX + (PAGE_CONTENT_WIDTH - totalWidth) / 2 - 6;
 
                 int centerY = startY + 25;
                 int arrowTextY = centerY - 2;

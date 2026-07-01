@@ -97,6 +97,8 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         registerElixir(t, "perm_speed", "Speed");
         registerElixir(t, "perm_strength", "Strength");
 
+        t.add("block.potions-n-rituals.pedestal", "Pedestal");
+
         t.add("item.potions-n-rituals.poisonous_carrot", "Poisonous Carrot");
         t.add("item.potions-n-rituals.poisonous_beetroot", "Poisonous Beetroot");
         t.add("item.potions-n-rituals.materia_prima", "Materia Prima");
@@ -110,8 +112,13 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.sulfur_ball", "Sulfur Ball");
         t.add("item.potions-n-rituals.mercury_ball", "Mercury Ball");
         t.add("item.potions-n-rituals.salt", "Salt");
+        t.add("item.potions-n-rituals.talisman", "Empty Talisman");
+        t.add("item.potions-n-rituals.talisman_charged", "Charged Talisman");
+        t.add("tooltip.potions-n-rituals.talisman_charge_line", "Gather %s Souls");
+        t.add("tooltip.potions-n-rituals.talisman_charged_line", "The talisman overflows with spiritual energy.");
         t.add("item.potions-n-rituals.alchemy_guide_basic", "The Foundations of Alchemy");
-        t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Chronicles of Chaos");
+        t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Nigredo: Chronicles of Chaos");
+        t.add("tooltip.potions-n-rituals.bookmarks_count_line", "%s Bookmarks");
         t.add("item.potions-n-rituals.alchemical_stone", "Alchemical Stone");
         t.add("item.potions-n-rituals.alchemical_stone.effect.empty", "Alchemical Stone");
         t.add("item.potions-n-rituals.alchemical_stone.effect.mixed", "Multi-effect Alchemical Stone");

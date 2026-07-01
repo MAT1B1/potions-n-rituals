@@ -1,6 +1,9 @@
 package com.matibi.potionsnrituals;
 
+import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
+import com.matibi.potionsnrituals.datacomponent.TalismanCharge;
 import com.matibi.potionsnrituals.effect.helper.DisorientInputHandler;
+import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.keybind.KeyInputHandler;
 import com.matibi.potionsnrituals.renderer.CooldownOverlayRenderer;
 import com.matibi.potionsnrituals.renderer.OreSenseOverlayRenderer;
@@ -15,5 +18,6 @@ public class PotionsNRitualsClient implements ClientModInitializer {
 		DisorientInputHandler.register();
 		KeyInputHandler.register();
 		ModItemTintSources.register();
+		ModDataComponents.registerTooltips();
 	}
 }

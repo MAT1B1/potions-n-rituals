@@ -1,13 +1,26 @@
 package com.matibi.potionsnrituals.datagen;
 
+import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.util.ModItemTintSources;
+import com.matibi.potionsnrituals.util.ModUtils;
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.model.ItemModelUtils;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.SelectItemModel;
+import net.minecraft.client.renderer.item.properties.conditional.CustomModelDataProperty;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import org.jspecify.annotations.NonNull;
 
 import java.util.List;
@@ -20,6 +33,7 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(@NonNull BlockModelGenerators blockModelGenerators) {
+        blockModelGenerators.createNonTemplateModelBlock(ModBlocks.PEDESTAL);
     }
 
     @Override
@@ -38,7 +52,9 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.MERCURY_BALL,
                 ModItems.SALT,
                 ModItems.BASIC_GUIDE,
-                ModItems.NIGREDO_GUIDE
+                ModItems.NIGREDO_GUIDE,
+                ModItems.TALISMAN,
+                ModItems.TALISMAN_CHARGED
         );
 
         items.forEach(item -> gen.generateFlatItem(item, ModelTemplates.FLAT_ITEM));

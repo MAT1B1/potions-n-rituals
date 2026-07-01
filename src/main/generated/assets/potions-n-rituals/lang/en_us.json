@@ -10,6 +10,7 @@
   "advancements.potions-n-rituals.rubedo.description": "Achieve absolute perfection by performing great worldly rituals",
   "advancements.potions-n-rituals.rubedo.title": "Rubedo",
   "block.potions-n-rituals.brewing_cauldron": "Brewing Cauldron",
+  "block.potions-n-rituals.pedestal": "Pedestal",
   "category.potions-n-rituals.active_effects": "Active Effects",
   "category.potions-n-rituals.mob_effects": "Mob Effects",
   "category.potions-n-rituals.potions_and_items": "Potions & Items",
@@ -342,7 +343,7 @@
   "item.potions-n-rituals.alchemical_stone.effect.petrification": "Petrification Stone",
   "item.potions-n-rituals.alchemical_stone.effect.resurrection": "Resurrection Stone",
   "item.potions-n-rituals.alchemy_guide_basic": "The Foundations of Alchemy",
-  "item.potions-n-rituals.alchemy_guide_nigredo": "Chronicles of Chaos",
+  "item.potions-n-rituals.alchemy_guide_nigredo": "Nigredo: Chronicles of Chaos",
   "item.potions-n-rituals.blood_bag": "Blood Bag",
   "item.potions-n-rituals.charged_copper": "Charged Copper",
   "item.potions-n-rituals.claw": "Claw",
@@ -450,6 +451,8 @@
   "item.potions-n-rituals.syringe.effect.potions-n-rituals.zeus": "Syringe of Zeus Benediction",
   "item.potions-n-rituals.syringe.effect.potions-n-rituals.zombie_contagion": "Syringe of Zombie Contagion",
   "item.potions-n-rituals.syringe.effect.unstable": "Unstable Syringe",
+  "item.potions-n-rituals.talisman": "Empty Talisman",
+  "item.potions-n-rituals.talisman_charged": "Charged Talisman",
   "item.potions-n-rituals.witch_finger": "Witch's Finger",
   "item.potions-n-rituals.zombie_brain": "Zombie Brain",
   "itemGroup.potions-n-rituals.alchemy": "Alchemy",
@@ -583,5 +586,8 @@
   "splash.potionsnrituals.magic": "Alchemy is power!!!",
   "splash.potionsnrituals.thanks": "Thank you for supporting me LivelyBadGood",
   "title.potions-n-rituals.config": "Potions & Rituals",
-  "tooltip.potions-n-rituals.imbued_line": "%s (%s hits remaining)"
+  "tooltip.potions-n-rituals.bookmarks_count_line": "%s Bookmarks",
+  "tooltip.potions-n-rituals.imbued_line": "%s (%s hits remaining)",
+  "tooltip.potions-n-rituals.talisman_charge_line": "Gather %s Souls",
+  "tooltip.potions-n-rituals.talisman_charged_line": "The talisman overflows with spiritual energy."
 }

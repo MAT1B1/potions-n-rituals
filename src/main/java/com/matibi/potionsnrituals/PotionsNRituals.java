@@ -1,5 +1,6 @@
 package com.matibi.potionsnrituals;
 
+import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.effect.ModEffects;
@@ -10,7 +11,8 @@ import com.matibi.potionsnrituals.effect.custom.brainwashing.DisorientVillagerHa
 import com.matibi.potionsnrituals.effect.custom.terrain.ResurrectionEffect;
 import com.matibi.potionsnrituals.group.ModItemGroups;
 import com.matibi.potionsnrituals.item.ModItems;
-import com.matibi.potionsnrituals.item.alchemicalStone.ModAlchemicalStone;
+import com.matibi.potionsnrituals.item.custom.TalismanItem;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.ModAlchemicalStone;
 import com.matibi.potionsnrituals.network.ModNetworking;
 import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.recipe.ModRecipeSerializer;
@@ -36,15 +38,16 @@ public class PotionsNRituals implements ModInitializer {
 		ModItemGroups.register();
 		ModDataComponents.register();
 		ModConfig.register();
+		ModBlocks.register();
 		/*
 		ModLootTable.register();
 		ModEvent.register();
-		ModBlocks.register();
+
 		ModBlockEntities.register();
 		ModScreenHandlers.register();
 		ModRituals.register();
 		*/
-
+		TalismanItem.registerEvents();
 		ResurrectionEffect.registerDeathHandler();
 		BerserkEffect.registerDeathHandler();
 		DisorientMobHandler.register();

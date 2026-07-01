@@ -9,6 +9,7 @@
   "advancements.potions-n-rituals.root.title": "Potions & Rituels",
   "advancements.potions-n-rituals.rubedo.description": "Atteignez la perfection absolue en accomplissant les grands rituels",
   "advancements.potions-n-rituals.rubedo.title": "Rubedo",
+  "block.potions-n-rituals.pedestal": "Piédestal",
   "category.potions-n-rituals.active_effects": "Effets Actifs",
   "category.potions-n-rituals.mob_effects": "Effets de statut",
   "category.potions-n-rituals.potions_and_items": "Potions & Objets",
@@ -341,7 +342,7 @@
   "item.potions-n-rituals.alchemical_stone.effect.petrification": "Pierre de Pétrification",
   "item.potions-n-rituals.alchemical_stone.effect.resurrection": "Pierre de Résurrection",
   "item.potions-n-rituals.alchemy_guide_basic": "Les Fondements de l'Alchimie",
-  "item.potions-n-rituals.alchemy_guide_nigredo": "Chroniques du Chaos",
+  "item.potions-n-rituals.alchemy_guide_nigredo": "Nigredo: Chroniques du Chaos",
   "item.potions-n-rituals.blood_bag": "Poche de sang",
   "item.potions-n-rituals.charged_copper": "Cuivre chargé",
   "item.potions-n-rituals.claw": "Griffe",
@@ -448,6 +449,8 @@
   "item.potions-n-rituals.syringe.effect.potions-n-rituals.xp_reduction": "Seringue de Réduction d'XP",
   "item.potions-n-rituals.syringe.effect.potions-n-rituals.zeus": "Seringue de Bénédiction de Zeus",
   "item.potions-n-rituals.syringe.effect.potions-n-rituals.zombie_contagion": "Seringue de Contagion de Zombie",
+  "item.potions-n-rituals.talisman": "Talisman vide",
+  "item.potions-n-rituals.talisman_charged": "Talisman chargé",
   "item.potions-n-rituals.witch_finger": "Doigt de sorcière",
   "item.potions-n-rituals.zombie_brain": "Cerveau de zombie",
   "itemGroup.potions-n-rituals.alchemy": "Alchimie",
@@ -581,5 +584,8 @@
   "splash.potionsnrituals.magic": "L'Alchimie c'est le pouvoir !!!",
   "splash.potionsnrituals.thanks": "Merci de me supporter LivelyBadGood",
   "title.potions-n-rituals.config": "Configuration de Potions & Rituals",
-  "tooltip.potions-n-rituals.imbued_line": "%s (%s coups restants)"
+  "tooltip.potions-n-rituals.bookmarks_count_line": "%s Marque-pages",
+  "tooltip.potions-n-rituals.imbued_line": "%s (%s coups restants)",
+  "tooltip.potions-n-rituals.talisman_charge_line": "Capture %s Âmes",
+  "tooltip.potions-n-rituals.talisman_charged_line": "Le talisman déborde d'énergie spirituelle."
 }

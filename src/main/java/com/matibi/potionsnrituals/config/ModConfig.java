@@ -1,7 +1,7 @@
 package com.matibi.potionsnrituals.config;
 
 import com.matibi.potionsnrituals.effect.ModEffects;
-import com.matibi.potionsnrituals.item.alchemicalStone.AlchemicalStone;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStone;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;

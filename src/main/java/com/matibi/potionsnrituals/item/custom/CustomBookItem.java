@@ -1,4 +1,4 @@
-package com.matibi.potionsnrituals.item;
+package com.matibi.potionsnrituals.item.custom;
 
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.screen.CustomBookScreen;
@@ -45,10 +45,10 @@ import java.util.function.Supplier;
 // §o : Italique
 // §r : Reset (Réinitialise toutes les couleurs et styles précédents)
 
-public class CustomBook extends Item {
+public class CustomBookItem extends Item {
     private final Supplier<BookStructure> bookSupplier;
 
-    public CustomBook(Properties properties, Supplier<BookStructure> bookSupplier) {
+    public CustomBookItem(Properties properties, Supplier<BookStructure> bookSupplier) {
         super(properties);
         this.bookSupplier = bookSupplier;
     }

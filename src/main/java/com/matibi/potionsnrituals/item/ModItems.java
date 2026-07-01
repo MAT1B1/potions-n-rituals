@@ -3,8 +3,11 @@ package com.matibi.potionsnrituals.item;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
-import com.matibi.potionsnrituals.item.alchemicalStone.AlchemicalStoneItem;
-import com.matibi.potionsnrituals.item.syringe.SyringeItem;
+import com.matibi.potionsnrituals.item.custom.CustomBookItem;
+import com.matibi.potionsnrituals.item.custom.NigredoBookItem;
+import com.matibi.potionsnrituals.item.custom.TalismanItem;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStoneItem;
+import com.matibi.potionsnrituals.item.custom.syringe.SyringeItem;
 import com.matibi.potionsnrituals.util.BookUtils;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -54,6 +57,15 @@ public class ModItems {
                     .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
                 )
             ),
+            TALISMAN = register("talisman",
+                    new TalismanItem(props("talisman"))
+            ),
+            TALISMAN_CHARGED = register("talisman_charged",
+                    new Item(props("talisman_charged").rarity(Rarity.UNCOMMON)) {
+                        @Override
+                        public boolean isFoil(@NonNull ItemStack stack) { return true; }
+                    }
+            ),
             ALCHEMICAL_STONE = register("alchemical_stone",
                 new AlchemicalStoneItem(props("alchemical_stone")
                     .stacksTo(16)
@@ -61,7 +73,7 @@ public class ModItems {
                 )
             ),
             BASIC_GUIDE = register("alchemy_guide_basic",
-                    new CustomBook(props("alchemy_guide_basic").stacksTo(1), () ->
+                    new CustomBookItem(props("alchemy_guide_basic").stacksTo(1), () ->
                             new BookStructure(Component.translatable("item.potions-n-rituals.alchemy_guide_basic"))
                                     .tableOfContents("Sommaire")
 
@@ -74,7 +86,7 @@ public class ModItems {
                                     )
                     )
             ),
-            NIGREDO_GUIDE = register("alchemy_guide_nigredo", new NigredoBook());
+            NIGREDO_GUIDE = register("alchemy_guide_nigredo", new NigredoBookItem());
 
     private static Item registerSimple(String id) {
         return register(id, new Item(props(id)));

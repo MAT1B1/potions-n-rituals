@@ -1,4 +1,4 @@
-package com.matibi.potionsnrituals.item.alchemicalStone;
+package com.matibi.potionsnrituals.item.custom.alchemicalStone;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.effect.ModEffects;

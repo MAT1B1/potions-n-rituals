@@ -1,9 +1,6 @@
 package com.matibi.potionsnrituals;
 
-import com.matibi.potionsnrituals.datagen.ModAdvancementProvider;
-import com.matibi.potionsnrituals.datagen.ModItemTagProvider;
-import com.matibi.potionsnrituals.datagen.ModModelProvider;
-import com.matibi.potionsnrituals.datagen.ModRecipeProvider;
+import com.matibi.potionsnrituals.datagen.*;
 import com.matibi.potionsnrituals.datagen.language.ModFrenchLanguageProvider;
 import com.matibi.potionsnrituals.datagen.language.ModUsLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -18,6 +15,7 @@ public class PotionsNRitualsDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModItemTagProvider::new);
 		pack.addProvider(ModRecipeProvider::new);
 		pack.addProvider(ModAdvancementProvider::new);
+		pack.addProvider(ModBlockLootTableProvider::new);
 
 		pack.addProvider(ModUsLanguageProvider::new);
 		pack.addProvider(ModFrenchLanguageProvider::new);

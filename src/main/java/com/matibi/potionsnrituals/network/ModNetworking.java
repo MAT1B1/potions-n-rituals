@@ -4,7 +4,7 @@ import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.datacomponent.PersonalBookmark;
 import com.matibi.potionsnrituals.effect.helper.ActiveEffectPayload;
 import com.matibi.potionsnrituals.effect.helper.CooldownSyncPayload;
-import com.matibi.potionsnrituals.item.CustomBook;
+import com.matibi.potionsnrituals.item.custom.CustomBookItem;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,7 +26,7 @@ public final class ModNetworking {
             ServerPlayer player = context.player();
             ItemStack stack = player.getItemInHand(payload.hand());
             List<PersonalBookmark> bookmarks = payload.bookmarks();
-            if (stack.getItem() instanceof CustomBook && PersonalBookmark.isValidList(bookmarks))
+            if (stack.getItem() instanceof CustomBookItem && PersonalBookmark.isValidList(bookmarks))
                 stack.set(ModDataComponents.PERSONAL_BOOKMARKS, List.copyOf(bookmarks));
         });
     }

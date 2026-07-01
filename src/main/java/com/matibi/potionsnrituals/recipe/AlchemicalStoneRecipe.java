@@ -1,7 +1,7 @@
 package com.matibi.potionsnrituals.recipe;
 
 import com.matibi.potionsnrituals.item.ModItems;
-import com.matibi.potionsnrituals.item.alchemicalStone.AlchemicalStone;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStone;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;

@@ -63,8 +63,8 @@ public class BookUtils {
         if (effects.isEmpty()) {
             return "Unknown";
         }
-        MobEffect effect = effects.getFirst().getEffect().value();
-        return Component.translatable(effect.getDescriptionId()).getString();
+        Holder<MobEffect> effect = effects.getFirst().getEffect();
+        return Component.translatable(effect.value().getDescriptionId()).getString();
     }
 
     public static Identifier getEffectTexture(Holder<Potion> potion) {
@@ -229,7 +229,7 @@ public class BookUtils {
                     fromMethod.setAccessible(true);
 
                     @SuppressWarnings("unchecked")
-                    Holder<Potion> fromHolder = (Holder<Potion>) (Holder) fromMethod.invoke(mixObj);
+                    Holder<Potion> fromHolder = (Holder<Potion>) fromMethod.invoke(mixObj);
 
                     inputPotion = new ItemStack(Items.POTION);
                     inputPotion.set(DataComponents.POTION_CONTENTS, new PotionContents(fromHolder));

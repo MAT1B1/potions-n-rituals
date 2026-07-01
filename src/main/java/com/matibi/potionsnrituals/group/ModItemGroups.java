@@ -1,9 +1,10 @@
 package com.matibi.potionsnrituals.group;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.item.ModItems;
-import com.matibi.potionsnrituals.item.alchemicalStone.AlchemicalStone;
-import com.matibi.potionsnrituals.item.alchemicalStone.ModAlchemicalStone;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStone;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.ModAlchemicalStone;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Holder;
@@ -64,9 +65,14 @@ public class ModItemGroups {
                                 )
                                 .toList();
 
+                        entries.accept(ModItems.BASIC_GUIDE);
                         entries.accept(ModItems.MATERIA_PRIMA);
                         entries.accept(ModItems.SULFUR_BALL);
                         entries.accept(ModItems.MERCURY_BALL);
+                        entries.accept(ModItems.NIGREDO_GUIDE);
+                        entries.accept(ModItems.TALISMAN);
+                        entries.accept(ModItems.TALISMAN_CHARGED);
+                        entries.accept(ModBlocks.PEDESTAL);
                         entries.accept(ModItems.SALT);
 
                         entries.accept(ModItems.SYRINGE);

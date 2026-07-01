@@ -3,8 +3,15 @@ package com.matibi.potionsnrituals.datacomponent;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+
+import java.util.Collections;
+import java.util.List;
 
 public record PersonalBookmark(int pageIndex, int color) {
     public static final int[] ALLOWED_COLORS = { 0xFF5555FF, 0xFFAA00AA, 0xFFFFAA00, 0xFF55FFFF };
@@ -38,4 +45,20 @@ public record PersonalBookmark(int pageIndex, int color) {
             ByteBufCodecs.VAR_INT, PersonalBookmark::color,
             PersonalBookmark::new
     );
+
+    public static void registerTooltip() {
+        ItemTooltipCallback.EVENT.register((itemStack, _, _, list) -> {
+            List<PersonalBookmark> bookmarks = itemStack.getComponents().getOrDefault(ModDataComponents.PERSONAL_BOOKMARKS, Collections.emptyList());
+
+            int count = bookmarks.size();
+            if (count == 0) return;
+
+            MutableComponent currentCount = Component.literal(String.valueOf(count))
+                    .withStyle(ChatFormatting.BLUE);
+
+            list.add(
+                    Component.translatable("tooltip.potions-n-rituals.bookmarks_count_line", currentCount)
+            );
+        });
+    }
 }

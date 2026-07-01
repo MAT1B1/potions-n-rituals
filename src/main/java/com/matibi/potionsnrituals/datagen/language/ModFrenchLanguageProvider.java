@@ -95,6 +95,8 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         registerElixir(t, "perm_speed", "Vitesse");
         registerElixir(t, "perm_strength", "Force");
 
+        t.add("block.potions-n-rituals.pedestal", "Piédestal");
+
         t.add("item.potions-n-rituals.poisonous_carrot", "Carotte empoisonnée");
         t.add("item.potions-n-rituals.poisonous_beetroot", "Betterave empoisonnée");
         t.add("item.potions-n-rituals.materia_prima", "Materia Prima");
@@ -108,8 +110,13 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.sulfur_ball", "Boule de Sulfure");
         t.add("item.potions-n-rituals.mercury_ball", "Boule de Mercure");
         t.add("item.potions-n-rituals.salt", "Sel");
+        t.add("item.potions-n-rituals.talisman", "Talisman vide");
+        t.add("item.potions-n-rituals.talisman_charged", "Talisman chargé");
+        t.add("tooltip.potions-n-rituals.talisman_charge_line", "Capture %s Âmes");
+        t.add("tooltip.potions-n-rituals.talisman_charged_line", "Le talisman déborde d'énergie spirituelle.");
         t.add("item.potions-n-rituals.alchemy_guide_basic", "Les Fondements de l'Alchimie");
-        t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Chroniques du Chaos");
+        t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
+        t.add("tooltip.potions-n-rituals.bookmarks_count_line", "%s Marque-pages");
         t.add("item.potions-n-rituals.alchemical_stone", "Pierre alchimique");
         t.add("item.potions-n-rituals.alchemical_stone.effect.empty", "Pierre alchimique");
         t.add("item.potions-n-rituals.alchemical_stone.effect.mixed", "Pierre alchimique multi-effets");

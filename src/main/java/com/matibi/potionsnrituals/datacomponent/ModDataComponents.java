@@ -24,6 +24,11 @@ public final class ModDataComponents {
                     .persistent(BloodType.CODEC)
                     .networkSynchronized(BloodType.STREAM_CODEC));
 
+    public static final DataComponentType<TalismanCharge> TALISMAN_CHARGE = register("talisman_charge",
+            builder -> builder
+                    .persistent(TalismanCharge.CODEC)
+                    .networkSynchronized(TalismanCharge.STREAM_CODEC));
+
     public static final DataComponentType<List<PersonalBookmark>> PERSONAL_BOOKMARKS = register("personal_bookmarks",
             builder -> builder
                     .persistent(PersonalBookmark.CODEC.listOf())
@@ -39,5 +44,11 @@ public final class ModDataComponents {
 
     public static void register() {
         PotionsNRituals.LOGGER.info("Registering data components for " + PotionsNRituals.MOD_ID);
+    }
+
+    public static void registerTooltips() {
+        TalismanCharge.registerTooltip();
+        ImbuedEffect.registerTooltip();
+        PersonalBookmark.registerTooltip();
     }
 }

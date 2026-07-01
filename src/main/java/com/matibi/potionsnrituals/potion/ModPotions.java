@@ -260,7 +260,7 @@ public class ModPotions {
             addMix(builder, Potions.AWKWARD, ModItems.ZOMBIE_BRAIN, ModPotions.BRAINWASHING);
             addMix(builder, Potions.AWKWARD, Items.SNOWBALL, ModPotions.COLD);
             addMix(builder, ModPotions.COLD, Items.SNOWBALL, ModPotions.FROST);
-            addMix(builder, Potions.AWKWARD, Items.COPPER_INGOT, ModPotions.ALCHEMIST);
+            addMix(builder, Potions.AWKWARD, ModItems.MERCURY_BALL, ModPotions.ALCHEMIST);
             addMix(builder, ModPotions.RESURRECTION, Items.WITHER_ROSE, ModPotions.DEATH);
             addMix(builder, Potions.AWKWARD, Items.BEETROOT, ModPotions.SATURATION);
             addMix(builder, Potions.STRONG_HEALING, Items.GOLDEN_APPLE, ModPotions.DOUBLE_HEALTH);
