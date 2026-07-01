@@ -3,7 +3,7 @@ package com.matibi.potionsnrituals.datagen;
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.block.custom.cauldron.BrewingCauldronBlock;
 import com.matibi.potionsnrituals.item.ModItems;
-import com.matibi.potionsnrituals.util.ModItemTintSources,
+import com.matibi.potionsnrituals.util.ModItemTintSources;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
