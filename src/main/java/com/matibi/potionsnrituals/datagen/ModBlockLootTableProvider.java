@@ -4,6 +4,7 @@ import com.matibi.potionsnrituals.block.ModBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -15,5 +16,6 @@ public class ModBlockLootTableProvider extends FabricBlockLootSubProvider {
     @Override
     public void generate() {
         dropSelf(ModBlocks.PEDESTAL);
+        dropOther(ModBlocks.BREWING_CAULDRON, Items.CAULDRON);
     }
 }

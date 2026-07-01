@@ -8,6 +8,7 @@
     "SlotEffectMixin",
     "brewingNpotion.BrewingStandAccessor",
     "brewingNpotion.BrewingStandBlockEntityMixin",
+    "brewingNpotion.CauldronBlockMixin",
     "brewingNpotion.FurnaceLeaveBucketMixin",
     "brewingNpotion.LingeringPotionItemMixin",
     "brewingNpotion.PotionBrewingBuilderMixin",

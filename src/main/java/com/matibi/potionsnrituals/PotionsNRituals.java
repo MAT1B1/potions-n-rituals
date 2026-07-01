@@ -1,5 +1,6 @@
 package com.matibi.potionsnrituals;
 
+import com.matibi.potionsnrituals.block.ModBlockEntities;
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
@@ -39,11 +40,11 @@ public class PotionsNRituals implements ModInitializer {
 		ModDataComponents.register();
 		ModConfig.register();
 		ModBlocks.register();
+		ModBlockEntities.register();
 		/*
 		ModLootTable.register();
 		ModEvent.register();
 
-		ModBlockEntities.register();
 		ModScreenHandlers.register();
 		ModRituals.register();
 		*/
