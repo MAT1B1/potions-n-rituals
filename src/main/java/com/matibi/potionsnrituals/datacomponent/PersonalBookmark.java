@@ -58,6 +58,7 @@ public record PersonalBookmark(int pageIndex, int color) {
 
             list.add(
                     Component.translatable("tooltip.potions-n-rituals.bookmarks_count_line", currentCount)
+                            .withStyle(ChatFormatting.GRAY)
             );
         });
     }
