@@ -193,7 +193,7 @@ public class CustomBookScreen extends Screen {
         MutableComponent base = Component.empty();
         for (int i = 0; i < lines.size(); i++) {
             lines.get(i).accept((_, style, codePoint) -> {
-                base.append(Component.literal(new String(Character.toChars(codePoint))).withStyle(style));
+                base.append(Component.translatable(new String(Character.toChars(codePoint))).withStyle(style));
                 return true;
             });
             if (i < lines.size() - 1) {
@@ -534,7 +534,7 @@ public class CustomBookScreen extends Screen {
 
             String caption = img.caption();
             if (caption != null && !caption.isEmpty()) {
-                maxCaptionLineCount = Math.max(maxCaptionLineCount, this.font.split(Component.literal(caption), slotWidth).size());
+                maxCaptionLineCount = Math.max(maxCaptionLineCount, this.font.split(Component.translatable(caption), slotWidth).size());
             }
         }
         int captionBlockHeight = maxCaptionLineCount > 0 ? CAPTION_GAP + maxCaptionLineCount * LINE_HEIGHT : 0;
@@ -845,11 +845,10 @@ public class CustomBookScreen extends Screen {
         for (int i = 0; i < count; i++) {
             String caption = images.get(i).caption();
             if (caption != null && !caption.isEmpty()) {
-                captionLines[i] = this.font.split(Component.literal(caption), slotWidth);
+                captionLines[i] = this.font.split(Component.translatable(caption), slotWidth);
                 maxCaptionLineCount = Math.max(maxCaptionLineCount, captionLines[i].size());
-            } else {
+            } else
                 captionLines[i] = List.of();
-            }
         }
 
         int cursorX = pageX - (count - 1) * IMAGE_GAP / 2;

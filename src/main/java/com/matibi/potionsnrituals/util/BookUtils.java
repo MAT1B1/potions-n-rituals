@@ -143,11 +143,11 @@ public class BookUtils {
     public static BookPage createCraftingPage(String pageId, String title, Item item, String description) {
         Minecraft mc = Minecraft.getInstance();
         ClientLevel level = mc.level;
-        if (level == null) return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
+        if (level == null) return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
 
         Recipe<?> recipe = loadRecipeFromJson(item);
         if (recipe == null || recipe.display().isEmpty()) {
-            return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
+            return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
         }
 
         RecipeDisplay display = recipe.display().getFirst();
@@ -164,27 +164,27 @@ public class BookUtils {
                 if (!(slot instanceof SlotDisplay.Empty)) inputs.add(slot.resolveForFirstStack(contextMap));
             }
         } else {
-            return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
+            return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
         }
 
         while (inputs.size() < 9) inputs.add(ItemStack.EMPTY);
-        return new BookPage.RecipePage(pageId, Component.literal(title), BookPage.Recipe.crafting(inputs, output), Component.literal(description));
+        return new BookPage.RecipePage(pageId, Component.translatable(title), BookPage.Recipe.crafting(inputs, output), Component.translatable(description));
     }
 
     @Environment(EnvType.CLIENT)
     public static BookPage createFurnacePage(String pageId, String title, Item item, String description) {
         Minecraft mc = Minecraft.getInstance();
         ClientLevel level = mc.level;
-        if (level == null) return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
+        if (level == null) return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
 
         Recipe<?> recipe = loadRecipeFromJson(item);
         if (recipe == null || recipe.display().isEmpty()) {
-            return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
+            return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
         }
 
         RecipeDisplay display = recipe.display().getFirst();
         if (!(display instanceof FurnaceRecipeDisplay furnaceDisplay)) {
-            return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
+            return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
         }
 
         ContextMap contextMap = SlotDisplayContext.fromLevel(level);
@@ -196,14 +196,14 @@ public class BookUtils {
             input = slot.resolveForFirstStack(contextMap);
         }
 
-        return new BookPage.RecipePage(pageId, Component.literal(title), BookPage.Recipe.furnace(input, output), Component.literal(description));
+        return new BookPage.RecipePage(pageId, Component.translatable(title), BookPage.Recipe.furnace(input, output), Component.translatable(description));
     }
 
     @Environment(EnvType.CLIENT)
     public static BookPage createBrewingPage(String pageId, String title, Holder<Potion> potion, String description) {
         Minecraft mc = Minecraft.getInstance();
         ClientLevel level = mc.level;
-        if (level == null) return new BookPage.TextPage(pageId, Component.literal(title), Component.literal(description));
+        if (level == null) return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
 
         ItemStack ingredient = ItemStack.EMPTY;
         ItemStack inputPotion = new ItemStack(Items.POTION);
@@ -254,6 +254,6 @@ public class BookUtils {
             PotionsNRituals.LOGGER.error("[POTIONS] Impossible d'accéder aux recettes d'alambic via Reflection", e);
         }
 
-        return new BookPage.RecipePage(pageId, Component.literal(title), BookPage.Recipe.brewing(ingredient, inputPotion, outputPotion), Component.literal(description));
+        return new BookPage.RecipePage(pageId, Component.translatable(title), BookPage.Recipe.brewing(ingredient, inputPotion, outputPotion), Component.translatable(description));
     }
 }

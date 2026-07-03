@@ -41,13 +41,7 @@ public class PotionsNRituals implements ModInitializer {
 		ModConfig.register();
 		ModBlocks.register();
 		ModBlockEntities.register();
-		/*
-		ModLootTable.register();
-		ModEvent.register();
 
-		ModScreenHandlers.register();
-		ModRituals.register();
-		*/
 		TalismanItem.registerEvents();
 		ResurrectionEffect.registerDeathHandler();
 		BerserkEffect.registerDeathHandler();

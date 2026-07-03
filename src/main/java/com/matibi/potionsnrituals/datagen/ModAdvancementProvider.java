@@ -7,12 +7,15 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.advancements.triggers.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import org.jspecify.annotations.NonNull;
 
@@ -57,6 +60,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         false
                 )
                 .addCriterion("has_materia_prima", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.MATERIA_PRIMA))
+                .rewards(getReward("advancement/reward_book_nigredo"))
                 .save(writer, ModUtils.id("nigredo"));
 
         // 2. ALBEDO : Création des premières potions
@@ -74,6 +78,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 )
                 // Se déclenche quand le joueur a brassé ou obtenu une fiole d'eau distillée / potion étrange
                 .addCriterion("has_potion", InventoryChangeTrigger.TriggerInstance.hasItems(Items.POTION))
+                .rewards(getReward("advancement/reward_book_albedo"))
                 .save(writer, ModUtils.id("albedo"));
 
         // 3. CITRINITAS : Les Talismans (Bloqué derrière le Nether via le Quartz)
@@ -90,6 +95,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         false
                 )
                 .addCriterion("has_quartz", InventoryChangeTrigger.TriggerInstance.hasItems(Items.QUARTZ))
+                .rewards(getReward("advancement/reward_book_citrinitas"))
                 .save(writer, ModUtils.id("citrinitas"));
 
         // 4. RUBEDO : Les Rituels (Bloqué derrière l'End via l'End Stone)
@@ -106,11 +112,16 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         false
                 )
                 .addCriterion("has_end_stone", InventoryChangeTrigger.TriggerInstance.hasItems(Items.END_STONE))
+                .rewards(getReward("advancement/reward_book_rubedo"))
                 .save(writer, ModUtils.id("rubedo"));
     }
 
     @Override
     public @NonNull String getName() {
         return PotionsNRituals.MOD_ID + " advancement";
+    }
+
+    private AdvancementRewards.Builder getReward(String path) {
+        return AdvancementRewards.Builder.loot(ResourceKey.create(Registries.LOOT_TABLE, ModUtils.id(path)));
     }
 }

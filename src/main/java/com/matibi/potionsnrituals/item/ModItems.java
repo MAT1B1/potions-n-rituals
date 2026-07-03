@@ -74,19 +74,60 @@ public class ModItems {
             ),
             BASIC_GUIDE = register("alchemy_guide_basic",
                     new CustomBookItem(props("alchemy_guide_basic").stacksTo(1), () ->
-                            new BookStructure(Component.translatable("item.potions-n-rituals.alchemy_guide_basic"))
-                                    .tableOfContents("Sommaire")
+                            new BookStructure("item.potions-n-rituals.alchemy_guide_basic")
+                                    .tableOfContents("book.potions-n-rituals.basic.toc")
 
-                                    .chapter("Creation de la matière première", c -> c
-                                            .page(BookUtils.createFurnacePage("sulfur", "The trinity", ModItems.SULFUR_BALL, ""))
-                                            .page(BookUtils.createFurnacePage("mercury", "The trinity", ModItems.MERCURY_BALL, ""))
-                                            .page(BookUtils.createFurnacePage("salt", "The trinity", ModItems.SALT, ""))
-                                            .page(BookUtils.createCraftingPage("materia_prima", "How to Obtain",
-                                                    ModItems.MATERIA_PRIMA, ""))
+                                    .chapter("book.potions-n-rituals.basic.opus.chapter", c -> c
+                                            .page(BookUtils.createStandardPage(
+                                                    "opus_intro",
+                                                    "book.potions-n-rituals.basic.opus.title",
+                                                    "book.potions-n-rituals.basic.opus.body"
+                                            ))
+                                    )
+                                    .chapter("book.potions-n-rituals.basic.nigredo.chapter", c -> c
+                                            .page(BookUtils.createStandardPage(
+                                                    "nigredo_intro",
+                                                    "book.potions-n-rituals.basic.nigredo.title",
+                                                    "book.potions-n-rituals.basic.nigredo.body"
+                                            ))
+                                            .page(BookUtils.createFurnacePage("sulfur", "book.potions-n-rituals.basic.nigredo.sulfur", ModItems.SULFUR_BALL, ""))
+                                            .page(BookUtils.createFurnacePage("mercury", "book.potions-n-rituals.basic.nigredo.mercury", ModItems.MERCURY_BALL, ""))
+                                            .page(BookUtils.createFurnacePage("salt", "book.potions-n-rituals.basic.nigredo.salt", ModItems.SALT, ""))
+                                            .page(BookUtils.createCraftingPage("materia_prima", "book.potions-n-rituals.basic.nigredo.materia", ModItems.MATERIA_PRIMA, ""))
+                                    )
+                                    .chapter("book.potions-n-rituals.basic.albedo.chapter", c -> c
+                                            .page(BookUtils.createStandardPage(
+                                                    "teasing_albedo",
+                                                    "book.potions-n-rituals.basic.albedo.title",
+                                                    "book.potions-n-rituals.basic.albedo.body"
+                                            ))
+                                    )
+                                    .chapter("book.potions-n-rituals.basic.citrinitas.chapter", c -> c
+                                            .page(BookUtils.createStandardPage(
+                                                    "teasing_citrinitas",
+                                                    "book.potions-n-rituals.basic.citrinitas.title",
+                                                    "book.potions-n-rituals.basic.citrinitas.body"
+                                            ))
+                                    )
+                                    .chapter("book.potions-n-rituals.basic.rubedo.chapter", c -> c
+                                            .page(BookUtils.createStandardPage(
+                                                    "teasing_rubedo",
+                                                    "book.potions-n-rituals.basic.rubedo.title",
+                                                    "book.potions-n-rituals.basic.rubedo.body"
+                                            ))
                                     )
                     )
             ),
-            NIGREDO_GUIDE = register("alchemy_guide_nigredo", new NigredoBookItem());
+            NIGREDO_GUIDE = register("alchemy_guide_nigredo", new NigredoBookItem()),
+            ALBEDO_GUIDE = register("alchemy_guide_albedo",
+                    new CustomBookItem(props("alchemy_guide_albedo").stacksTo(1), () ->
+                            new BookStructure("item.potions-n-rituals.alchemy_guide_albedo"))),
+            CITRINITAS_GUIDE = register("alchemy_guide_citrinitas",
+                    new CustomBookItem(props("alchemy_guide_citrinitas").stacksTo(1), () ->
+                            new BookStructure("item.potions-n-rituals.alchemy_guide_citrinitas"))),
+            RUBEDO_GUIDE = register("alchemy_guide_rubedo",
+                    new CustomBookItem(props("alchemy_guide_rubedo").stacksTo(1), () ->
+                            new BookStructure("item.potions-n-rituals.alchemy_guide_rubedo")));
 
     private static Item registerSimple(String id) {
         return register(id, new Item(props(id)));

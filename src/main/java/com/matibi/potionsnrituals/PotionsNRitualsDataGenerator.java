@@ -16,6 +16,7 @@ public class PotionsNRitualsDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ModRecipeProvider::new);
 		pack.addProvider(ModAdvancementProvider::new);
 		pack.addProvider(ModBlockLootTableProvider::new);
+		pack.addProvider(ModLootTableProvider::new);
 
 		pack.addProvider(ModUsLanguageProvider::new);
 		pack.addProvider(ModFrenchLanguageProvider::new);

@@ -25,8 +25,20 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(HolderLookup.@NonNull Provider wrapperLookup, @NonNull TranslationBuilder t) {
+        generateVanillaEffects(t);
+        generateModEffects(t);
+        generateItems(t);
+        generateBlocks(t);
+        generateAdvancements(t);
+        generateMisc(t);
 
-        // Potions & Effect
+        ModBookLanguageHelper.generateBookEnUsTranslations(t);
+        ModConfigLanguageHelper.generateConfigEnUsTranslations(t);
+
+        this.additionalTranslations.forEach(t::add);
+    }
+
+    private void generateVanillaEffects(TranslationBuilder t) {
         registerVanilla(t, "levitation", "Levitation");
         registerVanilla(t, "glowing", "Glowing");
         registerVanilla(t, "darkness", "Darkness");
@@ -37,7 +49,9 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.minecraft.splash_potion.effect.alcohol", "Splash Alcohol");
         t.add("item.minecraft.lingering_potion.effect.alcohol", "Lingering Alcohol");
         t.add("item.minecraft.tipped_arrow.effect.alcohol", "Arrow of Alcohol");
+    }
 
+    private void generateModEffects(TranslationBuilder t) {
         register(t, "saturation", "Saturation");
         register(t, "long_leg", "Long Legs");
         register(t, "liquid_walker", "Liquid Walker");
@@ -96,9 +110,9 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         registerElixir(t, "perm_health", "Health");
         registerElixir(t, "perm_speed", "Speed");
         registerElixir(t, "perm_strength", "Strength");
+    }
 
-        t.add("block.potions-n-rituals.pedestal", "Pedestal");
-
+    private void generateItems(TranslationBuilder t) {
         t.add("item.potions-n-rituals.poisonous_carrot", "Poisonous Carrot");
         t.add("item.potions-n-rituals.poisonous_beetroot", "Poisonous Beetroot");
         t.add("item.potions-n-rituals.materia_prima", "Materia Prima");
@@ -114,20 +128,15 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.salt", "Salt");
         t.add("item.potions-n-rituals.talisman", "Empty Talisman");
         t.add("item.potions-n-rituals.talisman_charged", "Charged Talisman");
-        t.add("tooltip.potions-n-rituals.talisman_charge_line", "Gather %s Souls");
-        t.add("tooltip.potions-n-rituals.talisman_charged_line", "The talisman overflows with spiritual energy.");
-        t.add("item.potions-n-rituals.alchemy_guide_basic", "The Foundations of Alchemy");
+        t.add("item.potions-n-rituals.alchemy_guide_basic", "Magnus Opus: The Foundations of Alchemy");
         t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Nigredo: Chronicles of Chaos");
-        t.add("tooltip.potions-n-rituals.bookmarks_count_line", "%s Bookmarks");
         t.add("item.potions-n-rituals.alchemical_stone", "Alchemical Stone");
         t.add("item.potions-n-rituals.alchemical_stone.effect.empty", "Alchemical Stone");
         t.add("item.potions-n-rituals.alchemical_stone.effect.mixed", "Multi-effect Alchemical Stone");
         registerVanillaReverse(t, "mixed", "Multi-effect");
 
-		t.add("item.potions-n-rituals.syringe", "Syringe");
-		t.add("item.potions-n-rituals.syringe.effect.isEmpty", "Syringe");
-
-		t.add("block.potions-n-rituals.brewing_cauldron", "Brewing Cauldron");
+        t.add("item.potions-n-rituals.syringe", "Syringe");
+        t.add("item.potions-n-rituals.syringe.effect.isEmpty", "Syringe");
 
         BuiltInRegistries.MOB_EFFECT.entrySet().forEach(entry -> {
             Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(entry.getValue());
@@ -135,15 +144,14 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
             String key = "item.potions-n-rituals.syringe." + entry.getValue().getDescriptionId();
             t.add(key, "Syringe of " + entry.getValue().getDescriptionId());
         });
+    }
 
-        t.add("potions-n-rituals.blood_type.unknown", "Unknown");
-        t.add("potions-n-rituals.blood_type.human", "Human Blood");
-        t.add("potions-n-rituals.blood_type.monster", "Monster Blood");
+    private void generateBlocks(TranslationBuilder t) {
+        t.add("block.potions-n-rituals.pedestal", "Pedestal");
+        t.add("block.potions-n-rituals.brewing_cauldron", "Brewing Cauldron");
+    }
 
-        t.add("item.potions-n-rituals.alchemical_stone.block_only", "Runes can only be used on blocks");
-        t.add("item.potions-n-rituals.alchemical_stone.block_not_good", "The block is not compatible");
-        t.add("itemGroup.potions-n-rituals.alchemy", "Alchemy");
-
+    private void generateAdvancements(TranslationBuilder t) {
         t.add("advancements.potions-n-rituals.root.title", "Potions & Rituals");
         t.add("advancements.potions-n-rituals.root.description", "The art of alchemy");
         t.add("advancements.potions-n-rituals.nigredo.title", "Nigredo");
@@ -154,196 +162,34 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("advancements.potions-n-rituals.citrinitas.description", "Channel Nether energies to forge your first talismans and artifacts");
         t.add("advancements.potions-n-rituals.rubedo.title", "Rubedo");
         t.add("advancements.potions-n-rituals.rubedo.description", "Achieve absolute perfection by performing great worldly rituals");
+    }
 
-        t.add("splash.potionsnrituals.magic", "Alchemy is power!!!");
-        t.add("splash.potionsnrituals.thanks", "Thank you for supporting me LivelyBadGood");
-        t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s hits remaining)");
+    private void generateMisc(TranslationBuilder t) {
+        // Parameter / Keys
         t.add("key.potions-n-rituals.show_effect_icons", "Show Effect Icons");
         t.add("key.potions-n-rituals.effect_button", "Effect Button");
         t.add("key.category.potions-n-rituals.main", "Potions & Rituals");
 
-        //ModConfig Screen — Title & Tabs
-        t.add("title.potions-n-rituals.config", "Potions & Rituals");
-        t.add("category.potions-n-rituals.potions_and_items", "Potions & Items");
-        t.add("category.potions-n-rituals.mob_effects", "Mob Effects");
-        t.add("category.potions-n-rituals.active_effects", "Active Effects");
+        // Blood Types
+        t.add("potions-n-rituals.blood_type.unknown", "Unknown");
+        t.add("potions-n-rituals.blood_type.human", "Human Blood");
+        t.add("potions-n-rituals.blood_type.monster", "Monster Blood");
 
-        //ModConfig Screen — Option Groups
-        t.add("group.potions-n-rituals.lingering_potion_cooldown", "Lingering Potion Cooldown");
-        t.add("group.potions-n-rituals.splash_potion_cooldown", "Splash Potion Cooldown");
-        t.add("group.potions-n-rituals.brewing_stand_alternative_fuel", "Brewing Stand Alternative Fuel");
-        t.add("group.potions-n-rituals.potion_stacks", "Potion Stacks");
-        t.add("group.potions-n-rituals.potion_duration", "Potion duration");
-        t.add("group.potions-n-rituals.imbued_effect_hit", "Imbued Effect Hit");
-        t.add("group.potions-n-rituals.effect_combination", "Effect Combination");
-        t.add("group.potions-n-rituals.permanent_potion", "Permanent Potion");
+        // Mod Text
+        t.add("item.potions-n-rituals.alchemical_stone.block_only", "Runes can only be used on blocks");
+        t.add("item.potions-n-rituals.alchemical_stone.block_not_good", "The block is not compatible");
+        t.add("itemGroup.potions-n-rituals.alchemy", "Alchemy");
+        t.add("splash.potionsnrituals.magic", "Alchemy is power!!!");
+        t.add("splash.potionsnrituals.thanks", "Thank you for supporting me LivelyBadGood");
 
-        //ModConfig Screen — Options (TAB 1)
-        t.add("option.potions-n-rituals.syringe.damage", "Damage");
-        t.add("option.potions-n-rituals.syringe.durability_loss", "Durability Loss");
-        t.add("option.potions-n-rituals.syringe.max_transfer_duration", "Max Transfer Duration (ticks)");
-        t.add("option.potions-n-rituals.syringe.durability", "Durability");
-
-        t.add("option.potions-n-rituals.lingering_potion_cooldown.cooldown", "Cooldown (ticks)");
-        t.add("option.potions-n-rituals.lingering_potion_cooldown.short_cooldown", "Short Cooldown (ticks)");
-        t.add("option.potions-n-rituals.lingering_potion_cooldown.long_cooldown", "Long Cooldown (ticks)");
-
-        t.add("option.potions-n-rituals.splash_potion_cooldown.cooldown", "Cooldown (ticks)");
-        t.add("option.potions-n-rituals.splash_potion_cooldown.short_cooldown", "Short Cooldown (ticks)");
-        t.add("option.potions-n-rituals.splash_potion_cooldown.long_cooldown", "Long Cooldown (ticks)");
-
-        t.add("option.potions-n-rituals.brewing_stand_alternative_fuel.fuel", "Fuel");
-
-        t.add("option.potions-n-rituals.potion_stacks.max_stack_size", "Max Stack Size");
-
-        t.add("option.potions-n-rituals.potion_duration.instant", "Instant (ticks)");
-        t.add("option.potions-n-rituals.potion_duration.very_short", "Very Short (ticks)");
-        t.add("option.potions-n-rituals.potion_duration.short", "Short (ticks)");
-        t.add("option.potions-n-rituals.potion_duration.basic", "Basic (ticks)");
-        t.add("option.potions-n-rituals.potion_duration.long", "Long (ticks)");
-        t.add("option.potions-n-rituals.potion_duration.infinite", "Infinite (-1 = inf)");
-
-        t.add("option.potions-n-rituals.imbued_effect_hit.default_hit", "Default Hit");
-
-        t.add("option.potions-n-rituals.effect_combination.max_diff", "Max Diff");
-
-        t.add("option.potions-n-rituals.permanent_potion.perm_heal", "Perm Heal");
-        t.add("option.potions-n-rituals.permanent_potion.perm_speed", "Perm Speed");
-        t.add("option.potions-n-rituals.permanent_potion.perm_strength", "Perm Strength");
-
-        //ModConfig Screen — Options (TAB 2)
-        t.add("option.potions-n-rituals.ghost_walk.y_movement", "Y Movement");
-        t.add("option.potions-n-rituals.ghost_walk.movement_absorber", "Movement Absorber");
-
-        t.add("option.potions-n-rituals.ignition.fireball_speed", "Fireball Speed");
-        t.add("option.potions-n-rituals.ignition.fireball_cooldown", "Fireball Cooldown (ticks)");
-
-        t.add("option.potions-n-rituals.vampirism.heal", "Heal");
-        t.add("option.potions-n-rituals.vampirism.heal_per_level", "Heal Per Level");
-
-        t.add("option.potions-n-rituals.acid.radius", "Radius");
-        t.add("option.potions-n-rituals.acid.depth", "Depth");
-        t.add("option.potions-n-rituals.acid.radius_per_level", "Radius Per Level");
-        t.add("option.potions-n-rituals.acid.depth_per_level", "Depth Per Level");
-
-        t.add("option.potions-n-rituals.frost.radius", "Radius");
-        t.add("option.potions-n-rituals.frost.radius_per_level", "Radius Per Level");
-
-        t.add("option.potions-n-rituals.giant.max_tries", "Max Tries");
-        t.add("option.potions-n-rituals.giant.max_tries_per_level", "Max Tries Per Level");
-
-        t.add("option.potions-n-rituals.resurrection.max_resurrections", "Max Resurrections");
-
-        t.add("option.potions-n-rituals.adhesion.horizontal_damping", "Horizontal Damping");
-        t.add("option.potions-n-rituals.adhesion.base_climb", "Base Climb");
-        t.add("option.potions-n-rituals.adhesion.climb_per_level", "Climb Per Level");
-
-        t.add("option.potions-n-rituals.aftermath.health_required_after", "Health Required After (0-1)");
-
-        t.add("option.potions-n-rituals.death.boss_death_damage", "Boss Death Damage");
-        t.add("option.potions-n-rituals.death.undead_death_heal", "Undead Death Heal");
-        t.add("option.potions-n-rituals.death.boss_death_backlash", "Boss Death Backlash");
-        t.add("option.potions-n-rituals.death.undead_death_backlash", "Undead Death Backlash");
-
-        t.add("option.potions-n-rituals.oblivion.inventory_forgotten_chance", "Inventory Forgotten Chance");
-        t.add("option.potions-n-rituals.oblivion.teleport_max_tries", "Teleport Max Tries");
-
-        t.add("option.potions-n-rituals.ore_sense.scan_range", "Scan Range");
-        t.add("option.potions-n-rituals.ore_sense.scan_range_per_level", "Scan Range Per Level");
-        t.add("option.potions-n-rituals.ore_sense.scan_interval", "Scan Interval (ticks)");
-        t.add("option.potions-n-rituals.ore_sense.coal_color", "Coal Color");
-        t.add("option.potions-n-rituals.ore_sense.iron_color", "Iron Color");
-        t.add("option.potions-n-rituals.ore_sense.gold_color", "Gold Color");
-        t.add("option.potions-n-rituals.ore_sense.diamond_color", "Diamond Color");
-        t.add("option.potions-n-rituals.ore_sense.emerald_color", "Emerald Color");
-        t.add("option.potions-n-rituals.ore_sense.lapis_color", "Lapis Color");
-        t.add("option.potions-n-rituals.ore_sense.redstone_color", "Redstone Color");
-        t.add("option.potions-n-rituals.ore_sense.copper_color", "Copper Color");
-        t.add("option.potions-n-rituals.ore_sense.ancient_debris_color", "Ancient Debris Color");
-        t.add("option.potions-n-rituals.ore_sense.quartz_color", "Quartz Color");
-        t.add("option.potions-n-rituals.ore_sense.generic_ore_color", "Generic Ore Color");
-        t.add("option.potions-n-rituals.ore_sense.alpha_max", "Alpha Max");
-        t.add("option.potions-n-rituals.ore_sense.lerp_speed", "Lerp Speed");
-        t.add("option.potions-n-rituals.ore_sense.thickness", "Thickness");
-
-        t.add("option.potions-n-rituals.photosynthesis.food", "Food");
-        t.add("option.potions-n-rituals.photosynthesis.base_saturation", "Base Saturation");
-        t.add("option.potions-n-rituals.photosynthesis.saturation_per_level", "Saturation Per Level");
-
-        t.add("option.potions-n-rituals.resonance.radius", "Radius");
-        t.add("option.potions-n-rituals.resonance.radius_per_level", "Radius Per Level");
-        t.add("option.potions-n-rituals.resonance.orbit_points", "Orbit Points");
-        t.add("option.potions-n-rituals.resonance.pulse_points", "Pulse Points");
-        t.add("option.potions-n-rituals.resonance.scale_orbit", "Scale Orbit");
-        t.add("option.potions-n-rituals.resonance.scale_pulse", "Scale Pulse");
-        t.add("option.potions-n-rituals.resonance.pulse_period", "Pulse Period");
-        t.add("option.potions-n-rituals.resonance.orbit_speed_base", "Orbit Speed Base");
-
-        t.add("option.potions-n-rituals.rust.damage", "Damage");
-        t.add("option.potions-n-rituals.rust.min_damage", "Min Damage");
-
-        t.add("option.potions-n-rituals.saturation.base", "Base");
-        t.add("option.potions-n-rituals.saturation.per_level", "Per Level");
-
-        t.add("option.potions-n-rituals.thorns.base", "Base");
-        t.add("option.potions-n-rituals.thorns.per_level", "Per Level");
-
-        t.add("option.potions-n-rituals.unstable.effect_seconds", "Effect Seconds");
-        t.add("option.potions-n-rituals.unstable.effect_seconds_per_level", "Effect Seconds Per Level");
-        t.add("option.potions-n-rituals.unstable.explosion_power", "Explosion Power");
-        t.add("option.potions-n-rituals.unstable.explosion_power_per_level", "Explosion Power Per Level");
-        t.add("option.potions-n-rituals.unstable.explosion_chance", "Explosion Chance");
-        t.add("option.potions-n-rituals.unstable.explosion_chance_per_level", "Explosion Chance Per Level");
-
-        t.add("option.potions-n-rituals.reactivation.duration", "Duration");
-
-        t.add("option.potions-n-rituals.infinity.max_health_lost", "Max Health Lost Per Effect");
-
-        t.add("option.potions-n-rituals.pregnancy.duration", "Duration (ticks)");
-        t.add("option.potions-n-rituals.pregnancy.max_distance", "Max Distance");
-
-        t.add("option.potions-n-rituals.clumsiness.drop_percentage", "Drop Percentage");
-
-        t.add("option.potions-n-rituals.cold.min_cough_time", "Min Cough Time");
-        t.add("option.potions-n-rituals.cold.max_cough_time", "Max Cough Time");
-
-        t.add("option.potions-n-rituals.empathy.damage", "Damage");
-        t.add("option.potions-n-rituals.empathy.damage_per_level", "Damage Per Level");
-
-        t.add("option.potions-n-rituals.hydrophobia.damage", "Damage");
-        t.add("option.potions-n-rituals.hydrophobia.damage_per_level", "Damage Per Level");
-        t.add("option.potions-n-rituals.hydrophobia.potion_damage", "Potion Damage");
-        t.add("option.potions-n-rituals.hydrophobia.potion_damage_per_level", "Potion Damage Per Level");
-
-        t.add("option.potions-n-rituals.magnetism.range", "Range");
-        t.add("option.potions-n-rituals.magnetism.range_per_level", "Range Per Level");
-        t.add("option.potions-n-rituals.magnetism.pull_strength", "Pull Strength");
-
-        t.add("option.potions-n-rituals.zombie_contagion.duration", "Duration (ticks)");
-
-        t.add("option.potions-n-rituals.reality_check.max_slowdown", "Max Slowdown");
-
-        //ModConfig Screen — Active Effect Options
-        //ModConfig Screen — Active Effect Options (TAB 3)
-        t.add("option.potions-n-rituals.active_effect.medusa_range", "Medusa Range");
-        t.add("option.potions-n-rituals.active_effect.medusa_range_per_level", "Medusa Range Per Level");
-        t.add("option.potions-n-rituals.active_effect.medusa_short_cooldown", "Medusa Short Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.medusa_cooldown", "Medusa Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.medusa_long_cooldown", "Medusa Long Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.teleport_range", "Teleport Range");
-        t.add("option.potions-n-rituals.active_effect.teleport_range_per_level", "Teleport Range Per Level");
-        t.add("option.potions-n-rituals.active_effect.teleport_short_cooldown", "Teleport Short Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.teleport_cooldown", "Teleport Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.teleport_long_cooldown", "Teleport Long Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.zeus_range", "Zeus Range");
-        t.add("option.potions-n-rituals.active_effect.zeus_range_per_level", "Zeus Range Per Level");
-        t.add("option.potions-n-rituals.active_effect.zeus_short_cooldown", "Zeus Short Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.zeus_cooldown", "Zeus Cooldown (ticks)");
-        t.add("option.potions-n-rituals.active_effect.zeus_long_cooldown", "Zeus Long Cooldown (ticks)");
-
-        this.additionalTranslations.forEach(t::add);
+        // Tooltips
+        t.add("tooltip.potions-n-rituals.talisman_charge_line", "Gather %s Souls");
+        t.add("tooltip.potions-n-rituals.talisman_charged_line", "The talisman overflows with spiritual energy.");
+        t.add("tooltip.potions-n-rituals.bookmarks_count_line", "%s Bookmarks");
+        t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s hits remaining)");
     }
 
+    // --- TES MÉTHODES DE REVERSE ET REGISTRE SPÉCIFIQUES À L'ANGLAIS ---
     private void registerWithAlchemicalStone(TranslationBuilder t, String id, String name) {
         register(t, id, name);
         t.add("item.potions-n-rituals.alchemical_stone.effect." + id, name + " Stone");
@@ -377,9 +223,9 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
 
     private void registerElixir(TranslationBuilder t, String id, String name) {
         t.add("effect.potions-n-rituals." + id, "Permanent " + name);
-        t.add("item.minecraft.potion.effect." + id, "Permanent "+ name + " Elixir");
-        t.add("item.minecraft.splash_potion.effect." + id, "Permanent "+ name + " Splash Elixir");
-        t.add("item.minecraft.lingering_potion.effect." + id, "Permanent "+ name + " Lingering Elixir");
-        t.add("item.minecraft.tipped_arrow.effect." + id, "Permanent "+ name + " Arrow");
+        t.add("item.minecraft.potion.effect." + id, "Permanent " + name + " Elixir");
+        t.add("item.minecraft.splash_potion.effect." + id, "Permanent " + name + " Splash Elixir");
+        t.add("item.minecraft.lingering_potion.effect." + id, "Permanent " + name + " Lingering Elixir");
+        t.add("item.minecraft.tipped_arrow.effect." + id, "Permanent " + name + " Arrow");
     }
 }

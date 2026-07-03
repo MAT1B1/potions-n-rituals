@@ -214,7 +214,6 @@ public class ModPotions {
             REALITY_CHECK = reg(ModEffects.REALITY_CHECK, ModConfig.get().dur_basic, 0, "reality_check", "reality_check"),
             LONG_REALITY_CHECK = reg(ModEffects.REALITY_CHECK, ModConfig.get().dur_long, 0, "reality_check", "long_reality_check");
 
-
     public static void register() {
         PotionsNRituals.LOGGER.info("Registering potions for " + PotionsNRituals.MOD_ID);
 

@@ -1,6 +1,7 @@
 package com.matibi.potionsnrituals.datagen;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.recipe.AlchemicalStoneRecipe;
 import com.matibi.potionsnrituals.recipe.CombinationRecipe;
@@ -91,10 +92,47 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(ModItems.MATERIA_PRIMA), has(ModItems.MATERIA_PRIMA))
                         .save(output, "alchemical_stone_from_nether_wart");
 
+                shaped(RecipeCategory.BREWING, ModItems.TALISMAN, 1)
+                        .pattern(" G ").pattern("GQG").pattern(" G ")
+                        .define('G', Items.GOLD_INGOT)
+                        .define('Q', Items.QUARTZ)
+                        .unlockedBy("has_quartz", has(Items.QUARTZ))
+                        .save(output);
+
                 shapeless(RecipeCategory.BREWING, ModItems.SYRINGE)
                         .requires(Items.GLASS_BOTTLE)
                         .requires(Items.IRON_NUGGET)
                         .unlockedBy(getHasName(Items.GLASS_BOTTLE), has(Items.GLASS_BOTTLE))
+                        .save(output);
+
+                shapeless(RecipeCategory.MISC, ModItems.BASIC_GUIDE, 1)
+                        .requires(Items.BOOK)
+                        .requires(Items.DIRT)
+                        .unlockedBy("has_dirt", has(Items.DIRT))
+                        .save(output);
+
+                shapeless(RecipeCategory.MISC, ModItems.NIGREDO_GUIDE, 1)
+                        .requires(ModItems.BASIC_GUIDE)
+                        .requires(ModItems.MATERIA_PRIMA)
+                        .unlockedBy("has_materia_prima", has(ModItems.MATERIA_PRIMA))
+                        .save(output);
+
+                shapeless(RecipeCategory.MISC, ModItems.ALBEDO_GUIDE, 1)
+                        .requires(ModItems.NIGREDO_GUIDE)
+                        .requires(Items.POTION)
+                        .unlockedBy("has_potion", has(Items.POTION))
+                        .save(output);
+
+                shapeless(RecipeCategory.MISC, ModItems.CITRINITAS_GUIDE, 1)
+                        .requires(ModItems.ALBEDO_GUIDE)
+                        .requires(ModItems.TALISMAN)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN))
+                        .save(output);
+
+                shapeless(RecipeCategory.MISC, ModItems.RUBEDO_GUIDE, 1)
+                        .requires(ModItems.CITRINITAS_GUIDE)
+                        .requires(ModBlocks.PEDESTAL.asItem())
+                        .unlockedBy("has_pedestal", has(ModBlocks.PEDESTAL.asItem()))
                         .save(output);
 
                 SpecialRecipeBuilder.special(FoodWithEffectRecipe::new)

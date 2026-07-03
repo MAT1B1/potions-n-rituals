@@ -1,5 +1,6 @@
 package com.matibi.potionsnrituals.book;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import java.util.ArrayList;
@@ -18,8 +19,8 @@ public class BookStructure {
     private boolean hasAutoSummary = false;
     private String summaryTitle = "Sommaire";
 
-    public BookStructure(Component bookTitle) {
-        this.bookTitle = bookTitle;
+    public BookStructure(String bookTitle) {
+        this.bookTitle = Component.translatable(bookTitle);
     }
 
     public BookStructure tableOfContents(String title) {
@@ -69,7 +70,7 @@ public class BookStructure {
 
         if (hasAutoSummary) {
             Component summaryBody = generateSummaryText(rootElements);
-            flatPages.set(0, new BookPage.TextPage("summary", Component.literal(summaryTitle), summaryBody));
+            flatPages.set(0, new BookPage.TextPage("summary", Component.translatable(summaryTitle), summaryBody));
         }
 
         return this;
@@ -92,20 +93,25 @@ public class BookStructure {
     }
 
     private Component generateSummaryText(List<Object> rootElements) {
-        var text = Component.translatable("Cliquez sur une section pour débuter :\n\n");
+        var text = Component.translatable("book.potions-n-rituals.basic.toc2");
 
         for (Object element : rootElements) {
             if (element instanceof Chapter chat) {
                 Integer chatIndex = anchorToPageIndex.get("chapter_" + chat.title);
                 if (chatIndex != null) {
-                    text.append(Component.translatable("§4" + chat.title + "§r\n")
+                    text.append(Component.translatable(chat.title)
+                            .withStyle(ChatFormatting.DARK_RED)
+                            .append("\n")
                             .withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(chatIndex))));
                 }
 
                 for (Chapter subChat : chat.subChapters) {
                     Integer subIndex = anchorToPageIndex.get("subchapter_" + subChat.title);
                     if (subIndex != null) {
-                        text.append(Component.translatable("§8- " + subChat.title + "§r\n")
+                        text.append(Component.literal("- ")
+                                .append(Component.translatable(subChat.title))
+                                .withStyle(ChatFormatting.DARK_GRAY)
+                                .append("\n")
                                 .withStyle(s -> s.withClickEvent(new ClickEvent.ChangePage(subIndex))));
                     }
                 }

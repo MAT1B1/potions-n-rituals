@@ -16,7 +16,7 @@ public class NigredoBookItem extends CustomBookItem {
                         Registries.ITEM,
                         ModUtils.id("alchemy_guide_nigredo"))
                 ).stacksTo(1), () ->
-                        new BookStructure(Component.translatable("item.potions-n-rituals.alchemy_guide_nigredo"))
+                        new BookStructure("item.potions-n-rituals.alchemy_guide_nigredo")
                                 .tableOfContents("Sommaire")
 
                                 // ── Chapitre : Potions Customs ──────────────────────────────────
