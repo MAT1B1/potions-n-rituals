@@ -1,6 +1,5 @@
 package com.matibi.potionsnrituals.entity;
 
-import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.block.custom.BloodTrailBlock;
 import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlock;
 import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlockEntity;
