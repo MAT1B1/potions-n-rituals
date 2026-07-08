@@ -16,8 +16,6 @@ public class ModRitualProvider extends RitualRecipeProvider {
 
     @Override
     protected void configure() {
-
-        // --- Spawn cheval squelettique ---
         addRitual(EntityTypes.SKELETON_HORSE, 1)
                 .duration(20 * 60)
                 .pattern("  I  ")
@@ -30,7 +28,6 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .catalyst(Ritual.Catalysts.KILL)
                 .save();
 
-        // --- Creation Ancient debris ---
         addRitual(Blocks.ANCIENT_DEBRIS, 1)
                 .duration(20 * 60 * 5)
                 .pattern("D   D")
@@ -43,10 +40,40 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .catalyst(Ritual.Catalysts.IGNITE)
                 .save();
 
-        // --- Random effet ---
         addRitual("random_effect")
                 .pattern("P")
                 .define('P', Items.POTION)
+                .catalyst(Ritual.Catalysts.IGNITE)
+                .save();
+
+        addRitual("summon_thunderstorm")
+                .pattern(" W ")
+                .pattern("WSW")
+                .pattern(" W ")
+                .define('W', Items.WATER_BUCKET)
+                .define('S', ModBlocks.BLOOD_TRAIL)
+                .catalyst(Ritual.Catalysts.IGNITE)
+                .height(120, 321)
+                .save();
+
+        addRitual(Items.ECHO_SHARD, 1)
+                .duration(20 * 20)
+                .pattern(" A ")
+                .pattern("ASA")
+                .pattern(" A ")
+                .define('A', Items.AMETHYST_SHARD)
+                .define('S', ModBlocks.BLOOD_TRAIL)
+                .catalyst(Ritual.Catalysts.KILL)
+                .time(13000, 23000)
+                .moonphase(RitualBuilder.MOONPHASE.NO_MOON)
+                .save();
+
+        addRitual("summon_dawn")
+                .pattern(" G ")
+                .pattern("GSG")
+                .pattern(" G ")
+                .define('G', Items.GLOWSTONE_DUST)
+                .define('S', Blocks.SUNFLOWER)
                 .catalyst(Ritual.Catalysts.IGNITE)
                 .save();
     }

@@ -10,6 +10,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.clock.ClockTimeMarkers;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
@@ -40,6 +41,26 @@ public class RitualActions {
                         .get(level.getRandom().nextInt(allEffects.size()));
                 player.addEffect(new MobEffectInstance(Holder.direct(chosenHolder), ModConfig.get().dur_short, 0));
                 level.playSound(null, player.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.5f, 1.0f);
+            }
+        });
+
+        register("summon_thunderstorm", (level, entity, _) -> {
+            if (level instanceof ServerLevel serverLevel) {
+                serverLevel.getServer().setWeatherParameters(0, 6000, true, true);
+                Player player = level.getNearestPlayer(entity, 10.0);
+                if (player != null)
+                    level.playSound(null, player.blockPosition(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER, 1.0f, 1.0f);
+            }
+        });
+
+        register("summon_dawn", (level, entity, _) -> {
+            if (level instanceof ServerLevel serverLevel) {
+                serverLevel.dimensionType().defaultClock().ifPresent(clock ->
+                    serverLevel.clockManager().moveToTimeMarker(clock, ClockTimeMarkers.WAKE_UP_FROM_SLEEP)
+                );
+                Player player = level.getNearestPlayer(entity, 10.0);
+                if (player != null)
+                    level.playSound(null, player.blockPosition(), SoundEvents.ILLUSIONER_PREPARE_BLINDNESS, SoundSource.PLAYERS, 1.0f, 0.5f);
             }
         });
     }
