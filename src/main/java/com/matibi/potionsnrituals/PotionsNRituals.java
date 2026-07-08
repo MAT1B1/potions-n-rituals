@@ -10,6 +10,7 @@ import com.matibi.potionsnrituals.effect.helper.ActiveEffectHandler;
 import com.matibi.potionsnrituals.effect.custom.brainwashing.DisorientMobHandler;
 import com.matibi.potionsnrituals.effect.custom.brainwashing.DisorientVillagerHandler;
 import com.matibi.potionsnrituals.effect.custom.terrain.ResurrectionEffect;
+import com.matibi.potionsnrituals.entity.ModEntities;
 import com.matibi.potionsnrituals.group.ModItemGroups;
 import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.item.custom.TalismanItem;
@@ -17,8 +18,12 @@ import com.matibi.potionsnrituals.item.custom.alchemicalStone.ModAlchemicalStone
 import com.matibi.potionsnrituals.network.ModNetworking;
 import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.recipe.ModRecipeSerializer;
+import com.matibi.potionsnrituals.ritual.RitualManager;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+import net.minecraft.server.packs.PackType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +46,13 @@ public class PotionsNRituals implements ModInitializer {
 		ModConfig.register();
 		ModBlocks.register();
 		ModBlockEntities.register();
+		ModEntities.register();
+
+		ResourceLoader.get(PackType.SERVER_DATA)
+				.registerReloadListener(
+						ModUtils.id("rituals_manager"),
+						new RitualManager()
+				);
 
 		TalismanItem.registerEvents();
 		ResurrectionEffect.registerDeathHandler();

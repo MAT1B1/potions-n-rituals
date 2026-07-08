@@ -28,5 +28,10 @@
       "has_materia_prima"
     ]
   ],
+  "rewards": {
+    "loot": [
+      "potions-n-rituals:advancement/reward_book_nigredo"
+    ]
+  },
   "sends_telemetry_event": true
 }

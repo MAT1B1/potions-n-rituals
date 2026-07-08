@@ -28,5 +28,10 @@
       "has_potion"
     ]
   ],
+  "rewards": {
+    "loot": [
+      "potions-n-rituals:advancement/reward_book_albedo"
+    ]
+  },
   "sends_telemetry_event": true
 }

@@ -2,6 +2,7 @@ package com.matibi.potionsnrituals.block;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.block.custom.cauldron.BrewingCauldronBlockEntity;
+import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlockEntity;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -10,13 +11,23 @@ import java.util.Set;
 
 public class ModBlockEntities {
 
-    public static final BlockEntityType<BrewingCauldronBlockEntity> BREWING_CAULDRON_BLOCK_ENTITY =
+    public static final BlockEntityType<BrewingCauldronBlockEntity> BREWING_CAULDRON =
             Registry.register(
                     BuiltInRegistries.BLOCK_ENTITY_TYPE,
                     ModUtils.id("brewing_cauldron"),
                     new BlockEntityType<>(
                             BrewingCauldronBlockEntity::new,
                             Set.of(ModBlocks.BREWING_CAULDRON)
+                    )
+            );
+
+    public static final BlockEntityType<PedestalBlockEntity> PEDESTAL =
+            Registry.register(
+                    BuiltInRegistries.BLOCK_ENTITY_TYPE,
+                    ModUtils.id("pedestal"),
+                    new BlockEntityType<>(
+                            PedestalBlockEntity::new,
+                            Set.of(ModBlocks.PEDESTAL)
                     )
             );
 

@@ -1,7 +1,7 @@
 package com.matibi.potionsnrituals.block;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
-import com.matibi.potionsnrituals.block.custom.PedestalBlock;
+import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlock;
 import com.matibi.potionsnrituals.block.custom.cauldron.BrewingCauldronBlock;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.Registry;
@@ -23,7 +23,8 @@ import java.util.function.Function;
 public class ModBlocks {
 
     public static final Block PEDESTAL = reg("pedestal",
-            properties -> new PedestalBlock(properties.strength(3.0F).noOcclusion()));
+            properties -> new PedestalBlock(properties.strength(3.0F).noOcclusion()
+                    .lightLevel(state -> state.getValue(PedestalBlock.LIT) ? 12 : 0)));
 
     public static final Block BREWING_CAULDRON = reg("brewing_cauldron",
             properties -> new BrewingCauldronBlock(properties.strength(2.0F).noOcclusion()));

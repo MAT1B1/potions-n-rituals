@@ -29,5 +29,10 @@
       "has_end_stone"
     ]
   ],
+  "rewards": {
+    "loot": [
+      "potions-n-rituals:advancement/reward_book_rubedo"
+    ]
+  },
   "sends_telemetry_event": true
 }

@@ -21,7 +21,7 @@ public class BrewingCauldronBlockEntity extends BlockEntity {
     private PotionContents potionContents = PotionContents.EMPTY;
 
     public BrewingCauldronBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlockEntities.BREWING_CAULDRON_BLOCK_ENTITY, pos, state);
+        super(ModBlockEntities.BREWING_CAULDRON, pos, state);
     }
 
     public PotionContents getPotionContents() {

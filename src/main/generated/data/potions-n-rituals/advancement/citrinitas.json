@@ -29,5 +29,10 @@
       "has_quartz"
     ]
   ],
+  "rewards": {
+    "loot": [
+      "potions-n-rituals:advancement/reward_book_citrinitas"
+    ]
+  },
   "sends_telemetry_event": true
 }
