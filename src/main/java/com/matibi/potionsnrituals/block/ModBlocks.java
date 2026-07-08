@@ -1,6 +1,7 @@
 package com.matibi.potionsnrituals.block;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.block.custom.BloodTrailBlock;
 import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlock;
 import com.matibi.potionsnrituals.block.custom.cauldron.BrewingCauldronBlock;
 import com.matibi.potionsnrituals.util.ModUtils;
@@ -22,16 +23,25 @@ import java.util.function.Function;
 
 public class ModBlocks {
 
-    public static final Block PEDESTAL = reg("pedestal",
-            properties -> new PedestalBlock(properties.strength(3.0F).noOcclusion()
-                    .lightLevel(state -> state.getValue(PedestalBlock.LIT) ? 12 : 0)));
+    public static final Block
+            BLOOD_TRAIL = regBlockOnly("blood", properties ->
+                new BloodTrailBlock(properties.strength(0.0F).noOcclusion())),
 
-    public static final Block BREWING_CAULDRON = reg("brewing_cauldron",
-            properties -> new BrewingCauldronBlock(properties.strength(2.0F).noOcclusion()));
+            PEDESTAL = reg("pedestal",
+                properties -> new PedestalBlock(properties.strength(3.0F).noOcclusion()
+                    .lightLevel(state -> state.getValue(PedestalBlock.LIT) ? 12 : 0))),
+
+            BREWING_CAULDRON = regBlockOnly("brewing_cauldron",
+                properties -> new BrewingCauldronBlock(properties.strength(2.0F).noOcclusion()));
 
     private static Block reg(String name, Function<BlockBehaviour.Properties, Block> function, Component... tooltips) {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ModUtils.id(name))));
         registerBlockItem(name, toRegister, tooltips);
+        return Registry.register(BuiltInRegistries.BLOCK, ModUtils.id(name), toRegister);
+    }
+
+    private static Block regBlockOnly(String name, Function<BlockBehaviour.Properties, Block> function, Component... tooltips) {
+        Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ModUtils.id(name))));
         return Registry.register(BuiltInRegistries.BLOCK, ModUtils.id(name), toRegister);
     }
 

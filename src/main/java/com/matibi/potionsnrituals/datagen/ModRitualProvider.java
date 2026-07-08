@@ -1,6 +1,6 @@
 package com.matibi.potionsnrituals.datagen;
 
-import com.matibi.potionsnrituals.item.ModItems;
+import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.ritual.datagen.definition.RitualCatalyst;
 import com.matibi.potionsnrituals.ritual.datagen.RitualRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -17,41 +17,34 @@ public class ModRitualProvider extends RitualRecipeProvider {
     @Override
     protected void configure() {
 
-        // --- 1. Invocation de Cheval Squelette ---
-        addRitual(EntityTypes.SKELETON_HORSE, 1)
-                .pattern("I")
-                .define('I', Items.BONE)
-                .catalyst(RitualCatalyst.IGNITE)
-                .save();
-
         // --- 2. Création de Materia Prima ---
-        addRitual(ModItems.MATERIA_PRIMA, 3)
+        addRitual(EntityTypes.SKELETON_HORSE, 1)
                 .duration(500)
                 .pattern("  I  ")
-                .pattern("I S I")
+                .pattern("  S  ")
+                .pattern("ISSSI")
+                .pattern("  S  ")
                 .pattern("  I  ")
-                .define('S', Blocks.CRYING_OBSIDIAN)
-                .define('I', Items.GHAST_TEAR)
+                .define('S', ModBlocks.BLOOD_TRAIL)
+                .define('I', Items.BONE)
                 .catalyst(RitualCatalyst.KILL)
                 .save();
 
         // --- 3. Bloc de Diamant ---
-        addRitual(Blocks.DIAMOND_BLOCK, 1)
-                .pattern(" S ")
-                .pattern("SXS")
-                .pattern(" S ")
-                .define('X', Items.NETHER_STAR)
-                .define('S', Items.DIAMOND)
+        addRitual(Blocks.ANCIENT_DEBRIS, 1)
+                .pattern("SSS")
+                .pattern("SDS")
+                .pattern("SSS")
+                .define('D', Items.DIAMOND_BLOCK)
+                .define('S', ModBlocks.BLOOD_TRAIL)
                 .catalyst(RitualCatalyst.IGNITE)
                 .save();
 
-        /*// --- 4. Rituel Spécial (Custom ID) ---
-        addRitual("any_id_rituals")
-                .pattern(" S ")
-                .pattern("S S")
-                .pattern(" S ")
-                .define('S', Items.DIAMOND)
-                .catalyst(RitualCatalyst.KILL)
-                .save();*/
+        // --- 4. Rituel Spécial (Custom ID) ---
+        addRitual("random_effect")
+                .pattern("P")
+                .define('P', Items.POTION)
+                .catalyst(RitualCatalyst.IGNITE)
+                .save();
     }
 }

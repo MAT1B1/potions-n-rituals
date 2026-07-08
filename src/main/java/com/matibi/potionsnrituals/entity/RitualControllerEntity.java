@@ -1,9 +1,15 @@
 package com.matibi.potionsnrituals.entity;
 
+import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.block.custom.BloodTrailBlock;
 import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlock;
 import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlockEntity;
+import com.matibi.potionsnrituals.ritual.RitualAction;
+import com.matibi.potionsnrituals.ritual.RitualActions;
+import com.matibi.potionsnrituals.ritual.RitualActivator;
 import com.matibi.potionsnrituals.ritual.RitualManager;
 import com.matibi.potionsnrituals.ritual.datagen.definition.Ritual;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,6 +30,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -89,11 +96,17 @@ public class RitualControllerEntity extends Entity {
         if (this.level() instanceof ServerLevel serverLevel && this.recipeId != null) {
             Ritual ritual = RitualManager.getAllRituals().get(this.recipeId);
 
-            if (ritual != null) {
+            if (ritual != null && RitualActivator.isPatternStillValid(this.level(), this.centerPos, ritual)) {
                 consumeIngredients(serverLevel, ritual);
 
                 var result = ritual.result();
                 int count = result.count().orElse(1);
+
+                result.custom().ifPresent(id -> {
+                    RitualAction action = RitualActions.REGISTRY.get(ModUtils.id(id));
+                    if (action != null)
+                        action.execute(serverLevel, this, ritual);
+                });
 
                 result.item().ifPresent(id -> {
                     Optional<Holder.Reference<Item>> optItem = BuiltInRegistries.ITEM.get(Identifier.parse(id));
@@ -120,9 +133,16 @@ public class RitualControllerEntity extends Entity {
                 });
 
                 serverLevel.sendParticles(ParticleTypes.ENCHANT, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
-            }
+            } else
+                triggerRitualFailure(serverLevel);
         }
         this.discard();
+    }
+
+    private void triggerRitualFailure(ServerLevel level) {
+        level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0F, Level.ExplosionInteraction.BLOCK);
+        level.playSound(null, this.centerPos, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 1.0F, 0.5F);
+        level.sendParticles(ParticleTypes.LAVA, this.getX(), this.getY(), this.getZ(), 20, 0.5, 0.5, 0.5, 0.1);
     }
 
     private void consumeIngredients(ServerLevel level, Ritual ritual) {
@@ -131,6 +151,7 @@ public class RitualControllerEntity extends Entity {
         int xSize = pattern.getFirst().length();
         int xOffset = xSize / 2;
         int zOffset = zSize / 2;
+        boolean bloodTrail = false;
 
         if (this.centerPos == null) return;
 
@@ -149,9 +170,19 @@ public class RitualControllerEntity extends Entity {
                     BlockEntity be = level.getBlockEntity(checkPos);
                     if (be instanceof PedestalBlockEntity pedestal)
                         pedestal.clearItem();
+                } else if (state.getBlock() instanceof BloodTrailBlock) {
+                    level.setBlock(checkPos, Blocks.AIR.defaultBlockState(), 3);
+                    bloodTrail = true;
+                    level.sendParticles(ParticleTypes.SMOKE,
+                            checkPos.getX() + 0.5, checkPos.getY() + 0.1, checkPos.getZ() + 0.5,
+                            5, 0.1, 0.1, 0.1, 0.02
+                    );
                 }
             }
         }
+        if (bloodTrail)
+            level.playSound(null, this.centerPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.1F, 0.5F);
+
     }
 
     private void igniteAllPedestals() {

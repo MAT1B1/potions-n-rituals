@@ -6,7 +6,10 @@ import org.jspecify.annotations.NonNull;
 
 public enum RitualCatalyst implements StringRepresentable {
     IGNITE("ignite"),
-    KILL("kill");
+    KILL("kill"),
+    SUICIDE("suicide"),
+    THUNDERSTRIKE("thunderstrike"),
+    MOONLIGHT("moonlight");
 
     public static final Codec<RitualCatalyst> CODEC = StringRepresentable.fromEnum(RitualCatalyst::values);
     private final String name;

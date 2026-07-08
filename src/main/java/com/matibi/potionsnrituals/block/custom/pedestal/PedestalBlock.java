@@ -3,8 +3,10 @@ package com.matibi.potionsnrituals.block.custom.pedestal;
 import com.matibi.potionsnrituals.entity.ModEntities;
 import com.matibi.potionsnrituals.ritual.RitualActivator;
 import com.matibi.potionsnrituals.entity.RitualControllerEntity;
+import com.matibi.potionsnrituals.ritual.datagen.definition.Ritual;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.level.ServerLevel;
@@ -117,13 +119,7 @@ public class PedestalBlock extends Block implements EntityBlock {
                 var matchedRitual = RitualActivator.checkRitualMatch(level, pos);
 
                 if (matchedRitual.isPresent()) {
-                    var recipeId = matchedRitual.get().getKey();
-                    var ritual = matchedRitual.get().getValue();
-
-                    // On fait spawn le contrôleur au centre du piédestal
-                    RitualControllerEntity controller = new RitualControllerEntity(ModEntities.RITUAL_CONTROLLER, level);
-                    controller.setPos(pos.getX() + 0.5, pos.getY() + 1.0, pos.getZ() + 0.5);
-                    controller.startRitual(recipeId, ritual.duration(), pos);
+                    RitualControllerEntity controller = getRitualControllerEntity(level, matchedRitual.get());
 
                     level.addFreshEntity(controller);
                 }
@@ -133,6 +129,18 @@ public class PedestalBlock extends Block implements EntityBlock {
         }
 
         return InteractionResult.PASS;
+    }
+
+    private static @NonNull RitualControllerEntity getRitualControllerEntity(Level level, RitualActivator.RitualType match) {
+        Identifier recipeId = match.id();
+        Ritual ritual = match.ritual();
+        BlockPos centerPos = match.center();
+
+        RitualControllerEntity controller = new RitualControllerEntity(ModEntities.RITUAL_CONTROLLER, level);
+        controller.setPos(centerPos.getX() + 0.5, centerPos.getY() + 1.0, centerPos.getZ() + 0.5);
+
+        controller.startRitual(recipeId, ritual.duration(), centerPos);
+        return controller;
     }
 
     @Override

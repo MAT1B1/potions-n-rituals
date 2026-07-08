@@ -1,6 +1,7 @@
 package com.matibi.potionsnrituals.item;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.custom.CustomBookItem;
@@ -33,7 +34,9 @@ public class ModItems {
             SULFUR_BALL = registerSimple("sulfur_ball"),
             SALT = registerSimple("salt"),
             CLAW = registerSimple("claw"),
-            BLOOD_BAG = registerSimple("blood_bag"),
+            BLOOD_BAG = register("blood_bag",
+                    new BlockItem(ModBlocks.BLOOD_TRAIL, props("blood_bag"))
+            ),
             CHARGED_COPPER = registerSimple("charged_copper"),
             OXYDATION = registerSimple("oxydation"),
             ZOMBIE_BRAIN = registerFoodWithEffect(
