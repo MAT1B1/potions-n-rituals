@@ -17,9 +17,9 @@ public class ModRitualProvider extends RitualRecipeProvider {
     @Override
     protected void configure() {
 
-        // --- 2. Création de Materia Prima ---
+        // --- Spawn cheval squelettique ---
         addRitual(EntityTypes.SKELETON_HORSE, 1)
-                .duration(500)
+                .duration(20 * 60)
                 .pattern("  I  ")
                 .pattern("  S  ")
                 .pattern("ISSSI")
@@ -30,17 +30,20 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .catalyst(Ritual.Catalysts.KILL)
                 .save();
 
-        // --- 3. Bloc de Diamant ---
+        // --- Creation Ancient debris ---
         addRitual(Blocks.ANCIENT_DEBRIS, 1)
-                .pattern("SSS")
-                .pattern("SDS")
-                .pattern("SSS")
+                .duration(20 * 60 * 5)
+                .pattern("D   D")
+                .pattern(" SSS ")
+                .pattern(" S S ")
+                .pattern(" SSS ")
+                .pattern("D   D")
                 .define('D', Items.DIAMOND_BLOCK)
                 .define('S', ModBlocks.BLOOD_TRAIL)
                 .catalyst(Ritual.Catalysts.IGNITE)
                 .save();
 
-        // --- 4. Rituel Spécial (Custom ID) ---
+        // --- Random effet ---
         addRitual("random_effect")
                 .pattern("P")
                 .define('P', Items.POTION)

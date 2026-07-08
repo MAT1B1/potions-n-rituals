@@ -69,15 +69,18 @@ public class RitualControllerEntity extends Entity {
 
         int maxDuration = this.entityData.get(MAX_DURATION);
 
-        if (this.level() instanceof ServerLevel serverLevel)
-            serverLevel.sendParticles(
-                    ParticleTypes.SMOKE,
-                    this.getX(), this.getY() + 0.5, this.getZ(),
-                    1, 0.0, 0.0, 0.0, 0.0
-            );
+        if (this.level() instanceof ServerLevel serverLevel) {
+            double angle = this.currentTicks * 0.2;
+            double radius = 1.5;
+            double xOffset = Math.cos(angle) * radius;
+            double zOffset = Math.sin(angle) * radius;
 
-        if (this.level().isClientSide())
-            return;
+            serverLevel.sendParticles(ParticleTypes.ENCHANT,
+                    this.getX() + xOffset, this.getY() + 0.5, this.getZ() + zOffset,
+                    2, 0.0, 0.5, 0.0, 0.1);
+        }
+
+        if (this.level().isClientSide()) return;
 
         this.currentTicks++;
 
@@ -94,7 +97,7 @@ public class RitualControllerEntity extends Entity {
         if (this.level() instanceof ServerLevel serverLevel && this.recipeId != null) {
             Ritual ritual = RitualManager.getAllRituals().get(this.recipeId);
 
-            if (ritual != null && RitualTriggerManager.isPatternStillValid(this.level(), this.centerPos, ritual)) {
+            if (ritual != null && RitualTriggerManager.isStillValid(this.level(), this.centerPos, ritual)) {
                 consumeIngredients(serverLevel, ritual);
 
                 var result = ritual.result();
@@ -116,8 +119,8 @@ public class RitualControllerEntity extends Entity {
                 result.block().ifPresent(id -> {
                     Optional<Holder.Reference<Block>> optBlock = BuiltInRegistries.BLOCK.get(Identifier.parse(id));
                     if (optBlock.isEmpty()) return;
-                    Item item = optBlock.get().value().asItem();
-                    Containers.dropItemStack(serverLevel, this.getX(), this.getY(), this.getZ(), new ItemStack(item, count));
+                    Block block = optBlock.get().value();
+                    serverLevel.setBlockAndUpdate(this.centerPos, block.defaultBlockState());
                 });
 
                 result.entity().ifPresent(id -> {
@@ -215,16 +218,17 @@ public class RitualControllerEntity extends Entity {
     protected void readAdditionalSaveData(ValueInput input) {
         this.currentTicks = input.getIntOr("CurrentTicks", 0);
         this.entityData.set(MAX_DURATION, input.getIntOr("MaxDuration", 200));
-
         input.read("RecipeId", Identifier.CODEC).ifPresent(id -> this.recipeId = id);
+        input.read("CenterPos", BlockPos.CODEC).ifPresent(pos -> this.centerPos = pos);
     }
 
     @Override
     protected void addAdditionalSaveData(ValueOutput output) {
         output.putInt("CurrentTicks", this.currentTicks);
         output.putInt("MaxDuration", this.entityData.get(MAX_DURATION));
-
         if (this.recipeId != null)
             output.store("RecipeId", Identifier.CODEC, this.recipeId);
+        if (this.centerPos != null)
+            output.store("CenterPos", BlockPos.CODEC, this.centerPos);
     }
 }

@@ -4,13 +4,17 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 
@@ -98,6 +102,7 @@ public abstract class RitualRecipeProvider implements DataProvider {
         private int duration = 200;
         private final Map<Character, JsonObject> keys = new LinkedHashMap<>();
         private final JsonArray pattern = new JsonArray();
+        private final JsonArray conditions = new JsonArray();
         private String catalyst;
         private final JsonObject result = new JsonObject();
 
@@ -148,19 +153,111 @@ public abstract class RitualRecipeProvider implements DataProvider {
             return this;
         }
 
-        // --- LA NOUVELLE MÉTHODE DE FIN ---
+        public enum WEATHER { RAIN, THUNDER, CLEAR }
+        public enum MOONPHASE { NO_MOON, HALF, FULL }
+        public enum DIMENSION {
+            OVERWORLD("minecraft:overworld"), NETHER("minecraft:the_nether"), END("minecraft:the_end");
+            private final String id;
+            DIMENSION(String id) { this.id = id; }
+            public String location() { return id; }
+        }
+
+        // --- Logique des Conditions ---
+        private RitualBuilder addCondition(Ritual.ConditionTypes type, JsonObject params) {
+            JsonObject cond = new JsonObject();
+            cond.addProperty("type", type.getSerializedName());
+            cond.add("params", params);
+            this.conditions.add(cond);
+            return this;
+        }
+
+        public RitualBuilder weather(WEATHER weather) {
+            JsonObject params = new JsonObject();
+            params.addProperty("type", weather.name().toLowerCase());
+            return addCondition(Ritual.ConditionTypes.WEATHER, params);
+        }
+
+        public RitualBuilder effect(Holder<MobEffect> effect) {
+            return effect(effect, 0);
+        }
+
+        public RitualBuilder effect(Holder<MobEffect> effect, int amplifier) {
+            JsonObject params = new JsonObject();
+            String id = effect.unwrapKey()
+                    .map(key -> key.identifier().toString())
+                    .orElseThrow(() -> new IllegalArgumentException("Le holder fourni n'a pas d'ID de registre valide"));
+            params.addProperty("id", id);
+            params.addProperty("amp", amplifier);
+            return addCondition(Ritual.ConditionTypes.EFFECT, params);
+        }
+
+        public RitualBuilder biome(ResourceKey<Biome> biome) {
+            JsonObject params = new JsonObject();
+            params.addProperty("id", biome.identifier().toString());
+            return addCondition(Ritual.ConditionTypes.BIOME, params);
+        }
+
+        public RitualBuilder moonphase(MOONPHASE moonphase) {
+            JsonObject params = new JsonObject();
+            params.addProperty("phase", moonphase.ordinal());
+            return addCondition(Ritual.ConditionTypes.MOONPHASE, params);
+        }
+
+        public RitualBuilder xp(float min, float max) {
+            return minMax(Ritual.ConditionTypes.XP, min, max);
+        }
+
+        public RitualBuilder health(float min, float max) {
+            return minMax(Ritual.ConditionTypes.HEALTH, min, max);
+        }
+
+        public RitualBuilder height(float min, float max) {
+            return minMax(Ritual.ConditionTypes.HEIGHT, min, max);
+        }
+
+        public RitualBuilder brightness(float min, float max) {
+            return minMax(Ritual.ConditionTypes.BRIGHTNESS, min, max);
+        }
+
+        public RitualBuilder time(float min, float max) {
+            return minMax(Ritual.ConditionTypes.TIME, min, max);
+        }
+
+        public RitualBuilder dimension(DIMENSION dimension) {
+            JsonObject params = new JsonObject();
+            params.addProperty("id", dimension.location());
+            return addCondition(Ritual.ConditionTypes.DIMENSION, params);
+        }
+
+        public RitualBuilder offhand(Item item) {
+            JsonObject params = new JsonObject();
+            params.addProperty("id", BuiltInRegistries.ITEM.getKey(item).toString());
+            return addCondition(Ritual.ConditionTypes.OFFHAND, params);
+        }
+
+        private RitualBuilder minMax(Ritual.ConditionTypes conditions, float min, float max) {
+            JsonObject params = new JsonObject();
+            params.addProperty("min", min);
+            params.addProperty("max", max);
+            return addCondition(conditions, params);
+        }
+
         public void save() {
             JsonObject json = new JsonObject();
             json.addProperty("type", "potions-n-rituals:ritual");
             json.addProperty("duration", this.duration);
 
             JsonObject keyObj = new JsonObject();
-            for (Map.Entry<Character, JsonObject> entry : this.keys.entrySet()) {
+            for (Map.Entry<Character, JsonObject> entry : this.keys.entrySet())
                 keyObj.add(String.valueOf(entry.getKey()), entry.getValue());
-            }
+
             json.add("key", keyObj);
 
             json.add("pattern", this.pattern);
+
+            if (!this.conditions.isEmpty())
+                json.add("conditions", this.conditions);
+
             if (this.catalyst != null)
                 json.addProperty("catalyst", this.catalyst);
 

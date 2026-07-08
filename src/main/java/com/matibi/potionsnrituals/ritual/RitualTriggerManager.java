@@ -10,12 +10,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.MoonPhase;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -59,15 +64,15 @@ public class RitualTriggerManager {
             if (ritual.catalyst().isPresent()
                     && ritual.catalyst().get() ==  catalyst) {
                 Optional<BlockPos> validCenter = findValidCenter(level, clickedPos, ritual);
-                if (validCenter.isPresent())
+                if (validCenter.isPresent() && checkConditions(level, validCenter.get(), ritual))
                     return Optional.of(new RitualType(entry.getKey(), ritual, validCenter.get()));
             }
         }
         return Optional.empty();
     }
 
-    public static boolean isPatternStillValid(Level level, BlockPos centerPos, Ritual ritual) {
-        return matchesPattern(level, centerPos, ritual);
+    public static boolean isStillValid(Level level, BlockPos centerPos, Ritual ritual) {
+        return matchesPattern(level, centerPos, ritual) && checkConditions(level, centerPos, ritual);
     }
 
     private static Optional<BlockPos> findValidCenter(Level level, BlockPos clickedPos, Ritual ritual) {
@@ -133,6 +138,95 @@ public class RitualTriggerManager {
 
                 if (!matchFound)
                     return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean checkConditions(Level level, BlockPos pos, Ritual ritual) {
+        if (!(level instanceof ServerLevel serverLevel)) return false;
+
+        if (ritual.conditions() == null || ritual.conditions().isEmpty()) return true;
+
+        Player player = serverLevel.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 10.0, false);
+
+        for (var condition : ritual.conditions()) {
+            var params = condition.params();
+
+            switch (condition.type()) {
+                case BIOME -> {
+                    String targetBiomeId = params.get("id").getAsString();
+                    Optional<ResourceKey<Biome>> optId = level.getBiome(pos).unwrapKey();
+                    boolean match = optId.map(biomeResourceKey ->
+                            biomeResourceKey.identifier().toString().equals(targetBiomeId)).orElse(false);
+                    if (!match) return false;
+                }
+                case XP -> {
+                    if (player == null) return false;
+                    float min = params.get("min").getAsFloat();
+                    float max = params.get("max").getAsFloat();
+                    if (player.experienceLevel < min || player.experienceLevel > max) return false;
+                }
+                case TIME -> {
+                    long time = level.getOverworldClockTime() % 24000;
+                    float min = params.get("min").getAsFloat();
+                    float max = params.get("max").getAsFloat();
+                    if (time < min || time > max) return false;
+                }
+                case WEATHER -> {
+                    String target = params.get("type").getAsString();
+                    boolean match = switch (target) {
+                        case "rain" -> level.isRaining();
+                        case "thunder" -> level.isThundering();
+                        default -> !level.isRaining() && !level.isThundering();
+                    };
+                    if (!match) return false;
+                }
+                case MOONPHASE -> {
+                    int target = params.get("phase").getAsInt();
+                    MoonPhase currentPhase = serverLevel.environmentAttributes()
+                            .getValue(EnvironmentAttributes.MOON_PHASE, pos);
+                    if (currentPhase.index() != target) return false;
+                }
+                case HEALTH -> {
+                    if (player == null) return false;
+                    float min = params.get("min").getAsFloat();
+                    float max = params.get("max").getAsFloat();
+                    if (player.getHealth() < min || player.getHealth() > max) return false;
+                }
+                case DIMENSION -> {
+                    String targetDim = params.get("id").getAsString();
+                    if (!level.dimension().identifier().toString().equals(targetDim)) return false;
+                }
+                case BRIGHTNESS -> {
+                    float val = level.getMaxLocalRawBrightness(pos);
+                    float min = params.get("min").getAsFloat();
+                    float max = params.get("max").getAsFloat();
+                    if (val < min || val > max) return false;
+                }
+                case HEIGHT -> {
+                    float min = params.get("min").getAsFloat();
+                    float max = params.get("max").getAsFloat();
+                    if (pos.getY() < min || pos.getY() > max) return false;
+                }
+                case EFFECT -> {
+                    if (player == null) return false;
+                    String id = params.get("id").getAsString();
+                    int minAmp = params.get("amp").getAsInt();
+
+                    boolean hasEffect = player.getActiveEffects().stream().anyMatch(e -> {
+                            var key = BuiltInRegistries.MOB_EFFECT.getKey(e.getEffect().value());
+                            if (key == null) return false;
+                            return key.toString().equals(id) && e.getAmplifier() >= minAmp;
+                        });
+                    if (!hasEffect) return false;
+                }
+                case OFFHAND -> {
+                    if (player == null) return false;
+                    String targetId = params.get("id").getAsString();
+                    String currentId = BuiltInRegistries.ITEM.getKey(player.getOffhandItem().getItem()).toString();
+                    if (!currentId.equals(targetId)) return false;
+                }
             }
         }
         return true;
