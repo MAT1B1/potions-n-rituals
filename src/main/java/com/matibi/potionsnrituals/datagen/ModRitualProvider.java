@@ -1,7 +1,7 @@
 package com.matibi.potionsnrituals.datagen;
 
 import com.matibi.potionsnrituals.block.ModBlocks;
-import com.matibi.potionsnrituals.ritual.datagen.definition.RitualCatalyst;
+import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import com.matibi.potionsnrituals.ritual.datagen.RitualRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.world.entity.EntityTypes;
@@ -27,7 +27,7 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .pattern("  I  ")
                 .define('S', ModBlocks.BLOOD_TRAIL)
                 .define('I', Items.BONE)
-                .catalyst(RitualCatalyst.KILL)
+                .catalyst(Ritual.Catalysts.KILL)
                 .save();
 
         // --- 3. Bloc de Diamant ---
@@ -37,14 +37,14 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .pattern("SSS")
                 .define('D', Items.DIAMOND_BLOCK)
                 .define('S', ModBlocks.BLOOD_TRAIL)
-                .catalyst(RitualCatalyst.IGNITE)
+                .catalyst(Ritual.Catalysts.IGNITE)
                 .save();
 
         // --- 4. Rituel Spécial (Custom ID) ---
         addRitual("random_effect")
                 .pattern("P")
                 .define('P', Items.POTION)
-                .catalyst(RitualCatalyst.IGNITE)
+                .catalyst(Ritual.Catalysts.IGNITE)
                 .save();
     }
 }

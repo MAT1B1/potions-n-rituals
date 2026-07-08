@@ -3,11 +3,10 @@ package com.matibi.potionsnrituals.entity;
 import com.matibi.potionsnrituals.block.custom.BloodTrailBlock;
 import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlock;
 import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlockEntity;
-import com.matibi.potionsnrituals.ritual.RitualAction;
+import com.matibi.potionsnrituals.ritual.RitualTriggerManager;
 import com.matibi.potionsnrituals.ritual.RitualActions;
-import com.matibi.potionsnrituals.ritual.RitualActivator;
 import com.matibi.potionsnrituals.ritual.RitualManager;
-import com.matibi.potionsnrituals.ritual.datagen.definition.Ritual;
+import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -95,14 +94,14 @@ public class RitualControllerEntity extends Entity {
         if (this.level() instanceof ServerLevel serverLevel && this.recipeId != null) {
             Ritual ritual = RitualManager.getAllRituals().get(this.recipeId);
 
-            if (ritual != null && RitualActivator.isPatternStillValid(this.level(), this.centerPos, ritual)) {
+            if (ritual != null && RitualTriggerManager.isPatternStillValid(this.level(), this.centerPos, ritual)) {
                 consumeIngredients(serverLevel, ritual);
 
                 var result = ritual.result();
                 int count = result.count().orElse(1);
 
                 result.custom().ifPresent(id -> {
-                    RitualAction action = RitualActions.REGISTRY.get(ModUtils.id(id));
+                    RitualActions.RitualAction action = RitualActions.get(ModUtils.id(id));
                     if (action != null)
                         action.execute(serverLevel, this, ritual);
                 });

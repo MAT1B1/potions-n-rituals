@@ -1,12 +1,9 @@
 package com.matibi.potionsnrituals.block.custom.pedestal;
 
-import com.matibi.potionsnrituals.entity.ModEntities;
-import com.matibi.potionsnrituals.ritual.RitualActivator;
-import com.matibi.potionsnrituals.entity.RitualControllerEntity;
-import com.matibi.potionsnrituals.ritual.datagen.definition.Ritual;
+import com.matibi.potionsnrituals.ritual.RitualTriggerManager;
+import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.server.level.ServerLevel;
@@ -107,40 +104,19 @@ public class PedestalBlock extends Block implements EntityBlock {
     private InteractionResult ignite(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
         if (!state.getValue(LIT)) {
             if (!level.isClientSide()) {
-                // On allume le bloc central
                 level.setBlock(pos, state.setValue(LIT, true), Block.UPDATE_ALL);
                 level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
 
-                if (!player.isCreative()) {
+                if (!player.isCreative())
                     stack.hurtAndBreak(1, player, hand);
-                }
 
-                // --- ACTIVATION DU RITUEL ---
-                var matchedRitual = RitualActivator.checkRitualMatch(level, pos);
-
-                if (matchedRitual.isPresent()) {
-                    RitualControllerEntity controller = getRitualControllerEntity(level, matchedRitual.get());
-
-                    level.addFreshEntity(controller);
-                }
+                RitualTriggerManager.tryTriggerRitual(level, pos, Ritual.Catalysts.IGNITE);
             }
 
             return InteractionResult.SUCCESS;
         }
 
         return InteractionResult.PASS;
-    }
-
-    private static @NonNull RitualControllerEntity getRitualControllerEntity(Level level, RitualActivator.RitualType match) {
-        Identifier recipeId = match.id();
-        Ritual ritual = match.ritual();
-        BlockPos centerPos = match.center();
-
-        RitualControllerEntity controller = new RitualControllerEntity(ModEntities.RITUAL_CONTROLLER, level);
-        controller.setPos(centerPos.getX() + 0.5, centerPos.getY() + 1.0, centerPos.getZ() + 0.5);
-
-        controller.startRitual(recipeId, ritual.duration(), centerPos);
-        return controller;
     }
 
     @Override
@@ -156,6 +132,13 @@ public class PedestalBlock extends Block implements EntityBlock {
 
         if (random.nextInt(3) == 0)
             level.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 0.02D, 0.0D);
+    }
+
+    @Override
+    protected void tick(@NonNull BlockState state, @NonNull ServerLevel level, @NonNull BlockPos pos, @NonNull RandomSource random) {
+        if (level.getGameTime() % 20L != 0L) return;
+        if (level.isDarkOutside()) RitualTriggerManager.tryTriggerRitual(level, pos, Ritual.Catalysts.MOONLIGHT);
+        super.tick(state, level, pos, random);
     }
 
     @Override

@@ -1,10 +1,13 @@
 package com.matibi.potionsnrituals.ritual;
 
 import com.matibi.potionsnrituals.config.ModConfig;
+import com.matibi.potionsnrituals.entity.RitualControllerEntity;
+import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
@@ -15,14 +18,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RitualActions {
-    public static final Map<Identifier, RitualAction> REGISTRY = new HashMap<>();
 
-    public static void addAction(String id, RitualAction action) {
+    public interface RitualAction {
+        void execute(ServerLevel level, RitualControllerEntity controller, Ritual ritual);
+    }
+
+    private static final Map<Identifier, RitualAction> REGISTRY = new HashMap<>();
+
+    public static void register(String id, RitualAction action) {
         REGISTRY.put(ModUtils.id(id), action);
     }
 
+    public static RitualAction get(Identifier id) { return REGISTRY.get(id); }
+
     static {
-        addAction("random_effect", (level, entity, _) -> {
+        register("random_effect", (level, entity, _) -> {
             Player player = level.getNearestPlayer(entity, 10.0);
             if (player != null) {
                 var allEffects = BuiltInRegistries.MOB_EFFECT.stream().toList();

@@ -1,7 +1,7 @@
 package com.matibi.potionsnrituals.ritual;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
-import com.matibi.potionsnrituals.ritual.datagen.definition.Ritual;
+import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;

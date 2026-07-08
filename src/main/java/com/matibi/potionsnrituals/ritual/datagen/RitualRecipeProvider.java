@@ -2,7 +2,6 @@ package com.matibi.potionsnrituals.ritual.datagen;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.matibi.potionsnrituals.ritual.datagen.definition.RitualCatalyst;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -144,7 +143,7 @@ public abstract class RitualRecipeProvider implements DataProvider {
             return this;
         }
 
-        public RitualBuilder catalyst(RitualCatalyst catalyst) {
+        public RitualBuilder catalyst(Ritual.Catalysts catalyst) {
             this.catalyst = catalyst.name().toLowerCase();
             return this;
         }
