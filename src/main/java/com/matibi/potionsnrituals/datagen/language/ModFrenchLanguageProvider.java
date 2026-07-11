@@ -128,6 +128,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.salt", "Sel");
         t.add("item.potions-n-rituals.talisman", "Talisman vide");
         t.add("item.potions-n-rituals.talisman_charged", "Talisman chargé");
+        t.add("item.potions-n-rituals.alchemical_bag", "Dimension de Poche");
         t.add("item.potions-n-rituals.alchemy_guide_basic", "Magnus Opus: Les Fondements de l'Alchimie");
         t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
         t.add("item.potions-n-rituals.alchemical_stone", "Pierre alchimique");
@@ -169,14 +170,18 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("key.potions-n-rituals.effect_button", "Bouton d'effet");
         t.add("key.category.potions-n-rituals.main", "Potions & Rituals");
 
+        // Blood Types
         t.add("potions-n-rituals.blood_type.unknown", "Inconnu");
         t.add("potions-n-rituals.blood_type.human", "Sang humain");
         t.add("potions-n-rituals.blood_type.monster", "Sang de monstre");
+
+        // Mod Text
         t.add("item.potions-n-rituals.alchemical_stone.block_only", "Les pierres alchimiques ne peuvent être utilisées que sur des blocs");
         t.add("item.potions-n-rituals.alchemical_stone.block_not_good", "Le bloc n'est pas compatible");
         t.add("itemGroup.potions-n-rituals.alchemy", "Alchimie");
         t.add("splash.potionsnrituals.magic", "L'Alchimie c'est le pouvoir !!!");
         t.add("splash.potionsnrituals.thanks", "Merci de me supporter LivelyBadGood");
+        t.add("message.potions-n-rituals.alchemical_bag.forbidden", "Les lois de l'alchimie interdisent d'ouvrir une dimension de poche à l'intérieur d'une autre...");
 
         // tooltip
         t.add("tooltip.potions-n-rituals.talisman_charge_line", "Capture %s Âmes");

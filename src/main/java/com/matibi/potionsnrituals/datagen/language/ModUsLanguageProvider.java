@@ -128,6 +128,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.salt", "Salt");
         t.add("item.potions-n-rituals.talisman", "Empty Talisman");
         t.add("item.potions-n-rituals.talisman_charged", "Charged Talisman");
+        t.add("item.potions-n-rituals.alchemical_bag", "Pocket Dimension");
         t.add("item.potions-n-rituals.alchemy_guide_basic", "Magnus Opus: The Foundations of Alchemy");
         t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Nigredo: Chronicles of Chaos");
         t.add("item.potions-n-rituals.alchemical_stone", "Alchemical Stone");
@@ -181,6 +182,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("itemGroup.potions-n-rituals.alchemy", "Alchemy");
         t.add("splash.potionsnrituals.magic", "Alchemy is power!!!");
         t.add("splash.potionsnrituals.thanks", "Thank you for supporting me LivelyBadGood");
+        t.add("message.potions-n-rituals.alchemical_bag.forbidden", "The laws of alchemy forbid opening a pocket dimension within another...");
 
         // Tooltips
         t.add("tooltip.potions-n-rituals.talisman_charge_line", "Gather %s Souls");

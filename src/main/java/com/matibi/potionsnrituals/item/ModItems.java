@@ -4,6 +4,7 @@ import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
+import com.matibi.potionsnrituals.item.custom.AlchemicalBagItem;
 import com.matibi.potionsnrituals.item.custom.CustomBookItem;
 import com.matibi.potionsnrituals.item.custom.NigredoBookItem;
 import com.matibi.potionsnrituals.item.custom.TalismanItem;
@@ -74,6 +75,8 @@ public class ModItems {
                     .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
                 )
             ),
+            ALCHEMICAL_BAG = register("alchemical_bag", new AlchemicalBagItem(props("alchemical_bag")
+                    .stacksTo(1))),
             BASIC_GUIDE = register("alchemy_guide_basic",
                     new CustomBookItem(props("alchemy_guide_basic").stacksTo(1), () ->
                             new BookStructure("item.potions-n-rituals.alchemy_guide_basic")

@@ -2,6 +2,7 @@ package com.matibi.potionsnrituals.datacomponent;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.util.ModUtils;
+import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -33,6 +34,16 @@ public final class ModDataComponents {
             builder -> builder
                     .persistent(PersonalBookmark.CODEC.listOf())
                     .networkSynchronized(PersonalBookmark.STREAM_CODEC.apply(ByteBufCodecs.list())));
+
+    public static final DataComponentType<Integer> BAG_ID = register("bag_id",
+            builder -> builder
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.INT));
+
+    public static final DataComponentType<ReturnLocation> RETURN_LOCATION = register("return_location",
+            builder -> builder
+                    .persistent(ReturnLocation.CODEC)
+                    .networkSynchronized(ReturnLocation.STREAM_CODEC));
 
     private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> op) {
         return Registry.register(

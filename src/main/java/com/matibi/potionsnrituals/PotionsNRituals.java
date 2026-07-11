@@ -21,6 +21,8 @@ import com.matibi.potionsnrituals.recipe.ModRecipeSerializer;
 import com.matibi.potionsnrituals.ritual.RitualManager;
 import com.matibi.potionsnrituals.ritual.RitualTriggerManager;
 import com.matibi.potionsnrituals.util.ModUtils;
+import com.matibi.potionsnrituals.world.data.ModAttachments;
+import com.matibi.potionsnrituals.world.dimension.ModDimensions;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
@@ -49,6 +51,8 @@ public class PotionsNRituals implements ModInitializer {
 		ModBlockEntities.register();
 		ModEntities.register();
 		RitualTriggerManager.register();
+		ModDimensions.register();
+		ModAttachments.register();
 
 		ResourceLoader.get(PackType.SERVER_DATA)
 				.registerReloadListener(

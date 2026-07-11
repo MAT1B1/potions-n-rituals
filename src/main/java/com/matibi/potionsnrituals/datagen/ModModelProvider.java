@@ -36,6 +36,8 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(@NonNull BlockModelGenerators gen) {
+        gen.createTrivialCube(ModBlocks.BAG_WALL);
+        gen.createTrivialCube(ModBlocks.BAG_EXIT);
         generatePedestalModel(gen);
         generateCauldronModel(gen);
         generateBloodTrailModel(gen);
@@ -192,6 +194,7 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.BASIC_GUIDE,
                 ModItems.NIGREDO_GUIDE,
                 ModItems.TALISMAN,
+                ModItems.ALCHEMICAL_BAG,
                 ModItems.TALISMAN_CHARGED
         );
 

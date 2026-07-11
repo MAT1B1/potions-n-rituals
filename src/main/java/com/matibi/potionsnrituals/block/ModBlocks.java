@@ -1,6 +1,8 @@
 package com.matibi.potionsnrituals.block;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.block.custom.BagExitBlock;
+import com.matibi.potionsnrituals.block.custom.BagWallBlock;
 import com.matibi.potionsnrituals.block.custom.BloodTrailBlock;
 import com.matibi.potionsnrituals.block.custom.pedestal.PedestalBlock;
 import com.matibi.potionsnrituals.block.custom.cauldron.BrewingCauldronBlock;
@@ -32,7 +34,19 @@ public class ModBlocks {
                     .lightLevel(state -> state.getValue(PedestalBlock.LIT) ? 12 : 0))),
 
             BREWING_CAULDRON = regBlockOnly("brewing_cauldron",
-                properties -> new BrewingCauldronBlock(properties.strength(2.0F).noOcclusion()));
+                properties -> new BrewingCauldronBlock(properties.strength(2.0F).noOcclusion())),
+
+            BAG_WALL = regBlockOnly("bag_wall", properties ->
+                    new BagWallBlock(properties
+                            .strength(-1.0F, 3600000.0F)
+                            .lightLevel(_ -> 10)
+                            .isValidSpawn((_, _, _, _) -> false))),
+
+            BAG_EXIT = regBlockOnly("bag_exit", properties ->
+                    new BagExitBlock(properties
+                            .strength(-1.0F, 3600000.0F)
+                            .lightLevel(_ -> 10)
+                            .noOcclusion()));
 
     private static Block reg(String name, Function<BlockBehaviour.Properties, Block> function, Component... tooltips) {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ModUtils.id(name))));
@@ -40,7 +54,7 @@ public class ModBlocks {
         return Registry.register(BuiltInRegistries.BLOCK, ModUtils.id(name), toRegister);
     }
 
-    private static Block regBlockOnly(String name, Function<BlockBehaviour.Properties, Block> function, Component... tooltips) {
+    private static Block regBlockOnly(String name, Function<BlockBehaviour.Properties, Block> function) {
         Block toRegister = function.apply(BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ModUtils.id(name))));
         return Registry.register(BuiltInRegistries.BLOCK, ModUtils.id(name), toRegister);
     }

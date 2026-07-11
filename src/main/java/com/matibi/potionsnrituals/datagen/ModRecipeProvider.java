@@ -113,6 +113,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_red_carpet", has(Items.CARPET.red()))
                         .save(output);
 
+                shaped(RecipeCategory.TOOLS, ModItems.ALCHEMICAL_BAG)
+                        .pattern(" S ").pattern(" T ").pattern(" L ")
+                        .define('S', Items.STRING)
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .define('L', Items.LEATHER)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
                 shapeless(RecipeCategory.MISC, ModItems.BASIC_GUIDE, 1)
                         .requires(Items.BOOK)
                         .requires(Items.DIRT)
