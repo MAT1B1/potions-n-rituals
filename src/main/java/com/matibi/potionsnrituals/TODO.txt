@@ -10,8 +10,6 @@ ajouter nouveau effet:
     - time stop : stop le temps (pas sur si realisable)
     - metamorphose : transforme le joueur en un autre mob (avec une hotkey)
 
-ajouter pour les rituels des effets pendant la durée
-
 principe alchimiques:
 nigredo = creation de la matiere premiere
 albedo = creation des premieres potions
