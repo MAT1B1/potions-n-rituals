@@ -129,6 +129,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.talisman", "Talisman vide");
         t.add("item.potions-n-rituals.talisman_charged", "Talisman chargé");
         t.add("item.potions-n-rituals.alchemical_bag", "Dimension de Poche");
+        t.add("item.potions-n-rituals.nether_seal_breaker", "Descelleur de Portail");
         t.add("item.potions-n-rituals.alchemy_guide_basic", "Magnus Opus: Les Fondements de l'Alchimie");
         t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
         t.add("item.potions-n-rituals.alchemical_stone", "Pierre alchimique");

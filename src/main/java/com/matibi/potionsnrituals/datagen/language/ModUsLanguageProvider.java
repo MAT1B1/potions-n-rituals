@@ -129,6 +129,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.potions-n-rituals.talisman", "Empty Talisman");
         t.add("item.potions-n-rituals.talisman_charged", "Charged Talisman");
         t.add("item.potions-n-rituals.alchemical_bag", "Pocket Dimension");
+        t.add("item.potions-n-rituals.nether_seal_breaker", "Portal Seal Breaker");
         t.add("item.potions-n-rituals.alchemy_guide_basic", "Magnus Opus: The Foundations of Alchemy");
         t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Nigredo: Chronicles of Chaos");
         t.add("item.potions-n-rituals.alchemical_stone", "Alchemical Stone");

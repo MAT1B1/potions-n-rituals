@@ -78,6 +78,13 @@ public class RitualControllerEntity extends Entity {
             serverLevel.sendParticles(ParticleTypes.ENCHANT,
                     this.getX() + xOffset, this.getY() + 0.5, this.getZ() + zOffset,
                     2, 0.0, 0.5, 0.0, 0.1);
+
+            Ritual ritual = RitualManager.getAllRituals().get(this.recipeId);
+            ritual.during().ifPresent(actionStr -> {
+                RitualActions.RitualAction action = RitualActions.get(ModUtils.id(actionStr));
+                if (action != null)
+                    action.execute(serverLevel, this, ritual, this.currentTicks);
+            });
         }
 
         if (this.level().isClientSide()) return;
@@ -106,7 +113,7 @@ public class RitualControllerEntity extends Entity {
                 result.custom().ifPresent(id -> {
                     RitualActions.RitualAction action = RitualActions.get(ModUtils.id(id));
                     if (action != null)
-                        action.execute(serverLevel, this, ritual);
+                        action.execute(serverLevel, this, ritual, this.currentTicks);
                 });
 
                 result.item().ifPresent(id -> {

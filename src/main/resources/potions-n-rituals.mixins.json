@@ -5,6 +5,7 @@
   "mixins": [
     "ActiveEffectMixin",
     "ItemPostHitMixin",
+    "PortalShapeMixin",
     "SlotEffectMixin",
     "brewingNpotion.BrewingStandAccessor",
     "brewingNpotion.BrewingStandBlockEntityMixin",

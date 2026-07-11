@@ -84,6 +84,10 @@ public class ModConfig {
 
     @SerialEntry public int nether_ghost_duration = 20 * 10;
 
+    @SerialEntry public int pocket_dimension_width = 3;
+    @SerialEntry public int pocket_dimension_length = 3;
+    @SerialEntry public int pocket_dimension_height = 3;
+
     // ── Mob Effect ──────────────────────────────────────────────────────────────────────
 
     // ── Ghost Walk ────────────────────────────────────────────────────────────

@@ -1,6 +1,7 @@
 package com.matibi.potionsnrituals.item.custom;
 
 import com.matibi.potionsnrituals.block.ModBlocks;
+import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.datacomponent.ReturnLocation;
 import com.matibi.potionsnrituals.world.data.ModAttachments;
@@ -88,18 +89,23 @@ public class AlchemicalBagItem extends Item {
         BlockState returnBlock = ModBlocks.BAG_EXIT.defaultBlockState();
         BlockState air = Blocks.AIR.defaultBlockState();
 
-        for (int x = 0; x < 5; x++) {
-            for (int y = 0; y < 5; y++) {
-                for (int z = 0; z < 5; z++) {
+        for (int x = 0; x < 2 + ModConfig.get().pocket_dimension_width; x++) {
+            for (int y = 0; y < 2 + ModConfig.get().pocket_dimension_height; y++) {
+                for (int z = 0; z < 2 + ModConfig.get().pocket_dimension_length; z++) {
                     BlockPos currentPos = startPos.offset(x, y, z);
 
-                    if (x == 0 || x == 4 || y == 0 || y == 4 || z == 0 || z == 4)
+                    if (x == 0 || x == ModConfig.get().pocket_dimension_width + 1
+                            || y == 0 || y == ModConfig.get().pocket_dimension_height + 1
+                            || z == 0 || z == ModConfig.get().pocket_dimension_length + 1)
                         level.setBlockAndUpdate(currentPos, wallBlock);
                     else
                         level.setBlockAndUpdate(currentPos, air);
                 }
             }
         }
-        level.setBlockAndUpdate(startPos.offset(2, 4, 2), returnBlock);
+        level.setBlockAndUpdate(startPos.offset(
+                ModConfig.get().pocket_dimension_width / 2 + 1,
+                ModConfig.get().pocket_dimension_height + 1,
+                ModConfig.get().pocket_dimension_length / 2 + 1), returnBlock);
     }
 }

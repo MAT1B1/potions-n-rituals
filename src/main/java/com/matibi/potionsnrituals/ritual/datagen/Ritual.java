@@ -18,6 +18,7 @@ public record Ritual(
         List<String> pattern,
         Optional<Catalysts> catalyst,
         List<Conditions> conditions,
+        Optional<String> during,
         Result result
 ) {
     public static final Codec<Ritual> CODEC = RecordCodecBuilder.create(inst -> inst.group(
@@ -26,6 +27,7 @@ public record Ritual(
             Codec.STRING.listOf().fieldOf("pattern").forGetter(Ritual::pattern),
             Catalysts.CODEC.optionalFieldOf("catalyst").forGetter(Ritual::catalyst),
             Conditions.CODEC.listOf().optionalFieldOf("conditions", List.of()).forGetter(Ritual::conditions),
+            Codec.STRING.optionalFieldOf("during").forGetter(Ritual::during),
             Result.CODEC.fieldOf("result").forGetter(Ritual::result)
     ).apply(inst, Ritual::new));
 

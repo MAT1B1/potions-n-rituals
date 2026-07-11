@@ -13,6 +13,11 @@ public class ModAttachments {
             Codec.INT
     );
 
+    public static final AttachmentType<Boolean> NETHER_SEALED = AttachmentRegistry.createDefaulted(
+            ModUtils.id("nether_sealed"),
+            () -> true
+    );
+
     public static void register() {
         PotionsNRituals.LOGGER.info("Registering Attachments for " + PotionsNRituals.MOD_ID);
     }

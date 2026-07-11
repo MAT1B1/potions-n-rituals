@@ -27,6 +27,7 @@ public class PotionsNRitualsClient implements ClientModInitializer {
 
 		BrewingCauldronBlock.registerTint();
 		EntityRenderers.register(ModEntities.RITUAL_CONTROLLER, NoopRenderer::new);
+		EntityRenderers.register(ModEntities.PORTAL_BUILDER, NoopRenderer::new);
 		BlockEntityRenderers.register(ModBlockEntities.PEDESTAL, PedestalBlockEntityRenderer::new);
 	}
 }

@@ -104,6 +104,7 @@ public abstract class RitualRecipeProvider implements DataProvider {
         private final JsonArray pattern = new JsonArray();
         private final JsonArray conditions = new JsonArray();
         private String catalyst;
+        private String duringAction;
         private final JsonObject result = new JsonObject();
 
         public RitualBuilder(RitualRecipeProvider provider, Identifier recipeId) {
@@ -235,6 +236,11 @@ public abstract class RitualRecipeProvider implements DataProvider {
             return addCondition(Ritual.ConditionTypes.OFFHAND, params);
         }
 
+        public RitualBuilder during(String action) {
+            this.duringAction = action;
+            return this;
+        }
+
         private RitualBuilder minMax(Ritual.ConditionTypes conditions, float min, float max) {
             JsonObject params = new JsonObject();
             params.addProperty("min", min);
@@ -260,6 +266,9 @@ public abstract class RitualRecipeProvider implements DataProvider {
 
             if (this.catalyst != null)
                 json.addProperty("catalyst", this.catalyst);
+
+            if (this.duringAction != null)
+                json.addProperty("during", this.duringAction);
 
             json.add("result", this.result);
 

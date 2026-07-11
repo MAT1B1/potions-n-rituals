@@ -1,6 +1,7 @@
 package com.matibi.potionsnrituals.datagen;
 
 import com.matibi.potionsnrituals.block.ModBlocks;
+import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import com.matibi.potionsnrituals.ritual.datagen.RitualRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -74,6 +75,29 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .pattern(" G ")
                 .define('G', Items.GLOWSTONE_DUST)
                 .define('S', Blocks.SUNFLOWER)
+                .catalyst(Ritual.Catalysts.IGNITE)
+                .save();
+
+        addRitual("nether_gate_final")
+                .during("nether_gate_action")
+                .pattern("  S  ")
+                .pattern(" SSS ")
+                .pattern("SS SS")
+                .pattern(" SSS ")
+                .pattern("  S  ")
+                .define('S', ModBlocks.BLOOD_TRAIL)
+                .catalyst(Ritual.Catalysts.KILL)
+                .dimension(RitualBuilder.DIMENSION.OVERWORLD)
+                .save();
+
+        addRitual("seal_nether")
+                .pattern("  S  ")
+                .pattern(" SSS ")
+                .pattern("SSNSS")
+                .pattern(" SSS ")
+                .pattern("  S  ")
+                .define('S', ModBlocks.BLOOD_TRAIL)
+                .define('N', ModItems.NETHER_SEAL_BREAKER)
                 .catalyst(Ritual.Catalysts.IGNITE)
                 .save();
     }

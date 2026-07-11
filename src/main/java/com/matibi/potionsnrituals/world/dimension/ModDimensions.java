@@ -14,6 +14,7 @@ import net.minecraft.world.level.CardinalLighting;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
@@ -37,7 +38,7 @@ public class ModDimensions {
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
 
-        HolderSet<net.minecraft.world.level.block.Block> infiniburnSet =
+        HolderSet<Block> infiniburnSet =
                 context.lookup(Registries.BLOCK).getOrThrow(BlockTags.INFINIBURN_OVERWORLD);
 
         context.register(POCKET_DIMENSION_TYPE, new DimensionType(

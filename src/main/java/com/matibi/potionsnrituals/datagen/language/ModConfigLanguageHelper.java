@@ -23,6 +23,9 @@ public class ModConfigLanguageHelper {
 
         t.add("group.potions-n-rituals.misc", "Divers");
         t.add("option.potions-n-rituals.misc.nether_ghost_duration", "Durée du fantôme du Nether (ticks)");
+        t.add("option.potions-n-rituals.misc.pocket_dimension_width", "Largeur de la dimension de poche");
+        t.add("option.potions-n-rituals.misc.pocket_dimension_length", "Longueur de la dimension de poche");
+        t.add("option.potions-n-rituals.misc.pocket_dimension_height", "Hauteur de la dimension de poche");
 
         // Écran ModConfig — Options (ONGLET 1)
         t.add("option.potions-n-rituals.syringe.damage", "Dégâts");
@@ -200,6 +203,9 @@ public class ModConfigLanguageHelper {
 
         t.add("group.potions-n-rituals.misc", "Miscellaneous");
         t.add("option.potions-n-rituals.misc.nether_ghost_duration", "Nether Ghost Duration (ticks)");
+        t.add("option.potions-n-rituals.misc.pocket_dimension_width", "Pocket Dimension Width");
+        t.add("option.potions-n-rituals.misc.pocket_dimension_length", "Pocket Dimension Length");
+        t.add("option.potions-n-rituals.misc.pocket_dimension_height", "Pocket Dimension Height");
 
         // ModConfig Screen — Options (TAB 1)
         t.add("option.potions-n-rituals.syringe.damage", "Damage");

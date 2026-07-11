@@ -4,10 +4,7 @@ import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
-import com.matibi.potionsnrituals.item.custom.AlchemicalBagItem;
-import com.matibi.potionsnrituals.item.custom.CustomBookItem;
-import com.matibi.potionsnrituals.item.custom.NigredoBookItem;
-import com.matibi.potionsnrituals.item.custom.TalismanItem;
+import com.matibi.potionsnrituals.item.custom.*;
 import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStoneItem;
 import com.matibi.potionsnrituals.item.custom.syringe.SyringeItem;
 import com.matibi.potionsnrituals.util.BookUtils;
@@ -76,6 +73,8 @@ public class ModItems {
                 )
             ),
             ALCHEMICAL_BAG = register("alchemical_bag", new AlchemicalBagItem(props("alchemical_bag")
+                    .stacksTo(1))),
+            NETHER_SEAL_BREAKER = register("nether_seal_breaker", new NetherSealBreakerItem(props("nether_seal_breaker")
                     .stacksTo(1))),
             BASIC_GUIDE = register("alchemy_guide_basic",
                     new CustomBookItem(props("alchemy_guide_basic").stacksTo(1), () ->

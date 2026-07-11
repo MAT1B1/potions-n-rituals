@@ -195,6 +195,7 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.NIGREDO_GUIDE,
                 ModItems.TALISMAN,
                 ModItems.ALCHEMICAL_BAG,
+                ModItems.NETHER_SEAL_BREAKER,
                 ModItems.TALISMAN_CHARGED
         );
 

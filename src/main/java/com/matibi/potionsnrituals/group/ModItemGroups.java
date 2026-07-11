@@ -73,6 +73,7 @@ public class ModItemGroups {
                         entries.accept(ModItems.TALISMAN);
                         entries.accept(ModItems.TALISMAN_CHARGED);
                         entries.accept(ModItems.ALCHEMICAL_BAG);
+                        entries.accept(ModItems.NETHER_SEAL_BREAKER);
                         entries.accept(ModBlocks.PEDESTAL);
                         entries.accept(ModItems.SALT);
 
