@@ -21,6 +21,9 @@ public class ModConfigLanguageHelper {
         t.add("group.potions-n-rituals.effect_combination", "Combinaison d'effets");
         t.add("group.potions-n-rituals.permanent_potion", "Potions permanentes");
 
+        t.add("group.potions-n-rituals.misc", "Divers");
+        t.add("option.potions-n-rituals.misc.nether_ghost_duration", "Durée du fantôme du Nether (ticks)");
+
         // Écran ModConfig — Options (ONGLET 1)
         t.add("option.potions-n-rituals.syringe.damage", "Dégâts");
         t.add("option.potions-n-rituals.syringe.durability_loss", "Perte de durabilité");
@@ -194,6 +197,9 @@ public class ModConfigLanguageHelper {
         t.add("group.potions-n-rituals.imbued_effect_hit", "Imbued Effect Hit");
         t.add("group.potions-n-rituals.effect_combination", "Effect Combination");
         t.add("group.potions-n-rituals.permanent_potion", "Permanent Potion");
+
+        t.add("group.potions-n-rituals.misc", "Miscellaneous");
+        t.add("option.potions-n-rituals.misc.nether_ghost_duration", "Nether Ghost Duration (ticks)");
 
         // ModConfig Screen — Options (TAB 1)
         t.add("option.potions-n-rituals.syringe.damage", "Damage");

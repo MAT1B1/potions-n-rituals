@@ -2,12 +2,12 @@ package com.matibi.potionsnrituals.config;
 
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStone;
+import com.matibi.potionsnrituals.util.ModUtils;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.alchemy.Potion;
@@ -18,7 +18,7 @@ import java.util.Set;
 public class ModConfig {
 
     public static final ConfigClassHandler<ModConfig> HANDLER = ConfigClassHandler.createBuilder(ModConfig.class)
-            .id(Identifier.fromNamespaceAndPath("potionsnrituals", "config"))
+            .id(ModUtils.id("config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("potionsnrituals.json"))
                     .build())
@@ -79,6 +79,10 @@ public class ModConfig {
     @SerialEntry public double perm_heal = 1.0D;
     @SerialEntry public double perm_speed = 0.01D;
     @SerialEntry public double perm_strength = 0.5D;
+
+    // ── Misc ────────────────────────────────────────────────────────────────────────────
+
+    @SerialEntry public int nether_ghost_duration = 20 * 10;
 
     // ── Mob Effect ──────────────────────────────────────────────────────────────────────
 

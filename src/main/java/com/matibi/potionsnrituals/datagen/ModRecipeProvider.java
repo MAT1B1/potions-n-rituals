@@ -105,6 +105,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy(getHasName(Items.GLASS_BOTTLE), has(Items.GLASS_BOTTLE))
                         .save(output);
 
+                shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PEDESTAL.asItem())
+                        .pattern(" C ").pattern(" S ").pattern(" W ")
+                        .define('C', Items.CARPET.red())
+                        .define('S', Items.STONE_SLAB)
+                        .define('W', Items.STONE_BRICK_WALL)
+                        .unlockedBy("has_red_carpet", has(Items.CARPET.red()))
+                        .save(output);
+
                 shapeless(RecipeCategory.MISC, ModItems.BASIC_GUIDE, 1)
                         .requires(Items.BOOK)
                         .requires(Items.DIRT)
