@@ -121,6 +121,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
                         .save(output);
 
+                shaped(RecipeCategory.TOOLS, ModItems.NETHER_SEAL_BREAKER)
+                        .pattern("OPO").pattern("RTB").pattern("OSO")
+                        .define('O', Items.OBSIDIAN)
+                        .define('P', Items.BASALT)
+                        .define('S', Items.SOUL_SAND)
+                        .define('R', Items.CRIMSON_STEM)
+                        .define('B', Items.WARPED_STEM)
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
                 shapeless(RecipeCategory.MISC, ModItems.BASIC_GUIDE, 1)
                         .requires(Items.BOOK)
                         .requires(Items.DIRT)

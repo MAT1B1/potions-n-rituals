@@ -27,7 +27,12 @@ import org.jspecify.annotations.NonNull;
 public class ModItems {
 
     public static final Item
-            MATERIA_PRIMA = registerFoil("materia_prima", Rarity.UNCOMMON),
+            MATERIA_PRIMA = register("materia_prima", new Item(props("materia_prima")
+                    .rarity(Rarity.UNCOMMON)) {
+                        @Override
+                        public boolean isFoil(@NonNull ItemStack stack) { return true; }
+                    }
+            ),
             MERCURY_BALL = registerSimple("mercury_ball"),
             SULFUR_BALL = registerSimple("sulfur_ball"),
             SALT = registerSimple("salt"),
@@ -60,8 +65,8 @@ public class ModItems {
             TALISMAN = register("talisman",
                     new TalismanItem(props("talisman"))
             ),
-            TALISMAN_CHARGED = register("talisman_charged",
-                    new Item(props("talisman_charged").rarity(Rarity.UNCOMMON)) {
+            TALISMAN_CHARGED = register("talisman_charged", new Item(props("talisman_charged")
+                    .rarity(Rarity.UNCOMMON)) {
                         @Override
                         public boolean isFoil(@NonNull ItemStack stack) { return true; }
                     }
@@ -73,9 +78,19 @@ public class ModItems {
                 )
             ),
             ALCHEMICAL_BAG = register("alchemical_bag", new AlchemicalBagItem(props("alchemical_bag")
-                    .stacksTo(1))),
+                    .stacksTo(1)
+                    .rarity(Rarity.UNCOMMON)) {
+                        @Override
+                        public boolean isFoil(@NonNull ItemStack stack) { return true; }
+                    }
+            ),
             NETHER_SEAL_BREAKER = register("nether_seal_breaker", new NetherSealBreakerItem(props("nether_seal_breaker")
-                    .stacksTo(1))),
+                    .stacksTo(1)
+                    .rarity(Rarity.UNCOMMON)) {
+                        @Override
+                        public boolean isFoil(@NonNull ItemStack stack) { return true; }
+                    }
+            ),
             BASIC_GUIDE = register("alchemy_guide_basic",
                     new CustomBookItem(props("alchemy_guide_basic").stacksTo(1), () ->
                             new BookStructure("item.potions-n-rituals.alchemy_guide_basic")
@@ -135,13 +150,6 @@ public class ModItems {
 
     private static Item registerSimple(String id) {
         return register(id, new Item(props(id)));
-    }
-
-    private static Item registerFoil(String id, Rarity rarity) {
-        return register(id, new Item(props(id).rarity(rarity)) {
-            @Override
-            public boolean isFoil(@NonNull ItemStack stack) { return true; }
-        });
     }
 
     private static Item registerFood(String id, int nutrition, float saturation, boolean alwaysEdible) {
