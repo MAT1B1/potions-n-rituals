@@ -57,9 +57,8 @@ public sealed interface BookPage permits
     // --- Sous-Records utilitaires (Images et Recettes) ---
     record Image(@Nullable Identifier texture, @Nullable ItemStack itemStack, int width, int height, @Nullable String caption, int bgColor) {
         public Image {
-            if ((texture == null) == (itemStack == null)) {
+            if ((texture == null) == (itemStack == null))
                 throw new IllegalArgumentException("Image doit avoir soit texture, soit itemStack — pas les deux, pas aucun");
-            }
         }
 
         public static Image fromTexture(Identifier texture, int width, int height, @Nullable String caption, int bgColor) {

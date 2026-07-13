@@ -17,7 +17,7 @@ public class BookStructure {
     private final List<Consumer<List<Object>>> rootBuilders = new ArrayList<>();
 
     private boolean hasAutoSummary = false;
-    private String summaryTitle = "Sommaire";
+    private String summaryTitle = "book.potions-n-rituals.basic.toc";
 
     public BookStructure(String bookTitle) {
         this.bookTitle = Component.translatable(bookTitle);

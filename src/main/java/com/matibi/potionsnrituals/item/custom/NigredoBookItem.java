@@ -16,454 +16,454 @@ public class NigredoBookItem extends CustomBookItem {
                         ModUtils.id("alchemy_guide_nigredo"))
                 ).stacksTo(1), () ->
                         new BookStructure("item.potions-n-rituals.alchemy_guide_nigredo")
-                                .tableOfContents("Sommaire")
+                                .tableOfContents("book.potions-n-rituals.basic.toc")
 
                                 // ── Chapitre : Potions Customs ──────────────────────────────────
-                                .chapter("Potions", alch -> alch
+                                .chapter("book.potions-n-rituals.nigredo.chapter.potions", alch -> alch
 
                                         .subChapter(BookUtils.getEffectName(ModPotions.LEVITATION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.LEVITATION,
-                                                        "\nGravity is a weight on the shoulders, forget it",
-                                                        "You fall slowly, so slowly that you don't take fall damage.\n\nIt's like you are on the §3Moon§r.\n\n§4Be careful, it only last a moment.§r",
-                                                        "A §3Slow Falling potion§r with a §3feather§r should be good enough to lighten your burden.")
+                                                        "book.potions-n-rituals.page.levitation.resume",
+                                                        "book.potions-n-rituals.page.levitation.explanation",
+                                                        "book.potions-n-rituals.page.levitation.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.ADHESION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.ADHESION,
-                                                        "\nMmh that's a bit...\n\n§2sticky§r.",
-                                                        "You stick to surfaces, allowing you to walk on walls.\n\nVery useful for repelling away spiders.",
-                                                        "Find something sticky, maybe like §2resin§r. Mix it with an §2awkward potion§r, it should be sufficient.")
+                                                        "book.potions-n-rituals.page.adhesion.resume",
+                                                        "book.potions-n-rituals.page.adhesion.explanation",
+                                                        "book.potions-n-rituals.page.adhesion.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.GLOWING), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.GLOWING,
-                                                        "\nIt's a bit dark in here...\n\nBut I can §6see§r you very well",
-                                                        "Make entity §6glow§r so that you can see them in the dark and behind walls.",
-                                                        "A §6Night Vision Potion§r allow you to see in the dark while a §6glow berry§r make you glow... pretty straight forward.")
+                                                        "book.potions-n-rituals.page.glowing.resume",
+                                                        "book.potions-n-rituals.page.glowing.explanation",
+                                                        "book.potions-n-rituals.page.glowing.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.ALCOHOL), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.ALCOHOL,
-                                                        "\n\n§2*hic*§r... Just one last drop.",
-                                                        "Gives entity a feeling of loss.\n\nYou §2lose control§r, yet everything seems so §2funny§r !",
-                                                        "Mix §2sweet berries§r and an §2awkward potion§r, to get some liquor.")
+                                                        "book.potions-n-rituals.page.alcohol.resume",
+                                                        "book.potions-n-rituals.page.alcohol.explanation",
+                                                        "book.potions-n-rituals.page.alcohol.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.DARKNESS), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.DARKNESS,
-                                                        "\nEverything disappear, only the §7void§r keep showing itself.",
-                                                        "You lose your sight, everything turn black.\n\nThere is just one thing to remember...\n\n§4RUN§r\n\nHe's close...",
-                                                        "An ink sac mixed with an awkward potion is great to mimic the effect.")
+                                                        "book.potions-n-rituals.page.darkness.resume",
+                                                        "book.potions-n-rituals.page.darkness.explanation",
+                                                        "book.potions-n-rituals.page.darkness.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.HASTE), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.HASTE,
-                                                        "\n\nA miner's dream...\n\nIt's so §6fast§r !!",
-                                                        "You can mine everything §6faster§r,\n\nreally really §6fast§r.",
-                                                        "Cat dig a lot, so a §6claw§r with an §6awkward potion§r might give you the potion")
+                                                        "book.potions-n-rituals.page.haste.resume",
+                                                        "book.potions-n-rituals.page.haste.explanation",
+                                                        "book.potions-n-rituals.page.haste.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.MINING_FATIGUE), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.MINING_FATIGUE,
-                                                        "\nWow, it's a §7hard stone§r ! \n\nI can't break it.",
-                                                        "You mine everything §4slower§r,\n\nreally really §4slow§r.",
-                                                        "You reverse the §4potion of haste§r with a §4fermented spider eye§r")
+                                                        "book.potions-n-rituals.page.mining_fatigue.resume",
+                                                        "book.potions-n-rituals.page.mining_fatigue.explanation",
+                                                        "book.potions-n-rituals.page.mining_fatigue.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.ACID), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.ACID,
-                                                        "Substance highly §2toxic§r,\n\nUse with precaution.\n\nCan cause indigestion.",
-                                                        "Damages you every seconds",
-                                                        "Mix a §2rotten flesh§r and a §2poison potion§r to get a highly toxic mixture.")
+                                                        "book.potions-n-rituals.page.acid.resume",
+                                                        "book.potions-n-rituals.page.acid.explanation",
+                                                        "book.potions-n-rituals.page.acid.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.ALCHEMIST), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.ALCHEMIST,
-                                                        "\nThe dream of every alchemist,\n\n§7coal§r that become §6gold§r.",
-                                                        "Turn §7Coal§r items into their §6Gold§r variant.",
-                                                        "Take an alchemist item like the §6mercury ball§r and an §6awkward potion§r to achieve that dream.")
+                                                        "book.potions-n-rituals.page.alchemist.resume",
+                                                        "book.potions-n-rituals.page.alchemist.explanation",
+                                                        "book.potions-n-rituals.page.alchemist.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.GIANT), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.GIANT,
-                                                        "\n\n§3Looking down upon the world.§r",
-                                                        "",
-                                                        "§7Bone Meal + Awkward")
+                                                        "book.potions-n-rituals.page.giant.resume",
+                                                        "book.potions-n-rituals.page.giant.explanation",
+                                                        "book.potions-n-rituals.page.giant.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.IGNITION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.IGNITION,
-                                                        "\n\n§6The inner fire.§r",
-                                                        "",
-                                                        "§7Fermented Eye + Fire Resistance")
+                                                        "book.potions-n-rituals.page.ignition.resume",
+                                                        "book.potions-n-rituals.page.ignition.explanation",
+                                                        "book.potions-n-rituals.page.ignition.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.PETRIFICATION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.PETRIFICATION,
-                                                        "\n\n§8Freezing the blood.§r",
-                                                        "",
-                                                        "§7Obsidian + Turtle Master")
+                                                        "book.potions-n-rituals.page.petrification.resume",
+                                                        "book.potions-n-rituals.page.petrification.explanation",
+                                                        "book.potions-n-rituals.page.petrification.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.RESURRECTION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.RESURRECTION,
-                                                        "\n\n§dTricking the reaper.§r",
-                                                        "",
-                                                        "§7Totem of Undying + Awkward")
+                                                        "book.potions-n-rituals.page.resurrection.resume",
+                                                        "book.potions-n-rituals.page.resurrection.explanation",
+                                                        "book.potions-n-rituals.page.resurrection.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.BERSERK), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.BERSERK,
-                                                        "\n\n§cBlind fury.§r",
-                                                        "",
-                                                        "§7Torchflower + Awkward")
+                                                        "book.potions-n-rituals.page.berserk.resume",
+                                                        "book.potions-n-rituals.page.berserk.explanation",
+                                                        "book.potions-n-rituals.page.berserk.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.BRAINWASHING), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.BRAINWASHING,
-                                                        "\n\n§dPutrid marionettes.§r",
-                                                        "",
-                                                        "§7Zombie Brain + Awkward")
+                                                        "book.potions-n-rituals.page.brainwashing.resume",
+                                                        "book.potions-n-rituals.page.brainwashing.explanation",
+                                                        "book.potions-n-rituals.page.brainwashing.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.DEATH), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.DEATH,
-                                                        "\n\n§8The definitive stop.§r",
-                                                        "",
-                                                        "§7Wither Rose + Resurrection")
+                                                        "book.potions-n-rituals.page.death.resume",
+                                                        "book.potions-n-rituals.page.death.explanation",
+                                                        "book.potions-n-rituals.page.death.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.DOUBLE_HEALTH), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.DOUBLE_HEALTH,
-                                                        "\n\n§cA second surge of life.§r",
-                                                        "",
-                                                        "§7Golden Apple + Strong Healing")
+                                                        "book.potions-n-rituals.page.double_health.resume",
+                                                        "book.potions-n-rituals.page.double_health.explanation",
+                                                        "book.potions-n-rituals.page.double_health.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.DWARF), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.DWARF,
-                                                        "\n\n§3A mouse's perspective.§r",
-                                                        "",
-                                                        "§7Fermented Eye + Giant")
+                                                        "book.potions-n-rituals.page.dwarf.resume",
+                                                        "book.potions-n-rituals.page.dwarf.explanation",
+                                                        "book.potions-n-rituals.page.dwarf.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.FROST), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.FROST,
-                                                        "\n\n§bThe kiss of winter.§r",
-                                                        "",
-                                                        "§7Snowball + Cold")
+                                                        "book.potions-n-rituals.page.frost.resume",
+                                                        "book.potions-n-rituals.page.frost.explanation",
+                                                        "book.potions-n-rituals.page.frost.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.GHOST_WALK), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.GHOST_WALK,
-                                                        "\n\n§7Passing through the veil.§r",
-                                                        "",
-                                                        "§7Ghast Tear + Awkward")
+                                                        "book.potions-n-rituals.page.ghost_walk.resume",
+                                                        "book.potions-n-rituals.page.ghost_walk.explanation",
+                                                        "book.potions-n-rituals.page.ghost_walk.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.LIQUID_WALKER), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.LIQUID_WALKER,
-                                                        "\n\n§3Fluid density.§r",
-                                                        "",
-                                                        "§7Lily Pad + Awkward")
+                                                        "book.potions-n-rituals.page.liquid_walker.resume",
+                                                        "book.potions-n-rituals.page.liquid_walker.explanation",
+                                                        "book.potions-n-rituals.page.liquid_walker.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.LONG_COOLDOWN), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.LONG_COOLDOWN,
-                                                        "\n\n§8Temporal numbness.§r",
-                                                        "",
-                                                        "§7Fermented Eye + Short Cooldown")
+                                                        "book.potions-n-rituals.page.long_cooldown.resume",
+                                                        "book.potions-n-rituals.page.long_cooldown.explanation",
+                                                        "book.potions-n-rituals.page.long_cooldown.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.LONG_LEG), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.LONG_LEG,
-                                                        "\n\n§3Des enjambées de géant.§r",
-                                                        "",
-                                                        "§7Bamboo + Awkward")
+                                                        "book.potions-n-rituals.page.long_leg.resume",
+                                                        "book.potions-n-rituals.page.long_leg.explanation",
+                                                        "book.potions-n-rituals.page.long_leg.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.LOVE), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.LOVE,
-                                                        "\n\n§dPeaceful euphoria.§r",
-                                                        "",
-                                                        "§7Poppy + Awkward")
+                                                        "book.potions-n-rituals.page.love.resume",
+                                                        "book.potions-n-rituals.page.love.explanation",
+                                                        "book.potions-n-rituals.page.love.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.MASKING), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.MASKING,
-                                                        "\n\n§8Total erasure.§r",
-                                                        "",
-                                                        "§7Fermented Eye + Invisibility")
+                                                        "book.potions-n-rituals.page.masking.resume",
+                                                        "book.potions-n-rituals.page.masking.explanation",
+                                                        "book.potions-n-rituals.page.masking.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.NO_INTERACTION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.NO_INTERACTION,
-                                                        "\n\n§8Spectator of the world.§r",
-                                                        "",
-                                                        "§7Rabbit Foot + Brainwashing")
+                                                        "book.potions-n-rituals.page.no_interaction.resume",
+                                                        "book.potions-n-rituals.page.no_interaction.explanation",
+                                                        "book.potions-n-rituals.page.no_interaction.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.OBLIVION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.OBLIVION,
-                                                        "\n\n§5The great void.§r",
-                                                        "",
-                                                        "§7Pitcher Plant + Awkward")
+                                                        "book.potions-n-rituals.page.oblivion.resume",
+                                                        "book.potions-n-rituals.page.oblivion.explanation",
+                                                        "book.potions-n-rituals.page.oblivion.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.ORE_SENSE), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.ORE_SENSE,
-                                                        "\n\n§eThe call of the rock.§r",
-                                                        "",
-                                                        "§7Iron Ore + Night Vision")
+                                                        "book.potions-n-rituals.page.ore_sense.resume",
+                                                        "book.potions-n-rituals.page.ore_sense.explanation",
+                                                        "book.potions-n-rituals.page.ore_sense.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.PHOTOSYNTHESIS), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.PHOTOSYNTHESIS,
-                                                        "\n\n§aFed by the divine star.§r",
-                                                        "",
-                                                        "§7Leaf Litter + Awkward")
+                                                        "book.potions-n-rituals.page.photosynthesis.resume",
+                                                        "book.potions-n-rituals.page.photosynthesis.explanation",
+                                                        "book.potions-n-rituals.page.photosynthesis.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.PURIFICATION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.PURIFICATION,
-                                                        "\n\n§fClean slate.§r",
-                                                        "",
-                                                        "§7Milk Bucket + Awkward")
+                                                        "book.potions-n-rituals.page.purification.resume",
+                                                        "book.potions-n-rituals.page.purification.explanation",
+                                                        "book.potions-n-rituals.page.purification.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.REACTIVATION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.REACTIVATION,
-                                                        "\n\n§eCritical moment.§r",
-                                                        "",
-                                                        "§7Sunflower + Short Cooldown")
+                                                        "book.potions-n-rituals.page.reactivation.resume",
+                                                        "book.potions-n-rituals.page.reactivation.explanation",
+                                                        "book.potions-n-rituals.page.reactivation.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.RESONANCE), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.RESONANCE,
-                                                        "\n\n§dThe pulse of the earth.§r",
-                                                        "",
-                                                        "§7Echo Shard + Awkward")
+                                                        "book.potions-n-rituals.page.resonance.resume",
+                                                        "book.potions-n-rituals.page.resonance.explanation",
+                                                        "book.potions-n-rituals.page.resonance.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.INFINITY), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.INFINITY,
-                                                        "\n\n§5The boundless source.§r",
-                                                        "",
-                                                        "Obtained through advanced alchemy.")
+                                                        "book.potions-n-rituals.page.infinity.resume",
+                                                        "book.potions-n-rituals.page.infinity.explanation",
+                                                        "book.potions-n-rituals.page.infinity.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.RUST), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.RUST,
-                                                        "\n\n§6The age of rust.§r",
-                                                        "",
-                                                        "§7Oxydation + Awkward")
+                                                        "book.potions-n-rituals.page.rust.resume",
+                                                        "book.potions-n-rituals.page.rust.explanation",
+                                                        "book.potions-n-rituals.page.rust.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.SATURATION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.SATURATION,
-                                                        "\n\n§cThe concentrated feast.§r",
-                                                        "",
-                                                        "§7Beetroot + Awkward")
+                                                        "book.potions-n-rituals.page.saturation.resume",
+                                                        "book.potions-n-rituals.page.saturation.explanation",
+                                                        "book.potions-n-rituals.page.saturation.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.SHORT_COOLDOWN), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.SHORT_COOLDOWN,
-                                                        "\n\n§eSurhuman vivacity.§r",
-                                                        "",
-                                                        "§7Sunflower + Awkward")
+                                                        "book.potions-n-rituals.page.short_cooldown.resume",
+                                                        "book.potions-n-rituals.page.short_cooldown.explanation",
+                                                        "book.potions-n-rituals.page.short_cooldown.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.STUN), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.STUN,
-                                                        "\n\n§8Synaptic overload.§r",
-                                                        "",
-                                                        "§7Charged Copper + Awkward")
+                                                        "book.potions-n-rituals.page.stun.resume",
+                                                        "book.potions-n-rituals.page.stun.explanation",
+                                                        "book.potions-n-rituals.page.stun.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.TELEPORTATION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.TELEPORTATION,
-                                                        "\n\n§5Unstable quantum leap.§r",
-                                                        "",
-                                                        "§7Ender Pearl + Awkward")
+                                                        "book.potions-n-rituals.page.teleportation.resume",
+                                                        "book.potions-n-rituals.page.teleportation.explanation",
+                                                        "book.potions-n-rituals.page.teleportation.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.THORNS), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.THORNS,
-                                                        "\n\n§2Thorns of flesh.§r",
-                                                        "",
-                                                        "§7Cactus + Awkward")
+                                                        "book.potions-n-rituals.page.thorns.resume",
+                                                        "book.potions-n-rituals.page.thorns.explanation",
+                                                        "book.potions-n-rituals.page.thorns.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.UNSTABLE), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.UNSTABLE,
-                                                        "\n\n§6A powder keg on legs.§r",
-                                                        "",
-                                                        "Obtained through alchemical rituals.")
+                                                        "book.potions-n-rituals.page.unstable.resume",
+                                                        "book.potions-n-rituals.page.unstable.explanation",
+                                                        "book.potions-n-rituals.page.unstable.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.VAMPIRISM), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.VAMPIRISM,
-                                                        "\n\n§cBlood for blood.§r",
-                                                        "",
-                                                        "§7Blood Bag + Awkward")
+                                                        "book.potions-n-rituals.page.vampirism.resume",
+                                                        "book.potions-n-rituals.page.vampirism.explanation",
+                                                        "book.potions-n-rituals.page.vampirism.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.XP_BOOST), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.XP_BOOST,
-                                                        "\n\n§bSpirit of learning.§r",
-                                                        "",
-                                                        "§7Lapis Lazuli + Awkward")
+                                                        "book.potions-n-rituals.page.xp_boost.resume",
+                                                        "book.potions-n-rituals.page.xp_boost.explanation",
+                                                        "book.potions-n-rituals.page.xp_boost.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.XP_REDUCTION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.XP_REDUCTION,
-                                                        "\n\n§8Amnesia of the soul.§r",
-                                                        "",
-                                                        "§7Fermented Eye + XP Boost")
+                                                        "book.potions-n-rituals.page.xp_reduction.resume",
+                                                        "book.potions-n-rituals.page.xp_reduction.explanation",
+                                                        "book.potions-n-rituals.page.xp_reduction.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.XP_LIFE), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.XP_LIFE,
-                                                        "\n\n§aSacrificing lore for flesh.§r",
-                                                        "",
-                                                        "§7Glistering Melon + XP Boost")
+                                                        "book.potions-n-rituals.page.xp_life.resume",
+                                                        "book.potions-n-rituals.page.xp_life.explanation",
+                                                        "book.potions-n-rituals.page.xp_life.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.ZEUS), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.ZEUS,
-                                                        "\n\n§6Wrath of the heavens.§r",
-                                                        "",
-                                                        "§7Materia Prima + Stun")
+                                                        "book.potions-n-rituals.page.zeus.resume",
+                                                        "book.potions-n-rituals.page.zeus.explanation",
+                                                        "book.potions-n-rituals.page.zeus.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.COLD), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.COLD,
-                                                        "\n\n§bWinter torpor.§r",
-                                                        "",
-                                                        "§7Snowball + Awkward")
+                                                        "book.potions-n-rituals.page.cold.resume",
+                                                        "book.potions-n-rituals.page.cold.explanation",
+                                                        "book.potions-n-rituals.page.cold.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.CLUMSINESS), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.CLUMSINESS,
-                                                        "\n\n§7Butterfingers.§r",
-                                                        "",
-                                                        "Brewing formula lost to time.")
+                                                        "book.potions-n-rituals.page.clumsiness.resume",
+                                                        "book.potions-n-rituals.page.clumsiness.explanation",
+                                                        "book.potions-n-rituals.page.clumsiness.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.ASTHMA), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.ASTHMA,
-                                                        "\n\n§8Lungs of ash.§r",
-                                                        "",
-                                                        "Brewing formula lost to time.")
+                                                        "book.potions-n-rituals.page.asthma.resume",
+                                                        "book.potions-n-rituals.page.asthma.explanation",
+                                                        "book.potions-n-rituals.page.asthma.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.PARANOIA), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.PARANOIA,
-                                                        "\n\n§5Shadows in the corners.§r",
-                                                        "",
-                                                        "Brewing formula lost to time.")
+                                                        "book.potions-n-rituals.page.paranoia.resume",
+                                                        "book.potions-n-rituals.page.paranoia.explanation",
+                                                        "book.potions-n-rituals.page.paranoia.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.MEDUSA), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.MEDUSA,
-                                                        "\n\n§2The fatal gaze.§r",
-                                                        "",
-                                                        "§7Materia Prima + Strong Petrification")
+                                                        "book.potions-n-rituals.page.medusa.resume",
+                                                        "book.potions-n-rituals.page.medusa.explanation",
+                                                        "book.potions-n-rituals.page.medusa.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.MIDAS), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.MIDAS,
-                                                        "\n\n§6The gilded curse.§r",
-                                                        "",
-                                                        "§7Materia Prima + Alchemist")
+                                                        "book.potions-n-rituals.page.midas.resume",
+                                                        "book.potions-n-rituals.page.midas.explanation",
+                                                        "book.potions-n-rituals.page.midas.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.ACTIVE_TELEPORT), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.ACTIVE_TELEPORT,
-                                                        "\n\n§5Focused displacement.§r",
-                                                        "",
-                                                        "§7Sulfur Ball + Teleportation")
+                                                        "book.potions-n-rituals.page.active_teleport.resume",
+                                                        "book.potions-n-rituals.page.active_teleport.explanation",
+                                                        "book.potions-n-rituals.page.active_teleport.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.HYDROPHOBIA), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.HYDROPHOBIA,
-                                                        "\n\n§8Rejection of the waves.§r",
-                                                        "",
-                                                        "§7Fermented Eye + Water Breathing")
+                                                        "book.potions-n-rituals.page.hydrophobia.resume",
+                                                        "book.potions-n-rituals.page.hydrophobia.explanation",
+                                                        "book.potions-n-rituals.page.hydrophobia.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.ZOMBIE_CONTAGION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.ZOMBIE_CONTAGION,
-                                                        "\n\n§2The plague of grave-gnawers.§r",
-                                                        "",
-                                                        "§7Rotten Flesh + Awkward")
+                                                        "book.potions-n-rituals.page.zombie_contagion.resume",
+                                                        "book.potions-n-rituals.page.zombie_contagion.explanation",
+                                                        "book.potions-n-rituals.page.zombie_contagion.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.MAGNETISM), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.MAGNETISM,
-                                                        "\n\n§bAttractive gravity.§r",
-                                                        "",
-                                                        "§7Iron Ingot + Awkward")
+                                                        "book.potions-n-rituals.page.magnetism.resume",
+                                                        "book.potions-n-rituals.page.magnetism.explanation",
+                                                        "book.potions-n-rituals.page.magnetism.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.REALITY_CHECK), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.REALITY_CHECK,
-                                                        "\n\n§5Cognitive collapse.§r",
-                                                        "",
-                                                        "Brewing formula lost to time.")
+                                                        "book.potions-n-rituals.page.reality_check.resume",
+                                                        "book.potions-n-rituals.page.reality_check.explanation",
+                                                        "book.potions-n-rituals.page.reality_check.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.FIRE_RESISTANCE), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.FIRE_RESISTANCE,
-                                                        "\n\n§6Skin of the salamander.§r",
-                                                        "",
-                                                        "§7Magma Block + Awkward")
+                                                        "book.potions-n-rituals.page.fire_resistance.resume",
+                                                        "book.potions-n-rituals.page.fire_resistance.explanation",
+                                                        "book.potions-n-rituals.page.fire_resistance.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.REGENERATION), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.REGENERATION,
-                                                        "\n\n§cCellular blossoming.§r",
-                                                        "",
-                                                        "§7Golden Apple + Awkward")
+                                                        "book.potions-n-rituals.page.regeneration.resume",
+                                                        "book.potions-n-rituals.page.regeneration.explanation",
+                                                        "book.potions-n-rituals.page.regeneration.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.STRENGTH), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.STRENGTH,
-                                                        "\n\n§cSurge of raw power.§r",
-                                                        "",
-                                                        "§7Firework Star + Awkward")
+                                                        "book.potions-n-rituals.page.strength.resume",
+                                                        "book.potions-n-rituals.page.strength.explanation",
+                                                        "book.potions-n-rituals.page.strength.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.SWIFTNESS), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.SWIFTNESS,
-                                                        "\n\n§bOutrunning time.§r",
-                                                        "",
-                                                        "§7Sugar + Awkward")
+                                                        "book.potions-n-rituals.page.swiftness.resume",
+                                                        "book.potions-n-rituals.page.swiftness.explanation",
+                                                        "book.potions-n-rituals.page.swiftness.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.POISON), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.POISON,
-                                                        "\n\n§aThe alchemist's blight.§r",
-                                                        "",
-                                                        "§7Poisonous Carrot + Awkward")
+                                                        "book.potions-n-rituals.page.poison.resume",
+                                                        "book.potions-n-rituals.page.poison.explanation",
+                                                        "book.potions-n-rituals.page.poison.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.HEALING), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.HEALING,
-                                                        "\n\n§cInstant flash of life.§r",
-                                                        "",
-                                                        "§7Glistering Melon + Awkward")
+                                                        "book.potions-n-rituals.page.healing.resume",
+                                                        "book.potions-n-rituals.page.healing.explanation",
+                                                        "book.potions-n-rituals.page.healing.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.NIGHT_VISION), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.NIGHT_VISION,
-                                                        "\n\n§ePupils of the feline.§r",
-                                                        "",
-                                                        "§7Golden Carrot + Awkward")
+                                                        "book.potions-n-rituals.page.night_vision.resume",
+                                                        "book.potions-n-rituals.page.night_vision.explanation",
+                                                        "book.potions-n-rituals.page.night_vision.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.INVISIBILITY), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.INVISIBILITY,
-                                                        "\n\n§8Refraction of light.§r",
-                                                        "",
-                                                        "§7Fermented Eye + Night Vision")
+                                                        "book.potions-n-rituals.page.invisibility.resume",
+                                                        "book.potions-n-rituals.page.invisibility.explanation",
+                                                        "book.potions-n-rituals.page.invisibility.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.WATER_BREATHING), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.WATER_BREATHING,
-                                                        "\n\n§bEphemeral gills.§r",
-                                                        "",
-                                                        "§7Pufferfish + Awkward")
+                                                        "book.potions-n-rituals.page.water_breathing.resume",
+                                                        "book.potions-n-rituals.page.water_breathing.explanation",
+                                                        "book.potions-n-rituals.page.water_breathing.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.LEAPING), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.LEAPING,
-                                                        "\n\n§3Defying heights.§r",
-                                                        "",
-                                                        "§7Rabbit Foot + Awkward")
+                                                        "book.potions-n-rituals.page.leaping.resume",
+                                                        "book.potions-n-rituals.page.leaping.explanation",
+                                                        "book.potions-n-rituals.page.leaping.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.TURTLE_MASTER), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.TURTLE_MASTER,
-                                                        "\n\n§2The shell of the mind.§r",
-                                                        "",
-                                                        "§7Turtle Shell + Awkward")
+                                                        "book.potions-n-rituals.page.turtle_master.resume",
+                                                        "book.potions-n-rituals.page.turtle_master.explanation",
+                                                        "book.potions-n-rituals.page.turtle_master.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.SLOW_FALLING), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.SLOW_FALLING,
-                                                        "\n\n§fPlume descent.§r",
-                                                        "",
-                                                        "§7Phantom Membrane + Awkward")
+                                                        "book.potions-n-rituals.page.slow_falling.resume",
+                                                        "book.potions-n-rituals.page.slow_falling.explanation",
+                                                        "book.potions-n-rituals.page.slow_falling.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.WEAKNESS), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.WEAKNESS,
-                                                        "\n\n§7Lethargy of the muscles.§r",
-                                                        "",
-                                                        "§7Fermented Eye + Strength")
+                                                        "book.potions-n-rituals.page.weakness.resume",
+                                                        "book.potions-n-rituals.page.weakness.explanation",
+                                                        "book.potions-n-rituals.page.weakness.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.SLOWNESS), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.SLOWNESS,
-                                                        "\n\n§7Leaden pace.§r",
-                                                        "",
-                                                        "§7Fermented Eye + Swiftness")
+                                                        "book.potions-n-rituals.page.slowness.resume",
+                                                        "book.potions-n-rituals.page.slowness.explanation",
+                                                        "book.potions-n-rituals.page.slowness.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(Potions.HARMING), sub ->
                                                 BookUtils.createPotionChapter(sub, Potions.HARMING,
-                                                        "\n\n§cDistilled bane.§r",
-                                                        "",
-                                                        "§7Fermented Eye + Healing")
+                                                        "book.potions-n-rituals.page.harming.resume",
+                                                        "book.potions-n-rituals.page.harming.explanation",
+                                                        "book.potions-n-rituals.page.harming.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.PERM_HEALTH), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.PERM_HEALTH,
-                                                        "\n\n§cThe flesh transcended.§r",
-                                                        "",
-                                                        "Obtained through alchemical rituals.")
+                                                        "book.potions-n-rituals.page.perm_health.resume",
+                                                        "book.potions-n-rituals.page.perm_health.explanation",
+                                                        "book.potions-n-rituals.page.perm_health.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.PERM_SPEED), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.PERM_SPEED,
-                                                        "\n\n§bEternal velocity.§r",
-                                                        "",
-                                                        "Obtained through alchemical rituals.")
+                                                        "book.potions-n-rituals.page.perm_speed.resume",
+                                                        "book.potions-n-rituals.page.perm_speed.explanation",
+                                                        "book.potions-n-rituals.page.perm_speed.brew")
                                         )
                                         .subChapter(BookUtils.getEffectName(ModPotions.PERM_STRENGTH), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.PERM_STRENGTH,
-                                                        "\n\n§cMark of the Titan.§r",
-                                                        "",
-                                                        "Obtained through alchemical rituals.")
+                                                        "book.potions-n-rituals.page.perm_strength.resume",
+                                                        "book.potions-n-rituals.page.perm_strength.explanation",
+                                                        "book.potions-n-rituals.page.perm_strength.brew")
                                         )
                                 )
         );

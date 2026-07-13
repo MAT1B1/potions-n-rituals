@@ -18,3 +18,4 @@ rubedo = creation des rituels
 
 on aura 5 livre (base de l'alchimie, nigredo, albedo, citrinitas, rubedo)
 chaque livre dis comment passer d'une etape a une autre
+
