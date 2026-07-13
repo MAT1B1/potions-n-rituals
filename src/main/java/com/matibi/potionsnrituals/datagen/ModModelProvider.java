@@ -23,6 +23,8 @@ import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.jspecify.annotations.NonNull;
 
@@ -36,11 +38,17 @@ public class ModModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(@NonNull BlockModelGenerators gen) {
-        gen.createTrivialCube(ModBlocks.BAG_WALL);
-        gen.createTrivialCube(ModBlocks.BAG_EXIT);
+        generateBlockNItem(gen, ModBlocks.BAG_WALL);
+        generateBlockNItem(gen, ModBlocks.BAG_EXIT);
         generatePedestalModel(gen);
         generateCauldronModel(gen);
         generateBloodTrailModel(gen);
+    }
+
+    private void generateBlockNItem(BlockModelGenerators gen, Block block) {
+        gen.createTrivialCube(block);
+        if (block.asItem() != Items.AIR)
+            gen.registerSimpleItemModel(block, ModelLocationUtils.getModelLocation(block));
     }
 
     private void generatePedestalModel(BlockModelGenerators gen) {
@@ -193,6 +201,9 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.SALT,
                 ModItems.BASIC_GUIDE,
                 ModItems.NIGREDO_GUIDE,
+                ModItems.ALBEDO_GUIDE,
+                ModItems.CITRINITAS_GUIDE,
+                ModItems.RUBEDO_GUIDE,
                 ModItems.TALISMAN,
                 ModItems.ALCHEMICAL_BAG,
                 ModItems.NETHER_SEAL_BREAKER,

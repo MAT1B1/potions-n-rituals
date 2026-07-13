@@ -2,6 +2,7 @@ package com.matibi.potionsnrituals.item;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.block.ModBlocks;
+import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.custom.*;
@@ -140,13 +141,16 @@ public class ModItems {
             NIGREDO_GUIDE = register("alchemy_guide_nigredo", new NigredoBookItem()),
             ALBEDO_GUIDE = register("alchemy_guide_albedo",
                     new CustomBookItem(props("alchemy_guide_albedo").stacksTo(1), () ->
-                            new BookStructure("item.potions-n-rituals.alchemy_guide_albedo"))),
+                            new BookStructure("item.potions-n-rituals.alchemy_guide_albedo")
+                                    .page(new BookPage.EmptyPage()))),
             CITRINITAS_GUIDE = register("alchemy_guide_citrinitas",
                     new CustomBookItem(props("alchemy_guide_citrinitas").stacksTo(1), () ->
-                            new BookStructure("item.potions-n-rituals.alchemy_guide_citrinitas"))),
+                            new BookStructure("item.potions-n-rituals.alchemy_guide_citrinitas")
+                                    .page(new BookPage.EmptyPage()))),
             RUBEDO_GUIDE = register("alchemy_guide_rubedo",
                     new CustomBookItem(props("alchemy_guide_rubedo").stacksTo(1), () ->
-                            new BookStructure("item.potions-n-rituals.alchemy_guide_rubedo")));
+                            new BookStructure("item.potions-n-rituals.alchemy_guide_rubedo")
+                                    .page(new BookPage.EmptyPage())));
 
     private static Item registerSimple(String id) {
         return register(id, new Item(props(id)));

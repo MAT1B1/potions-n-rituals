@@ -66,10 +66,13 @@ public class ModItemGroups {
                                 .toList();
 
                         entries.accept(ModItems.BASIC_GUIDE);
+                        entries.accept(ModItems.NIGREDO_GUIDE);
+                        entries.accept(ModItems.ALBEDO_GUIDE);
+                        entries.accept(ModItems.CITRINITAS_GUIDE);
+                        entries.accept(ModItems.RUBEDO_GUIDE);
                         entries.accept(ModItems.MATERIA_PRIMA);
                         entries.accept(ModItems.SULFUR_BALL);
                         entries.accept(ModItems.MERCURY_BALL);
-                        entries.accept(ModItems.NIGREDO_GUIDE);
                         entries.accept(ModItems.TALISMAN);
                         entries.accept(ModItems.TALISMAN_CHARGED);
                         entries.accept(ModItems.ALCHEMICAL_BAG);
