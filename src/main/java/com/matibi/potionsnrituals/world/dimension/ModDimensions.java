@@ -38,8 +38,7 @@ public class ModDimensions {
     public static final ResourceKey<Level> SPIRIT_DIMENSION = createLevelKey("spirit_dimension");
     public static final ResourceKey<DimensionType> SPIRIT_DIMENSION_TYPE = createTypeKey("spirit_dimension");
     public static final ResourceKey<LevelStem> SPIRIT_LEVEL_STEM = createStemKey("spirit_dimension");
-    public static final ResourceKey<NoiseGeneratorSettings> SPIRIT_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS, ModUtils.id("spirit_noise"));
-
+    
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
         HolderSet<Block> infiniburnSet = context.lookup(Registries.BLOCK).getOrThrow(BlockTags.INFINIBURN_OVERWORLD);
         DimensionType.MonsterSettings emptyMonsterSettings = new DimensionType.MonsterSettings(ConstantInt.of(0), 0);
