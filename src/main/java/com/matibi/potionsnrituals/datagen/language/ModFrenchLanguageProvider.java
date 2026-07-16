@@ -13,6 +13,7 @@ import java.util.concurrent.CompletableFuture;
 public class ModFrenchLanguageProvider extends FabricLanguageProvider {
 
     private final Map<String, String> additionalTranslations;
+    private TranslationBuilder t;
 
     public ModFrenchLanguageProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         this(dataOutput, registryLookup, Map.of());
@@ -24,13 +25,14 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
     }
 
     @Override
-    public void generateTranslations(HolderLookup.@NonNull Provider wrapperLookup, @NonNull TranslationBuilder t) {
-        generateVanillaEffects(t);
-        generateModEffects(t);
-        generateItems(t);
-        generateBlocks(t);
-        generateAdvancements(t);
-        generateMisc(t);
+    public void generateTranslations(HolderLookup.@NonNull Provider wrapperLookup, @NonNull TranslationBuilder t_p) {
+        t = t_p;
+        generateVanillaEffects();
+        generateModEffects();
+        generateItems();
+        generateBlocks();
+        generateAdvancements();
+        generateMisc();
 
         ModBookLanguageHelper.generateBookFrFrTranslations(t);
         ModConfigLanguageHelper.generateConfigFrFrTranslations(t);
@@ -38,12 +40,12 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         this.additionalTranslations.forEach(t::add);
     }
 
-    private void generateVanillaEffects(TranslationBuilder t) {
-        registerVanilla(t, "levitation", "de Lévitation");
-        registerVanilla(t, "glowing", "de Surbrillance");
-        registerVanilla(t, "darkness", "de Obscurité");
-        registerVanilla(t, "haste", "de Célérité");
-        registerVanilla(t, "mining_fatigue", "de Fatigue de minage");
+    private void generateVanillaEffects() {
+        registerVanilla("levitation", "de Lévitation");
+        registerVanilla("glowing", "de Surbrillance");
+        registerVanilla("darkness", "de Obscurité");
+        registerVanilla("haste", "de Célérité");
+        registerVanilla("mining_fatigue", "de Fatigue de minage");
 
         t.add("item.minecraft.potion.effect.alcohol", "Alcool");
         t.add("item.minecraft.splash_potion.effect.alcohol", "Alcool jetable");
@@ -51,94 +53,95 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("item.minecraft.tipped_arrow.effect.alcohol", "Flèche d'Alcool");
     }
 
-    private void generateModEffects(TranslationBuilder t) {
-        register(t, "saturation", "Saturation");
-        register(t, "long_leg", "Grandes jambes");
-        register(t, "liquid_walker", "Marche sur liquide");
-        register(t, "ore_sense", "Détection de minerais");
-        register(t, "resonance", "Résonance");
-        register(t, "reactivation", "Réactivation");
-        register(t, "purification", "Purification");
-        register(t, "teleportation", "Téléportation");
-        register(t, "thorns", "Épines", "d'Épines");
-        register(t, "brainwashing", "Lavage de cerveau");
-        register(t, "death", "Mort");
-        register(t, "double_health", "Double vie");
-        register(t, "infinity", "Infinité", "d'Infinité");
-        register(t, "long_cooldown", "Cooldown allongé");
-        register(t, "short_cooldown", "Cooldown réduit");
-        register(t, "love", "Amour", "d'Amour");
-        register(t, "masking", "Voile d'oubli");
-        register(t, "unstable", "Instable", "Instable");
-        register(t, "vampirism", "Vampirisme");
-        register(t, "stun", "Étourdissement", "d'Étourdissement");
-        register(t, "no_interaction", "Mains liées");
-        register(t, "aftermath", "Contrecoup");
-        register(t, "berserk", "Berserk");
-        register(t, "ghost_walk", "Marche spectrale");
-        register(t, "dwarf", "Nanisme");
-        register(t, "photosynthesis", "Photosynthèse");
-        register(t, "pregnant", "Enceinte");
-        register(t, "oblivion", "Oubli", "d'Oubli");
-        register(t, "adhesion", "Adhésion", "d'Adhésion");
-        register(t, "rust", "Rouille");
-        register(t, "xp_boost", "Boost d'XP");
-        register(t, "xp_life", "Vie d'XP");
-        register(t, "zeus", "Bénédiction de Zeus");
-        register(t, "medusa", "Bénédiction de Méduse");
-        register(t, "midas", "Bénédiction de Midas");
-        register(t, "xp_reduction", "Réduction d'XP");
-        register(t, "clumsiness", "Maladresse");
-        register(t, "cold", "Rhume");
-        register(t, "asthma", "Asthme", "d'Asthme");
-        register(t, "paranoia", "Paranoïa");
-        register(t, "hydrophobia", "Hydrophobie");
-        register(t, "zombie_contagion", "Contagion de Zombie");
-        register(t, "empathy", "Empathie", "d'Empathie");
-        register(t, "magnetism", "Magnétisme");
-        register(t, "reality_check", "Retour à la Réalité");
-        register(t, "active_tp", "Téléportation Active");
+    private void generateModEffects() {
+        register("saturation", "Saturation");
+        register("long_leg", "Grandes jambes");
+        register("liquid_walker", "Marche sur liquide");
+        register("ore_sense", "Détection de minerais");
+        register("resonance", "Résonance");
+        register("reactivation", "Réactivation");
+        register("purification", "Purification");
+        register("teleportation", "Téléportation");
+        register("thorns", "Épines", "d'Épines");
+        register("brainwashing", "Lavage de cerveau");
+        register("death", "Mort");
+        register("double_health", "Double vie");
+        register("infinity", "Infinité", "d'Infinité");
+        register("long_cooldown", "Cooldown allongé");
+        register("short_cooldown", "Cooldown réduit");
+        register("love", "Amour", "d'Amour");
+        register("masking", "Voile d'oubli");
+        register("unstable", "Instable", "Instable");
+        register("vampirism", "Vampirisme");
+        register("stun", "Étourdissement", "d'Étourdissement");
+        register("no_interaction", "Mains liées");
+        register("aftermath", "Contrecoup");
+        register("berserk", "Berserk");
+        register("ghost_walk", "Marche spectrale");
+        register("dwarf", "Nanisme");
+        register("photosynthesis", "Photosynthèse");
+        register("pregnant", "Enceinte");
+        register("oblivion", "Oubli", "d'Oubli");
+        register("adhesion", "Adhésion", "d'Adhésion");
+        register("rust", "Rouille");
+        register("xp_boost", "Boost d'XP");
+        register("xp_life", "Vie d'XP");
+        register("zeus", "Bénédiction de Zeus");
+        register("medusa", "Bénédiction de Méduse");
+        register("midas", "Bénédiction de Midas");
+        register("xp_reduction", "Réduction d'XP");
+        register("clumsiness", "Maladresse");
+        register("cold", "Rhume");
+        register("asthma", "Asthme", "d'Asthme");
+        register("paranoia", "Paranoïa");
+        register("hydrophobia", "Hydrophobie");
+        register("zombie_contagion", "Contagion de Zombie");
+        register("empathy", "Empathie", "d'Empathie");
+        register("magnetism", "Magnétisme");
+        register("reality_check", "Retour à la Réalité");
+        register("active_tp", "Téléportation Active");
 
-        registerWithAlchemicalStone(t, "resurrection", "Résurrection");
-        registerWithAlchemicalStone(t, "giant", "Géant");
-        registerWithAlchemicalStone(t, "petrification", "Pétrification");
-        registerWithAlchemicalStone(t, "acid", "Acidité", "d'Acidité");
-        registerWithAlchemicalStone(t, "ignition", "Ignition", "d'Ignition");
-        registerWithAlchemicalStone(t, "alchemist", "Alchimiste", "de l'Alchimiste");
-        registerWithAlchemicalStone(t, "frost", "Givre");
+        registerWithAlchemicalStone("resurrection", "Résurrection");
+        registerWithAlchemicalStone("giant", "Géant");
+        registerWithAlchemicalStone("petrification", "Pétrification");
+        registerWithAlchemicalStone("acid", "Acidité", "d'Acidité");
+        registerWithAlchemicalStone("ignition", "Ignition", "d'Ignition");
+        registerWithAlchemicalStone("alchemist", "Alchimiste", "de l'Alchimiste");
+        registerWithAlchemicalStone("frost", "Givre");
 
-        registerElixir(t, "perm_health", "Vie");
-        registerElixir(t, "perm_speed", "Vitesse");
-        registerElixir(t, "perm_strength", "Force");
+        registerElixir("perm_health", "Vie");
+        registerElixir("perm_speed", "Vitesse");
+        registerElixir("perm_strength", "Force");
     }
 
-    private void generateItems(TranslationBuilder t) {
-        t.add("item.potions-n-rituals.poisonous_carrot", "Carotte empoisonnée");
-        t.add("item.potions-n-rituals.poisonous_beetroot", "Betterave empoisonnée");
-        t.add("item.potions-n-rituals.materia_prima", "Materia Prima");
-        t.add("item.potions-n-rituals.claw", "Griffe");
-        t.add("item.potions-n-rituals.zombie_brain", "Cerveau de zombie");
-        t.add("item.potions-n-rituals.leaf", "Feuille");
-        t.add("item.potions-n-rituals.witch_finger", "Doigt de sorcière");
-        t.add("item.potions-n-rituals.blood_bag", "Poche de sang");
-        t.add("item.potions-n-rituals.oxydation", "Fragment d'oxydation");
-        t.add("item.potions-n-rituals.charged_copper", "Cuivre chargé");
-        t.add("item.potions-n-rituals.sulfur_ball", "Boule de Sulfure");
-        t.add("item.potions-n-rituals.mercury_ball", "Boule de Mercure");
-        t.add("item.potions-n-rituals.salt", "Sel");
-        t.add("item.potions-n-rituals.talisman", "Talisman vide");
-        t.add("item.potions-n-rituals.talisman_charged", "Talisman chargé");
-        t.add("item.potions-n-rituals.alchemical_bag", "Dimension de Poche");
-        t.add("item.potions-n-rituals.nether_seal_breaker", "Descelleur de Portail");
-        t.add("item.potions-n-rituals.alchemy_guide_basic", "Magnus Opus: Les Fondements de l'Alchimie");
-        t.add("item.potions-n-rituals.alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
-        t.add("item.potions-n-rituals.alchemical_stone", "Pierre alchimique");
-        t.add("item.potions-n-rituals.alchemical_stone.effect.empty", "Pierre alchimique");
-        t.add("item.potions-n-rituals.alchemical_stone.effect.mixed", "Pierre alchimique multi-effets");
-        registerVanilla(t, "mixed", "multi-effets");
+    private void generateItems() {
+        addItem("poisonous_carrot", "Carotte empoisonnée");
+        addItem("poisonous_beetroot", "Betterave empoisonnée");
+        addItem("materia_prima", "Materia Prima");
+        addItem("claw", "Griffe");
+        addItem("zombie_brain", "Cerveau de zombie");
+        addItem("leaf", "Feuille");
+        addItem("witch_finger", "Doigt de sorcière");
+        addItem("blood_bag", "Poche de sang");
+        addItem("oxydation", "Fragment d'oxydation");
+        addItem("charged_copper", "Cuivre chargé");
+        addItem("sulfur_ball", "Boule de Sulfure");
+        addItem("mercury_ball", "Boule de Mercure");
+        addItem("salt", "Sel");
+        addItem("talisman", "Talisman vide");
+        addItem("talisman_charged", "Talisman chargé");
+        addItem("alchemical_bag", "Dimension de Poche");
+        addItem("nether_seal_breaker", "Descelleur de Portail");
+        addItem("spirit_mirror", "Miroir spirituel");
+        addItem("alchemy_guide_basic", "Magnus Opus: Les Fondements de l'Alchimie");
+        addItem("alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
+        addItem("alchemical_stone", "Pierre alchimique");
+        addItem("alchemical_stone.effect.empty", "Pierre alchimique");
+        addItem("alchemical_stone.effect.mixed", "Pierre alchimique multi-effets");
+        registerVanilla("mixed", "multi-effets");
 
-        t.add("item.potions-n-rituals.syringe", "Seringue");
-        t.add("item.potions-n-rituals.syringe.effect.isEmpty", "Seringue");
+        addItem("syringe", "Seringue");
+        addItem("syringe.effect.isEmpty", "Seringue");
 
         BuiltInRegistries.MOB_EFFECT.entrySet().forEach(entry -> {
             Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(entry.getValue());
@@ -148,11 +151,15 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         });
     }
 
-    private void generateBlocks(TranslationBuilder t) {
+    private void addItem(String id, String name) {
+        t.add("item.potions-n-rituals." + id, name);
+    }
+
+    private void generateBlocks() {
         t.add("block.potions-n-rituals.pedestal", "Piédestal");
     }
 
-    private void generateAdvancements(TranslationBuilder t) {
+    private void generateAdvancements() {
         t.add("advancements.potions-n-rituals.root.title", "Potions & Rituels");
         t.add("advancements.potions-n-rituals.root.description", "L'art de l'alchimie");
         t.add("advancements.potions-n-rituals.nigredo.title", "Nigredo");
@@ -165,7 +172,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("advancements.potions-n-rituals.rubedo.description", "Atteignez la perfection absolue en accomplissant les grands rituels");
     }
 
-    private void generateMisc(TranslationBuilder t) {
+    private void generateMisc() {
         // parameter
         t.add("key.potions-n-rituals.show_effect_icons", "Montrer les effets");
         t.add("key.potions-n-rituals.effect_button", "Bouton d'effet");
@@ -177,8 +184,8 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("potions-n-rituals.blood_type.monster", "Sang de monstre");
 
         // Mod Text
-        t.add("item.potions-n-rituals.alchemical_stone.block_only", "Les pierres alchimiques ne peuvent être utilisées que sur des blocs");
-        t.add("item.potions-n-rituals.alchemical_stone.block_not_good", "Le bloc n'est pas compatible");
+        addItem("alchemical_stone.block_only", "Les pierres alchimiques ne peuvent être utilisées que sur des blocs");
+        addItem("alchemical_stone.block_not_good", "Le bloc n'est pas compatible");
         t.add("itemGroup.potions-n-rituals.alchemy", "Alchimie");
         t.add("splash.potionsnrituals.magic", "L'Alchimie c'est le pouvoir !!!");
         t.add("splash.potionsnrituals.thanks", "Merci de me supporter LivelyBadGood");
@@ -191,33 +198,33 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s coups restants)");
     }
 
-    private void registerWithAlchemicalStone(TranslationBuilder t, String id, String name) {
-        registerWithAlchemicalStone(t, id, name, "de " + name);
+    private void registerWithAlchemicalStone(String id, String name) {
+        registerWithAlchemicalStone(id, name, "de " + name);
     }
 
-    private void registerWithAlchemicalStone(TranslationBuilder t, String id, String effectName, String name) {
-        register(t, id, effectName, name);
-        t.add("item.potions-n-rituals.alchemical_stone.effect." + id, "Pierre " + name);
+    private void registerWithAlchemicalStone(String id, String effectName, String name) {
+        register(id, effectName, name);
+        addItem("alchemical_stone.effect." + id, "Pierre " + name);
     }
 
-    private void registerVanilla(TranslationBuilder t, String id, String name) {
+    private void registerVanilla(String id, String name) {
         t.add("item.minecraft.potion.effect." + id, "Potion " + name);
         t.add("item.minecraft.splash_potion.effect." + id, "Potion jetable " + name);
         t.add("item.minecraft.lingering_potion.effect." + id, "Potion persistante " + name);
         t.add("item.minecraft.tipped_arrow.effect." + id, "Flèche " + name);
     }
 
-    private void register(TranslationBuilder t, String id, String name) {
-        register(t, id, name, "de " + name);
+    private void register(String id, String name) {
+        register(id, name, "de " + name);
     }
 
-    private void register(TranslationBuilder t, String id, String effectName, String name) {
-        registerVanilla(t, id, name);
+    private void register(String id, String effectName, String name) {
+        registerVanilla(id, name);
         t.add("effect.potions-n-rituals." + id, effectName);
-        t.add("item.potions-n-rituals.syringe.effect.potions-n-rituals." + id, "Seringue " + name);
+        addItem("syringe.effect.potions-n-rituals." + id, "Seringue " + name);
     }
 
-    private void registerElixir(TranslationBuilder t, String id, String name) {
+    private void registerElixir(String id, String name) {
         t.add("effect.potions-n-rituals." + id, name + " Permanente");
         t.add("item.minecraft.potion.effect." + id, "Elixir de " + name + " Permanente");
         t.add("item.minecraft.splash_potion.effect." + id, "Elixir jetable de " + name + " Permanente");

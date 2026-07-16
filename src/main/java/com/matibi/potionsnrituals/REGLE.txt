@@ -11,3 +11,13 @@ quand on veut rajouter un effet:
         - ajouter la potion dans le NigredoBookItem.java
         - ajouter les trad du Nigredo book dans le ModBookLanguageHelper.java
     - faire les traductions dans ModFrenchLanguageProvider.java et ModUsLanguageProvider.java
+
+quand on rajoute un item:
+    - faire le <Nom de l'item>Item.java si necessaire
+    - faire un mixin si necessaire
+    - si il y a des constantes modifiables:
+        - les mettre dans le ModConfig.java
+        - les ajouter dans le ModConfigScreen.java
+        - rajouter les trad dans ModConfigLanguageHelper.java
+    - rajouter l'item dans ModItems.java
+    - faire les traductions dans ModFrenchLanguageProvider.java et ModUsLanguageProvider.java

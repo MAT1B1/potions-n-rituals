@@ -2,6 +2,7 @@ package com.matibi.potionsnrituals;
 
 import com.matibi.potionsnrituals.block.ModBlockEntities;
 import com.matibi.potionsnrituals.block.ModBlocks;
+import com.matibi.potionsnrituals.command.ModCommands;
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.effect.ModEffects;
@@ -53,6 +54,7 @@ public class PotionsNRituals implements ModInitializer {
 		RitualTriggerManager.register();
 		ModDimensions.register();
 		ModAttachments.register();
+		ModCommands.register();
 
 		ResourceLoader.get(PackType.SERVER_DATA)
 				.registerReloadListener(

@@ -3,6 +3,7 @@ package com.matibi.potionsnrituals;
 import com.matibi.potionsnrituals.datagen.*;
 import com.matibi.potionsnrituals.datagen.language.ModFrenchLanguageProvider;
 import com.matibi.potionsnrituals.datagen.language.ModUsLanguageProvider;
+import com.matibi.potionsnrituals.world.biome.ModBiomes;
 import com.matibi.potionsnrituals.world.dimension.ModDimensions;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -31,5 +32,6 @@ public class PotionsNRitualsDataGenerator implements DataGeneratorEntrypoint {
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {
 		registryBuilder.add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType);
 		registryBuilder.add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem);
+		registryBuilder.add(Registries.BIOME, ModBiomes::bootstrap);
 	}
 }

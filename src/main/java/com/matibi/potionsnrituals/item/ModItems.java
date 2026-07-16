@@ -80,14 +80,21 @@ public class ModItems {
             ),
             ALCHEMICAL_BAG = register("alchemical_bag", new AlchemicalBagItem(props("alchemical_bag")
                     .stacksTo(1)
-                    .rarity(Rarity.UNCOMMON)) {
+                    .rarity(Rarity.RARE)) {
                         @Override
                         public boolean isFoil(@NonNull ItemStack stack) { return true; }
                     }
             ),
             NETHER_SEAL_BREAKER = register("nether_seal_breaker", new NetherSealBreakerItem(props("nether_seal_breaker")
                     .stacksTo(1)
-                    .rarity(Rarity.UNCOMMON)) {
+                    .rarity(Rarity.RARE)) {
+                        @Override
+                        public boolean isFoil(@NonNull ItemStack stack) { return true; }
+                    }
+            ),
+            SPIRIT_MIRROR = register("spirit_mirror", new SpiritMirrorItem(props("spirit_mirror")
+                    .stacksTo(1)
+                    .rarity(Rarity.RARE)) {
                         @Override
                         public boolean isFoil(@NonNull ItemStack stack) { return true; }
                     }
