@@ -30,7 +30,8 @@
     "effect.ghost_walker.EntityMixin",
     "effect.ghost_walker.LivingEntityMixin",
     "effect.ghost_walker.PlayerGhostWalkMixin",
-    "effect.XpLife.XpLifeMixin"
+    "effect.XpLife.XpLifeMixin",
+    "world.LivingEntityMixin"
   ],
   "client": [
     "effect.XpLife.GuiMixin"

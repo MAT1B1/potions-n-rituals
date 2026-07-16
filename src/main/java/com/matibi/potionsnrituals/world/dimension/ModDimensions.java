@@ -3,6 +3,8 @@ package com.matibi.potionsnrituals.world.dimension;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.util.ModUtils;
 import com.matibi.potionsnrituals.world.biome.ModBiomes;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
@@ -36,6 +38,7 @@ public class ModDimensions {
     public static final ResourceKey<Level> SPIRIT_DIMENSION = createLevelKey("spirit_dimension");
     public static final ResourceKey<DimensionType> SPIRIT_DIMENSION_TYPE = createTypeKey("spirit_dimension");
     public static final ResourceKey<LevelStem> SPIRIT_LEVEL_STEM = createStemKey("spirit_dimension");
+    public static final ResourceKey<NoiseGeneratorSettings> SPIRIT_NOISE = ResourceKey.create(Registries.NOISE_SETTINGS, ModUtils.id("spirit_noise"));
 
     public static void bootstrapType(BootstrapContext<DimensionType> context) {
         HolderSet<Block> infiniburnSet = context.lookup(Registries.BLOCK).getOrThrow(BlockTags.INFINIBURN_OVERWORLD);
@@ -70,10 +73,37 @@ public class ModDimensions {
 
     private static NoiseBasedChunkGenerator createSpiritNoiseGenerator(BootstrapContext<LevelStem> context) {
         HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
+        Holder<Biome> deepDarkBiome = biomeRegistry.getOrThrow(Biomes.DEEP_DARK);
+        Holder<Biome> spiritBiome = biomeRegistry.getOrThrow(ModBiomes.SPIRIT_BIOME);
         HolderGetter<NoiseGeneratorSettings> noiseSettings = context.lookup(Registries.NOISE_SETTINGS);
 
+        Climate.ParameterPoint deepDarkPoint = Climate.parameters(
+                Climate.Parameter.span(-1.0F, 1.0F),
+                Climate.Parameter.span(-1.0F, 1.0F),
+                Climate.Parameter.span(-1.0F, 1.0F),
+                Climate.Parameter.span(-1.0F, 1.0F),
+                Climate.Parameter.span(0.2F, 1.0F),
+                Climate.Parameter.span(-1.0F, 1.0F),
+                0.0F
+        );
+
+        Climate.ParameterPoint spiritPoint = Climate.parameters(
+                Climate.Parameter.span(-1.0F, 1.0F),
+                Climate.Parameter.span(-1.0F, 1.0F),
+                Climate.Parameter.span(-1.0F, 1.0F),
+                Climate.Parameter.span(-1.0F, 1.0F),
+                Climate.Parameter.span(-1.0F, 0.2F),
+                Climate.Parameter.span(-1.0F, 1.0F),
+                0.0F
+        );
+
+        Climate.ParameterList<Holder<Biome>> biomeList = new Climate.ParameterList<>(List.of(
+                Pair.of(deepDarkPoint, deepDarkBiome),
+                Pair.of(spiritPoint, spiritBiome)
+        ));
+
         return new NoiseBasedChunkGenerator(
-                new FixedBiomeSource(biomeRegistry.getOrThrow(ModBiomes.SPIRIT_BIOME)),
+                MultiNoiseBiomeSource.createFromList(biomeList),
                 noiseSettings.getOrThrow(NoiseGeneratorSettings.OVERWORLD)
         );
     }
