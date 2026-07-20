@@ -56,8 +56,6 @@ public sealed interface BookPage permits
 
     // --- Sous-Records utilitaires (Images et Recettes) ---
     record Image(@Nullable Identifier texture, @Nullable ItemStack itemStack, @Nullable BlockState blockState, int width, int height, @Nullable String caption, int bgColor) {
-        public Image {
-        }
 
         public static Image fromItem(ItemStack stack) {
             return new Image(null, stack, null, 64, 64, null, 0x00000000);
