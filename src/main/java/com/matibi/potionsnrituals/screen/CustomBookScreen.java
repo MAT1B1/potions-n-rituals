@@ -59,7 +59,7 @@ public class CustomBookScreen extends Screen {
     private static final int IMAGE_GAP = 8;
     private static final int CAPTION_GAP = 2;
     private static final int IMAGE_BLOCK_GAP = 6;
-    private static final int MAX_IMAGE_HEIGHT = 50;
+    private static final int MAX_IMAGE_HEIGHT = 150;
 
     private static final Identifier SLOT_TEXTURE = Identifier.withDefaultNamespace("textures/gui/sprites/container/slot.png");
 
@@ -582,7 +582,7 @@ public class CustomBookScreen extends Screen {
         switch (page) {
             case BookPage.ImagePage imgPage -> {
                 if (!imgPage.images().isEmpty())
-                    drawImages(graphics, imgPage.images(), pageX, cursorY);
+                    hoveredItem = drawImages(graphics, imgPage.images(), pageX, cursorY, mouseX, mouseY);
             }
             case BookPage.RecipePage recPage ->
                     hoveredItem = drawRecipeLayout(graphics, recPage.recipe(), pageX, cursorY, mouseX, mouseY);
@@ -818,22 +818,30 @@ public class CustomBookScreen extends Screen {
         return hovered;
     }
 
-    private void drawImages(GuiGraphicsExtractor graphics, List<BookPage.Image> images, int pageX, int startY) {
+    private @Nullable ItemStack drawImages(GuiGraphicsExtractor graphics, List<BookPage.Image> images, int pageX, int startY, int mouseX, int mouseY) {
         int count = images.size();
-        int slotWidth = count == 2 ? (PAGE_CONTENT_WIDTH - IMAGE_GAP) / 2 : PAGE_CONTENT_WIDTH;
+        int columns = count > 2 ? (int) Math.sqrt(count) : count;
+        int rows = (int) Math.ceil((double) count / columns);
 
+        int slotWidth = (PAGE_CONTENT_WIDTH - (columns - 1) * IMAGE_GAP) / columns;
         int maxDrawHeight = 0;
+
         int[] drawW = new int[count];
         int[] drawH = new int[count];
 
         for (int i = 0; i < count; i++) {
             BookPage.Image img = images.get(i);
+            if (img.texture() == null && img.itemStack() == null && img.blockState() == null) {
+                drawW[i] = slotWidth;
+                drawH[i] = slotWidth;
+                continue;
+            }
+
             float ratio = (float) img.height() / img.width();
             int w = Math.min(slotWidth, img.width());
             int h = Math.min(MAX_IMAGE_HEIGHT, Math.round(w * ratio));
-            if (h == MAX_IMAGE_HEIGHT) {
+            if (h == MAX_IMAGE_HEIGHT)
                 w = Math.round(h / ratio);
-            }
             drawW[i] = w;
             drawH[i] = h;
             maxDrawHeight = Math.max(maxDrawHeight, h);
@@ -851,15 +859,26 @@ public class CustomBookScreen extends Screen {
                 captionLines[i] = List.of();
         }
 
-        int cursorX = pageX - (count - 1) * IMAGE_GAP / 2;
-        int captionStartY = startY + maxDrawHeight + CAPTION_GAP;
+        int captionStartY = startY + (rows * maxDrawHeight) + ((rows - 1) * IMAGE_GAP) + CAPTION_GAP;
+        ItemStack hoveredItem = null;
 
         for (int i = 0; i < count; i++) {
             BookPage.Image img = images.get(i);
+
+            int col = i % columns;
+            int row = i / columns;
+
             int w = drawW[i];
             int h = drawH[i];
-            int imgX = cursorX + (slotWidth - w) / 2;
-            int imgY = startY + (maxDrawHeight - h);
+
+            int cellX = pageX + col * (slotWidth + IMAGE_GAP);
+            int cellY = startY + row * (maxDrawHeight + IMAGE_GAP);
+
+            int imgX = cellX + (slotWidth - w) / 2;
+            int imgY = cellY + (maxDrawHeight - h) / 2;
+
+            if (img.texture() == null && img.itemStack() == null && img.blockState() == null)
+                continue;
 
             if ((img.bgColor() & 0xFF000000) != 0) {
                 graphics.fill(imgX - 1, imgY, imgX + w + 1, imgY + h, img.bgColor());
@@ -867,7 +886,28 @@ public class CustomBookScreen extends Screen {
                 graphics.fill(imgX, imgY + h, imgX + w, imgY + h + 1, img.bgColor());
             }
 
-            if (img.itemStack() != null) {
+            if (img.blockState() != null) {
+                ItemStack blockItem = img.blockState().getBlock().asItem().getDefaultInstance();
+                float scaleX = w / 16f;
+                float scaleY = h / 16f;
+                graphics.pose().pushMatrix();
+                graphics.pose().translate(imgX, imgY);
+                graphics.pose().scale(scaleX, scaleY);
+                graphics.item(blockItem, 0, 0);
+                graphics.pose().popMatrix();
+
+                if (isInside(mouseX, mouseY, imgX, imgY, w, h))
+                    hoveredItem = img.blockState().getBlock().asItem().getDefaultInstance();
+            } else if (img.itemStack() != null) {
+                if (img.texture() != null) {
+                    float scaleX = (float) w / img.width();
+                    float scaleY = (float) h / img.height();
+                    graphics.pose().pushMatrix();
+                    graphics.pose().translate(imgX, imgY);
+                    graphics.pose().scale(scaleX, scaleY);
+                    graphics.blit(RenderPipelines.GUI_TEXTURED, img.texture(), 0, 0, 0, 0, img.width(), img.height(), img.width(), img.height());
+                    graphics.pose().popMatrix();
+                }
                 float scaleX = w / 16f;
                 float scaleY = h / 16f;
                 graphics.pose().pushMatrix();
@@ -875,27 +915,28 @@ public class CustomBookScreen extends Screen {
                 graphics.pose().scale(scaleX, scaleY);
                 graphics.item(img.itemStack(), 0, 0);
                 graphics.pose().popMatrix();
+
+                if (isInside(mouseX, mouseY, imgX, imgY, w, h))
+                    hoveredItem = img.itemStack();
             } else {
                 float scaleX = (float) w / img.width();
                 float scaleY = (float) h / img.height();
                 graphics.pose().pushMatrix();
                 graphics.pose().translate(imgX, imgY);
                 graphics.pose().scale(scaleX, scaleY);
-                if (img.texture() != null)
-                    graphics.blit(RenderPipelines.GUI_TEXTURED, img.texture(), 0, 0, 0, 0, img.width(), img.height(), img.width(), img.height());
+                graphics.blit(RenderPipelines.GUI_TEXTURED, img.texture(), 0, 0, 0, 0, img.width(), img.height(), img.width(), img.height());
                 graphics.pose().popMatrix();
             }
 
             int lineY = captionStartY;
             for (FormattedCharSequence line : captionLines[i]) {
                 int lineWidth = this.font.width(line);
-                int lineX = cursorX + (slotWidth - lineWidth) / 2;
+                int lineX = cellX + (slotWidth - lineWidth) / 2;
                 graphics.text(this.font, line, lineX, lineY, CAPTION_COLOR, false);
                 lineY += LINE_HEIGHT;
             }
-
-            cursorX += slotWidth + IMAGE_GAP;
         }
+        return hoveredItem;
     }
 
     @Nullable

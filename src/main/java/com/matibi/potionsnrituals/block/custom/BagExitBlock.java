@@ -2,7 +2,7 @@ package com.matibi.potionsnrituals.block.custom;
 
 import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.datacomponent.ReturnLocation;
-import com.matibi.potionsnrituals.item.custom.AlchemicalBagItem;
+import com.matibi.potionsnrituals.item.custom.talisman.AlchemicalBagItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;

@@ -1,4 +1,4 @@
-package com.matibi.potionsnrituals.item.custom;
+package com.matibi.potionsnrituals.item.custom.book;
 
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.screen.CustomBookScreen;

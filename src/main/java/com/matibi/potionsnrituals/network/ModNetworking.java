@@ -4,7 +4,7 @@ import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.datacomponent.PersonalBookmark;
 import com.matibi.potionsnrituals.effect.helper.ActiveEffectPayload;
 import com.matibi.potionsnrituals.effect.helper.CooldownSyncPayload;
-import com.matibi.potionsnrituals.item.custom.CustomBookItem;
+import com.matibi.potionsnrituals.item.custom.book.CustomBookItem;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;

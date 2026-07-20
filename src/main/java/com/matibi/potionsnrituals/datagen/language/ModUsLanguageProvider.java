@@ -135,6 +135,9 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         addItem("spirit_mirror", "Spirit Mirror");
         addItem("alchemy_guide_basic", "Magnus Opus: The Foundations of Alchemy");
         addItem("alchemy_guide_nigredo", "Nigredo: Chronicles of Chaos");
+        addItem("alchemy_guide_albedo", "Albedo: Vessel of Order");
+        addItem("alchemy_guide_citrinitas", "Citrinitas: Anchor of Enlightenment");
+        addItem("alchemy_guide_rubedo", "Rubedo: Apex of Mastery");
         addItem("alchemical_stone", "Alchemical Stone");
         addItem("alchemical_stone.effect.empty", "Alchemical Stone");
         addItem("alchemical_stone.effect.mixed", "Multi-effect Alchemical Stone");

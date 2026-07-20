@@ -52,7 +52,7 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .pattern("WSW")
                 .pattern(" W ")
                 .define('W', Items.WATER_BUCKET)
-                .define('S', ModBlocks.BLOOD_TRAIL)
+                .define('S', Blocks.IRON_BLOCK)
                 .catalyst(Ritual.Catalysts.IGNITE)
                 .height(120, 321)
                 .save();

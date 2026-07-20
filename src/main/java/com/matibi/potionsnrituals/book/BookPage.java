@@ -3,6 +3,7 @@ package com.matibi.potionsnrituals.book;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
@@ -30,7 +31,6 @@ public sealed interface BookPage permits
     ) implements BookPage {
         public ImagePage {
             if (images == null) images = List.of();
-            if (images.size() > 2) throw new IllegalArgumentException("Max 2 images par page, reçu: " + images.size());
             images = List.copyOf(images);
         }
     }
@@ -55,26 +55,40 @@ public sealed interface BookPage permits
     ) implements BookPage {}
 
     // --- Sous-Records utilitaires (Images et Recettes) ---
-    record Image(@Nullable Identifier texture, @Nullable ItemStack itemStack, int width, int height, @Nullable String caption, int bgColor) {
+    record Image(@Nullable Identifier texture, @Nullable ItemStack itemStack, @Nullable BlockState blockState, int width, int height, @Nullable String caption, int bgColor) {
         public Image {
-            if ((texture == null) == (itemStack == null))
-                throw new IllegalArgumentException("Image doit avoir soit texture, soit itemStack — pas les deux, pas aucun");
-        }
-
-        public static Image fromTexture(Identifier texture, int width, int height, @Nullable String caption, int bgColor) {
-            return new Image(texture, null, width, height, caption, bgColor);
-        }
-
-        public static Image fromTexture(Identifier texture, int width, int height) {
-            return new Image(texture, null, width, height, null, 0x00000000);
-        }
-
-        public static Image fromItem(ItemStack stack, @Nullable String caption, int bgColor) {
-            return new Image(null, stack, 64, 64, caption, bgColor);
         }
 
         public static Image fromItem(ItemStack stack) {
-            return new Image(null, stack, 64, 64, null, 0x00000000);
+            return new Image(null, stack, null, 64, 64, null, 0x00000000);
+        }
+
+        public static Image compound(Identifier bgTexture, ItemStack stack) {
+            return new Image(bgTexture, stack, null, 64, 64, null, 0x00000000);
+        }
+
+        public static Image fromTexture(Identifier texture) {
+            return new Image(texture, null, null, 64, 64, null, 0x00000000);
+        }
+
+        public static Image fromBlockState(BlockState state) {
+            return new Image(null, null, state, 64, 64, null, 0x00000000);
+        }
+
+        public static Image fromItem(ItemStack stack, int width, int height, @Nullable String caption, int bgColor) {
+            return new Image(null, stack, null, width, height, caption, bgColor);
+        }
+
+        public static Image compound(Identifier bgTexture, ItemStack stack, int width, int height, @Nullable String caption, int bgColor) {
+            return new Image(bgTexture, stack, null, width, height, caption, bgColor);
+        }
+
+        public static Image fromTexture(Identifier texture, int width, int height, @Nullable String caption, int bgColor) {
+            return new Image(texture, null, null, width, height, caption, bgColor);
+        }
+
+        public static Image fromBlockState(BlockState state, int width, int height, @Nullable String caption, int bgColor) {
+            return new Image(null, null, state, width, height, caption, bgColor);
         }
     }
 

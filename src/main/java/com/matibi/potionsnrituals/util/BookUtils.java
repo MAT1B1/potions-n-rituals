@@ -6,6 +6,8 @@ import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.potion.PotionIconHelper;
+import com.matibi.potionsnrituals.ritual.RitualManager;
+import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import com.mojang.serialization.JsonOps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -29,6 +32,8 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import java.io.Reader;
 import java.lang.reflect.Field;
@@ -41,9 +46,15 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class BookUtils {
-    public static String getIdString(Holder<Potion> potion) {
-        return potion.unwrapKey()
+    public static String getIdString(Holder<?> holder) {
+        return holder.unwrapKey()
                 .map(key -> key.identifier().getPath())
+                .orElse("unknown");
+    }
+
+    public static String getIdString(Item item) {
+        return BuiltInRegistries.ITEM.getResourceKey(item)
+                .map(key -> key.identifier().toString())
                 .orElse("unknown");
     }
 
@@ -56,6 +67,11 @@ public class BookUtils {
     public static String getName(Holder<Potion> potion) {
         String res = getItemStack(potion).getDisplayName().getString();
         return res.substring(1, res.length() - 1);
+    }
+
+    public static String getName(Item item) {
+        String res = new ItemStack(item).getHoverName().getString();
+        return res.length() > 2 ? res.substring(1, res.length() - 1) : res;
     }
 
     public static String getEffectName(Holder<Potion> potion) {
@@ -96,6 +112,64 @@ public class BookUtils {
     }
 
     @Environment(EnvType.CLIENT)
+    public static BookPage createIllustrationPage(String idString) {
+        Identifier id = ModUtils.id("textures/gui/pages/" + idString + ".png");
+        return new BookPage.ImagePage(id.getPath(), Component.empty(),
+                List.of(
+                        BookPage.Image.fromTexture(id,
+                                110, 145, null, 0x00000000)
+                ), Component.empty());
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static BookPage createRitualPage(String title, String ritualId, String description) {
+        Ritual ritual = RitualManager.getAllRituals().get(ModUtils.id(ritualId));
+        String pageId = ritual.toString().toLowerCase();
+        List<BookPage.Image> gridImages = new ArrayList<>();
+
+        Identifier pedestalTexture = ModUtils.id("textures/gui/pedestal.png");
+
+        for (String row : ritual.pattern()) {
+            for (char c : row.toCharArray()) {
+                if (c == ' ') {
+                    gridImages.add(new BookPage.Image(null, null, null, 16, 16, "", 0));
+                    continue;
+                }
+
+                String key = String.valueOf(c);
+                Ritual.Ingredient ing = ritual.keys().get(key);
+
+                if (ing != null) {
+                    Identifier ingId = Identifier.parse(ing.id());
+
+                    Optional<Block> blockOpt = BuiltInRegistries.BLOCK.getOptional(ingId);
+                    Optional<Item> itemOpt = BuiltInRegistries.ITEM.getOptional(ingId);
+
+                    if (blockOpt.isPresent() && blockOpt.get() != Blocks.AIR) {
+                        BookPage.Image testImg = BookPage.Image.fromBlockState(blockOpt.get().defaultBlockState());
+                        System.out.println("CRÉATION IMAGE BLOC : " + ingId + " | blockState est-il null ? " + (testImg.blockState() == null));
+                        gridImages.add(testImg);
+                    } else if (itemOpt.isPresent()) {
+                        ItemStack stack = new ItemStack(itemOpt.get());
+                        gridImages.add(BookPage.Image.compound(pedestalTexture, stack));
+                    } else {
+                        gridImages.add(new BookPage.Image(null, null, null, 16, 16, "", 0));
+                        System.out.println("ÉCHEC BLOC : " + ingId + " passe dans le else !");
+                    }
+                } else
+                    gridImages.add(new BookPage.Image(null, null, null, 16, 16, "", 0));
+            }
+        }
+
+        return new BookPage.ImagePage(
+                pageId,
+                Component.translatable(title),
+                gridImages,
+                Component.translatable(description)
+        );
+    }
+
+    @Environment(EnvType.CLIENT)
     public static void createPotionChapter(BookStructure.Chapter sub, Holder<Potion> potion,
                                            String resume, String explanation, String brew) {
         String id = getIdString(potion);
@@ -107,6 +181,15 @@ public class BookUtils {
                     potion,
                     brew))
             .page(new BookPage.EmptyPage());
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void createTalismanChapter(BookStructure.Chapter sub, Item item, String explanation) {
+        String id = getIdString(item);
+        sub .page(new BookPage.ImagePage(id, Component.literal(getName(item)),
+                        List.of(BookPage.Image.fromItem(new ItemStack(item))),
+                        Component.translatable(explanation)))
+                .page(createStandardPage(id + "_explanation", "How it works", explanation));
     }
 
     @Environment(EnvType.CLIENT)

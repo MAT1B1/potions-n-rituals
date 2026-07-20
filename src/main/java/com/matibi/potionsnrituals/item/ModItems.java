@@ -5,9 +5,15 @@ import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
-import com.matibi.potionsnrituals.item.custom.*;
 import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStoneItem;
+import com.matibi.potionsnrituals.item.custom.book.AlbedoBookItem;
+import com.matibi.potionsnrituals.item.custom.book.CustomBookItem;
+import com.matibi.potionsnrituals.item.custom.book.NigredoBookItem;
 import com.matibi.potionsnrituals.item.custom.syringe.SyringeItem;
+import com.matibi.potionsnrituals.item.custom.talisman.AlchemicalBagItem;
+import com.matibi.potionsnrituals.item.custom.talisman.NetherSealBreakerItem;
+import com.matibi.potionsnrituals.item.custom.talisman.SpiritMirrorItem;
+import com.matibi.potionsnrituals.item.custom.talisman.TalismanItem;
 import com.matibi.potionsnrituals.util.BookUtils;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -15,6 +21,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -146,10 +153,7 @@ public class ModItems {
                     )
             ),
             NIGREDO_GUIDE = register("alchemy_guide_nigredo", new NigredoBookItem()),
-            ALBEDO_GUIDE = register("alchemy_guide_albedo",
-                    new CustomBookItem(props("alchemy_guide_albedo").stacksTo(1), () ->
-                            new BookStructure("item.potions-n-rituals.alchemy_guide_albedo")
-                                    .page(new BookPage.EmptyPage()))),
+            ALBEDO_GUIDE = register("alchemy_guide_albedo", new AlbedoBookItem()),
             CITRINITAS_GUIDE = register("alchemy_guide_citrinitas",
                     new CustomBookItem(props("alchemy_guide_citrinitas").stacksTo(1), () ->
                             new BookStructure("item.potions-n-rituals.alchemy_guide_citrinitas")
@@ -157,7 +161,7 @@ public class ModItems {
             RUBEDO_GUIDE = register("alchemy_guide_rubedo",
                     new CustomBookItem(props("alchemy_guide_rubedo").stacksTo(1), () ->
                             new BookStructure("item.potions-n-rituals.alchemy_guide_rubedo")
-                                    .page(new BookPage.EmptyPage())));
+                                    .page(BookUtils.createRitualPage("Ok", "summon_thunderstorm", ""))));
 
     private static Item registerSimple(String id) {
         return register(id, new Item(props(id)));

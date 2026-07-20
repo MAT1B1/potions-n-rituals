@@ -42,6 +42,18 @@ public class ModBiomes {
                 new MobSpawnSettings.SpawnerData(EntityTypes.ALLAY, 1, 3)
         );
 
+        spawnBuilder.addSpawn(
+                MobCategory.CREATURE,
+                25,
+                new MobSpawnSettings.SpawnerData(EntityTypes.VEX, 1, 3)
+        );
+
+        spawnBuilder.addSpawn(
+                MobCategory.CREATURE,
+                10,
+                new MobSpawnSettings.SpawnerData(EntityTypes.PHANTOM, 1, 3)
+        );
+
         context.register(SPIRIT_BIOME, new Biome.BiomeBuilder()
                 .hasPrecipitation(false)
                 .temperature(0.5F)

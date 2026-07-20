@@ -1,5 +1,6 @@
-package com.matibi.potionsnrituals.item.custom;
+package com.matibi.potionsnrituals.item.custom.book;
 
+import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.util.BookUtils;
@@ -20,7 +21,8 @@ public class NigredoBookItem extends CustomBookItem {
 
                                 // ── Chapitre : Potions Customs ──────────────────────────────────
                                 .chapter("book.potions-n-rituals.nigredo.chapter.potions", alch -> alch
-
+                                        .page(new BookPage.EmptyPage())
+                                        .page(BookUtils.createIllustrationPage("potion_page"))
                                         .subChapter(BookUtils.getEffectName(ModPotions.LEVITATION), sub ->
                                                 BookUtils.createPotionChapter(sub, ModPotions.LEVITATION,
                                                         "book.potions-n-rituals.page.levitation.resume",

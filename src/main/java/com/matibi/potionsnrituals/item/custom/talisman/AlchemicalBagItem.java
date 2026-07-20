@@ -1,4 +1,4 @@
-package com.matibi.potionsnrituals.item.custom;
+package com.matibi.potionsnrituals.item.custom.talisman;
 
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.config.ModConfig;

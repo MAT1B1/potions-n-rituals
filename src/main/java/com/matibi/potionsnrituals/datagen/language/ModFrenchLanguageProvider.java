@@ -135,6 +135,9 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         addItem("spirit_mirror", "Miroir spirituel");
         addItem("alchemy_guide_basic", "Magnus Opus: Les Fondements de l'Alchimie");
         addItem("alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
+        addItem("alchemy_guide_albedo", "Albedo: Vaisseau de l'Ordre");
+        addItem("alchemy_guide_citrinitas", "Citrinitas: Ancre de l'Éveil");
+        addItem("alchemy_guide_rubedo", "Rubedo: Apogée de la Maîtrise");
         addItem("alchemical_stone", "Pierre alchimique");
         addItem("alchemical_stone.effect.empty", "Pierre alchimique");
         addItem("alchemical_stone.effect.mixed", "Pierre alchimique multi-effets");
