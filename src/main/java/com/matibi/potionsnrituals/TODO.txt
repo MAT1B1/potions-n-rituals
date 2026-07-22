@@ -1,9 +1,6 @@
 À rajouter sur les effets :
     – saut avec LiquidWalker
 
-Effet à faire :
-    – brainwashing
-
 ajouter nouveau effet:
     - activation : active les truc comme un bloc de redstone
     - vie liée : lie la vie a un item du joueur

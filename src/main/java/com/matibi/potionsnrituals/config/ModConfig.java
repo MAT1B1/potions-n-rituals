@@ -273,7 +273,7 @@ public class ModConfig {
         HANDLER.load();
 
         ModConfig cfg = get();
-        cfg.blacklist_effect = List.of(ModEffects.BRAINWASHING);
+        cfg.blacklist_effect = List.of();
         cfg.blacklist_potions = List.of();
         cfg.blacklist_stone = List.of();
     }
