@@ -60,13 +60,13 @@ public class AlbedoBookItem extends CustomBookItem {
                                 )
                                 // ── Chapitre : Les alchemical stones ────────────────────────────
                                 .chapter("item.potions-n-rituals.alchemical_stone", c -> c
-                                        .page(BookUtils.createStonePage(ModAlchemicalStone.ACID, ""))
-                                        .page(BookUtils.createStonePage(ModAlchemicalStone.PETRIFICATION, ""))
-                                        .page(BookUtils.createStonePage(ModAlchemicalStone.ALCHEMIST, ""))
-                                        .page(BookUtils.createStonePage(ModAlchemicalStone.IGNITION, ""))
-                                        .page(BookUtils.createStonePage(ModAlchemicalStone.GIANT, ""))
-                                        .page(BookUtils.createStonePage(ModAlchemicalStone.RESURRECTION, ""))
-                                        .page(BookUtils.createStonePage(ModAlchemicalStone.FROST, ""))
+                                        .subChapter(BookUtils.getIdString(ModAlchemicalStone.ACID), s -> s.page(BookUtils.createStonePage(ModAlchemicalStone.ACID, "")))
+                                        .subChapter(BookUtils.getIdString(ModAlchemicalStone.PETRIFICATION), s -> s.page(BookUtils.createStonePage(ModAlchemicalStone.PETRIFICATION, "")))
+                                        .subChapter(BookUtils.getIdString(ModAlchemicalStone.ALCHEMIST), s -> s.page(BookUtils.createStonePage(ModAlchemicalStone.ALCHEMIST, "")))
+                                        .subChapter(BookUtils.getIdString(ModAlchemicalStone.IGNITION), s -> s.page(BookUtils.createStonePage(ModAlchemicalStone.IGNITION, "")))
+                                        .subChapter(BookUtils.getIdString(ModAlchemicalStone.GIANT), s -> s.page(BookUtils.createStonePage(ModAlchemicalStone.GIANT, "")))
+                                        .subChapter(BookUtils.getIdString(ModAlchemicalStone.RESURRECTION), s -> s.page(BookUtils.createStonePage(ModAlchemicalStone.RESURRECTION, "")))
+                                        .subChapter(BookUtils.getIdString(ModAlchemicalStone.FROST), s -> s.page(BookUtils.createStonePage(ModAlchemicalStone.FROST, "")))
                                 )
         );
     }

@@ -33,9 +33,7 @@ public class TickManager {
     }
 
     public static void initialize() {
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
-            CONDITIONAL_TASKS.removeIf(task -> !task.tick(server));
-
-        });
+        ServerTickEvents.END_SERVER_TICK.register(server ->
+                CONDITIONAL_TASKS.removeIf(task -> !task.tick(server)));
     }
 }
