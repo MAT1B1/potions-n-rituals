@@ -188,6 +188,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerators gen) {
         List<Item> items = List.of(
                 ModItems.CLAW,
+                ModItems.BAT_WING,
                 ModItems.WITCH_S_FINGER,
                 ModItems.ZOMBIE_BRAIN,
                 ModItems.POISONOUS_BEETROOT,

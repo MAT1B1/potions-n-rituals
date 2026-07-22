@@ -119,6 +119,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         addItem("poisonous_beetroot", "Betterave empoisonnée");
         addItem("materia_prima", "Materia Prima");
         addItem("claw", "Griffe");
+        addItem("bat_wing", "Aile de Chauve-souris");
         addItem("zombie_brain", "Cerveau de zombie");
         addItem("witch_finger", "Doigt de sorcière");
         addItem("blood_bag", "Poche de sang");

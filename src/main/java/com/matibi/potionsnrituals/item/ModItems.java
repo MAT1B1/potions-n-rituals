@@ -41,6 +41,7 @@ public class ModItems {
             SULFUR_BALL = registerSimple("sulfur_ball"),
             SALT = registerSimple("salt"),
             CLAW = registerSimple("claw"),
+            BAT_WING = registerSimple("bat_wing"),
             BLOOD_BAG = register("blood_bag",
                     new BlockItem(ModBlocks.BLOOD_TRAIL, props("blood_bag"))
             ),
@@ -222,6 +223,7 @@ public class ModItems {
                     output.insertAfter(Items.NETHER_WART, ModItems.MATERIA_PRIMA);
                     output.insertAfter(Items.PHANTOM_MEMBRANE,
                             ModItems.CLAW,
+                            ModItems.BAT_WING,
                             ModItems.WITCH_S_FINGER,
                             ModItems.OXYDATION,
                             ModItems.CHARGED_COPPER

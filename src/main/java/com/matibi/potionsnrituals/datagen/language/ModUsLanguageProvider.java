@@ -121,6 +121,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         addItem("poisonous_beetroot", "Poisonous Beetroot");
         addItem("materia_prima", "Materia Prima");
         addItem("claw", "Claw");
+        addItem("bat_wing", "Bat Wing");
         addItem("zombie_brain", "Zombie Brain");
         addItem("witch_finger", "Witch's Finger");
         addItem("blood_bag", "Blood Bag");
