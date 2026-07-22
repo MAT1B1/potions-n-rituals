@@ -10,10 +10,7 @@ import com.matibi.potionsnrituals.item.custom.book.AlbedoBookItem;
 import com.matibi.potionsnrituals.item.custom.book.CustomBookItem;
 import com.matibi.potionsnrituals.item.custom.book.NigredoBookItem;
 import com.matibi.potionsnrituals.item.custom.syringe.SyringeItem;
-import com.matibi.potionsnrituals.item.custom.talisman.AlchemicalBagItem;
-import com.matibi.potionsnrituals.item.custom.talisman.NetherSealBreakerItem;
-import com.matibi.potionsnrituals.item.custom.talisman.SpiritMirrorItem;
-import com.matibi.potionsnrituals.item.custom.talisman.TalismanItem;
+import com.matibi.potionsnrituals.item.custom.talisman.*;
 import com.matibi.potionsnrituals.util.BookUtils;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -99,6 +96,14 @@ public class ModItems {
                     }
             ),
             SPIRIT_MIRROR = register("spirit_mirror", new SpiritMirrorItem(props("spirit_mirror")
+                    .durability(6)
+                    .stacksTo(1)
+                    .rarity(Rarity.RARE)) {
+                        @Override
+                        public boolean isFoil(@NonNull ItemStack stack) { return true; }
+                    }
+            ),
+            DECOY = register("decoy", new DecoyItem(props("decoy")
                     .stacksTo(1)
                     .rarity(Rarity.RARE)) {
                         @Override

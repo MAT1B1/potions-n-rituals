@@ -78,6 +78,7 @@ public class ModItemGroups {
                         entries.accept(ModItems.ALCHEMICAL_BAG);
                         entries.accept(ModItems.NETHER_SEAL_BREAKER);
                         entries.accept(ModItems.SPIRIT_MIRROR);
+                        entries.accept(ModItems.DECOY);
                         entries.accept(ModBlocks.PEDESTAL);
                         entries.accept(ModItems.SALT);
 

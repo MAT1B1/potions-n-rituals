@@ -335,6 +335,27 @@ public class ModBookLanguageHelper {
                 "\nLes dieux vous ont béni.",
                 "Augmente de façon permanente la puissance de tous vos coups au corps-à-corps.\n\nRien ne pourra plus vous résister.",
                 "Une telle puissance brute doit être §cobtenue via des rituels alchimiques§r d'une précision et d'une dangerosité absolues.");
+
+        // --- AJOUTS ALBEDO (AlbedoBookItem) ---
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", "Chemin vers le Citrinitas");
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.rituals", "Rituel");
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.talisman", "Talisman");
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.artifacts", "Les Artefacts");
+
+        // Textes des pages
+        t.add("book.potions-n-rituals.page.nether_gate.text", "Vous aurez besoin de partir en enfer avec un rituel. Pour l'activer, il faut sacrifier une entité à l'intérieur du rituel.");
+        t.add("book.potions-n-rituals.page.ritual_pattern", "Structure du Rituel");
+        t.add("book.potions-n-rituals.page.talisman_recipe", "Recette du Talisman");
+
+        // --- AJOUTS ARTEFACTS (Chapitre : Les Artefacts) ---
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.artifact_page", "Les Artefacts");
+        t.add("book.potions-n-rituals.page.artifact.alchemical_bag.desc", "Permet de stocker des objets dans une dimension séparée.");
+        t.add("book.potions-n-rituals.page.artifact.alchemical_bag.craft", "Vous donnez du pouvoir à un bundle avec un talisman.");
+        t.add("book.potions-n-rituals.page.artifact.spirit_mirror.desc", "Permet de naviguer vers une dimension différente.");
+        t.add("book.potions-n-rituals.page.artifact.nether_seal_breaker.desc", "Brise le sceau du Nether et crée un portail.");
+        t.add("book.potions-n-rituals.page.artifact.nether_seal_breaker.craft", "Vous devez visiter chaque partie du Nether pour récupérer les blocs nécessaires.");
+        t.add("book.potions-n-rituals.page.artifact.decoy.desc", "Crée un Leurre qui distrait les mobs hostiles.");
+        t.add("book.potions-n-rituals.page.artifact.alchemical_stone.desc", "La pierre peut stocker des effets de potions pour les appliquer au sol.");
     }
 
     public static void generateBookEnUsTranslations(TranslationBuilder t) {
@@ -669,6 +690,27 @@ public class ModBookLanguageHelper {
                 "\nThe gods have blessed you.",
                 "Permanently increases the power of all your melee strikes.\n\nNothing will be able to resist you anymore.",
                 "Such raw power must be §cobtained through alchemical rituals§r of absolute precision and danger.");
+
+        // --- AJOUTS ALBEDO (AlbedoBookItem) ---
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", "Path to Citrinitas");
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.rituals", "Ritual");
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.talisman", "Talisman");
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.artifacts", "Artifacts");
+
+        // Textes des pages
+        t.add("book.potions-n-rituals.page.nether_gate.text", "You will need to go to the Nether with a ritual. To activate it, you must sacrifice an entity inside the ritual.");
+        t.add("book.potions-n-rituals.page.ritual_pattern", "Ritual Pattern");
+        t.add("book.potions-n-rituals.page.talisman_recipe", "Talisman Recipe");
+
+        // --- AJOUTS ARTEFACTS (Chapter: Artifacts) ---
+        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.artifact_page", "Artifacts");
+        t.add("book.potions-n-rituals.page.artifact.alchemical_bag.desc", "Allows you to store in a separate dimension.");
+        t.add("book.potions-n-rituals.page.artifact.alchemical_bag.craft", "You give power to a bundle with a talisman.");
+        t.add("book.potions-n-rituals.page.artifact.spirit_mirror.desc", "Allows you to navigate to a different dimension.");
+        t.add("book.potions-n-rituals.page.artifact.nether_seal_breaker.desc", "Break the nether seal and create a portal.");
+        t.add("book.potions-n-rituals.page.artifact.nether_seal_breaker.craft", "You need to go to every part of the nether to get the blocks.");
+        t.add("book.potions-n-rituals.page.artifact.decoy.desc", "Create a decoy that distract hostile mobs.");
+        t.add("book.potions-n-rituals.page.artifact.alchemical_stone.desc", "The stone can store some potion effects to apply them on the ground.");
     }
 
     private static void registerPotionLines(TranslationBuilder t, String id, String resume, String explanation, String brew) {

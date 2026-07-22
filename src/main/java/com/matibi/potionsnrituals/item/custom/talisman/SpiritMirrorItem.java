@@ -55,6 +55,7 @@ public class SpiritMirrorItem extends Item {
 
                     targetLevel.playSound(null, serverPlayer.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
 
+                    itemStack.hurtAndBreak(1, serverPlayer, player.getEquipmentSlotForItem(itemStack));
                     serverPlayer.getCooldowns().addCooldown(itemStack, 100);
                 }
             }

@@ -11,6 +11,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.core.component.DataComponentType;
@@ -72,6 +73,17 @@ public record AlchemicalStone(Identifier id, Holder<MobEffect> effect, int ampli
         }
 
         return ItemStack.EMPTY;
+    }
+
+    public static Holder<Potion> getPotion(Holder<AlchemicalStone> stone) {
+        AlchemicalStone stoneValue = stone.value();
+
+        Potion potion = new Potion(
+                "stone_potion_" + stoneValue.id().getPath(),
+                new MobEffectInstance(stoneValue.effect(), 1, stoneValue.amplifier())
+        );
+
+        return BuiltInRegistries.POTION.wrapAsHolder(potion);
     }
 
     private static void createTooltip(ItemStack stack, Holder<MobEffect> effect, int amplifier) {

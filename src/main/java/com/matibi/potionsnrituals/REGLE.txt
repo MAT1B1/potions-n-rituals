@@ -20,4 +20,8 @@ quand on rajoute un item:
         - les ajouter dans le ModConfigScreen.java
         - rajouter les trad dans ModConfigLanguageHelper.java
     - rajouter l'item dans ModItems.java
+    - si c'est un talisman:
+        - ajouter a AlbedoBookItem.java
+        - ajouter trad de AlbedoBookItem.java dans le ModBookLanguageHelper.java
+        - rajouter la recettes dans ModRecipeProvider.java
     - faire les traductions dans ModFrenchLanguageProvider.java et ModUsLanguageProvider.java

@@ -19,6 +19,7 @@ public class ModEntities {
     public static final EntityType<PortalBuilderEntity> PORTAL_BUILDER = reg("portal_builder",
             EntityType.Builder.of(PortalBuilderEntity::new, MobCategory.MISC).sized(0.1f, 0.1f));
 
+
     private static <T extends Entity> EntityType<T> reg(String name, EntityType.Builder<T> builder) {
         Identifier id = ModUtils.id(name);
         ResourceKey<EntityType<?>> key = ResourceKey.create(Registries.ENTITY_TYPE, id);

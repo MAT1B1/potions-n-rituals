@@ -208,7 +208,8 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.ALCHEMICAL_BAG,
                 ModItems.NETHER_SEAL_BREAKER,
                 ModItems.TALISMAN_CHARGED,
-                ModItems.SPIRIT_MIRROR
+                ModItems.SPIRIT_MIRROR,
+                ModItems.DECOY
         );
 
         items.forEach(item -> gen.generateFlatItem(item, ModelTemplates.FLAT_ITEM));

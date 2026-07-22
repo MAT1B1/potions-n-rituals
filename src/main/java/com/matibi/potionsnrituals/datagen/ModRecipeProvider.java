@@ -121,6 +121,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
                         .save(output);
 
+                shaped(RecipeCategory.TOOLS, ModItems.SPIRIT_MIRROR)
+                        .pattern(" G ").pattern("GVG").pattern(" T ")
+                        .define('G', Items.GOLD_INGOT)
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .define('V', Items.GLASS_PANE)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
                 shaped(RecipeCategory.TOOLS, ModItems.NETHER_SEAL_BREAKER)
                         .pattern("OPO").pattern("RTB").pattern("OSO")
                         .define('O', Items.OBSIDIAN)
@@ -129,6 +137,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .define('R', Items.CRIMSON_STEM)
                         .define('B', Items.WARPED_STEM)
                         .define('T', ModItems.TALISMAN_CHARGED)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.DECOY)
+                        .pattern(" H ").pattern(" T ")
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .define('H', Items.SKELETON_SKULL)
                         .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
                         .save(output);
 

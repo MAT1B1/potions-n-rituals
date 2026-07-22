@@ -3,6 +3,7 @@ package com.matibi.potionsnrituals.item.custom.book;
 import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.item.ModItems;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.ModAlchemicalStone;
 import com.matibi.potionsnrituals.util.BookUtils;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.core.registries.Registries;
@@ -20,24 +21,52 @@ public class AlbedoBookItem extends CustomBookItem {
                                 .tableOfContents("book.potions-n-rituals.basic.toc")
 
                                 // ── Chapitre : Chemin vers le Citrinitas ────────────────────────
-                                .chapter("Chemin vers le Citrinitas", c -> c
-                                        .subChapter("Rituel", sub -> sub
+                                .chapter("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", c -> c
+                                        .subChapter("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.rituals", sub -> sub
                                                 .page(BookUtils.createIllustrationPage("nether_page"))
-                                                .page(new BookPage.TextPage("nether_gate", Component.literal("Ritual"),
-                                                        Component.literal("Vous aurez besoin de partir en enfer avec un rituel. Pour l'activer, il faut sacrifier une entité à l'intérieur du rituel.\n\nAttention nul ne sait comment revenir de l'enfer...")))
+                                                .page(new BookPage.TextPage("nether_gate",
+                                                        Component.translatable("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.rituals"),
+                                                        Component.translatable("book.potions-n-rituals.page.nether_gate.text")))
                                                 .page(BookUtils.createRitualPage("Ritual Pattern", "nether_gate_final", ""))
                                         )
-                                        .subChapter("Talisman", sub -> sub
-                                                .page(BookUtils.createCraftingPage("talisman", "Talisman Recipe", ModItems.TALISMAN, "Une fois dans le §4Nether§r, vous devrez fabriquer un talisman"))
+                                        .subChapter("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.talisman", sub -> sub
+                                                .page(BookUtils.createCraftingPage("talisman", "book.potions-n-rituals.page.talisman_recipe", ModItems.TALISMAN, "book.potions-n-rituals.page.talisman.desc"))
                                                 .page(new BookPage.EmptyPage())
                                         )
                                 )
                                 // ── Chapitre : Les artefacts ────────────────────────────────────
-                                .chapter("Les Artefacts", c -> c
-                                        .subChapter(BookUtils.getName(ModItems.ALCHEMICAL_BAG), sub -> BookUtils.createTalismanChapter(sub, ModItems.ALCHEMICAL_BAG, ""))
-                                        .subChapter(BookUtils.getName(ModItems.SPIRIT_MIRROR), sub -> BookUtils.createTalismanChapter(sub, ModItems.SPIRIT_MIRROR, ""))
-                                        .subChapter(BookUtils.getName(ModItems.NETHER_SEAL_BREAKER), sub -> BookUtils.createTalismanChapter(sub, ModItems.NETHER_SEAL_BREAKER, ""))
-                                        .subChapter(BookUtils.getName(ModItems.ALCHEMICAL_STONE), sub -> BookUtils.createTalismanChapter(sub, ModItems.ALCHEMICAL_STONE, ""))
+                                .chapter("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.artifacts", c -> c
+                                        .page(BookUtils.createIllustrationPage("artefact_page"))
+                                        .subChapter(BookUtils.getName(ModItems.ALCHEMICAL_BAG), sub ->
+                                                BookUtils.createTalismanChapter(sub, ModItems.ALCHEMICAL_BAG,
+                                                        "book.potions-n-rituals.page.artifact.alchemical_bag.desc",
+                                                        "book.potions-n-rituals.page.artifact.alchemical_bag.craft"))
+                                        .subChapter(BookUtils.getName(ModItems.SPIRIT_MIRROR), sub ->
+                                                BookUtils.createTalismanChapter(sub, ModItems.SPIRIT_MIRROR,
+                                                        "book.potions-n-rituals.page.artifact.spirit_mirror.desc",
+                                                        ""))
+                                        .subChapter(BookUtils.getName(ModItems.NETHER_SEAL_BREAKER), sub ->
+                                                BookUtils.createTalismanChapter(sub, ModItems.NETHER_SEAL_BREAKER,
+                                                        "book.potions-n-rituals.page.artifact.nether_seal_breaker.desc",
+                                                        "book.potions-n-rituals.page.artifact.nether_seal_breaker.craft"))
+                                        .subChapter(BookUtils.getName(ModItems.DECOY), sub ->
+                                                BookUtils.createTalismanChapter(sub, ModItems.DECOY,
+                                                        "book.potions-n-rituals.page.artifact.decoy.desc",
+                                                        ""))
+                                        .subChapter(BookUtils.getName(ModItems.ALCHEMICAL_STONE), sub ->
+                                                BookUtils.createTalismanChapter(sub, ModItems.ALCHEMICAL_STONE,
+                                                        "book.potions-n-rituals.page.artifact.alchemical_stone.desc",
+                                                        ""))
+                                )
+                                // ── Chapitre : Les alchemical stones ────────────────────────────
+                                .chapter("item.potions-n-rituals.alchemical_stone", c -> c
+                                        .page(BookUtils.createStonePage(ModAlchemicalStone.ACID, ""))
+                                        .page(BookUtils.createStonePage(ModAlchemicalStone.PETRIFICATION, ""))
+                                        .page(BookUtils.createStonePage(ModAlchemicalStone.ALCHEMIST, ""))
+                                        .page(BookUtils.createStonePage(ModAlchemicalStone.IGNITION, ""))
+                                        .page(BookUtils.createStonePage(ModAlchemicalStone.GIANT, ""))
+                                        .page(BookUtils.createStonePage(ModAlchemicalStone.RESURRECTION, ""))
+                                        .page(BookUtils.createStonePage(ModAlchemicalStone.FROST, ""))
                                 )
         );
     }

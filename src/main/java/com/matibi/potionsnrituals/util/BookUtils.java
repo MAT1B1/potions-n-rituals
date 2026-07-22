@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.book.BookStructure;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStone;
 import com.matibi.potionsnrituals.potion.PotionIconHelper;
 import com.matibi.potionsnrituals.ritual.RitualManager;
 import com.matibi.potionsnrituals.ritual.datagen.Ritual;
@@ -65,13 +66,15 @@ public class BookUtils {
     }
 
     public static String getName(Holder<Potion> potion) {
-        String res = getItemStack(potion).getDisplayName().getString();
-        return res.substring(1, res.length() - 1);
+        return getItemStack(potion).getHoverName().getString();
     }
 
     public static String getName(Item item) {
-        String res = new ItemStack(item).getHoverName().getString();
-        return res.length() > 2 ? res.substring(1, res.length() - 1) : res;
+        return new ItemStack(item).getHoverName().getString();
+    }
+
+    public static String getName(ItemStack itemStack) {
+        return itemStack.getHoverName().getString();
     }
 
     public static String getEffectName(Holder<Potion> potion) {
@@ -105,6 +108,20 @@ public class BookUtils {
                 Component.translatable("§l" + getName(potion)),
                 List.of(
                         BookPage.Image.fromItem(getItemStack(potion)),
+                        BookPage.Image.fromTexture(getEffectTexture(potion), 64, 64, null, 0xFFE6D8BA)
+                ),
+                body != null ? Component.translatable(body) : null
+        );
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static BookPage createStonePage(Holder<AlchemicalStone> stone, String body) {
+        Holder<Potion> potion = AlchemicalStone.getPotion(stone);
+        return new BookPage.ImagePage(
+                getIdString(stone),
+                Component.translatable("§l" + getName(AlchemicalStone.getItemStack(stone))),
+                List.of(
+                        BookPage.Image.fromItem(AlchemicalStone.getItemStack(stone)),
                         BookPage.Image.fromTexture(getEffectTexture(potion), 64, 64, null, 0xFFE6D8BA)
                 ),
                 body != null ? Component.translatable(body) : null
@@ -184,12 +201,12 @@ public class BookUtils {
     }
 
     @Environment(EnvType.CLIENT)
-    public static void createTalismanChapter(BookStructure.Chapter sub, Item item, String explanation) {
+    public static void createTalismanChapter(BookStructure.Chapter sub, Item item, String explanation, String recipe) {
         String id = getIdString(item);
-        sub .page(new BookPage.ImagePage(id, Component.literal(getName(item)),
+        sub .page(new BookPage.ImagePage(id, Component.literal("§l" + getName(item)),
                         List.of(BookPage.Image.fromItem(new ItemStack(item))),
                         Component.translatable(explanation)))
-                .page(createStandardPage(id + "_explanation", "How it works", explanation));
+                .page(createCraftingPage(id + "_craft", "How to obtain", item, recipe));
     }
 
     @Environment(EnvType.CLIENT)
