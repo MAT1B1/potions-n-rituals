@@ -3,11 +3,14 @@ package com.matibi.potionsnrituals.block.custom.cauldron;
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.ModItems;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStone;
+import com.matibi.potionsnrituals.item.custom.alchemicalStone.ModAlchemicalStone;
 import com.matibi.potionsnrituals.util.CombinationUtils;
 import com.mojang.serialization.MapCodec;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SpellParticleOption;
@@ -96,10 +99,17 @@ public class BrewingCauldronBlock extends BaseEntityBlock {
         BrewingCauldronBlockEntity be = getBlockEntity(level, pos);
         if (be == null) return InteractionResult.PASS;
 
+        if (stack.is(ModItems.ALCHEMICAL_STONE)) {
+            PotionContents stoneContents = stack.get(DataComponents.POTION_CONTENTS);
+            if (stoneContents == null || !stoneContents.hasEffects())
+                return tryChargeStone(stack, state, level, pos, player, hand, be);
+        }
         if (isPotionItem(stack))
             return tryAddPotion(stack, state, level, pos, player, be);
         if (stack.is(Items.GLASS_BOTTLE))
             return tryExtractPotion(stack, state, level, pos, player, be);
+        if (stack.is(Items.ARROW))
+            return tryDipArrows(stack, state, level, pos, player, be);
 
         return InteractionResult.PASS;
     }
@@ -182,8 +192,83 @@ public class BrewingCauldronBlock extends BaseEntityBlock {
     private boolean isPotionItem(ItemStack stack) {
         return stack.is(Items.POTION)
                 || stack.is(Items.SPLASH_POTION)
-                || stack.is(Items.LINGERING_POTION)
-                || stack.is(ModItems.ALCHEMICAL_STONE);
+                || stack.is(Items.LINGERING_POTION);
+    }
+
+    private InteractionResult tryDipArrows(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, BrewingCauldronBlockEntity be) {
+        if (be.isEmpty())
+            return InteractionResult.PASS;
+
+        if (!level.isClientSide()) {
+            PotionContents contents = be.getPotionContents();
+            int newLevel = be.getLiquidLevel() - 1;
+
+            ItemStack tippedStack = new ItemStack(Items.TIPPED_ARROW, stack.getCount());
+            tippedStack.set(DataComponents.POTION_CONTENTS, contents);
+
+            if (newLevel == 0)
+                level.setBlock(pos, Blocks.CAULDRON.defaultBlockState(), 3);
+            else {
+                level.setBlock(pos, state.setValue(LEVEL, newLevel), 3);
+                BlockEntity currentBe = level.getBlockEntity(pos);
+                if (currentBe instanceof BrewingCauldronBlockEntity updatedBe)
+                    updatedBe.setPotionContents(contents);
+            }
+
+            level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+            if (!player.isCreative())
+                stack.shrink(stack.count());
+
+            if (!player.getInventory().add(tippedStack))
+                player.drop(tippedStack, false);
+        }
+
+        return InteractionResult.SUCCESS;
+    }
+
+    private InteractionResult tryChargeStone(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BrewingCauldronBlockEntity be) {
+        if (be.isEmpty())
+            return InteractionResult.PASS;
+
+        if (!level.isClientSide()) {
+            PotionContents contents = be.getPotionContents();
+            if (contents == null || !contents.hasEffects())
+                return InteractionResult.PASS;
+
+            MobEffectInstance firstEffect = contents.getAllEffects().iterator().next();
+
+            AlchemicalStone matchingStone = null;
+            for (AlchemicalStone stone : ModAlchemicalStone.ALCHEMICAL_STONE_REGISTRY) {
+                if (stone.effect().value() == firstEffect.getEffect().value() && stone.amplifier() == firstEffect.getAmplifier()) {
+                    matchingStone = stone;
+                    break;
+                }
+            }
+
+            if (matchingStone == null)
+                return InteractionResult.PASS;
+
+            int newLevel = be.getLiquidLevel() - 1;
+
+            ItemStack stoneStack = AlchemicalStone.getItemStack(Holder.direct(matchingStone));
+            stoneStack.setCount(stack.getCount());
+
+            if (newLevel == 0)
+                level.setBlock(pos, Blocks.CAULDRON.defaultBlockState(), 3);
+            else {
+                level.setBlock(pos, state.setValue(LEVEL, newLevel), 3);
+                BlockEntity currentBe = level.getBlockEntity(pos);
+                if (currentBe instanceof BrewingCauldronBlockEntity updatedBe)
+                    updatedBe.setPotionContents(contents);
+            }
+
+            level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+            player.setItemInHand(hand, stoneStack);
+        }
+
+        return InteractionResult.SUCCESS;
     }
 
     @Nullable
