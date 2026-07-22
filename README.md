@@ -1,12 +1,21 @@
+<div align="center">
+
 # Potions & Rituals
+
+![License](https://img.shields.io/badge/license-MIT-green)
+![Minecraft](https://img.shields.io/badge/minecraft-26.2-blue)
+![Fabric](https://img.shields.io/badge/mod%20loader-fabric-dbd0b4)
 
 A Fabric mod that **reinvents alchemy** in Minecraft.
 
-New potions, effects, alchemical stones, imbued weapons, rituals, and immersive mechanics — **alchemy becomes strategic**, expanding far beyond simple brewing.
+New potions, effects, alchemical stones, imbued weapons, rituals, and immersive mechanics — **alchemy becomes strategic**, expanding far beyond simple brewing
 
----
+![Séparateur Principal](asset/separation_bar.png)
 
-## 🧭 Overview
+
+## Overview
+
+</div>
 
 > The Alchemist is no longer just a potion brewer,  
 > but a craftsman capable of **shaping matter, life, and death**.  
@@ -14,22 +23,26 @@ New potions, effects, alchemical stones, imbued weapons, rituals, and immersive 
 > and your creations can change the world… literally.
 
 ### Main Features
-- **40+ new potions** with unique gameplay effects.  
-- **New status effects.**  
-- **Alchemical Stones**: apply effects to the **terrain**.  
-- **Brewing Cauldron**: mix up to 3 potions into one multi-effect brew.  
-- **Imbued Weapons**: apply a potion effect for a **number of hits**.  
-- **Potion-infused food**: consume enchanted meals to gain effects.  
-- **Stackable potions** up to 16 units.  
-- **Lava buckets** can fuel brewing stands (less efficient than blaze powder).  
-- **Rituals**: data-driven pattern-based transmutations.  
+- **40+ new potions** with unique gameplay effects.
+- **New status effects.**
+- **Alchemical Stones**: apply effects to the **terrain**.
+- **Brewing Cauldron**: mix up to 3 potions into one multi-effect brew.
+- **Imbued Weapons**: apply a potion effect for a **number of hits**.
+- **Potion-infused food**: consume enchanted meals to gain effects.
+- **Stackable potions** up to 16 units.
+- **Lava buckets** can fuel brewing stands (less efficient than blaze powder).
+- **Rituals**: data-driven pattern-based transmutations.
 - **5 in-game alchemical tomes** with recipes, lore, and illustrations.
 - **Pocket Dimension** and **Spirit Dimension** to explore.
 - **Fully configurable** via YACL + ModMenu.
 
----
+<div align="center">
 
-## 🧪 Potions
+![Séparateur Simple](asset/separate_simple.png)
+
+## Potions
+
+</div>
 
 <details>
 <summary><strong>Full Potion Recipe List (click to expand)</strong></summary>
@@ -39,6 +52,8 @@ Every potion starts with an **Awkward Potion** unless stated otherwise.
 **Glowstone Dust** → increased potency.
 
 ### Vanilla Potions — Alternative Recipes
+<div align="center">
+
 | Potion | Alternative Ingredient | Base |
 |--------|----------------------|------|
 | Awkward | Materia Prima | Water Bottle |
@@ -49,7 +64,10 @@ Every potion starts with an **Awkward Potion** unless stated otherwise.
 | Poison | Poisonous Carrot | Awkward |
 | Poison | Poisonous Beetroot | Awkward |
 
+</div>
 ### Mod main potions
+<div align="center">
+
 | Potion | Base | Ingredient | Variant |
 |--------|------|------------|---------|
 | Saturation | Awkward | Beetroot | Long, Strong |
@@ -109,21 +127,32 @@ Every potion starts with an **Awkward Potion** unless stated otherwise.
 | Paranoia | *(not directly brewable)* | *(ritual / creative)* | Long |
 | Infinity | *(not directly brewable)* | *(ritual / creative)* | — |
 
+</div>
 ### Permanent Elixirs
+<div align="center">
+
 | Elixir | Effect |
 |--------|--------|
 | Permanent Health | +1 max heart (permanent) |
 | Permanent Speed | +base speed (permanent) |
 | Permanent Strength | +melee damage (permanent) |
 
+</div>
+
 </details>
 
----
+<div align="center">
 
-## ✨ Effects Breakdown
+![Séparateur Simple](asset/separation_bar.png)
+
+## Effects Breakdown
+
+</div>
 
 <details>
 <summary><strong>Click to expand</strong></summary>
+
+<div align="center">
 
 | Effect | Type | Description |
 |--------|------|-------------|
@@ -181,11 +210,16 @@ Every potion starts with an **Awkward Potion** unless stated otherwise.
 | Reality Check | Harmful | Applies a movement slowdown based on how full/heavy the player's inventory is. |
 | Pregnant | Neutral | Triggers a gestation period that eventually spawns baby mobs. |
 
+</div>
 </details>
 
----
+<div align="center">
 
-## 🍲 Brewing Cauldron
+![Séparateur Simple](asset/separate_simple.png)
+
+## Brewing Cauldron
+
+</div>
 
 - **Pour a potion** into a vanilla cauldron to transform it into a Brewing Cauldron.
 - **Up to 3 levels**: stack multiple potions by pouring them in.
@@ -194,17 +228,23 @@ Every potion starts with an **Awkward Potion** unless stated otherwise.
 - **Dip arrows**: right-click with arrows to create tipped arrows imbued with the cauldron's effects.
 - **Charge Alchemical Stones**: right-click with an Alchemical Stone to charge it from the cauldron's contents (consumes 1 level).
 - **Splash & Lingering potions** can also be poured in.
-- **⚠️ Unstable**: adding an Unstable potion makes the cauldron **explode**.
+- **Unstable**: adding an Unstable potion makes the cauldron **explode**.
 - **Visual feedback**: the liquid color changes to match the stored effect, with ambient particles.
 
----
+<div align="center">
 
-## 🪨 Alchemical Stone
+![Séparateur Simple](asset/separation_bar.png)
+
+## Alchemical Stone
+
+</div>
 
 Items capable of **storing potion essences** and **applying the effect to the terrain**.
 
 <details>
 <summary><strong>Click to expand</strong></summary>
+
+<div align="center">
 
 | Stone | Effect on Terrain |
 |-------|------------------|
@@ -219,24 +259,37 @@ Items capable of **storing potion essences** and **applying the effect to the te
 | Frost | Freezes water sources into ice in a radius |
 | Frost II | Same, larger radius |
 
+</div>
 </details>
 
----
+<div align="center">
 
-## ⚔️ Imbued Weapons & 🍽️ Imbued Food
+![Séparateur Simple](asset/separate_simple.png)
+
+## Imbued Weapons & Imbued Food
+
+</div>
 
 - **Weapon Imbuing**: Combine a weapon with a potion in a Crafting Table. Each hit delivers the effect for a number of hits based on the potion's duration (minimum 10 hits).
 - **Food Imbuing**: Combine any food item with one or more potions in a Crafting Table. Eating applies all imbued effects. Add a Masking potion to hide effects from the tooltip.
 
----
+<div align="center">
 
-## 💉 Syringe
+![Séparateur Simple](asset/separate_simple.png)
+
+## Syringe
+
+</div>
 
 Extract potion effects from creatures or inject them. Right-click a target to drain its effects, right-click yourself to absorb them. Hit an enemy to transfer stored effects. If the target has no effects, you get a Blood Bag. 20 durability, configurable.
 
----
+<div align="center">
 
-## 🔮 Rituals
+![Séparateur Principal](asset/separation_bar.png)
+
+## Rituals
+
+</div>
 
 Rituals are **data-driven transmutations** — patterns of blocks and pedestals that reshape reality when triggered.
 
@@ -250,6 +303,8 @@ Each ritual defines:
 <details>
 <summary><strong>Available Rituals (click to expand)</strong></summary>
 
+<div align="center">
+
 | Ritual | Catalyst | Pattern | Result |
 |--------|----------|---------|--------|
 | Skeleton Horse | Kill a skeleton horse | Blood Trail + Bones | Spawns a skeletal steed |
@@ -261,31 +316,42 @@ Each ritual defines:
 | Nether Gate | Kill in Overworld | Blood Trail pattern | Teleports player to Nether with Ghost Walk |
 | Seal Nether | Ignite | Blood Trail + Nether Seal Breaker | Seals the Nether permanently (world attachment) |
 
+</div>
 </details>
 
 Rituals are defined as JSON files in `data/potions-n-rituals/rituals/`.
 
----
+<div align="center">
 
-## 🌍 New Dimensions
+![Séparateur Simple](asset/separate_simple.png)
+
+## New Dimensions
+
+</div>
 
 - **Pocket Dimension** — a void flat world (3×3×3 by default), linked to your Alchemical Bag item. Each bag creates its own instance.
 - **Spirit Dimension** — an overworld-like realm with deep dark caves and a custom Spirit biome.
 
----
+<div align="center">
 
-## 📖 Alchemical Tomes
+![Séparateur Simple](asset/separate_simple.png)
 
-Five in-game books with custom GUI, recipes, lore, and illustrations — no wiki required:
-1. **Magnus Opus: The Foundations of Alchemy** — introduction to the four stages
-2. **Nigredo: Chronicles of Chaos** — all custom potion recipes
-3. **Albedo: Vessel of Order** — talismans, artifacts, Alchemical Stones
-4. **Citrinitas: Anchor of Enlightenment** — ritual documentation
-5. **Rubedo: Apex of Mastery** — grand rituals
+## Alchemical Tomes
 
----
+</div>
 
-## ⚗️ Special Items
+Five in-game books with custom GUI, recipes, lore, and illustrations - no wiki required:
+1. **Magnus Opus: The Foundations of Alchemy** - introduction to the four stages
+2. **Nigredo: Chronicles of Chaos** - all custom potion recipes
+3. **Albedo: Vessel of Order** - talismans, artifacts, Alchemical Stones
+4. **Citrinitas: Anchor of Enlightenment** - ritual documentation
+5. **Rubedo: Apex of Mastery** - grand rituals
+
+<div align="center">
+
+![Séparateur Simple](asset/separation_bar.png)
+
+## Special Items
 
 | Item | Description |
 |------|-------------|
@@ -304,22 +370,37 @@ Five in-game books with custom GUI, recipes, lore, and illustrations — no wiki
 | Spirit Mirror | Teleports to Spirit Dimension (6 durability) |
 | Decoy | Distracts hostile mobs |
 
----
+</div>
 
-## 🎨 Configurable
+<div align="center">
+
+![Séparateur Simple](asset/separate_simple.png)
+
+## Configurable
+
+</div>
 
 - **ModMenu** + **YACL** integration
 - 3 tabs: Potions & Items, Mob Effects, Active Effects
 - Tweak every number: durations, cooldowns, strengths, ranges, colors
 - Runtime blacklists for effects, potions, and alchemical stones
 
----
+<div align="center">
+
+![Séparateur Principal](asset/separate_simple.png)
+
+</div>
 
 **Potions & Rituals** is built for **Minecraft 26.2** with **Fabric**. It requires Fabric API.
 
 *Alchemy isn't just a craft. It's a transformation.*
 
----
+
+<div align="center">
+
+![Séparateur Principal](asset/separation_bar.png)
+
+</div>
 
 ## Got feedback or ideas?
 
