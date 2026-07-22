@@ -2,11 +2,11 @@ package com.matibi.potionsnrituals.item;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.block.ModBlocks;
-import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStoneItem;
 import com.matibi.potionsnrituals.item.custom.book.AlbedoBookItem;
+import com.matibi.potionsnrituals.item.custom.book.CitrinitasBookItem;
 import com.matibi.potionsnrituals.item.custom.book.CustomBookItem;
 import com.matibi.potionsnrituals.item.custom.book.NigredoBookItem;
 import com.matibi.potionsnrituals.item.custom.syringe.SyringeItem;
@@ -158,10 +158,7 @@ public class ModItems {
             ),
             NIGREDO_GUIDE = register("alchemy_guide_nigredo", new NigredoBookItem()),
             ALBEDO_GUIDE = register("alchemy_guide_albedo", new AlbedoBookItem()),
-            CITRINITAS_GUIDE = register("alchemy_guide_citrinitas",
-                    new CustomBookItem(props("alchemy_guide_citrinitas").stacksTo(1), () ->
-                            new BookStructure("item.potions-n-rituals.alchemy_guide_citrinitas")
-                                    .page(new BookPage.EmptyPage()))),
+            CITRINITAS_GUIDE = register("alchemy_guide_citrinitas", new CitrinitasBookItem()),
             RUBEDO_GUIDE = register("alchemy_guide_rubedo",
                     new CustomBookItem(props("alchemy_guide_rubedo").stacksTo(1), () ->
                             new BookStructure("item.potions-n-rituals.alchemy_guide_rubedo")

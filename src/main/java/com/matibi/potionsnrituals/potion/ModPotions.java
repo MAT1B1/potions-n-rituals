@@ -309,7 +309,7 @@ public class ModPotions {
             addLong(builder, ModPotions.BRAINWASHING, ModPotions.LONG_BRAINWASHING);
             addLong(builder, ModPotions.FROST, ModPotions.LONG_FROST);
             addLong(builder, ModPotions.COLD, ModPotions.LONG_COLD);
-            addMix(builder, ModPotions.LONG_COLD, Items.SNOWBALL, ModPotions.LONG_COLD);
+            addMix(builder, ModPotions.LONG_COLD, Items.SNOWBALL, ModPotions.LONG_FROST);
             addLong(builder, ModPotions.SATURATION, ModPotions.LONG_SATURATION);
             addLong(builder, ModPotions.HASTE, ModPotions.LONG_HASTE);
             addLong(builder, ModPotions.MINING_FATIGUE, ModPotions.LONG_MINING_FATIGUE);
@@ -332,7 +332,6 @@ public class ModPotions {
             addMix(builder, ModPotions.LONG_XP_BOOST, Items.FERMENTED_SPIDER_EYE, ModPotions.LONG_XP_REDUCTION);
             addLong(builder, ModPotions.XP_LIFE, ModPotions.LONG_XP_LIFE);
             addLong(builder, ModPotions.ZEUS, ModPotions.LONG_ZEUS);
-            addLong(builder, ModPotions.CLUMSINESS, ModPotions.LONG_ZEUS);
             addLong(builder, ModPotions.ASTHMA, ModPotions.LONG_ASTHMA);
             addLong(builder, ModPotions.PARANOIA, ModPotions.LONG_PARANOIA);
             addLong(builder, ModPotions.CLUMSINESS, ModPotions.LONG_CLUMSINESS);

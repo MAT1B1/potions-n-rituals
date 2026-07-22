@@ -120,7 +120,6 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         addItem("materia_prima", "Materia Prima");
         addItem("claw", "Griffe");
         addItem("zombie_brain", "Cerveau de zombie");
-        addItem("leaf", "Feuille");
         addItem("witch_finger", "Doigt de sorcière");
         addItem("blood_bag", "Poche de sang");
         addItem("oxydation", "Fragment d'oxydation");

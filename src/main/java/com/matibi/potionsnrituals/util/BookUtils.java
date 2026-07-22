@@ -164,15 +164,12 @@ public class BookUtils {
 
                     if (blockOpt.isPresent() && blockOpt.get() != Blocks.AIR) {
                         BookPage.Image testImg = BookPage.Image.fromBlockState(blockOpt.get().defaultBlockState());
-                        System.out.println("CRÉATION IMAGE BLOC : " + ingId + " | blockState est-il null ? " + (testImg.blockState() == null));
                         gridImages.add(testImg);
                     } else if (itemOpt.isPresent()) {
                         ItemStack stack = new ItemStack(itemOpt.get());
                         gridImages.add(BookPage.Image.compound(pedestalTexture, stack));
-                    } else {
+                    } else
                         gridImages.add(new BookPage.Image(null, null, null, 16, 16, "", 0));
-                        System.out.println("ÉCHEC BLOC : " + ingId + " passe dans le else !");
-                    }
                 } else
                     gridImages.add(new BookPage.Image(null, null, null, 16, 16, "", 0));
             }
@@ -198,6 +195,12 @@ public class BookUtils {
                     potion,
                     brew))
             .page(new BookPage.EmptyPage());
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void createRitualChapter(BookStructure.Chapter sub, String title, String ritualId, String description) {
+        sub .page(createRitualPage(title, ritualId, ""))
+            .page(new BookPage.TextPage(null, Component.translatable(title), Component.translatable(description)));
     }
 
     @Environment(EnvType.CLIENT)

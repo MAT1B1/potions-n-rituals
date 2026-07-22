@@ -71,7 +71,6 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register("short_cooldown", "Short Cooldown");
         register("love", "Love");
         register("masking", "Masking");
-        registerReverse("unstable", "Unstable");
         register("vampirism", "Vampirism");
         register("stun", "Stun");
         register("no_interaction", "Hands Bound");
@@ -101,6 +100,9 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register("reality_check", "Reality Check");
         register("active_tp", "Active teleportation");
 
+        registerVanillaReverse("unstable", "Unstable");
+        t.add("effect.potions-n-rituals." + "unstable", "Unstable");
+
         registerWithAlchemicalStone("giant", "Giant");
         registerWithAlchemicalStone("resurrection", "Resurrection");
         registerWithAlchemicalStone("petrification", "Petrification");
@@ -120,7 +122,6 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         addItem("materia_prima", "Materia Prima");
         addItem("claw", "Claw");
         addItem("zombie_brain", "Zombie Brain");
-        addItem("leaf", "Leaf");
         addItem("witch_finger", "Witch's Finger");
         addItem("blood_bag", "Blood Bag");
         addItem("oxydation", "Oxidation Fragment");
@@ -222,11 +223,6 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("item.minecraft.lingering_potion.effect." + id, name + " Lingering Potion");
         t.add("item.minecraft.tipped_arrow.effect." + id, name + " Arrow");
         addItem("syringe.effect." + id, name + " Syringe");
-    }
-
-    private void registerReverse(String id, String name) {
-        registerVanillaReverse(id, name);
-        t.add("effect.potions-n-rituals." + id, name);
     }
 
     private void register(String id, String name) {

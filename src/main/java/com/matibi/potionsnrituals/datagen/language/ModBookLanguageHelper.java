@@ -336,6 +336,26 @@ public class ModBookLanguageHelper {
                 "Augmente de façon permanente la puissance de tous vos coups au corps-à-corps.\n\nRien ne pourra plus vous résister.",
                 "Une telle puissance brute doit être §cobtenue via des rituels alchimiques§r d'une précision et d'une dangerosité absolues.");
 
+        // --- AJOUTS CITRINITAS (CitrinitasBookItem) ---
+        t.add("book.potions-n-rituals.citrinitas.chapter.rituals", "Les Rituels");
+
+        t.add("book.potions-n-rituals.page.citrinitas.skeleton_horse", "Cheval Squelette");
+        t.add("book.potions-n-rituals.page.citrinitas.skeleton_horse.desc", "Invoque un cheval squelette.");
+        t.add("book.potions-n-rituals.page.citrinitas.ancient_debris", "Débris Antiques");
+        t.add("book.potions-n-rituals.page.citrinitas.ancient_debris.desc", "Fait apparaître des débris antiques, la clé pour l'équipement en Netherite.");
+        t.add("book.potions-n-rituals.page.citrinitas.random_effect", "Effet Aléatoire");
+        t.add("book.potions-n-rituals.page.citrinitas.random_effect.desc", "Applique un effet aléatoire à vous-même.");
+        t.add("book.potions-n-rituals.page.citrinitas.summon_thunderstorm", "Orage");
+        t.add("book.potions-n-rituals.page.citrinitas.summon_thunderstorm.desc", "Déclenche un violent orage.");
+        t.add("book.potions-n-rituals.page.citrinitas.echo_shard", "Éclat d'Écho");
+        t.add("book.potions-n-rituals.page.citrinitas.echo_shard.desc", "Produit un éclat d'écho, une ressource rare des profondeurs.");
+        t.add("book.potions-n-rituals.page.citrinitas.summon_dawn", "Aube");
+        t.add("book.potions-n-rituals.page.citrinitas.summon_dawn.desc", "Fait apparaître les premières lueurs de l'aube.");
+        t.add("book.potions-n-rituals.page.citrinitas.nether_gate", "Portail du Nether");
+        t.add("book.potions-n-rituals.page.citrinitas.nether_gate.desc", "Ouvre un portail vers le Nether et vous y téléporte.");
+        t.add("book.potions-n-rituals.page.citrinitas.seal_nether", "Sceau du Nether");
+        t.add("book.potions-n-rituals.page.citrinitas.seal_nether.desc", "Scelle le Nether pour empêcher tout accès.");
+
         // --- AJOUTS ALBEDO (AlbedoBookItem) ---
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", "Chemin vers le Citrinitas");
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.rituals", "Rituel");
@@ -690,6 +710,26 @@ public class ModBookLanguageHelper {
                 "\nThe gods have blessed you.",
                 "Permanently increases the power of all your melee strikes.\n\nNothing will be able to resist you anymore.",
                 "Such raw power must be §cobtained through alchemical rituals§r of absolute precision and danger.");
+
+        // --- AJOUTS CITRINITAS (CitrinitasBookItem) ---
+        t.add("book.potions-n-rituals.citrinitas.chapter.rituals", "Rituals");
+
+        t.add("book.potions-n-rituals.page.citrinitas.skeleton_horse", "Skeleton Horse");
+        t.add("book.potions-n-rituals.page.citrinitas.skeleton_horse.desc", "Summons a skeleton horse.");
+        t.add("book.potions-n-rituals.page.citrinitas.ancient_debris", "Ancient Debris");
+        t.add("book.potions-n-rituals.page.citrinitas.ancient_debris.desc", "Conjures ancient debris, the key to Netherite equipment.");
+        t.add("book.potions-n-rituals.page.citrinitas.random_effect", "Random Effect");
+        t.add("book.potions-n-rituals.page.citrinitas.random_effect.desc", "Applies a random effect to yourself.");
+        t.add("book.potions-n-rituals.page.citrinitas.summon_thunderstorm", "Thunderstorm");
+        t.add("book.potions-n-rituals.page.citrinitas.summon_thunderstorm.desc", "Triggers a violent thunderstorm.");
+        t.add("book.potions-n-rituals.page.citrinitas.echo_shard", "Echo Shard");
+        t.add("book.potions-n-rituals.page.citrinitas.echo_shard.desc", "Produces an echo shard, a rare resource from the deep.");
+        t.add("book.potions-n-rituals.page.citrinitas.summon_dawn", "Dawn");
+        t.add("book.potions-n-rituals.page.citrinitas.summon_dawn.desc", "Brings forth the first light of dawn.");
+        t.add("book.potions-n-rituals.page.citrinitas.nether_gate", "Nether Portal");
+        t.add("book.potions-n-rituals.page.citrinitas.nether_gate.desc", "Opens a portal to the Nether and teleports you there.");
+        t.add("book.potions-n-rituals.page.citrinitas.seal_nether", "Seal the Nether");
+        t.add("book.potions-n-rituals.page.citrinitas.seal_nether.desc", "Seals the Nether to prevent any access.");
 
         // --- AJOUTS ALBEDO (AlbedoBookItem) ---
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", "Path to Citrinitas");
