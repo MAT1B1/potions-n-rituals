@@ -69,7 +69,7 @@ public class ModItemGroups {
                         entries.accept(ModItems.NIGREDO_GUIDE);
                         entries.accept(ModItems.ALBEDO_GUIDE);
                         entries.accept(ModItems.CITRINITAS_GUIDE);
-                        //entries.accept(ModItems.RUBEDO_GUIDE);
+                        entries.accept(ModItems.RUBEDO_GUIDE);
                         entries.accept(ModItems.MATERIA_PRIMA);
                         entries.accept(ModItems.SULFUR_BALL);
                         entries.accept(ModItems.MERCURY_BALL);
