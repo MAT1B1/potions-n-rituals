@@ -182,11 +182,6 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("key.potions-n-rituals.effect_button", "Bouton d'effet");
         t.add("key.category.potions-n-rituals.main", "Potions & Rituals");
 
-        // Blood Types
-        t.add("potions-n-rituals.blood_type.unknown", "Inconnu");
-        t.add("potions-n-rituals.blood_type.human", "Sang humain");
-        t.add("potions-n-rituals.blood_type.monster", "Sang de monstre");
-
         // Mod Text
         addItem("alchemical_stone.block_only", "Les pierres alchimiques ne peuvent être utilisées que sur des blocs");
         addItem("alchemical_stone.block_not_good", "Le bloc n'est pas compatible");

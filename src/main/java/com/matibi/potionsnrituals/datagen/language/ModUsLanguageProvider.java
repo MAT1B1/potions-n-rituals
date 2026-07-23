@@ -185,11 +185,6 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("key.potions-n-rituals.effect_button", "Effect Button");
         t.add("key.category.potions-n-rituals.main", "Potions & Rituals");
 
-        // Blood Types
-        t.add("potions-n-rituals.blood_type.unknown", "Unknown");
-        t.add("potions-n-rituals.blood_type.human", "Human Blood");
-        t.add("potions-n-rituals.blood_type.monster", "Monster Blood");
-
         // Mod Text
         addItem("alchemical_stone.block_only", "Runes can only be used on blocks");
         addItem("alchemical_stone.block_not_good", "The block is not compatible");

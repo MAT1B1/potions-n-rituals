@@ -20,11 +20,6 @@ public final class ModDataComponents {
                     .persistent(ImbuedEffect.CODEC)
                     .networkSynchronized(ImbuedEffect.STREAM_CODEC));
 
-    public static final DataComponentType<BloodType> BLOOD_TYPE = register("blood_type",
-            builder -> builder
-                    .persistent(BloodType.CODEC)
-                    .networkSynchronized(BloodType.STREAM_CODEC));
-
     public static final DataComponentType<TalismanCharge> TALISMAN_CHARGE = register("talisman_charge",
             builder -> builder
                     .persistent(TalismanCharge.CODEC)
