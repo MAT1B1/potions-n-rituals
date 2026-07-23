@@ -144,6 +144,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
                         .save(output);
 
+                shaped(RecipeCategory.TOOLS, ModItems.GAUNTLET)
+                        .pattern("GGG").pattern("GTG").pattern("CCC")
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .define('G', Items.GOLD_INGOT)
+                        .define('C', Items.LEATHER)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
                 shapeless(RecipeCategory.MISC, ModItems.BASIC_GUIDE, 1)
                         .requires(Items.BOOK)
                         .requires(Items.DIRT)

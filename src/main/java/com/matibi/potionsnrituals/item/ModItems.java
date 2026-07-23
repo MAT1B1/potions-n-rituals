@@ -48,6 +48,10 @@ public class ModItems {
                 "zombie_brain", 1, 0.1f, true,
                 new MobEffectInstance(ModEffects.BRAINWASHING, 200, 0), 0.5f
             ),
+            ZOMBIE_LUNG = registerFoodWithEffect(
+                    "zombie_lung", 1, 0.1f, true,
+                    new MobEffectInstance(ModEffects.ASTHMA, 200, 0), 0.5f
+            ),
             WITCH_S_FINGER = registerFood("witch_finger", 1, 0.1f, false),
             POISONOUS_CARROT = registerFoodWithEffect(
                 "poisonous_carrot", 1, 0.2f, true,
@@ -137,7 +141,7 @@ public class ModItems {
                 .register(output -> {
                     output.insertAfter(Items.BEETROOT, ModItems.POISONOUS_BEETROOT);
                     output.insertAfter(Items.CARROT, ModItems.POISONOUS_CARROT);
-                    output.insertAfter(Items.ROTTEN_FLESH, ModItems.ZOMBIE_BRAIN);
+                    output.insertAfter(Items.ROTTEN_FLESH, ModItems.ZOMBIE_BRAIN, ModItems.ZOMBIE_LUNG);
                 });
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.TOOLS_AND_UTILITIES)

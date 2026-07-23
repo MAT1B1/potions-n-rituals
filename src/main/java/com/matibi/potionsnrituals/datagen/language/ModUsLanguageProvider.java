@@ -123,6 +123,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         addItem("claw", "Claw");
         addItem("bat_wing", "Bat Wing");
         addItem("zombie_brain", "Zombie Brain");
+        addItem("zombie_lung", "Zombie Lung");
         addItem("witch_finger", "Witch's Finger");
         addItem("blood_bag", "Blood Bag");
         addItem("oxydation", "Oxidation Fragment");

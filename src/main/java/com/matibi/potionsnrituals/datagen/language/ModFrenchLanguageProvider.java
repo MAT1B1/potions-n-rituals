@@ -115,21 +115,22 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
     }
 
     private void generateItems() {
-        addItem("poisonous_carrot", "Carotte empoisonnée");
-        addItem("poisonous_beetroot", "Betterave empoisonnée");
+        addItem("poisonous_carrot", "Carotte Empoisonnée");
+        addItem("poisonous_beetroot", "Betterave Empoisonnée");
         addItem("materia_prima", "Materia Prima");
         addItem("claw", "Griffe");
         addItem("bat_wing", "Aile de Chauve-souris");
-        addItem("zombie_brain", "Cerveau de zombie");
-        addItem("witch_finger", "Doigt de sorcière");
-        addItem("blood_bag", "Poche de sang");
-        addItem("oxydation", "Fragment d'oxydation");
-        addItem("charged_copper", "Cuivre chargé");
+        addItem("zombie_brain", "Cerveau de Zombie");
+        addItem("zombie_lung", "Poumons de Zombie");
+        addItem("witch_finger", "Doigt de Sorcière");
+        addItem("blood_bag", "Poche de Sang");
+        addItem("oxydation", "Fragment d'Oxydation");
+        addItem("charged_copper", "Cuivre Chargé");
         addItem("sulfur_ball", "Boule de Sulfure");
         addItem("mercury_ball", "Boule de Mercure");
         addItem("salt", "Sel");
-        addItem("talisman", "Talisman vide");
-        addItem("talisman_charged", "Talisman chargé");
+        addItem("talisman", "Talisman Vide");
+        addItem("talisman_charged", "Talisman Chargé");
         addItem("alchemical_bag", "Dimension de Poche");
         addItem("nether_seal_breaker", "Descelleur de Portail");
         addItem("spirit_mirror", "Miroir spirituel");

@@ -290,6 +290,10 @@ public class ModPotions {
             addMix(builder, ModPotions.STRONG_PETRIFICATION, ModItems.MATERIA_PRIMA, ModPotions.MEDUSA);
             addMix(builder, ModPotions.ALCHEMIST, ModItems.MATERIA_PRIMA, ModPotions.MIDAS);
             addMix(builder, ModPotions.STUN, ModItems.MATERIA_PRIMA, ModPotions.ZEUS);
+            addMix(builder, Potions.AWKWARD, Items.CREEPER_HEAD, ModPotions.PARANOIA);
+            addMix(builder, Potions.AWKWARD, Items.ANVIL, ModPotions.REALITY_CHECK);
+            addMix(builder, ModPotions.ALCOHOL, Items.FERMENTED_SPIDER_EYE, ModPotions.CLUMSINESS);
+            addMix(builder, Potions.AWKWARD, ModItems.ZOMBIE_LUNG, ModPotions.ASTHMA);
 
             // version longue
             addLong(builder, ModPotions.LEVITATION, ModPotions.LONG_LEVITATION);

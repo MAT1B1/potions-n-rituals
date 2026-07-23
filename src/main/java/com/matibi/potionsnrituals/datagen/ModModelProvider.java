@@ -191,6 +191,7 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.BAT_WING,
                 ModItems.WITCH_S_FINGER,
                 ModItems.ZOMBIE_BRAIN,
+                ModItems.ZOMBIE_LUNG,
                 ModItems.POISONOUS_BEETROOT,
                 ModItems.POISONOUS_CARROT,
                 ModItems.MATERIA_PRIMA,

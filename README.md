@@ -131,10 +131,10 @@ Every potion starts with an **Awkward Potion** unless stated otherwise.
 | Oblivion         | Awkward                   | Pitcher Plant          | —            |
 | Zombie Contagion | Awkward                   | Rotten Flesh           | —            |
 | Unstable         | *(not directly brewable)* | *(ritual / creative)*  | Strong       |
-| Reality Check    | *(not directly brewable)* | *(ritual / creative)*  | Long         |
-| Clumsiness       | *(not directly brewable)* | *(ritual / creative)*  | Long         |
-| Asthma           | *(not directly brewable)* | *(ritual / creative)*  | Long         |
-| Paranoia         | *(not directly brewable)* | *(ritual / creative)*  | Long         |
+| Reality Check    | Awkward                   | Anvil                  | Long         |
+| Clumsiness       | Alcohol                   | Fermented Spider Eye   | Long         |
+| Asthma           | Awkward                   | Zombie Lung            | Long         |
+| Paranoia         | Awkward                   | Creeper Head           | Long         |
 | Infinity         | *(not directly brewable)* | *(ritual / creative)*  | —            |
 
 </div>

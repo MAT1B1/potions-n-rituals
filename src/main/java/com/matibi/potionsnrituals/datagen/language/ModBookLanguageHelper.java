@@ -144,19 +144,19 @@ public class ModBookLanguageHelper {
                 "Vide une partie de votre inventaire.",
                 "Plongez une §7Fleur de Broc§r dans une §7potion étrange§r pour créer un puissant amnésique liquide.");
         registerPotionLines(t, "ore_sense",
-                "\nLes §etrésors§r de la terre vous appellent.",
+                "\nLes §6trésors§r de la terre vous appellent.",
                 "Vous ressentez les minerais précieux à travers la roche, ça facilite vos sessions de minage.",
                 "L'alliance d'un §7minerai de fer§r et d'une potion de §7vision nocturne§r affûtera vos sens souterrains.");
         registerPotionLines(t, "photosynthesis",
-                "\nLe soleil est votre meilleur repas.\n\nVous êtes nourri par §al'astre divin§r.",
+                "\nLe soleil est votre meilleur repas.\n\nVous êtes nourri par §2l'astre divin§r.",
                 "Restaure lentement votre faim tant que vous vous tenez sous la lumière directe du soleil.",
                 "Écrasez du §7feuillage§r dans une §7potion étrange§r pour assimiler la force des plantes.");
         registerPotionLines(t, "purification",
-                "\nToute §fsouillure§r doit disparaître.",
+                "\nToute §7souillure§r doit disparaître.",
                 "Nettoie instantanément tous les effets négatifs sans toucher à vos bonus actifs.",
                 "Un §7seau de lait§r concentré et stabilisé dans une §7potion étrange§r purgera votre organisme.");
         registerPotionLines(t, "reactivation",
-                "\nLe §etemps§r est de votre côté.",
+                "\nLe §6temps§r est de votre côté.",
                 "Ajoute du temps supplémentaire à tous les effets actifs.",
                 "Le pouvoir solaire d'un §7tournesol§r ajouté à une potion de §7cooldown réduit§r force le destin.");
         registerPotionLines(t, "resonance",
@@ -176,7 +176,7 @@ public class ModBookLanguageHelper {
                 "Remplit progressivement votre barre de saturation.",
                 "Le sucre naturel d'une §7betterave§r concentré dans une §7potion étrange§r vous coupera l'appétit pour de bon.");
         registerPotionLines(t, "short_cooldown",
-                "\nVos bras sont si §elourds§r...",
+                "\nVos bras sont si §6lourds§r...",
                 "Diminue drastiquement le temps de recharge pour l'utilisation de potions et l'activation d'effet actif. Ils demandent si peu d'effort.",
                 "L'énergie d'un §7tournesol§r infusée dans une §7potion étrange§r boostera votre dextérité.");
         registerPotionLines(t, "stun",
@@ -213,24 +213,24 @@ public class ModBookLanguageHelper {
                 "Le croisement d'une §7tranche de melon scintillant§r et d'une potion de §7boost d'XP§r convertit l'esprit en chair.");
         registerPotionLines(t, "zeus",
                 "\nLa foudre frappe toujours deux fois.",
-                "Vos attaques invoque la colère de §bZeus§r sur la cible, vous pouvez aussi l'invoquer manuellement.",
+                "Vos attaques invoque la colère de §3Zeus§r sur la cible, vous pouvez aussi l'invoquer manuellement.",
                 "Associez de la mystique §7Materia Prima§r à une potion d'§7étourdissement§r pour invoquer la foudre.");
         registerPotionLines(t, "cold",
-                "\n§bBrrrr§r... Prévoyez un manteau.",
+                "\n§3Brrrr§r... Prévoyez un manteau.",
                 "Vous toussez de manière aléatoire, transmettant ainsi votre maladie a d'autre entité.",
                 "Une banale §7boule de neige§r fondue dans une §7potion étrange§r refroidira les ardeurs de n'importe qui.");
         registerPotionLines(t, "clumsiness",
                 "\n§7Oups§r, je l'ai encore fait tomber.",
                 "Force la cible à lâcher aléatoirement les objets qu'elle tient en main.",
-                "La formule de brassage de cette potion chaotique a été §7perdue dans le temps§r.");
+                "Corrompez une §7potion d'alcool§r avec un §7œil d'araignée fermenté§r pour obtenir cette mixture chaotique.");
         registerPotionLines(t, "asthma",
                 "\nL'air semble si §8épais§r...",
                 "Réduit votre barre d'oxygène si vous courez, même à l'air libre. Vous infligeant des dégâts de suffocation si vous manquez d'air.",
-                "La formule de brassage de cette terrible concoction a été §7perdue dans le temps§r.");
+                "Un §7poumon de zombie§r macéré dans une §7potion étrange§r obstruera vos voies respiratoires.");
         registerPotionLines(t, "paranoia",
                 "\nAvez-vous entendu ce bruit ?",
                 "Fait entendre à la cible des bruits de monstres effrayants qui n'existent pas.",
-                "La formule de brassage pour altérer l'esprit de la sorte a été §5perdue dans le temps§r.");
+                "Une §7tête de Creeper§r infusée dans une §7potion étrange§r éveille vos peurs les plus sombres.");
         registerPotionLines(t, "medusa",
                 "\nNe la regardez pas dans les yeux !\n\nElle a le §2regard§r qui tue...",
                 "Pétrifie, si vous le souhaitez, toute entité qui croise votre regard.",
@@ -242,7 +242,7 @@ public class ModBookLanguageHelper {
         registerPotionLines(t, "active_teleport",
                 "\nUn §5clignement d'œil§r et vous y êtes.",
                 "Vous téléporte instantanément, lorsque vous en avez envie, à l'endroit exact que vous regardez (dans une limite de portée).",
-                "La fluidité d'une §7boule de mercure§r stabilise les effets chaotiques d'une potion de §7téléportation§r.");
+                "Le soufre volatil d'une §7boule de soufre§r stabilise les effets chaotiques d'une potion de §7téléportation§r.");
         registerPotionLines(t, "hydrophobia",
                 "\nL'§8eau§r brûle comme de l'acide.",
                 "Inflige de lourds dégâts continus si la cible entre en contact avec de l'eau ou la pluie.",
@@ -258,21 +258,21 @@ public class ModBookLanguageHelper {
         registerPotionLines(t, "reality_check",
                 "\nPourquoi tout est si §5lourd§d ??",
                 "Dissipe instantanément toutes les illusions, votre inventaire est plein, donc vous êtes lourd.",
-                "La formule de brassage pour briser le quatrième mur a été §5perdue dans le temps§r.");
+                "L'écrasante présence d'une §7enclume§r infusée dans une §7potion étrange§r vous ramène à la réalité.");
 
         // Potions de base Minecraft
         registerPotionLines(t, "fire_resistance",
                 "\nUn §6bain de lave§r n'a jamais fait de mal à personne.",
                 "Vous immunise totalement contre les dégâts de feu, de lave et d'embrasement.\n\nIdéal pour un séjour dans le Nether.",
-                "Faites fondre une §7crème de magma§r dans une §7potion étrange§r pour ignorer la chaleur de ce monde.");
+                "Faites fondre un §7bloc de magma§r dans une §7potion étrange§r pour ignorer la chaleur de ce monde.");
         registerPotionLines(t, "regeneration",
                 "\nVos plaies se referment à vue d'œil.",
                 "Restaure progressivement vos points de vie au fil du temps sans avoir besoin de manger.",
-                "Laissez pleurer une §7larme de Ghast§r dans une §7potion étrange§r pour stimuler votre guérison naturelle.");
+                "L'essence d'une §7pomme dorée§r infusée dans une §7potion étrange§r stimule votre guérison naturelle.");
         registerPotionLines(t, "strength",
                 "\nVous vous sentez capable de soulever des montagnes.",
                 "Augmente considérablement les dégâts infligés par vos attaques de mêlée.",
-                "La chaleur d'une §7poudre de Blaze§r ajoutée à une §7potion étrange§r décuplera votre force musculaire.");
+                "L'énergie explosive d'une §7étoile de feu d'artifice§r infusée dans une §7potion étrange§r décuplera votre force musculaire.");
         registerPotionLines(t, "swiftness",
                 "\nLe vent souffle dans vos oreilles.",
                 "Augmente votre vitesse de déplacement et élargit légèrement votre champ de vision.",
@@ -280,7 +280,7 @@ public class ModBookLanguageHelper {
         registerPotionLines(t, "poison",
                 "\nUn goût amer qui vous ronge de l'intérieur.",
                 "Vous inflige des dégâts réguliers sur la durée, mais ne peut pas vous achever. L'effet s'arrête à un demi-cœur.",
-                "Faites macérer un §7œil d'araignée§r dans une §7potion étrange§r pour en extraire son venin toxique.");
+                "Faites macérer un §7légume empoisonnée§r dans une §7potion étrange§r pour en extraire le venin toxique.");
         registerPotionLines(t, "healing",
                 "\nUn soulagement pur et immédiat.",
                 "Restaure instantanément une partie de vos points de vie.\n\n§4Blesse§r les créatures mort-vivantes.",
@@ -294,7 +294,7 @@ public class ModBookLanguageHelper {
                 "Rend votre corps complètement invisible aux yeux des autres.\n\n§4Attention, vos armures et objets tenus restent visibles.§r",
                 "Corrompez une potion de §7vision nocturne§r avec un §7œil fermenté§r pour tromper la lumière elle-même.");
         registerPotionLines(t, "water_breathing",
-                "\nVos poumons s'adaptent aux profondeurs.\n\n§bOuïes éphémères.§r",
+                "\nVos poumons s'adaptent aux profondeurs.\n\n§3Ouïes éphémères.§r",
                 "Empêche votre barre d'oxygène de se vider sous l'eau, vous permettant de rester immergé indéfiniment.",
                 "Gonflez une §7potion étrange§r avec un §7poisson-globe§r pour respirer comme un habitant des océans.");
         registerPotionLines(t, "leaping",
@@ -319,7 +319,7 @@ public class ModBookLanguageHelper {
                 "La corruption d'une potion de §7vitesse§r par un §7œil fermenté§r vous privera de tout votre élan.");
         registerPotionLines(t, "harming",
                 "\nUne douleur fulgurante et instantanée.",
-                "Inflige des dégâts magiques instantanés qui ignorent la plupart des armures.\n\n§aSoigne les créatures mort-vivantes.§r",
+                "Inflige des dégâts magiques instantanés qui ignorent la plupart des armures.\n\n§2Soigne les créatures mort-vivantes.§r",
                 "Pervertissez une potion de §7soin§r à l'aide d'un §7œil fermenté§r pour transformer le remède en poison mortel.");
 
         // Élixirs Permanents
@@ -330,7 +330,7 @@ public class ModBookLanguageHelper {
         registerPotionLines(t, "perm_speed",
                 "\nRapide, à chaque instant de votre vie.",
                 "Augmente définitivement votre vitesse de déplacement de base.\n\nVos jambes ne se fatigueront plus jamais.",
-                "La maîtrise absolue du mouvement est une magie §bobtenue uniquement via des rituels alchimiques§r complexes.");
+                "La maîtrise absolue du mouvement est une magie §3obtenue uniquement via des rituels alchimiques§r complexes.");
         registerPotionLines(t, "perm_strength",
                 "\nLes dieux vous ont béni.",
                 "Augmente de façon permanente la puissance de tous vos coups au corps-à-corps.\n\nRien ne pourra plus vous résister.",
@@ -376,6 +376,8 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.artifact.nether_seal_breaker.craft", "Vous devez visiter chaque partie du Nether pour récupérer les blocs nécessaires.");
         t.add("book.potions-n-rituals.page.artifact.decoy.desc", "Crée un Leurre qui distrait les mobs hostiles.");
         t.add("book.potions-n-rituals.page.artifact.alchemical_stone.desc", "La pierre peut stocker des effets de potions pour les appliquer au sol.");
+        t.add("book.potions-n-rituals.page.artifact.gauntlet.desc", "Permet de stocker plusieurs pierre alchimique et de cycler parmis eux.");
+        t.add("book.potions-n-rituals.page.artifact.gauntlet.craft", "Ajouter des pierres alchimiques avec le Gant de l'Absolu pour les ajouter.");
     }
 
     public static void generateBookEnUsTranslations(TranslationBuilder t) {
@@ -519,19 +521,19 @@ public class ModBookLanguageHelper {
                 "Empties a part of your inventory.",
                 "Plunge a §7pitcher plant§r into an §7awkward potion§r to create a powerful liquid amnesic.");
         registerPotionLines(t, "ore_sense",
-                "\nThe earth's §etreasures§r are calling you.",
+                "\nThe earth's §6treasures§r are calling you.",
                 "You can sense precious ores through the rock, which facilitates your mining sessions.",
                 "The alliance of an §7iron ore§r and a §7night vision potion§r will sharpen your underground senses.");
         registerPotionLines(t, "photosynthesis",
-                "\nThe sun is your best meal.\n\nYou are fed by the §adivine star§r.",
+                "\nThe sun is your best meal.\n\nYou are fed by the §2divine star§r.",
                 "Slowly restores your hunger as long as you stand in direct sunlight.",
                 "Crush some §7leaves§r in an §7awkward potion§r to assimilate the strength of plants.");
         registerPotionLines(t, "purification",
-                "\nAll §fdefilement§r must disappear.",
+                "\nAll §7defilement§r must disappear.",
                 "Instantly cleanses all negative effects without touching your active bonuses.",
                 "A §7milk bucket§r concentrated and stabilized in an §7awkward potion§r will purge your organism.");
         registerPotionLines(t, "reactivation",
-                "\n§eTime§r is on your side.",
+                "\n§6Time§r is on your side.",
                 "Adds extra time to all active effects.",
                 "The solar power of a §7sunflower§r added to a §7short cooldown potion§r forces destiny.");
         registerPotionLines(t, "resonance",
@@ -551,7 +553,7 @@ public class ModBookLanguageHelper {
                 "Progressively fills your saturation bar.",
                 "The natural sugar of a §7beetroot§r concentrated in an §7awkward potion§r will curb your appetite for good.");
         registerPotionLines(t, "short_cooldown",
-                "\nYour arms feel so §elight§r...",
+                "\nYour arms feel so §6light§r...",
                 "Drastically decreases the cooldown time for using potions and activating active effects. They require so little effort.",
                 "The energy of a §7sunflower§r infused in an §7awkward potion§r will boost your dexterity.");
         registerPotionLines(t, "stun",
@@ -588,24 +590,24 @@ public class ModBookLanguageHelper {
                 "The crossing of a §7glistering melon slice§r and an §7XP boost potion§r converts mind into flesh.");
         registerPotionLines(t, "zeus",
                 "\nLightning always strikes twice.",
-                "Your attacks invoke the wrath of §bZeus§r upon the target, you can also invoke it manually.",
+                "Your attacks invoke the wrath of §3Zeus§r upon the target, you can also invoke it manually.",
                 "Combine mystical §7Materia Prima§r with a §7stun potion§r to summon lightning.");
         registerPotionLines(t, "cold",
-                "\n§bBrrrr§r... Bring a coat.",
+                "\n§3Brrrr§r... Bring a coat.",
                 "You cough randomly, transmitting your disease to other entities.",
                 "A mundane §7snowball§r melted in an §7awkward potion§r will cool anyone's ardor.");
         registerPotionLines(t, "clumsiness",
                 "\n§7Oops§r, I dropped it again.",
                 "Forces the target to randomly drop the items they are holding in their hands.",
-                "The brewing formula for this chaotic potion has been §7lost to time§r.");
+                "Corrupt an §7alcohol potion§r with a §7fermented spider eye§r to obtain this chaotic mixture.");
         registerPotionLines(t, "asthma",
                 "\nThe air feels so §8thick§r...",
                 "Reduces your oxygen bar if you run, even in the open air. Inflicting suffocation damage if you run out of air.",
-                "The brewing formula for this terrible concoction has been §7lost to time§r.");
+                "A §7zombie lung§r macerated in an §7awkward potion§r will clog your airways.");
         registerPotionLines(t, "paranoia",
                 "\nDid you hear that noise?",
                 "Makes the target hear terrifying monster sounds that do not exist.",
-                "The brewing formula to alter the mind like this has been §5lost to time§r.");
+                "A §7Creeper head§r infused in an §7awkward potion§r awakens your darkest fears.");
         registerPotionLines(t, "medusa",
                 "\nDo not look her in the eyes!\n\nShe has looks that §2kill§r...",
                 "Petrifies, if you wish, any entity that meets your gaze.",
@@ -617,7 +619,7 @@ public class ModBookLanguageHelper {
         registerPotionLines(t, "active_teleport",
                 "\nA §5blink of an eye§r and you're there.",
                 "Instantly teleports you, whenever you want, to the exact spot you are looking at (within range).",
-                "The fluidity of a §7mercury ball§r stabilizes the chaotic effects of a §7teleportation potion§r.");
+                "The volatile sulfur of a §7sulfur ball§r stabilizes the chaotic effects of a §7teleportation potion§r.");
         registerPotionLines(t, "hydrophobia",
                 "\n§8Water§r burns like acid.",
                 "Inflicts heavy continuous damage if the target comes into contact with water or rain.",
@@ -633,21 +635,21 @@ public class ModBookLanguageHelper {
         registerPotionLines(t, "reality_check",
                 "\nWhy is everything so §5heavy§d??",
                 "Instantly dispels all illusions. Your inventory is full, so you are heavy.",
-                "The brewing formula to break the fourth wall has been §5lost to time§r.");
+                "The crushing presence of an §7anvil§r infused in an §7awkward potion§r brings you back to reality.");
 
         // Minecraft Base Potions
         registerPotionLines(t, "fire_resistance",
                 "\nA §6lava bath§r never hurt anyone.",
                 "Completely immunizes you against fire, lava, and burning damage.\n\nIdeal for a trip to the Nether.",
-                "Melt a §7magma cream§r in an §7awkward potion§r to ignore the heat of this world.");
+                "Melt a §7magma block§r in an §7awkward potion§r to ignore the heat of this world.");
         registerPotionLines(t, "regeneration",
                 "\nYour wounds close up before your eyes.",
                 "Progressively restores your health points over time without needing to eat.",
-                "Let a §7Ghast tear§r weep in an §7awkward potion§r to stimulate your natural healing.");
+                "The essence of a §7golden apple§r infused in an §7awkward potion§r stimulates your natural healing.");
         registerPotionLines(t, "strength",
                 "\nYou feel capable of moving mountains.",
                 "Considerably increases the damage dealt by your melee attacks.",
-                "The heat of §7Blaze powder§r added to an §7awkward potion§r will multiply your muscular strength.");
+                "The explosive energy of a §7firework star§r infused in an §7awkward potion§r will multiply your muscular strength.");
         registerPotionLines(t, "swiftness",
                 "\nThe wind blows in your ears.",
                 "Increases your movement speed and slightly widens your field of vision.",
@@ -655,7 +657,7 @@ public class ModBookLanguageHelper {
         registerPotionLines(t, "poison",
                 "\nA bitter taste that eats away at you from the inside.",
                 "Inflicts regular damage over time, but cannot kill you. The effect stops at half a heart.",
-                "Macerate a §7spider eye§r in an §7awkward potion§r to extract its toxic venom.");
+                "Macerate any §7poisonous vegetables§r in an §7awkward potion§r to extract the toxic venom.");
         registerPotionLines(t, "healing",
                 "\nA pure and immediate relief.",
                 "Instantly restores a portion of your health points.\n\n§4Hurts§r undead creatures.",
@@ -669,7 +671,7 @@ public class ModBookLanguageHelper {
                 "Makes your body completely invisible to the eyes of others.\n\n§4Be careful, your armors and held items remain visible.§r",
                 "Corrupt a §7night vision potion§r with a §7fermented spider eye§r to trick light itself.");
         registerPotionLines(t, "water_breathing",
-                "\nYour lungs adapt to the depths.\n\n§bEphemeral gills.§r",
+                "\nYour lungs adapt to the depths.\n\n§3Ephemeral gills.§r",
                 "Prevents your oxygen bar from depleting underwater, allowing you to stay submerged indefinitely.",
                 "Inflate an §7awkward potion§r with a §7pufferfish§r to breathe like an inhabitant of the oceans.");
         registerPotionLines(t, "leaping",
@@ -694,7 +696,7 @@ public class ModBookLanguageHelper {
                 "The corruption of a §7swiftness potion§r by a §7fermented spider eye§r will deprive you of all your momentum.");
         registerPotionLines(t, "harming",
                 "\nA sudden and blazing pain.",
-                "Inflicts instant magical damage that ignores most armors.\n\n§aHeals undead creatures.§r",
+                "Inflicts instant magical damage that ignores most armors.\n\n§2Heals undead creatures.§r",
                 "Pervert a §7healing potion§r using a §7fermented spider eye§r to turn the cure into a deadly poison.");
 
         // Elixirs
@@ -705,7 +707,7 @@ public class ModBookLanguageHelper {
         registerPotionLines(t, "perm_speed",
                 "\nFast, in every moment of your life.",
                 "Permanently increases your base movement speed.\n\nYour legs will never get tired again.",
-                "The absolute mastery of movement is a magic §bobtained only through complex alchemical rituals§r.");
+                "The absolute mastery of movement is a magic §3obtained only through complex alchemical rituals§r.");
         registerPotionLines(t, "perm_strength",
                 "\nThe gods have blessed you.",
                 "Permanently increases the power of all your melee strikes.\n\nNothing will be able to resist you anymore.",
@@ -751,6 +753,8 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.artifact.nether_seal_breaker.craft", "You need to go to every part of the nether to get the blocks.");
         t.add("book.potions-n-rituals.page.artifact.decoy.desc", "Create a decoy that distract hostile mobs.");
         t.add("book.potions-n-rituals.page.artifact.alchemical_stone.desc", "The stone can store some potion effects to apply them on the ground.");
+        t.add("book.potions-n-rituals.page.artifact.gauntlet.desc", "Stores multiple alchemical stones and allows you to cycle through them.");
+        t.add("book.potions-n-rituals.page.artifact.gauntlet.craft", "Combine alchemical stones with the Gauntlet of the Absolute to add their effects.");
     }
 
     private static void registerPotionLines(TranslationBuilder t, String id, String resume, String explanation, String brew) {
