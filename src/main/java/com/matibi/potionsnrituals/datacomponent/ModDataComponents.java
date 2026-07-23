@@ -32,13 +32,17 @@ public final class ModDataComponents {
 
     public static final DataComponentType<Integer> BAG_ID = register("bag_id",
             builder -> builder
-                    .persistent(Codec.INT)
                     .networkSynchronized(ByteBufCodecs.INT));
 
     public static final DataComponentType<ReturnLocation> RETURN_LOCATION = register("return_location",
             builder -> builder
                     .persistent(ReturnLocation.CODEC)
                     .networkSynchronized(ReturnLocation.STREAM_CODEC));
+
+    public static final DataComponentType<Integer> INDEX = register("index",
+            builder -> builder
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.INT));
 
     private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> op) {
         return Registry.register(

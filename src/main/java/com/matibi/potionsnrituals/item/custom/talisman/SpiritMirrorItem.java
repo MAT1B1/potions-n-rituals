@@ -12,6 +12,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
 
@@ -20,7 +21,7 @@ import java.util.Set;
 public class SpiritMirrorItem extends Item {
 
     public SpiritMirrorItem(Properties properties) {
-        super(properties);
+        super(properties.durability(6).rarity(Rarity.RARE));
     }
 
     @Override
@@ -62,4 +63,7 @@ public class SpiritMirrorItem extends Item {
         }
         return InteractionResult.SUCCESS;
     }
+
+    @Override
+    public boolean isFoil(@NonNull ItemStack stack) { return true; }
 }

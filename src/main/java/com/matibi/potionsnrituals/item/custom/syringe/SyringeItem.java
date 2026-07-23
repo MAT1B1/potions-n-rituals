@@ -24,7 +24,10 @@ import java.util.Optional;
 public class SyringeItem extends Item {
 
     public SyringeItem(Properties properties) {
-        super(properties.durability(ModConfig.get().syringe_durability));
+        super(properties
+                .durability(ModConfig.get().syringe_durability)
+                .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
+        );
     }
 
     @Override

@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NonNull;
@@ -13,7 +15,7 @@ import org.jspecify.annotations.NonNull;
 public class NetherSealBreakerItem extends Item {
 
     public NetherSealBreakerItem(Properties properties) {
-        super(properties);
+        super(properties.stacksTo(1).rarity(Rarity.RARE));
     }
 
     @Override
@@ -36,4 +38,7 @@ public class NetherSealBreakerItem extends Item {
 
         return InteractionResult.SUCCESS;
     }
+
+    @Override
+    public boolean isFoil(@NonNull ItemStack stack) { return true; }
 }

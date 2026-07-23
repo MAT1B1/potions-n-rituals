@@ -38,7 +38,8 @@ public class CombinationRecipe extends CustomRecipe {
                 if (!isPotionItem(stack)) return false;
 
                 PotionContents component = stack.get(DataComponents.POTION_CONTENTS);
-                if (component == null || !component.hasEffects()) return false;
+                if (component == null || !component.hasEffects() || stack.getItem() == ModItems.ALCHEMICAL_STONE)
+                    return false;
 
                 if (basePotionItem == null) basePotionItem = stack.getItem();
                 else if (stack.getItem() != basePotionItem) return false;

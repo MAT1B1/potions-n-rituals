@@ -19,6 +19,9 @@ public class ModRecipeSerializer {
     public static final RecipeSerializer<ImbuedEffectRecipe> IMBUED_EFFECT =
             ImbuedEffectRecipe.SERIALIZER;
 
+    public static final RecipeSerializer<GauntletLoadRecipe> GAUNTLET_LOAD =
+            GauntletLoadRecipe.SERIALIZER;
+
     private static void reg(String id, RecipeSerializer<?> serializer) {
         Registry.register(BuiltInRegistries.RECIPE_SERIALIZER,
                 ModUtils.id(id),
@@ -30,5 +33,6 @@ public class ModRecipeSerializer {
         reg("combination",              COMBINATION);
         reg("food_with_effect_recipe",  FOOD_WITH_EFFECT);
         reg("imbued_effect",            IMBUED_EFFECT);
+        reg("gauntlet_load",            GAUNTLET_LOAD);
     }
 }

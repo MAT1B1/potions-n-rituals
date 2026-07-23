@@ -2,9 +2,8 @@ package com.matibi.potionsnrituals.network;
 
 import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.datacomponent.PersonalBookmark;
-import com.matibi.potionsnrituals.effect.helper.ActiveEffectPayload;
-import com.matibi.potionsnrituals.effect.helper.CooldownSyncPayload;
 import com.matibi.potionsnrituals.item.custom.book.CustomBookItem;
+import com.matibi.potionsnrituals.item.custom.talisman.GauntletItem;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,6 +16,7 @@ public final class ModNetworking {
     }
 
     public static void register() {
+        PayloadTypeRegistry.serverboundPlay().register(GauntletCyclePayload.TYPE, GauntletCyclePayload.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(ActiveEffectPayload.TYPE, ActiveEffectPayload.CODEC);
         PayloadTypeRegistry.clientboundPlay().register(OreSensePayload.TYPE, OreSensePayload.CODEC);
         PayloadTypeRegistry.clientboundPlay().register(CooldownSyncPayload.TYPE, CooldownSyncPayload.CODEC);
@@ -29,5 +29,17 @@ public final class ModNetworking {
             if (stack.getItem() instanceof CustomBookItem && PersonalBookmark.isValidList(bookmarks))
                 stack.set(ModDataComponents.PERSONAL_BOOKMARKS, List.copyOf(bookmarks));
         });
+
+        ServerPlayNetworking.registerGlobalReceiver(GauntletCyclePayload.TYPE, (_, context) ->
+            context.server().execute(() -> {
+                var player = context.player();
+                var mainHand = player.getMainHandItem();
+                var offHand = player.getOffhandItem();
+
+                if (mainHand.getItem() instanceof GauntletItem)
+                    GauntletItem.cycleActiveEffect(mainHand, player);
+                else if (offHand.getItem() instanceof GauntletItem)
+                    GauntletItem.cycleActiveEffect(offHand, player);
+        }));
     }
 }

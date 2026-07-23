@@ -36,7 +36,7 @@ public class ModItemGroups {
             BuiltInRegistries.CREATIVE_MODE_TAB,
             ModUtils.id("alchemy"),
             FabricCreativeModeTab.builder()
-                    .icon(() -> new ItemStack(Items.POTION))
+                    .icon(() -> new ItemStack(ModItems.RUBEDO_GUIDE))
                     .title(Component.translatable("itemGroup.potions-n-rituals.alchemy"))
                     .displayItems((_, entries) -> {
                         var SKIP = Set.of(
@@ -70,17 +70,21 @@ public class ModItemGroups {
                         entries.accept(ModItems.ALBEDO_GUIDE);
                         entries.accept(ModItems.CITRINITAS_GUIDE);
                         entries.accept(ModItems.RUBEDO_GUIDE);
+
                         entries.accept(ModItems.MATERIA_PRIMA);
                         entries.accept(ModItems.SULFUR_BALL);
                         entries.accept(ModItems.MERCURY_BALL);
+                        entries.accept(ModItems.SALT);
+
                         entries.accept(ModItems.TALISMAN);
                         entries.accept(ModItems.TALISMAN_CHARGED);
                         entries.accept(ModItems.ALCHEMICAL_BAG);
                         entries.accept(ModItems.NETHER_SEAL_BREAKER);
                         entries.accept(ModItems.SPIRIT_MIRROR);
                         entries.accept(ModItems.DECOY);
+                        entries.accept(ModItems.GAUNTLET);
+
                         entries.accept(ModBlocks.PEDESTAL);
-                        entries.accept(ModItems.SALT);
 
                         entries.accept(ModItems.SYRINGE);
                         entries.accept(ModItems.BLOOD_BAG);

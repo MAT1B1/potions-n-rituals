@@ -1,6 +1,8 @@
 package com.matibi.potionsnrituals.effect.helper;
 
 import com.matibi.potionsnrituals.effect.ActiveEffect;
+import com.matibi.potionsnrituals.network.ActiveEffectPayload;
+import com.matibi.potionsnrituals.network.CooldownSyncPayload;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;

@@ -3,10 +3,7 @@ package com.matibi.potionsnrituals.datagen;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.item.ModItems;
-import com.matibi.potionsnrituals.recipe.AlchemicalStoneRecipe;
-import com.matibi.potionsnrituals.recipe.CombinationRecipe;
-import com.matibi.potionsnrituals.recipe.FoodWithEffectRecipe;
-import com.matibi.potionsnrituals.recipe.ImbuedEffectRecipe;
+import com.matibi.potionsnrituals.recipe.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancements.predicates.FluidPredicate;
@@ -185,6 +182,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .save(output, "potions-n-rituals:combination_recipe");
                 SpecialRecipeBuilder.special(ImbuedEffectRecipe::new)
                         .save(output, "potions-n-rituals:imbued_effect_recipe");
+                SpecialRecipeBuilder.special(GauntletLoadRecipe::new)
+                        .save(output, "potions-n-rituals:gauntlet_load_recipe");
             }
         };
     }

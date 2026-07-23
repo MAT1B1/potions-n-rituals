@@ -134,6 +134,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         addItem("nether_seal_breaker", "Descelleur de Portail");
         addItem("spirit_mirror", "Miroir spirituel");
         addItem("decoy", "Leurre");
+        addItem("gauntlet", "Gantelet de l'Absolu");
         addItem("alchemy_guide_basic", "Magnus Opus: Les Fondements de l'Alchimie");
         addItem("alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
         addItem("alchemy_guide_albedo", "Albedo: Vaisseau de l'Ordre");

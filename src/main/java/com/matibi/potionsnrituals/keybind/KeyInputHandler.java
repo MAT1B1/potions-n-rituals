@@ -1,7 +1,9 @@
 package com.matibi.potionsnrituals.keybind;
 
 import com.matibi.potionsnrituals.effect.ActiveEffect;
-import com.matibi.potionsnrituals.effect.helper.ActiveEffectPayload;
+import com.matibi.potionsnrituals.item.custom.talisman.GauntletItem;
+import com.matibi.potionsnrituals.network.ActiveEffectPayload;
+import com.matibi.potionsnrituals.network.GauntletCyclePayload;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -11,6 +13,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 
@@ -39,11 +42,20 @@ public class KeyInputHandler {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (EFFECT_BUTTON.consumeClick()) {
-                if (!ClientPlayNetworking.canSend(ActiveEffectPayload.TYPE)) return;
-
                 LocalPlayer player = client.player;
                 if (player == null) return;
 
+                ItemStack mainHand = player.getMainHandItem();
+                ItemStack offHand = player.getOffhandItem();
+
+                if (mainHand.getItem() instanceof GauntletItem || offHand.getItem() instanceof GauntletItem) {
+                    if (ClientPlayNetworking.canSend(GauntletCyclePayload.TYPE)) {
+                        ClientPlayNetworking.send(new GauntletCyclePayload());
+                        return;
+                    }
+                }
+
+                if (!ClientPlayNetworking.canSend(ActiveEffectPayload.TYPE)) return;
                 for (MobEffectInstance instance : player.getActiveEffects()) {
                     Identifier id = BuiltInRegistries.MOB_EFFECT.getKey(instance.getEffect().value());
                     if (id == null) continue;

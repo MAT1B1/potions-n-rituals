@@ -12,21 +12,23 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
 public class DecoyItem extends Item {
 
     public DecoyItem(Properties properties) {
-        super(properties.stacksTo(1));
+        super(properties.stacksTo(1).rarity(Rarity.RARE));
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
+    public @NonNull InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
         Level level = context.getLevel();
         ItemStack stack = context.getItemInHand();
@@ -90,4 +92,7 @@ public class DecoyItem extends Item {
 
         return InteractionResult.SUCCESS;
     }
+
+    @Override
+    public boolean isFoil(@NonNull ItemStack stack) { return true; }
 }

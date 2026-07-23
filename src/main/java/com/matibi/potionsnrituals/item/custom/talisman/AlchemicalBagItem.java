@@ -15,6 +15,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,7 +26,7 @@ import java.util.Set;
 public class AlchemicalBagItem extends Item {
 
     public AlchemicalBagItem(Item.Properties properties) {
-        super(properties);
+        super(properties.stacksTo(1).rarity(Rarity.RARE));
     }
 
     @Override
@@ -108,4 +109,7 @@ public class AlchemicalBagItem extends Item {
                 ModConfig.get().pocket_dimension_height + 1,
                 ModConfig.get().pocket_dimension_length / 2 + 1), returnBlock);
     }
+
+    @Override
+    public boolean isFoil(@NonNull ItemStack stack) { return true; }
 }
