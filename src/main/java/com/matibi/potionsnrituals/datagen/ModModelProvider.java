@@ -216,6 +216,7 @@ public class ModModelProvider extends FabricModelProvider {
         );
 
         items.forEach(item -> gen.generateFlatItem(item, ModelTemplates.FLAT_ITEM));
+
         gen.generateItemWithTintedOverlay(ModItems.ALCHEMICAL_STONE, new ModItemTintSources.TintItemColor(0xFFFFFFFF));
         gen.generateItemWithTintedOverlay(ModItems.SYRINGE, new ModItemTintSources.TintItemColor(0xFFFFFFFF));
     }
