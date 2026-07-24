@@ -6,12 +6,19 @@ import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.recipe.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.recipe.v1.ingredient.DefaultCustomIngredients;
 import net.minecraft.advancements.predicates.FluidPredicate;
 import net.minecraft.advancements.predicates.LocationPredicate;
 import net.minecraft.advancements.triggers.PlayerTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluids;
@@ -138,9 +145,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .save(output);
 
                 shaped(RecipeCategory.TOOLS, ModItems.DECOY)
-                        .pattern(" H ").pattern(" T ")
+                        .pattern(" H ").pattern(" T ").pattern(" B ")
                         .define('T', ModItems.TALISMAN_CHARGED)
                         .define('H', Items.SKELETON_SKULL)
+                        .define('B', Items.HAY_BLOCK)
                         .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
                         .save(output);
 
@@ -149,6 +157,22 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .define('T', ModItems.TALISMAN_CHARGED)
                         .define('G', Items.GOLD_INGOT)
                         .define('C', Items.LEATHER)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.RING)
+                        .pattern(" T ").pattern("GIG").pattern(" G ")
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .define('I', potion(Potions.INVISIBILITY))
+                        .define('G', Items.GOLD_INGOT)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.CLOAK)
+                        .pattern("LTL").pattern("LIL").pattern("L L")
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .define('I', potion(Potions.INVISIBILITY))
+                        .define('L', Items.LEATHER)
                         .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
                         .save(output);
 
@@ -194,6 +218,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .save(output, "potions-n-rituals:gauntlet_load_recipe");
             }
         };
+    }
+
+    private Ingredient potion(Holder<Potion> potionHolder) {
+        DataComponentPatch componentsToMatch = DataComponentPatch.builder()
+                .set(DataComponents.POTION_CONTENTS, new PotionContents(potionHolder))
+                .build();
+        Ingredient basePotion = Ingredient.of(Items.POTION);
+        return DefaultCustomIngredients.components(basePotion, componentsToMatch);
     }
 
     @Override

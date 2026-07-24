@@ -23,21 +23,20 @@ public class AlbedoBookItem extends CustomBookItem {
 
                         // ── Chapitre : Chemin vers le Citrinitas ────────────────────────
                         .chapter("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", c -> c
-                                .subChapter("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.rituals", sub -> sub
-                                        .page(BookUtils.createIllustrationPage("nether_page"))
-                                        .page(new BookPage.TextPage("nether_gate",
-                                                Component.translatable("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.rituals"),
-                                                Component.translatable("book.potions-n-rituals.page.nether_gate.text")))
-                                        .page(BookUtils.createRitualPage("Ritual Pattern", "nether_gate_final", ""))
-                                )
-                                .subChapter("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.talisman", sub -> sub
-                                        .page(BookUtils.createCraftingPage("talisman", "book.potions-n-rituals.page.talisman_recipe", ModItems.TALISMAN, "book.potions-n-rituals.page.talisman.desc"))
-                                        .page(new BookPage.EmptyPage())
-                                )
+                                .page(BookUtils.createIllustrationPage("nether_page"))
+                                .page(new BookPage.TextPage("nether_gate",
+                                        Component.translatable("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.rituals"),
+                                        Component.translatable("book.potions-n-rituals.page.nether_gate.text")))
+                                .page(BookUtils.createRitualPage("Ritual Pattern", "nether_gate_final", ""))
+                                .page(new BookPage.EmptyPage())
                         )
                         // ── Chapitre : Les artefacts ────────────────────────────────────
                         .chapter("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.artifacts", c -> c
                                 .page(BookUtils.createIllustrationPage("artefact_page"))
+                                .subChapter("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.talisman", sub -> sub
+                                        .page(BookUtils.createCraftingPage("talisman", "book.potions-n-rituals.page.talisman_recipe", ModItems.TALISMAN, "book.potions-n-rituals.page.talisman.desc"))
+                                        .page(new BookPage.TextPage(null, null, Component.translatable("book.potions-n-rituals.page.talisman.more")))
+                                )
                                 .subChapter(BookUtils.getName(ModItems.ALCHEMICAL_BAG), sub ->
                                         BookUtils.createTalismanChapter(sub, ModItems.ALCHEMICAL_BAG,
                                                 "book.potions-n-rituals.page.artifact.alchemical_bag.desc",

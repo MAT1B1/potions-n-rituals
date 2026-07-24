@@ -78,10 +78,11 @@ public class BookUtils {
     }
 
     public static String getEffectName(Holder<Potion> potion) {
+        if (potion == Potions.TURTLE_MASTER)
+            return Component.translatable("effect.potions-n-rituals.turtle_master").getString();
         List<MobEffectInstance> effects = potion.value().getEffects();
-        if (effects.isEmpty()) {
+        if (effects.isEmpty())
             return "Unknown";
-        }
         Holder<MobEffect> effect = effects.getFirst().getEffect();
         return Component.translatable(effect.value().getDescriptionId()).getString();
     }

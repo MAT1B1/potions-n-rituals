@@ -301,6 +301,7 @@ public class ModBookLanguageHelper {
                 "\nLa gravité a moins d'emprise sur vous.",
                 "Augmente la hauteur de vos sauts de manière significative et réduit les dégâts de chute que vous subissez.",
                 "La chance d'une §7patte de lapin§r infusée dans une §7potion étrange§r vous donnera des ressorts sous les pieds.");
+        t.add("effect.potions-n-rituals.turtle_master", "Maitre Tortue");
         registerPotionLines(t, "turtle_master",
                 "\nLent, mais totalement indestructible.",
                 "Réduit drastiquement votre vitesse de déplacement, mais vous accorde une résistance inébranlable aux dégâts physiques.",
@@ -358,7 +359,6 @@ public class ModBookLanguageHelper {
 
         // --- AJOUTS ALBEDO (AlbedoBookItem) ---
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", "Chemin vers le Citrinitas");
-        t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.rituals", "Rituel");
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.talisman", "Talisman");
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.artifacts", "Les Artefacts");
 
@@ -366,6 +366,8 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.nether_gate.text", "Vous aurez besoin de partir en enfer avec un rituel. Pour l'activer, il faut sacrifier une entité à l'intérieur du rituel.");
         t.add("book.potions-n-rituals.page.ritual_pattern", "Structure du Rituel");
         t.add("book.potions-n-rituals.page.talisman_recipe", "Recette du Talisman");
+        t.add("book.potions-n-rituals.page.talisman.desc", "Fabriquer un Talisman pour être capable d'avoir des artefacts puissants.");
+        t.add("book.potions-n-rituals.page.talisman.more", "Vous aurez besoin de récupérer du pouvoir spirituelle en tuant des entités pour avoir un Talisman Chargé.");
 
         // --- AJOUTS ARTEFACTS (Chapitre : Les Artefacts) ---
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.artifact_page", "Les Artefacts");
@@ -680,6 +682,7 @@ public class ModBookLanguageHelper {
                 "\nGravity has less grip on you.",
                 "Significantly increases your jump height and reduces the fall damage you take.",
                 "The luck of a §7rabbit foot§r infused in an §7awkward potion§r will put springs under your feet.");
+        t.add("effect.potions-n-rituals.turtle_master", "Turtle Master");
         registerPotionLines(t, "turtle_master",
                 "\nSlow, but completely indestructible.",
                 "Drastically reduces your movement speed, but grants you unwavering resistance to physical damage.",
@@ -745,6 +748,8 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.nether_gate.text", "You will need to go to the Nether with a ritual. To activate it, you must sacrifice an entity inside the ritual.");
         t.add("book.potions-n-rituals.page.ritual_pattern", "Ritual Pattern");
         t.add("book.potions-n-rituals.page.talisman_recipe", "Talisman Recipe");
+        t.add("book.potions-n-rituals.page.talisman.desc", "Craft a Talisman to be able to get powerfull artefact.");
+        t.add("book.potions-n-rituals.page.talisman.more", "You will then need to gather soul power by killing entities to get a Charged Talisman.");
 
         // --- AJOUTS ARTEFACTS (Chapter: Artifacts) ---
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.artifact_page", "Artifacts");
