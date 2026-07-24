@@ -83,6 +83,8 @@ public class ModItemGroups {
                         entries.accept(ModItems.SPIRIT_MIRROR);
                         entries.accept(ModItems.DECOY);
                         entries.accept(ModItems.GAUNTLET);
+                        entries.accept(ModItems.RING);
+                        entries.accept(ModItems.CLOAK);
 
                         entries.accept(ModBlocks.PEDESTAL);
 

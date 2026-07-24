@@ -62,6 +62,14 @@ public class AlbedoBookItem extends CustomBookItem {
                                         BookUtils.createTalismanChapter(sub, ModItems.GAUNTLET,
                                                 "book.potions-n-rituals.page.artifact.gauntlet.desc",
                                                 "book.potions-n-rituals.page.artifact.gauntlet.craft"))
+                                .subChapter(BookUtils.getName(ModItems.RING), sub ->
+                                        BookUtils.createTalismanChapter(sub, ModItems.RING,
+                                                "book.potions-n-rituals.page.artifact.invisibility_ring.desc",
+                                                ""))
+                                .subChapter(BookUtils.getName(ModItems.CLOAK), sub ->
+                                        BookUtils.createTalismanChapter(sub, ModItems.CLOAK,
+                                                "book.potions-n-rituals.page.artifact.invisibility_cloak.desc",
+                                                ""))
                         )
                         // ── Chapitre : Les alchemical stones ────────────────────────────
                         .chapter("item.potions-n-rituals.alchemical_stone", c -> c

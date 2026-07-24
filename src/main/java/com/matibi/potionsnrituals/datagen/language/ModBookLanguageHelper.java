@@ -378,6 +378,8 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.artifact.alchemical_stone.desc", "La pierre peut stocker des effets de potions pour les appliquer au sol.");
         t.add("book.potions-n-rituals.page.artifact.gauntlet.desc", "Permet de stocker plusieurs pierre alchimique et de cycler parmis eux.");
         t.add("book.potions-n-rituals.page.artifact.gauntlet.craft", "Ajouter des pierres alchimiques avec le Gant de l'Absolu pour les ajouter.");
+        t.add("book.potions-n-rituals.page.artifact.invisibility_ring.desc", "Un anneau qui rend son porteur invisible tant qu'il est équipé.");
+        t.add("book.potions-n-rituals.page.artifact.invisibility_cloak.desc", "Une cape qui vous rend invisible, estompant votre présence.");
     }
 
     public static void generateBookEnUsTranslations(TranslationBuilder t) {
@@ -755,6 +757,8 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.artifact.alchemical_stone.desc", "The stone can store some potion effects to apply them on the ground.");
         t.add("book.potions-n-rituals.page.artifact.gauntlet.desc", "Stores multiple alchemical stones and allows you to cycle through them.");
         t.add("book.potions-n-rituals.page.artifact.gauntlet.craft", "Combine alchemical stones with the Gauntlet of the Absolute to add their effects.");
+        t.add("book.potions-n-rituals.page.artifact.invisibility_ring.desc", "A ring that renders its wearer invisible while equipped.");
+        t.add("book.potions-n-rituals.page.artifact.invisibility_cloak.desc", "A cloak that grants invisibility, fading your presence.");
     }
 
     private static void registerPotionLines(TranslationBuilder t, String id, String resume, String explanation, String brew) {

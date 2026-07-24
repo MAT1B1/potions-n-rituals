@@ -138,6 +138,8 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         addItem("spirit_mirror", "Spirit Mirror");
         addItem("decoy", "Decoy");
         addItem("gauntlet", "Gauntlet of the Absolute");
+        addItem("invisibility_ring", "Invisibility Ring");
+        addItem("invisibility_cloak", "Invisibility Cloak");
         addItem("alchemy_guide_basic", "Magnus Opus: The Foundations of Alchemy");
         addItem("alchemy_guide_nigredo", "Nigredo: Chronicles of Chaos");
         addItem("alchemy_guide_albedo", "Albedo: Vessel of Order");

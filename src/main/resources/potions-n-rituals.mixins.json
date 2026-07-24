@@ -34,6 +34,7 @@
     "world.LivingEntityMixin"
   ],
   "client": [
+    "ItemInHandLayerMixin",
     "PotionModelMixin",
     "effect.BrainwashingMixin",
     "effect.XpLife.GuiMixin"

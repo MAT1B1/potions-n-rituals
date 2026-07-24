@@ -84,6 +84,8 @@ public class ModItems {
             SPIRIT_MIRROR = register("spirit_mirror", new SpiritMirrorItem(props("spirit_mirror"))),
             DECOY = register("decoy", new DecoyItem(props("decoy"))),
             GAUNTLET = register("gauntlet", new GauntletItem(props("gauntlet"))),
+            RING = register("invisibility_ring", new InvisibilityRingItem(props("invisibility_ring"))),
+            CLOAK = register("invisibility_cloak", new InvisibilityCloakItem(props("invisibility_cloak"))),
 
             // Knowledge Books
             BASIC_GUIDE = register("alchemy_guide_basic", new BasicBookItem()),

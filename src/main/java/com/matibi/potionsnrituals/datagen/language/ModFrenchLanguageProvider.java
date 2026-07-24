@@ -136,6 +136,8 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         addItem("spirit_mirror", "Miroir spirituel");
         addItem("decoy", "Leurre");
         addItem("gauntlet", "Gantelet de l'Absolu");
+        addItem("invisibility_ring", "Bague d'Invisibilité");
+        addItem("invisibility_cloak", "Cape d'Invisibilité");
         addItem("alchemy_guide_basic", "Magnus Opus: Les Fondements de l'Alchimie");
         addItem("alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
         addItem("alchemy_guide_albedo", "Albedo: Vaisseau de l'Ordre");
