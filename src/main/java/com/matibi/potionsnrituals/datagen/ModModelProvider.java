@@ -21,6 +21,7 @@ import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -219,6 +220,13 @@ public class ModModelProvider extends FabricModelProvider {
 
         gen.generateItemWithTintedOverlay(ModItems.ALCHEMICAL_STONE, new ModItemTintSources.TintItemColor(0xFFFFFFFF));
         gen.generateItemWithTintedOverlay(ModItems.SYRINGE, new ModItemTintSources.TintItemColor(0xFFFFFFFF));
+
+        Identifier modelTarget = ModUtils.id("item/potion");
+        Identifier idOverlay = ModUtils.id("item/potion_overlay");
+        Identifier idBouteille = ModUtils.id("item/potion");
+        Material layer0 = new Material(idOverlay);
+        Material layer1 = new Material(idBouteille);
+        gen.generateLayeredItem(modelTarget, layer0, layer1);
     }
 
     private static Identifier createPedestalFireModel(BlockModelGenerators gen) {
