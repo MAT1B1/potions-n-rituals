@@ -31,6 +31,9 @@
     "effect.ghost_walker.LivingEntityMixin",
     "effect.ghost_walker.PlayerGhostWalkMixin",
     "effect.XpLife.XpLifeMixin",
+    "lock.LockExplosionMixin",
+    "lock.LockMiningMixin",
+    "lock.LockMixin",
     "world.LivingEntityMixin"
   ],
   "client": [

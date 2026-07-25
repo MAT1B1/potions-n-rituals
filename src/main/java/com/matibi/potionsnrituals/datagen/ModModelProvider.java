@@ -215,7 +215,10 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.DECOY,
                 ModItems.GAUNTLET,
                 ModItems.RING,
-                ModItems.CLOAK
+                ModItems.CLOAK,
+                ModItems.PHOENIX_QUILL,
+                ModItems.LOCK,
+                ModItems.KEY
         );
 
         items.forEach(item -> gen.generateFlatItem(item, ModelTemplates.FLAT_ITEM));

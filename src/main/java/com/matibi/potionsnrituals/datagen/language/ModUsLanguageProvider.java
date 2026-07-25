@@ -140,6 +140,9 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         addItem("gauntlet", "Gauntlet of the Absolute");
         addItem("invisibility_ring", "Invisibility Ring");
         addItem("invisibility_cloak", "Invisibility Cloak");
+        addItem("phoenix_quill", "Phoenix Quill");
+        addItem("lock", "Lock");
+        addItem("key", "Key");
         addItem("alchemy_guide_basic", "Magnus Opus: The Foundations of Alchemy");
         addItem("alchemy_guide_nigredo", "Nigredo: Chronicles of Chaos");
         addItem("alchemy_guide_albedo", "Albedo: Vessel of Order");
@@ -202,6 +205,10 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("tooltip.potions-n-rituals.talisman_charged_line", "The talisman overflows with spiritual energy.");
         t.add("tooltip.potions-n-rituals.bookmarks_count_line", "%s Bookmarks");
         t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s hits remaining)");
+
+        // message
+        t.add("message.potions-n-rituals.locked", "Locked");
+        t.add("message.potions-n-rituals.unlocked", "Unlocked");
     }
 
     // --- TES MÉTHODES DE REVERSE ET REGISTRE SPÉCIFIQUES À L'ANGLAIS ---

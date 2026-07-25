@@ -14,6 +14,7 @@ import com.matibi.potionsnrituals.effect.custom.terrain.ResurrectionEffect;
 import com.matibi.potionsnrituals.entity.ModEntities;
 import com.matibi.potionsnrituals.group.ModItemGroups;
 import com.matibi.potionsnrituals.item.ModItems;
+import com.matibi.potionsnrituals.item.custom.talisman.LockItem;
 import com.matibi.potionsnrituals.item.custom.talisman.TalismanItem;
 import com.matibi.potionsnrituals.item.custom.alchemicalStone.ModAlchemicalStone;
 import com.matibi.potionsnrituals.network.ModNetworking;
@@ -65,6 +66,7 @@ public class PotionsNRituals implements ModInitializer {
 				);
 
 		TalismanItem.registerEvents();
+		LockItem.blockChest();
 		ResurrectionEffect.registerDeathHandler();
 		BerserkEffect.registerDeathHandler();
 		DisorientMobHandler.register();

@@ -15,7 +15,7 @@ import org.jspecify.annotations.NonNull;
 public class NetherSealBreakerItem extends Item {
 
     public NetherSealBreakerItem(Properties properties) {
-        super(properties.stacksTo(1).rarity(Rarity.RARE));
+        super(properties.stacksTo(16).rarity(Rarity.RARE));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.matibi.potionsnrituals.datagen;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.item.ModItems;
+import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.recipe.*;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -173,6 +174,23 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .define('T', ModItems.TALISMAN_CHARGED)
                         .define('I', potion(Potions.INVISIBILITY))
                         .define('L', Items.LEATHER)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.PHOENIX_QUILL)
+                        .pattern("  F").pattern(" T ").pattern("NR ")
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .define('F', Items.FEATHER)
+                        .define('N', Items.IRON_NUGGET)
+                        .define('R', potion(ModPotions.RESURRECTION))
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
+                shaped(RecipeCategory.TOOLS, ModItems.LOCK)
+                        .pattern("III").pattern("GTG").pattern("GGG")
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .define('G', Items.GOLD_INGOT)
+                        .define('I', Items.IRON_INGOT)
                         .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
                         .save(output);
 

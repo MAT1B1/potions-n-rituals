@@ -28,12 +28,7 @@ import org.jspecify.annotations.NonNull;
 public class ModItems {
 
     public static final Item
-            MATERIA_PRIMA = register("materia_prima", new Item(props("materia_prima")
-                    .rarity(Rarity.UNCOMMON)) {
-                        @Override
-                        public boolean isFoil(@NonNull ItemStack stack) { return true; }
-                    }
-            ),
+            MATERIA_PRIMA = registerFoil("materia_prima", Rarity.UNCOMMON),
             MERCURY_BALL = registerSimple("mercury_ball"),
             SULFUR_BALL = registerSimple("sulfur_ball"),
             SALT = registerSimple("salt"),
@@ -86,6 +81,9 @@ public class ModItems {
             GAUNTLET = register("gauntlet", new GauntletItem(props("gauntlet"))),
             RING = register("invisibility_ring", new InvisibilityRingItem(props("invisibility_ring"))),
             CLOAK = register("invisibility_cloak", new InvisibilityCloakItem(props("invisibility_cloak"))),
+            PHOENIX_QUILL = register("phoenix_quill", new PhoenixQuillItem(props("phoenix_quill"))),
+            LOCK = register("lock", new LockItem(props("lock"))),
+            KEY = registerFoil("key", Rarity.RARE),
 
             // Knowledge Books
             BASIC_GUIDE = register("alchemy_guide_basic", new BasicBookItem()),
@@ -99,6 +97,13 @@ public class ModItems {
 
     private static Item registerSimple(String id) {
         return register(id, new Item(props(id)));
+    }
+
+    private static Item registerFoil(String id, Rarity rarity) {
+        return register(id, new Item(props(id).rarity(rarity)) {
+            @Override
+            public boolean isFoil(@NonNull ItemStack stack) { return true; }
+        });
     }
 
     private static Item registerFood(String id, int nutrition, float saturation, boolean alwaysEdible) {

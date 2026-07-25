@@ -85,6 +85,9 @@ public class ModItemGroups {
                         entries.accept(ModItems.GAUNTLET);
                         entries.accept(ModItems.RING);
                         entries.accept(ModItems.CLOAK);
+                        entries.accept(ModItems.PHOENIX_QUILL);
+                        entries.accept(ModItems.LOCK);
+                        entries.accept(ModItems.KEY);
 
                         entries.accept(ModBlocks.PEDESTAL);
 

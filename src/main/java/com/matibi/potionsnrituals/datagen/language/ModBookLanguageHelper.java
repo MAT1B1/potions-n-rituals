@@ -382,6 +382,9 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.artifact.gauntlet.craft", "Ajouter des pierres alchimiques avec le Gant de l'Absolu pour les ajouter.");
         t.add("book.potions-n-rituals.page.artifact.invisibility_ring.desc", "Un anneau qui rend son porteur invisible tant qu'il est équipé.");
         t.add("book.potions-n-rituals.page.artifact.invisibility_cloak.desc", "Une cape qui vous rend invisible, estompant votre présence.");
+        t.add("book.potions-n-rituals.page.artifact.phoenix_quill.desc", "Une plume enflammée qui permet d'exécuter des commandes au prix d'un terrible coût.");
+        t.add("book.potions-n-rituals.page.artifact.lock.desc", "Un verrou magique qui permet de sécuriser vos coffres et contenants.");
+        t.add("book.potions-n-rituals.page.artifact.key.desc", "La clé associée à un verrou, seule elle peut déverrouiller ce qui a été scellé.");
     }
 
     public static void generateBookEnUsTranslations(TranslationBuilder t) {
@@ -764,6 +767,9 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.artifact.gauntlet.craft", "Combine alchemical stones with the Gauntlet of the Absolute to add their effects.");
         t.add("book.potions-n-rituals.page.artifact.invisibility_ring.desc", "A ring that renders its wearer invisible while equipped.");
         t.add("book.potions-n-rituals.page.artifact.invisibility_cloak.desc", "A cloak that grants invisibility, fading your presence.");
+        t.add("book.potions-n-rituals.page.artifact.phoenix_quill.desc", "A flaming quill that can execute commands, but it cost a lot.");
+        t.add("book.potions-n-rituals.page.artifact.lock.desc", "A magical lock that secures your chests and containers.");
+        t.add("book.potions-n-rituals.page.artifact.key.desc", "The key bound to the lock, only it can unlock what has been sealed.");
     }
 
     private static void registerPotionLines(TranslationBuilder t, String id, String resume, String explanation, String brew) {

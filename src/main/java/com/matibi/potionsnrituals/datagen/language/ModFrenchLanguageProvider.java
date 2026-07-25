@@ -138,6 +138,9 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         addItem("gauntlet", "Gantelet de l'Absolu");
         addItem("invisibility_ring", "Bague d'Invisibilité");
         addItem("invisibility_cloak", "Cape d'Invisibilité");
+        addItem("phoenix_quill", "Plumes de Phoenix");
+        addItem("lock", "Cadenas");
+        addItem("key", "Clé");
         addItem("alchemy_guide_basic", "Magnus Opus: Les Fondements de l'Alchimie");
         addItem("alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
         addItem("alchemy_guide_albedo", "Albedo: Vaisseau de l'Ordre");
@@ -199,6 +202,10 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("tooltip.potions-n-rituals.talisman_charged_line", "Le talisman déborde d'énergie spirituelle.");
         t.add("tooltip.potions-n-rituals.bookmarks_count_line", "%s Marque-pages");
         t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s coups restants)");
+
+        // message
+        t.add("message.potions-n-rituals.locked", "Fermé");
+        t.add("message.potions-n-rituals.unlocked", "Ouvert");
     }
 
     private void registerWithAlchemicalStone(String id, String name) {

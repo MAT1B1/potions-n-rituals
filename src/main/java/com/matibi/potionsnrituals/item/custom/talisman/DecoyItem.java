@@ -24,7 +24,7 @@ import java.util.List;
 public class DecoyItem extends Item {
 
     public DecoyItem(Properties properties) {
-        super(properties.stacksTo(1).rarity(Rarity.RARE));
+        super(properties.stacksTo(16).rarity(Rarity.RARE));
     }
 
     @Override
