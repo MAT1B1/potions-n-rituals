@@ -75,7 +75,7 @@ public class PortalBuilderEntity extends Entity {
                     overworld.setAttached(ModAttachments.NETHER_SEALED, false);
 
                     level.getServer().getPlayerList().getPlayers().forEach(player ->
-                        player.sendSystemMessage(Component.literal("§4§lLe sceau de la dimension de feu a été brisé...")));
+                        player.sendSystemMessage(Component.translatable("message.potions-n-rituals.nether_seal.broken")));
                 }
 
                 BlockPos firePos = center.above();

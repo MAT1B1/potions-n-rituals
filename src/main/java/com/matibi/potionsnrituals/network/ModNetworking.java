@@ -6,6 +6,7 @@ import com.matibi.potionsnrituals.item.ModItems;
 import com.matibi.potionsnrituals.item.custom.book.CustomBookItem;
 import com.matibi.potionsnrituals.item.custom.talisman.GauntletItem;
 import com.matibi.potionsnrituals.util.AttributeUtils;
+import com.matibi.potionsnrituals.util.CommandPricing;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
@@ -50,8 +51,17 @@ public final class ModNetworking {
                 context.server().execute(() -> {
             var player = context.player();
             var elevatedSource = player.createCommandSourceStack().withPermission(PermissionSet.ALL_PERMISSIONS);
-            context.server().getCommands().performPrefixedCommand(elevatedSource, payload.command());
-            AttributeUtils.changeHealthBy(player, -player.getMaxHealth() / 2);
+
+            String baseCommand = payload.command().split(" ")[0];
+            float cost = CommandPricing.cost(player,  baseCommand, payload.command());
+
+            if (cost >= player.getMaxHealth())
+                player.hurtServer(player.level(), player.level().damageSources().magic(), Float.MAX_VALUE);
+            else {
+                context.server().getCommands().performPrefixedCommand(elevatedSource, payload.command());
+                AttributeUtils.changeHealthBy(player, -cost);
+            }
+
             ItemStack mainHandStack = player.getMainHandItem();
             ItemStack offHandStack = player.getOffhandItem();
 

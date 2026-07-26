@@ -209,6 +209,14 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         // message
         t.add("message.potions-n-rituals.locked", "Locked");
         t.add("message.potions-n-rituals.unlocked", "Unlocked");
+        t.add("message.potions-n-rituals.spirit.return", "Return to the material world...");
+        t.add("message.potions-n-rituals.spirit.enter", "Entering the spirit world...");
+        t.add("message.potions-n-rituals.nether_seal.broken", "§4§lThe seal of the fire dimension has been broken...");
+
+        // screen
+        t.add("screen.potions-n-rituals.command_write.title", "Engrave a Command");
+        t.add("screen.potions-n-rituals.command_write.placeholder", "Command");
+        t.add("screen.potions-n-rituals.command_write.execute", "Execute");
     }
 
     // --- TES MÉTHODES DE REVERSE ET REGISTRE SPÉCIFIQUES À L'ANGLAIS ---

@@ -36,10 +36,10 @@ public class ModCommands {
         ServerLevel targetLevel;
         if (currentLevel.dimension() == ModDimensions.SPIRIT_DIMENSION) {
             targetLevel = server.getLevel(Level.OVERWORLD);
-            player.sendSystemMessage(Component.literal("Retour dans le monde matériel..."));
+            player.sendSystemMessage(Component.translatable("message.potions-n-rituals.spirit.return"));
         } else {
             targetLevel = server.getLevel(ModDimensions.SPIRIT_DIMENSION);
-            player.sendSystemMessage(Component.literal("Entrée dans le monde des esprits..."));
+            player.sendSystemMessage(Component.translatable("message.potions-n-rituals.spirit.enter"));
         }
 
         if (targetLevel != null) {

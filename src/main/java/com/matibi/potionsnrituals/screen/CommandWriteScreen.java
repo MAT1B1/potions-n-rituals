@@ -16,7 +16,7 @@ public class CommandWriteScreen extends Screen {
     private EditBox commandBox;
 
     public CommandWriteScreen() {
-        super(Component.literal("Graver une commande").withStyle(ChatFormatting.GOLD));
+        super(Component.translatable("screen.potions-n-rituals.command_write.title").withStyle(ChatFormatting.GOLD));
     }
 
     @Override
@@ -32,13 +32,13 @@ public class CommandWriteScreen extends Screen {
 
         this.addRenderableWidget(new StringWidget(titleX, titleY, titleWidth, 9, this.title, this.font));
 
-        this.commandBox = new EditBox(this.font, centerX - 125, centerY - 20, 250, 20, Component.literal("Commande"));
+        this.commandBox = new EditBox(this.font, centerX - 125, centerY - 20, 250, 20, Component.translatable("screen.potions-n-rituals.command_write.placeholder"));
         this.commandBox.setMaxLength(256);
         this.addRenderableWidget(this.commandBox);
 
         this.setInitialFocus(this.commandBox);
 
-        Button executeButton = Button.builder(Component.literal("Exécuter"), _ -> this.executeCommand())
+        Button executeButton = Button.builder(Component.translatable("screen.potions-n-rituals.command_write.execute"), _ -> this.executeCommand())
                 .bounds(centerX - 50, centerY + 15, 100, 20)
                 .build();
 

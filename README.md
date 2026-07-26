@@ -26,12 +26,16 @@ New potions, effects, alchemical stones, imbued weapons, rituals, and immersive 
 - **40+ new potions** with unique gameplay effects.
 - **New status effects.**
 - **Alchemical Stones**: apply effects to the **terrain**.
+- **Alchemical Gauntlet**: store up to 5 stone effects in one item and cycle between them.
 - **Brewing Cauldron**: mix up to 3 potions into one multi-effect brew.
 - **Imbued Weapons**: apply a potion effect for a **number of hits**.
 - **Potion-infused food**: consume enchanted meals to gain effects.
 - **Stackable potions** up to 16 units.
 - **Lava buckets** can fuel brewing stands (less efficient than blaze powder).
 - **Rituals**: data-driven pattern-based transmutations.
+- **Lock & Key system**: secure your chests and containers.
+- **Invisibility items**: ring and cloak that grant true invisibility.
+- **Phoenix Quill**: write and execute commands at the cost of health.
 - **5 in-game alchemical tomes** with recipes, lore, and illustrations.
 - **Pocket Dimension** and **Spirit Dimension** to explore.
 - **Fully configurable** via YACL + ModMenu.
@@ -252,6 +256,21 @@ Items capable of **storing potion essences** and **applying the effect to the te
 
 ![Séparateur Simple](asset/separate_simple.png)
 
+## Alchemical Gauntlet
+
+</div>
+
+A **multi-stone terrain applicator** that can store up to 5 alchemical stone effects in a single item. Right-click on blocks to apply the active terrain effect. Press **Left Alt** to cycle through loaded effects. Craft a Gauntlet with alchemical stones in a Crafting Table to load their effects.
+
+- Stores up to **5 alchemical stone effects** simultaneously
+- Cycle effects with **Left Alt** (or the active effect keybind)
+- Right-click to apply the active effect to terrain
+- Works with all Alchemical Stone effects (Acid, Petrification, Alchemist, Ignition, Giant, Resurrection, Frost)
+
+<div align="center">
+
+![Séparateur Simple](asset/separate_simple.png)
+
 ## Imbued Weapons & Imbued Food
 
 </div>
@@ -268,6 +287,21 @@ Items capable of **storing potion essences** and **applying the effect to the te
 </div>
 
 Extract potion effects from creatures or inject them. Right-click a target to drain its effects, right-click yourself to absorb them. Hit an enemy to transfer stored effects. If the target has no effects, you get a Blood Bag. 20 durability, configurable.
+
+<div align="center">
+
+![Séparateur Simple](asset/separate_simple.png)
+
+## Lock & Key
+
+</div>
+
+Secure your valuables with the **Lock & Key system**. Right-click any chest, barrel, or compatible container with a **Lock** to seal it with a unique UUID — a matching **Key** is placed in your inventory. To open it, right-click with the matching Key (consumed on use, returns the Lock).
+
+- Right-click a container with a **Lock** to secure it
+- A unique **Key** is generated and given to you
+- Right-click with the matching **Key** to unlock (consumes the key, returns the lock)
+- Prevents unauthorized access to your stored items
 
 <div align="center">
 
@@ -335,26 +369,50 @@ Five in-game books with custom GUI, recipes, lore, and illustrations - no wiki r
 
 ## Special Items
 
-| Item                    | Description                                                      |
-|-------------------------|------------------------------------------------------------------|
-| Materia Prima           | Enchanted base alchemical component (substitute for Nether Wart) |
-| Sulfur / Mercury / Salt | Primal Principles, smelted from raw materials                    |
-| Claw                    | Brewing ingredient                                               |
-| Zombie Brain            | Brewing ingredient + edible (grants Brain Washing)               |
-| Witch's Finger          | Edible                                                           |
-| Blood Bag               | Stores blood, places Blood Trail blocks                          |
-| Charged Copper          | Brewing ingredient                                               |
-| Oxidation Fragment      | Brewing ingredient                                               |
-| Empty Talisman          | Base for charged talisman                                        |
-| Charged Talisman        | Overflowing with soul energy                                     |
-| Alchemical Bag          | Pocket Dimension access                                          |
-| Portal Seal Breaker     | Break the nether portal seal and builds a Nether portal          |
-| Spirit Mirror           | Teleports to Spirit Dimension (6 uses)                           |
-| Decoy                   | Distracts hostile mobs                                           |
+| Item                    | Description                                                       |
+|-------------------------|-------------------------------------------------------------------|
+| Materia Prima           | Enchanted base alchemical component (substitute for Nether Wart)  |
+| Sulfur / Mercury / Salt | Primal Principles, smelted from raw materials                     |
+| Claw                    | Brewing ingredient                                                |
+| Bat Wing                | Brewing ingredient                                                |
+| Zombie Brain            | Brewing ingredient + edible (grants Brain Washing)                |
+| Zombie Lung             | Brewing ingredient + edible (grants Asthma)                       |
+| Witch's Finger          | Edible                                                            |
+| Syringe                 | Extract/inject potion effects from/to entities                    |
+| Blood Bag               | Stores blood, places Blood Trail blocks                           |
+| Charged Copper          | Brewing ingredient                                                |
+| Oxidation Fragment      | Brewing ingredient                                                |
+| Empty Talisman          | Base for charged talisman                                         |
+| Charged Talisman        | Overflowing with soul energy                                      |
+| Alchemical Bag          | Pocket Dimension access                                           |
+| Portal Seal Breaker     | Break the nether portal seal and builds a Nether portal           |
+| Spirit Mirror           | Teleports to Spirit Dimension (6 uses)                            |
+| Decoy                   | Distracts hostile mobs                                            |
+| Alchemical Gauntlet     | Stores up to 5 alchemical stone effects; cycle & apply on terrain |
+| Invisibility Ring       | Grants invisibility while held                                    |
+| Invisibility Cloak      | Wearable chestplate granting invisibility +2 armor                |
+| Phoenix Quill           | Write and execute any command at the cost of half your health     |
+| Lock                    | Locks any chest or container with a unique UUID                   |
+| Key                     | Unlocks a matching locked container (consumed on use)             |
 
 </div>
 
 </details>
+
+<div align="center">
+
+![Séparateur Simple](asset/separate_simple.png)
+
+## Keybinds
+
+| Keybind                        | Default  | Function                                                                         |
+|--------------------------------|----------|----------------------------------------------------------------------------------|
+| Active Effect / Cycle Gauntlet | Left Alt | Trigger active effects (Zeus, Medusa, Active TP, Love) or cycle Gauntlet effects |
+| Show Effect Icons              | M        | Hold to display active effect icons overlay                                      |
+
+</div>
+
+- Ore Sense overlay and cooldown timers are displayed automatically when relevant.
 
 <div align="center">
 

@@ -178,10 +178,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .save(output);
 
                 shaped(RecipeCategory.TOOLS, ModItems.PHOENIX_QUILL)
-                        .pattern("  F").pattern(" T ").pattern("NR ")
+                        .pattern("  F").pattern("IT ").pattern("NR ")
                         .define('T', ModItems.TALISMAN_CHARGED)
                         .define('F', Items.FEATHER)
                         .define('N', Items.IRON_NUGGET)
+                        .define('I', potion(ModPotions.IGNITION))
                         .define('R', potion(ModPotions.RESURRECTION))
                         .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
                         .save(output);

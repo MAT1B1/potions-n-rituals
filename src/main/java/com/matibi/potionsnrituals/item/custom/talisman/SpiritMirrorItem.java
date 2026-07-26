@@ -36,10 +36,10 @@ public class SpiritMirrorItem extends Item {
 
                 if (currentLevel.dimension() == ModDimensions.SPIRIT_DIMENSION) {
                     targetLevel = server.getLevel(Level.OVERWORLD);
-                    serverPlayer.sendSystemMessage(Component.literal("Retour dans le monde matériel..."));
+                    serverPlayer.sendSystemMessage(Component.translatable("message.potions-n-rituals.spirit.return"));
                 } else {
                     targetLevel = server.getLevel(ModDimensions.SPIRIT_DIMENSION);
-                    serverPlayer.sendSystemMessage(Component.literal("Entrée dans le monde des esprits..."));
+                    serverPlayer.sendSystemMessage(Component.translatable("message.potions-n-rituals.spirit.enter"));
                 }
 
                 if (targetLevel != null) {

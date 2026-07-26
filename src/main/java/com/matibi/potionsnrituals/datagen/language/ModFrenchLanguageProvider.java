@@ -206,6 +206,14 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         // message
         t.add("message.potions-n-rituals.locked", "Fermé");
         t.add("message.potions-n-rituals.unlocked", "Ouvert");
+        t.add("message.potions-n-rituals.spirit.return", "Retour dans le monde matériel...");
+        t.add("message.potions-n-rituals.spirit.enter", "Entrée dans le monde des esprits...");
+        t.add("message.potions-n-rituals.nether_seal.broken", "§4§lLe sceau de la dimension de feu a été brisé...");
+
+        // screen
+        t.add("screen.potions-n-rituals.command_write.title", "Graver une commande");
+        t.add("screen.potions-n-rituals.command_write.placeholder", "Commande");
+        t.add("screen.potions-n-rituals.command_write.execute", "Exécuter");
     }
 
     private void registerWithAlchemicalStone(String id, String name) {

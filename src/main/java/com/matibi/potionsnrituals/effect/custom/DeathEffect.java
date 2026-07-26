@@ -70,9 +70,9 @@ public class DeathEffect extends MobEffect {
 
     private static void killTarget(ServerLevel world, @Nullable Entity attacker, LivingEntity target) {
         if (attacker instanceof LivingEntity livingAttacker)
-            target.hurtServer(world, world.damageSources().mobAttack(livingAttacker), target.getMaxHealth());
+            target.hurtServer(world, world.damageSources().mobAttack(livingAttacker), Float.MAX_VALUE);
         else
-            target.hurtServer(world, world.damageSources().magic(), target.getMaxHealth());
+            target.hurtServer(world, world.damageSources().magic(), Float.MAX_VALUE);
 
     }
 
