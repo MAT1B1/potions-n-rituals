@@ -1,10 +1,13 @@
 package com.matibi.potionsnrituals.ritual.datagen;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.matibi.potionsnrituals.util.ModUtils;
+import com.mojang.serialization.JsonOps;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -14,14 +17,13 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 public abstract class RitualRecipeProvider implements DataProvider {
@@ -66,9 +68,8 @@ public abstract class RitualRecipeProvider implements DataProvider {
     }
 
     protected void addRecipe(Identifier id, JsonObject recipe) {
-        if (this.recipes.containsKey(id)) {
+        if (this.recipes.containsKey(id))
             throw new IllegalStateException("Un rituel avec l'ID " + id + " existe déjà !");
-        }
         this.recipes.put(id, recipe);
     }
 
@@ -99,13 +100,21 @@ public abstract class RitualRecipeProvider implements DataProvider {
     public static class RitualBuilder {
         private final RitualRecipeProvider provider;
         private final Identifier recipeId;
+
+        // Variables typées correspondant au Record Ritual
         private int duration = 200;
-        private final Map<Character, JsonObject> keys = new LinkedHashMap<>();
-        private final JsonArray pattern = new JsonArray();
-        private final JsonArray conditions = new JsonArray();
-        private String catalyst;
-        private String duringAction;
-        private final JsonObject result = new JsonObject();
+        private final Map<String, Ingredient> keys = new LinkedHashMap<>();
+        private final List<String> pattern = new ArrayList<>();
+        private final List<Ritual.Conditions> conditions = new ArrayList<>();
+        private Ritual.Catalysts catalyst = null;
+        private String duringAction = null;
+
+        // Variables temporaires pour construire le Result
+        private String resultItem = null;
+        private String resultBlock = null;
+        private String resultEntity = null;
+        private String resultCustom = null;
+        private Integer resultCount = null;
 
         public RitualBuilder(RitualRecipeProvider provider, Identifier recipeId) {
             this.provider = provider;
@@ -113,12 +122,17 @@ public abstract class RitualRecipeProvider implements DataProvider {
         }
 
         protected void setResult(String type, String id, int count) {
-            this.result.addProperty(type, id);
-            this.result.addProperty("count", count);
+            switch (type) {
+                case "item" -> this.resultItem = id;
+                case "block" -> this.resultBlock = id;
+                case "entity" -> this.resultEntity = id;
+            }
+
+            this.resultCount = count;
         }
 
         protected void setCustomResult(String customId) {
-            this.result.addProperty("custom", customId);
+            this.resultCustom = customId;
         }
 
         public RitualBuilder pattern(String line) {
@@ -131,26 +145,25 @@ public abstract class RitualRecipeProvider implements DataProvider {
             return this;
         }
 
-        public RitualBuilder define(char symbol, Item item) {
-            String id = BuiltInRegistries.ITEM.getKey(item).toString();
-            return this.rawKey(symbol, id, "item");
-        }
-
-        public RitualBuilder define(char symbol, Block block) {
-            String id = BuiltInRegistries.BLOCK.getKey(block).toString();
-            return this.rawKey(symbol, id, "block");
-        }
-
-        private RitualBuilder rawKey(char symbol, String id, String type) {
-            JsonObject keyObj = new JsonObject();
-            keyObj.addProperty("id", id);
-            keyObj.addProperty("type", type);
-            this.keys.put(symbol, keyObj);
+        public RitualBuilder define(char symbol, Ingredient ingredient) {
+            this.keys.put(String.valueOf(symbol), ingredient);
             return this;
         }
 
+        public RitualBuilder define(char symbol, Item item) {
+            return this.define(symbol, Ingredient.of(item));
+        }
+
+        public RitualBuilder define(char symbol, Block block) {
+            return this.define(symbol, Ingredient.of(block));
+        }
+
+        public RitualBuilder define(char symbol, HolderSet<Item> tag) {
+            return this.define(symbol, Ingredient.of(tag));
+        }
+
         public RitualBuilder catalyst(Ritual.Catalysts catalyst) {
-            this.catalyst = catalyst.name().toLowerCase();
+            this.catalyst = catalyst;
             return this;
         }
 
@@ -165,10 +178,7 @@ public abstract class RitualRecipeProvider implements DataProvider {
 
         // --- Logique des Conditions ---
         private RitualBuilder addCondition(Ritual.ConditionTypes type, JsonObject params) {
-            JsonObject cond = new JsonObject();
-            cond.addProperty("type", type.getSerializedName());
-            cond.add("params", params);
-            this.conditions.add(cond);
+            this.conditions.add(new Ritual.Conditions(type, params));
             return this;
         }
 
@@ -249,30 +259,67 @@ public abstract class RitualRecipeProvider implements DataProvider {
         }
 
         public void save() {
-            JsonObject json = new JsonObject();
-            json.addProperty("type", "potions-n-rituals:ritual");
-            json.addProperty("duration", this.duration);
+            Ritual ritual = getRitual();
 
-            JsonObject keyObj = new JsonObject();
-            for (Map.Entry<Character, JsonObject> entry : this.keys.entrySet())
-                keyObj.add(String.valueOf(entry.getKey()), entry.getValue());
+            JsonObject finalJson = Ritual.CODEC.encodeStart(JsonOps.INSTANCE, ritual).getOrThrow().getAsJsonObject();
 
-            json.add("key", keyObj);
+            JsonObject keysObj = finalJson.getAsJsonObject("key");
+            if (keysObj != null) {
+                for (Map.Entry<String, JsonElement> entry : keysObj.entrySet())
+                    keysObj.add(entry.getKey(), fixIngredientFormat(entry.getValue()));
+            }
 
-            json.add("pattern", this.pattern);
+            finalJson.addProperty("type", "potions-n-rituals:ritual");
 
-            if (!this.conditions.isEmpty())
-                json.add("conditions", this.conditions);
+            this.provider.addRecipe(this.recipeId, finalJson);
+        }
 
-            if (this.catalyst != null)
-                json.addProperty("catalyst", this.catalyst);
+        private JsonElement fixIngredientFormat(JsonElement element) {
+            if (element.isJsonArray()) {
+                JsonArray arr = new JsonArray();
+                for (JsonElement e : element.getAsJsonArray())
+                    arr.add(normalizeEntry(e));
+                return arr;
+            }
+            if (element.isJsonObject() && element.getAsJsonObject().has("fabric:type")) {
+                JsonObject obj = element.getAsJsonObject();
+                if (obj.has("base"))
+                    obj.add("base", fixIngredientFormat(obj.get("base")));
+                return obj;
+            }
+            JsonArray arr = new JsonArray();
+            arr.add(element);
+            return arr;
+        }
 
-            if (this.duringAction != null)
-                json.addProperty("during", this.duringAction);
+        private JsonElement normalizeEntry(JsonElement element) {
+            if (element.isJsonObject()) {
+                JsonObject obj = element.getAsJsonObject();
+                if (obj.has("fabric:type") && obj.has("base"))
+                    obj.add("base", normalizeEntry(obj.get("base")));
+                return obj;
+            }
+            return element;
+        }
 
-            json.add("result", this.result);
+        private @NonNull Ritual getRitual() {
+            Ritual.Result ritualResult = new Ritual.Result(
+                    Optional.ofNullable(this.resultItem),
+                    Optional.ofNullable(this.resultBlock),
+                    Optional.ofNullable(this.resultEntity),
+                    Optional.ofNullable(this.resultCustom),
+                    Optional.ofNullable(this.resultCount)
+            );
 
-            this.provider.addRecipe(this.recipeId, json);
+            return new Ritual(
+                    this.duration,
+                    this.keys,
+                    this.pattern,
+                    Optional.ofNullable(this.catalyst),
+                    this.conditions,
+                    Optional.ofNullable(this.duringAction),
+                    ritualResult
+            );
         }
     }
 }

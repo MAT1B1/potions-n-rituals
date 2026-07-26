@@ -7,7 +7,6 @@ import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -17,11 +16,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.MoonPhase;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -110,32 +109,25 @@ public class RitualTriggerManager {
                 if (symbol == ' ') continue;
 
                 BlockPos checkPos = centerPos.offset(x - xOffset, 0, z - zOffset);
-                Ritual.Ingredient expectedIngredient = ritual.keys().get(String.valueOf(symbol));
+
+                Ingredient expectedIngredient = ritual.keys().get(String.valueOf(symbol));
                 if (expectedIngredient == null) return false;
 
-                Identifier expectedId = Identifier.parse(expectedIngredient.id());
                 boolean matchFound = false;
 
-                Optional<Holder.Reference<Block>> optBlock = BuiltInRegistries.BLOCK.get(expectedId);
-                if (optBlock.isPresent()) {
-                    Block expectedBlock = optBlock.get().value();
-                    BlockState state = level.getBlockState(checkPos);
-                    if (state.is(expectedBlock))
+               BlockState state = level.getBlockState(checkPos);
+                if (!state.isAir()) {
+                    ItemStack blockStack = new ItemStack(state.getBlock());
+                    if (expectedIngredient.test(blockStack))
                         matchFound = true;
                 }
-
                 if (!matchFound) {
-                    Optional<Holder.Reference<Item>> optItem = BuiltInRegistries.ITEM.get(expectedId);
-                    if (optItem.isPresent()) {
-                        Item expectedItem = optItem.get().value();
-                        BlockEntity blockEntity = level.getBlockEntity(checkPos);
-
-                        if (blockEntity instanceof PedestalBlockEntity pedestal)
-                            if (pedestal.getItem().getItem() == expectedItem)
-                                matchFound = true;
+                    BlockEntity blockEntity = level.getBlockEntity(checkPos);
+                    if (blockEntity instanceof PedestalBlockEntity pedestal) {
+                        if (expectedIngredient.test(pedestal.getItem()))
+                            matchFound = true;
                     }
                 }
-
                 if (!matchFound)
                     return false;
             }

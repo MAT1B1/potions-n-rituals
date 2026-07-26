@@ -1,7 +1,5 @@
 package com.matibi.potionsnrituals.util;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.book.BookPage;
 import com.matibi.potionsnrituals.book.BookStructure;
@@ -9,18 +7,17 @@ import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStone;
 import com.matibi.potionsnrituals.potion.PotionIconHelper;
 import com.matibi.potionsnrituals.ritual.RitualManager;
 import com.matibi.potionsnrituals.ritual.datagen.Ritual;
-import com.mojang.serialization.JsonOps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.ClientRecipeBook;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.recipebook.RecipeCollection;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -36,11 +33,8 @@ import net.minecraft.world.item.crafting.display.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-import java.io.Reader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -142,10 +136,22 @@ public class BookUtils {
     @Environment(EnvType.CLIENT)
     public static BookPage createRitualPage(String title, String ritualId, String description) {
         Ritual ritual = RitualManager.getAllRituals().get(ModUtils.id(ritualId));
-        String pageId = ritual.toString().toLowerCase();
+
+        if (ritual == null) {
+            PotionsNRituals.LOGGER.error("Impossible de créer la page du livre : Le rituel '{}' n'est pas chargé !", ritualId);
+            return new BookPage.TextPage(ritualId, Component.translatable(title), Component.literal("§cErreur: Rituel introuvable."));
+        }
+
+        String pageId = ritualId.toLowerCase();
         List<BookPage.Image> gridImages = new ArrayList<>();
 
         Identifier pedestalTexture = ModUtils.id("textures/gui/pedestal.png");
+
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null)
+            return new BookPage.ImagePage(pageId, Component.translatable(title), gridImages, Component.translatable(description));
+
+        ContextMap contextMap = SlotDisplayContext.fromLevel(mc.level);
 
         for (String row : ritual.pattern()) {
             for (char c : row.toCharArray()) {
@@ -155,20 +161,18 @@ public class BookUtils {
                 }
 
                 String key = String.valueOf(c);
-                Ritual.Ingredient ing = ritual.keys().get(key);
+                Ingredient ing = ritual.keys().get(key);
 
-                if (ing != null) {
-                    Identifier ingId = Identifier.parse(ing.id());
+                if (ing != null && !ing.isEmpty()) {
+                    ItemStack stack = ing.display().resolveForFirstStack(contextMap);
 
-                    Optional<Block> blockOpt = BuiltInRegistries.BLOCK.getOptional(ingId);
-                    Optional<Item> itemOpt = BuiltInRegistries.ITEM.getOptional(ingId);
-
-                    if (blockOpt.isPresent() && blockOpt.get() != Blocks.AIR) {
-                        BookPage.Image testImg = BookPage.Image.fromBlockState(blockOpt.get().defaultBlockState());
-                        gridImages.add(testImg);
-                    } else if (itemOpt.isPresent()) {
-                        ItemStack stack = new ItemStack(itemOpt.get());
-                        gridImages.add(BookPage.Image.compound(pedestalTexture, stack));
+                    if (!stack.isEmpty()) {
+                        Item item = stack.getItem();
+                        Block block = Block.byItem(item);
+                        if (block != Blocks.AIR)
+                            gridImages.add(BookPage.Image.fromBlockState(block.defaultBlockState()));
+                        else
+                            gridImages.add(BookPage.Image.compound(pedestalTexture, stack));
                     } else
                         gridImages.add(new BookPage.Image(null, null, null, 16, 16, "", 0));
                 } else
@@ -214,31 +218,38 @@ public class BookUtils {
     }
 
     @Environment(EnvType.CLIENT)
-    private static Recipe<?> loadRecipeFromJson(Item item) {
+    public static void createTalismanThroughRitualChapter(BookStructure.Chapter sub, Item item, String explanation) {
+        String id = getIdString(item);
+        String idRitual = id.split(":")[1] + "_ritual";
+        sub .page(new BookPage.ImagePage(id, Component.literal("§l" + getName(item)),
+                        List.of(BookPage.Image.fromItem(new ItemStack(item))),
+                        Component.translatable(explanation)))
+                .page(createRitualPage("How to obtain", idRitual, ""));
+    }
+
+    @Environment(EnvType.CLIENT)
+    private static RecipeDisplay getRecipeDisplay(Item item, RecipeType<?> targetType) {
         Minecraft mc = Minecraft.getInstance();
-        Optional<ResourceKey<Item>> optid = item.getDefaultInstance().typeHolder().unwrapKey();
-        if (optid.isEmpty()) return null;
+        if (mc.level == null || mc.player == null) return null;
 
-        Identifier recipeId = optid.get().identifier();
-        try {
-            Path generatedPath = FabricLoader.getInstance().getGameDir()
-                    .getParent()
-                    .resolve("src/main/generated/data")
-                    .resolve(recipeId.getNamespace())
-                    .resolve("recipe")
-                    .resolve(recipeId.getPath() + ".json");
+        ContextMap contextMap = SlotDisplayContext.fromLevel(mc.level);
+        ClientRecipeBook recipeBook = mc.player.getRecipeBook();
 
-            if (Files.exists(generatedPath)) {
-                try (Reader reader = Files.newBufferedReader(generatedPath)) {
-                    JsonElement json = JsonParser.parseReader(reader);
-                    if (mc.level == null) return null;
-                    return Recipe.CODEC.parse(mc.level.registryAccess().createSerializationContext(JsonOps.INSTANCE), json)
-                            .result()
-                            .orElse(null);
-                }
+        for (RecipeCollection collection : recipeBook.getCollections()) {
+            for (RecipeDisplayEntry entry : collection.getRecipes()) {
+                RecipeDisplay display = entry.display();
+
+                boolean matchesCategory =
+                        (targetType == RecipeType.CRAFTING &&
+                                (display instanceof ShapedCraftingRecipeDisplay || display instanceof ShapelessCraftingRecipeDisplay))
+                                || (targetType == RecipeType.SMELTING && display instanceof FurnaceRecipeDisplay);
+
+                if (!matchesCategory) continue;
+
+                ItemStack outputStack = display.result().resolveForFirstStack(contextMap);
+                if (!outputStack.isEmpty() && outputStack.getItem() == item)
+                    return display;
             }
-        } catch (Exception e) {
-            PotionsNRituals.LOGGER.warn("[POTIONS] Erreur lors de la lecture du JSON pour {}", recipeId);
         }
         return null;
     }
@@ -249,27 +260,22 @@ public class BookUtils {
         ClientLevel level = mc.level;
         if (level == null) return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
 
-        Recipe<?> recipe = loadRecipeFromJson(item);
-        if (recipe == null || recipe.display().isEmpty()) {
+        RecipeDisplay display = getRecipeDisplay(item, RecipeType.CRAFTING);
+        if (display == null)
             return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
-        }
 
-        RecipeDisplay display = recipe.display().getFirst();
         ContextMap contextMap = SlotDisplayContext.fromLevel(level);
         ItemStack output = display.result().resolveForFirstStack(contextMap);
 
         List<ItemStack> inputs = new ArrayList<>();
-        if (display instanceof ShapedCraftingRecipeDisplay shaped) {
-            for (SlotDisplay slot : shaped.ingredients()) {
-                inputs.add(slot instanceof SlotDisplay.Empty ? ItemStack.EMPTY : slot.resolveForFirstStack(contextMap));
-            }
-        } else if (display instanceof ShapelessCraftingRecipeDisplay shapeless) {
-            for (SlotDisplay slot : shapeless.ingredients()) {
-                if (!(slot instanceof SlotDisplay.Empty)) inputs.add(slot.resolveForFirstStack(contextMap));
-            }
-        } else {
+        if (display instanceof ShapedCraftingRecipeDisplay shaped)
+            for (SlotDisplay slot : shaped.ingredients())
+                inputs.add(slot.resolveForFirstStack(contextMap));
+        else if (display instanceof ShapelessCraftingRecipeDisplay shapeless)
+            for (SlotDisplay slot : shapeless.ingredients())
+                inputs.add(slot.resolveForFirstStack(contextMap));
+        else
             return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
-        }
 
         while (inputs.size() < 9) inputs.add(ItemStack.EMPTY);
         return new BookPage.RecipePage(pageId, Component.translatable(title), BookPage.Recipe.crafting(inputs, output), Component.translatable(description));
@@ -281,24 +287,13 @@ public class BookUtils {
         ClientLevel level = mc.level;
         if (level == null) return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
 
-        Recipe<?> recipe = loadRecipeFromJson(item);
-        if (recipe == null || recipe.display().isEmpty()) {
+        RecipeDisplay display = getRecipeDisplay(item, RecipeType.SMELTING);
+        if (!(display instanceof FurnaceRecipeDisplay furnaceDisplay))
             return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
-        }
-
-        RecipeDisplay display = recipe.display().getFirst();
-        if (!(display instanceof FurnaceRecipeDisplay furnaceDisplay)) {
-            return new BookPage.TextPage(pageId, Component.translatable(title), Component.translatable(description));
-        }
 
         ContextMap contextMap = SlotDisplayContext.fromLevel(level);
         ItemStack output = furnaceDisplay.result().resolveForFirstStack(contextMap);
-
-        ItemStack input = ItemStack.EMPTY;
-        SlotDisplay slot = furnaceDisplay.ingredient();
-        if (!(slot instanceof SlotDisplay.Empty)) {
-            input = slot.resolveForFirstStack(contextMap);
-        }
+        ItemStack input = furnaceDisplay.ingredient().resolveForFirstStack(contextMap);
 
         return new BookPage.RecipePage(pageId, Component.translatable(title), BookPage.Recipe.furnace(input, output), Component.translatable(description));
     }

@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jspecify.annotations.NonNull;
 
 import java.util.List;
@@ -23,20 +24,13 @@ public record Ritual(
 ) {
     public static final Codec<Ritual> CODEC = RecordCodecBuilder.create(inst -> inst.group(
             Codec.INT.optionalFieldOf("duration", 200).forGetter(Ritual::duration),
-            Codec.unboundedMap(Codec.STRING, Ingredient.CODEC).fieldOf("key").forGetter(Ritual::keys),
+            Codec.unboundedMap(Codec.STRING, Ingredient.CODEC).fieldOf("key").forGetter(Ritual::keys), // Utilise l'Ingredient.CODEC natif
             Codec.STRING.listOf().fieldOf("pattern").forGetter(Ritual::pattern),
             Catalysts.CODEC.optionalFieldOf("catalyst").forGetter(Ritual::catalyst),
             Conditions.CODEC.listOf().optionalFieldOf("conditions", List.of()).forGetter(Ritual::conditions),
             Codec.STRING.optionalFieldOf("during").forGetter(Ritual::during),
             Result.CODEC.fieldOf("result").forGetter(Ritual::result)
     ).apply(inst, Ritual::new));
-
-    public record Ingredient(String id, String type) {
-        public static final Codec<Ingredient> CODEC = RecordCodecBuilder.create(inst -> inst.group(
-                Codec.STRING.fieldOf("id").forGetter(Ingredient::id),
-                Codec.STRING.fieldOf("type").forGetter(Ingredient::type)
-        ).apply(inst, Ingredient::new));
-    }
 
     public record Result(
             Optional<String> item,

@@ -2,8 +2,10 @@ package com.matibi.potionsnrituals.datagen;
 
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.item.ModItems;
+import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import com.matibi.potionsnrituals.ritual.datagen.RitualRecipeProvider;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Items;
@@ -98,6 +100,18 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .pattern("  S  ")
                 .define('S', ModBlocks.BLOOD_TRAIL)
                 .define('N', ModItems.NETHER_SEAL_BREAKER)
+                .catalyst(Ritual.Catalysts.IGNITE)
+                .save();
+
+        addRitual(ModItems.PHOENIX_QUILL, 1)
+                .pattern("F R F")
+                .pattern("     ")
+                .pattern("R T R")
+                .pattern("     ")
+                .pattern("F R F")
+                .define('T', ModItems.TALISMAN_CHARGED)
+                .define('F', Items.FEATHER)
+                .define('R', ModUtils.potionIngredient((ModPotions.RESURRECTION)))
                 .catalyst(Ritual.Catalysts.IGNITE)
                 .save();
     }
