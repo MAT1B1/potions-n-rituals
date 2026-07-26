@@ -23,7 +23,7 @@ public class DeathEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(@NonNull ServerLevel world, @NonNull LivingEntity entity, int amplifier) {
-        applyEffect(world, null, null, entity, amplifier);
+        applyEffect(world, null, entity);
         return super.applyEffectTick(world, entity, amplifier);
     }
 
@@ -34,11 +34,11 @@ public class DeathEffect extends MobEffect {
 
     @Override
     public void applyInstantaneousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
-        applyEffect(world, effectEntity, attacker, target, amplifier);
+        applyEffect(world, effectEntity, target);
         super.applyInstantaneousEffect(world, effectEntity, attacker, target, amplifier, proximity);
     }
 
-    private static void applyEffect(ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, LivingEntity target, int amplifier) {
+    private static void applyEffect(ServerLevel world, @Nullable Entity attacker, LivingEntity target) {
         if (!target.isAlive()) return;
 
         if (isBoss(target))

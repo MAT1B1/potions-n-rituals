@@ -72,6 +72,9 @@ public class CommandPricing {
     }
 
     private static float getCommandMultiplier(String base, String fullCommand) {
+        if (fullCommand.toLowerCase().contains("command_block"))
+            return 1.0F;
+
         if (base.equals("execute")) {
             int runIndex = fullCommand.indexOf(" run ");
             if (runIndex != -1) {
