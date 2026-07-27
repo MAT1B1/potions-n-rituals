@@ -179,6 +179,13 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
                         .save(output);
 
+                shaped(RecipeCategory.TOOLS, ModItems.CAPTURE_SPHERE)
+                        .pattern("III").pattern("ITI").pattern("III")
+                        .define('T', ModItems.TALISMAN_CHARGED)
+                        .define('I', Items.IRON_BARS)
+                        .unlockedBy("has_talisman", has(ModItems.TALISMAN_CHARGED))
+                        .save(output);
+
                 shapeless(RecipeCategory.MISC, ModItems.BASIC_GUIDE, 1)
                         .requires(Items.BOOK)
                         .requires(Items.DIRT)

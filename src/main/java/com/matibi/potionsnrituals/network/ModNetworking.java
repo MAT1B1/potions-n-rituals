@@ -55,11 +55,9 @@ public final class ModNetworking {
             String baseCommand = payload.command().split(" ")[0];
             float cost = CommandPricing.cost(player,  baseCommand, payload.command());
 
-            if (cost >= player.getMaxHealth())
-                player.hurtServer(player.level(), player.level().damageSources().magic(), Float.MAX_VALUE);
-            else {
-                context.server().getCommands().performPrefixedCommand(elevatedSource, payload.command());
-                AttributeUtils.changeHealthBy(player, -cost);
+            if (cost > 0) {
+                if (player.experienceLevel < 100) return;
+                player.setExperienceLevels(player.experienceLevel - 100);
             }
 
             ItemStack mainHandStack = player.getMainHandItem();
@@ -69,6 +67,13 @@ public final class ModNetworking {
                 mainHandStack.shrink(1);
             else if (offHandStack.is(ModItems.PHOENIX_QUILL))
                 offHandStack.shrink(1);
+
+            if (cost >= player.getMaxHealth())
+                player.hurtServer(player.level(), player.level().damageSources().magic(), Float.MAX_VALUE);
+            else {
+                context.server().getCommands().performPrefixedCommand(elevatedSource, payload.command());
+                AttributeUtils.changeHealthBy(player, -cost);
+            }
         }));
     }
 }

@@ -141,6 +141,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         addItem("phoenix_quill", "Plumes de Phoenix");
         addItem("lock", "Cadenas");
         addItem("key", "Clé");
+        addItem("capture_sphere", "Sphère de Capture");
         addItem("alchemy_guide_basic", "Magnus Opus: Les Fondements de l'Alchimie");
         addItem("alchemy_guide_nigredo", "Nigredo: Chroniques du Chaos");
         addItem("alchemy_guide_albedo", "Albedo: Vaisseau de l'Ordre");
@@ -202,6 +203,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         t.add("tooltip.potions-n-rituals.talisman_charged_line", "Le talisman déborde d'énergie spirituelle.");
         t.add("tooltip.potions-n-rituals.bookmarks_count_line", "%s Marque-pages");
         t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s coups restants)");
+        t.add("tooltip.potions-n-rituals.capture_sphere.contains", "Contient: %s");
 
         // message
         t.add("message.potions-n-rituals.locked", "Fermé");
@@ -213,7 +215,7 @@ public class ModFrenchLanguageProvider extends FabricLanguageProvider {
         // screen
         t.add("screen.potions-n-rituals.command_write.title", "Graver une commande");
         t.add("screen.potions-n-rituals.command_write.placeholder", "Commande");
-        t.add("screen.potions-n-rituals.command_write.execute", "Exécuter");
+        t.add("screen.potions-n-rituals.command_write.execute", "Payer le Prix");
     }
 
     private void registerWithAlchemicalStone(String id, String name) {

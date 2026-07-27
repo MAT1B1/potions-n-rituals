@@ -19,6 +19,10 @@ public class ModEntities {
     public static final EntityType<PortalBuilderEntity> PORTAL_BUILDER = reg("portal_builder",
             EntityType.Builder.of(PortalBuilderEntity::new, MobCategory.MISC).sized(0.1f, 0.1f));
 
+    public static final EntityType<CaptureSphereEntity> CAPTURE_SPHERE = reg("capture_sphere",
+            EntityType.Builder.<CaptureSphereEntity>of(CaptureSphereEntity::new, MobCategory.MISC)
+                    .sized(0.25f, 0.25f).clientTrackingRange(4).updateInterval(10));
+
 
     private static <T extends Entity> EntityType<T> reg(String name, EntityType.Builder<T> builder) {
         Identifier id = ModUtils.id(name);

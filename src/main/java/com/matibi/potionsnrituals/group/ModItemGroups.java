@@ -88,6 +88,7 @@ public class ModItemGroups {
                         entries.accept(ModItems.PHOENIX_QUILL);
                         entries.accept(ModItems.LOCK);
                         entries.accept(ModItems.KEY);
+                        entries.accept(ModItems.CAPTURE_SPHERE);
 
                         entries.accept(ModBlocks.PEDESTAL);
 
