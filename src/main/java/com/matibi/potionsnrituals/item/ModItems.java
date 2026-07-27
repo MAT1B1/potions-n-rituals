@@ -6,6 +6,7 @@ import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStoneItem;
 import com.matibi.potionsnrituals.item.custom.book.*;
+import com.matibi.potionsnrituals.item.custom.talisman.CaptureSphereItem;
 import com.matibi.potionsnrituals.item.custom.syringe.SyringeItem;
 import com.matibi.potionsnrituals.item.custom.talisman.*;
 import com.matibi.potionsnrituals.util.BookUtils;
@@ -84,6 +85,7 @@ public class ModItems {
             PHOENIX_QUILL = register("phoenix_quill", new PhoenixQuillItem(props("phoenix_quill"))),
             LOCK = register("lock", new LockItem(props("lock"))),
             KEY = registerFoil("key", Rarity.RARE),
+            CAPTURE_SPHERE = register("capture_sphere", new CaptureSphereItem(props("capture_sphere"))),
 
             // Knowledge Books
             BASIC_GUIDE = register("alchemy_guide_basic", new BasicBookItem()),

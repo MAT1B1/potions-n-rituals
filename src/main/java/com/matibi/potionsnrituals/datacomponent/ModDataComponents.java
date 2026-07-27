@@ -51,6 +51,11 @@ public final class ModDataComponents {
                     .persistent(UUIDUtil.CODEC)
                     .networkSynchronized(UUIDUtil.STREAM_CODEC));
 
+    public static final DataComponentType<CapturedMob> CAPTURED_MOB = register("captured_mob",
+            builder -> builder
+                    .persistent(CapturedMob.CODEC)
+                    .networkSynchronized(CapturedMob.STREAM_CODEC));
+
     private static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> op) {
         return Registry.register(
                 BuiltInRegistries.DATA_COMPONENT_TYPE,

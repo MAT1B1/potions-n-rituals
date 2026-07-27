@@ -13,6 +13,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 
 public class PotionsNRitualsClient implements ClientModInitializer {
 	@Override
@@ -26,6 +27,7 @@ public class PotionsNRitualsClient implements ClientModInitializer {
 		BrewingCauldronBlock.registerTint();
 		EntityRenderers.register(ModEntities.RITUAL_CONTROLLER, NoopRenderer::new);
 		EntityRenderers.register(ModEntities.PORTAL_BUILDER, NoopRenderer::new);
+		EntityRenderers.register(ModEntities.CAPTURE_SPHERE, ThrownItemRenderer::new);
 		BlockEntityRenderers.register(ModBlockEntities.PEDESTAL, PedestalBlockEntityRenderer::new);
 	}
 }

@@ -143,6 +143,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         addItem("phoenix_quill", "Phoenix Quill");
         addItem("lock", "Lock");
         addItem("key", "Key");
+        addItem("capture_sphere", "Capture Sphere");
         addItem("alchemy_guide_basic", "Magnus Opus: The Foundations of Alchemy");
         addItem("alchemy_guide_nigredo", "Nigredo: Chronicles of Chaos");
         addItem("alchemy_guide_albedo", "Albedo: Vessel of Order");
@@ -205,6 +206,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         t.add("tooltip.potions-n-rituals.talisman_charged_line", "The talisman overflows with spiritual energy.");
         t.add("tooltip.potions-n-rituals.bookmarks_count_line", "%s Bookmarks");
         t.add("tooltip.potions-n-rituals.imbued_line", "%s (%s hits remaining)");
+        t.add("tooltip.potions-n-rituals.capture_sphere.contains", "Contains: %s");
 
         // message
         t.add("message.potions-n-rituals.locked", "Locked");
@@ -216,7 +218,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         // screen
         t.add("screen.potions-n-rituals.command_write.title", "Engrave a Command");
         t.add("screen.potions-n-rituals.command_write.placeholder", "Command");
-        t.add("screen.potions-n-rituals.command_write.execute", "Execute");
+        t.add("screen.potions-n-rituals.command_write.execute", "Pay the Price");
     }
 
     // --- TES MÉTHODES DE REVERSE ET REGISTRE SPÉCIFIQUES À L'ANGLAIS ---

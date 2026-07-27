@@ -218,7 +218,8 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.CLOAK,
                 ModItems.PHOENIX_QUILL,
                 ModItems.LOCK,
-                ModItems.KEY
+                ModItems.KEY,
+                ModItems.CAPTURE_SPHERE
         );
 
         items.forEach(item -> gen.generateFlatItem(item, ModelTemplates.FLAT_ITEM));

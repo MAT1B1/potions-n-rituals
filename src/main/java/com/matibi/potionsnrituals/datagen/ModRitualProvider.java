@@ -104,14 +104,20 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .save();
 
         addRitual(ModItems.PHOENIX_QUILL, 1)
-                .pattern("F R F")
-                .pattern("     ")
-                .pattern("R T R")
-                .pattern("     ")
-                .pattern("F R F")
+                .pattern("N   N   N")
+                .pattern(" BBBBBBB ")
+                .pattern(" BF R FB ")
+                .pattern(" B BBB B ")
+                .pattern("NBRBTBRBN")
+                .pattern(" B BBB B ")
+                .pattern(" BF R FB ")
+                .pattern(" BBBBBBB ")
+                .pattern("N   N   N")
                 .define('T', ModItems.TALISMAN_CHARGED)
                 .define('F', Items.FEATHER)
                 .define('R', ModUtils.potionIngredient((ModPotions.RESURRECTION)))
+                .define('B', ModBlocks.BLOOD_TRAIL)
+                .define('N', Items.NETHER_STAR)
                 .catalyst(Ritual.Catalysts.IGNITE)
                 .save();
     }
