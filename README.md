@@ -308,19 +308,19 @@ Five in-game books with custom GUI, recipes, lore, and illustrations - no wiki r
 
 ## Special Items
 
-| Item                    | Description                                                                                     | Obtain methods                       |
-|-------------------------|-------------------------------------------------------------------------------------------------|--------------------------------------|
-| Materia Prima           | Enchanted base alchemical component (substitute for Nether Wart)                                | Craft                                |
-| Sulfur / Mercury / Salt | Primal Principles, smelted from raw materials                                                   | Smelt                                |
-| Claw                    | Brewing ingredient                                                                              | Drop (Cat, Wolf, Ocelot)             |
-| Bat Wing                | Brewing ingredient                                                                              | Drop (Bat)                           |
-| Zombie Brain            | Brewing ingredient + edible (grants Brain Washing)                                              | Drop (Zombie, Zombie Villager, Husk) |
-| Zombie Lung             | Brewing ingredient + edible (grants Asthma)                                                     | Drop (Zombie, Zombie Villager, Husk) |
-| Witch's Finger          | Edible                                                                                          | Drop (Witch)                         |
-| Syringe                 | Extract/inject potion effects from/to entities; if no potions effect is found, give a blood bag | Craft                                |
-| Blood Bag               | Stores blood, places Blood Trail blocks                                                         | Syringe use                          |
-| Charged Copper          | Brewing ingredient                                                                              | Unknown                              |
-| Oxidation Fragment      | Brewing ingredient                                                                              | Unknown                              |
+| Item                    | Description                                                                                     | Obtain methods                           |
+|-------------------------|-------------------------------------------------------------------------------------------------|------------------------------------------|
+| Materia Prima           | Enchanted base alchemical component (substitute for Nether Wart)                                | Craft                                    |
+| Sulfur / Mercury / Salt | Primal Principles, smelted from raw materials                                                   | Smelt                                    |
+| Claw                    | Brewing ingredient                                                                              | Drop (Cat, Wolf, Ocelot)                 |
+| Bat Wing                | Brewing ingredient                                                                              | Drop (Bat)                               |
+| Zombie Brain            | Brewing ingredient + edible (grants Brain Washing)                                              | Drop (Zombie, Zombie Villager, Husk)     |
+| Zombie Lung             | Brewing ingredient + edible (grants Asthma)                                                     | Drop (Zombie, Zombie Villager, Husk)     |
+| Witch's Finger          | Edible                                                                                          | Drop (Witch)                             |
+| Syringe                 | Extract/inject potion effects from/to entities; if no potions effect is found, give a blood bag | Craft                                    |
+| Blood Bag               | Stores blood, places Blood Trail blocks                                                         | Syringe use                              |
+| Charged Copper          | Brewing ingredient                                                                              | Unknown                                  |
+| Oxidation Fragment      | Brewing ingredient + oxidize copper                                                             | Using an axe on an oxidized copper block |
 
 
 ## Artifacts

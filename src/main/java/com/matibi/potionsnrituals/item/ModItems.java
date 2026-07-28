@@ -6,6 +6,7 @@ import com.matibi.potionsnrituals.book.BookStructure;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStoneItem;
 import com.matibi.potionsnrituals.item.custom.book.*;
+import com.matibi.potionsnrituals.item.custom.OxidationFragmentItem;
 import com.matibi.potionsnrituals.item.custom.talisman.CaptureSphereItem;
 import com.matibi.potionsnrituals.item.custom.syringe.SyringeItem;
 import com.matibi.potionsnrituals.item.custom.talisman.*;
@@ -39,23 +40,24 @@ public class ModItems {
                     new BlockItem(ModBlocks.BLOOD_TRAIL, props("blood_bag"))
             ),
             CHARGED_COPPER = registerSimple("charged_copper"),
-            OXYDATION = registerSimple("oxydation"),
+            OXYDATION = register("oxydation", new OxidationFragmentItem(props("oxydation"))),
             ZOMBIE_BRAIN = registerFoodWithEffect(
-                "zombie_brain", 1, 0.1f, true,
-                new MobEffectInstance(ModEffects.BRAINWASHING, 200, 0), 0.5f
+                "zombie_brain", 1, 0.1f,
+                    new MobEffectInstance(ModEffects.BRAINWASHING, 200, 0), 0.5f
             ),
             ZOMBIE_LUNG = registerFoodWithEffect(
-                    "zombie_lung", 1, 0.1f, true,
+                    "zombie_lung", 2, 0.2f,
                     new MobEffectInstance(ModEffects.ASTHMA, 200, 0), 0.5f
             ),
-            WITCH_S_FINGER = registerFood("witch_finger", 1, 0.1f, false),
+            WITCH_S_FINGER = register("witch_finger", new Item(props("witch_finger").food(new FoodProperties.Builder()
+                    .nutrition(1).saturationModifier(0.1f).build()))),
             POISONOUS_CARROT = registerFoodWithEffect(
-                "poisonous_carrot", 1, 0.2f, true,
-                new MobEffectInstance(MobEffects.POISON, 120, 1), 0.6f
+                "poisonous_carrot", 1, 0.2f,
+                    new MobEffectInstance(MobEffects.POISON, 120, 1), 0.6f
             ),
             POISONOUS_BEETROOT = registerFoodWithEffect(
-                "poisonous_beetroot", 1, 0.2f, true,
-                new MobEffectInstance(MobEffects.POISON, 120, 1), 0.6f
+                "poisonous_beetroot", 1, 0.2f,
+                    new MobEffectInstance(MobEffects.POISON, 120, 1), 0.6f
             ),
             SYRINGE = register("syringe", new SyringeItem(props("syringe"))),
 
@@ -108,18 +110,11 @@ public class ModItems {
         });
     }
 
-    private static Item registerFood(String id, int nutrition, float saturation, boolean alwaysEdible) {
-        FoodProperties.Builder builder = new FoodProperties.Builder()
-                .nutrition(nutrition).saturationModifier(saturation);
-        if (alwaysEdible) builder.alwaysEdible();
-        return register(id, new Item(props(id).food(builder.build())));
-    }
-
     private static Item registerFoodWithEffect(String id, int nutrition, float saturation,
-                                               boolean alwaysEdible, MobEffectInstance effect, float probability) {
+                                               MobEffectInstance effect, float probability) {
         FoodProperties.Builder builder = new FoodProperties.Builder()
                 .nutrition(nutrition).saturationModifier(saturation);
-        if (alwaysEdible) builder.alwaysEdible();
+        builder.alwaysEdible();
         return register(id, new Item(props(id)
                 .food(builder.build())
                 .component(DataComponents.CONSUMABLE, Consumable.builder()
