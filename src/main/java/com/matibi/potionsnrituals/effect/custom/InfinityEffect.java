@@ -51,7 +51,7 @@ public class InfinityEffect extends MobEffect {
             if (ModConfig.get().infinity_blacklist.contains(effect.getEffect())) continue;
             if (effect.getEffect().equals(ModEffects.INFINITY)) continue;
 
-            if (!(target instanceof Player) || effect.getDuration() <= 0 ) continue;
+            if (effect.getDuration() <= 0 ) continue;
             cost++;
 
             target.addEffect(new MobEffectInstance(

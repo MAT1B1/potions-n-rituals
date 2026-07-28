@@ -75,7 +75,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register("stun", "Stun");
         register("no_interaction", "Hands Bound");
         register("aftermath", "Aftermath");
-        register("berserk", "Beserk");
+        register("berserk", "Berserk");
         register("ghost_walk", "Ghost Walk");
         register("dwarf", "Dwarfism");
         register("photosynthesis", "Photosynthesis");
@@ -98,7 +98,7 @@ public class ModUsLanguageProvider extends FabricLanguageProvider {
         register("empathy", "Empathy");
         register("magnetism", "Magnetism");
         register("reality_check", "Reality Check");
-        register("active_tp", "Active teleportation");
+        register("active_tp", "Active Teleportation");
 
         registerVanillaReverse("unstable", "Unstable");
         t.add("effect.potions-n-rituals." + "unstable", "Unstable");

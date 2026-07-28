@@ -65,7 +65,7 @@ public class ResurrectionEffect extends MobEffect implements TerrainEffect {
 
                 MinecraftServer server = world.getServer();
 
-                server.execute(() -> server.execute(() -> {
+                server.execute(() -> {
                     if (player instanceof ServerPlayer serverPlayer && !serverPlayer.isDeadOrDying()) {
                         serverPlayer.teleportTo(world, anchor.x, anchor.y + 1, anchor.z,
                                 Set.of(), player.getYRot(), player.getXRot(), false);
@@ -80,9 +80,8 @@ public class ResurrectionEffect extends MobEffect implements TerrainEffect {
                         );
                         totemLogic(world, player);
                     }
-                }));
+                });
             }
-
             return false;
         });
     }

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemInHandLayer.class)
-public class ItemInHandLayerMixin {
+public class InvisibilityRingMixin {
 
     @Inject(method = "submit(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/ArmedEntityRenderState;FF)V", at = @At("HEAD"), cancellable = true)
     private void pnr$hideItemsForInvisibleRing(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, ArmedEntityRenderState state, float yRot, float xRot, CallbackInfo ci) {
@@ -21,6 +21,5 @@ public class ItemInHandLayerMixin {
 
         if (hasRingInRight || hasRingInLeft)
             ci.cancel();
-
     }
 }
