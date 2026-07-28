@@ -308,19 +308,25 @@ Five in-game books with custom GUI, recipes, lore, and illustrations - no wiki r
 
 ## Special Items
 
-| Item                     | Description                                                                                                            |
+| Item                    | Description                                                                                     | Obtain methods                       |
+|-------------------------|-------------------------------------------------------------------------------------------------|--------------------------------------|
+| Materia Prima           | Enchanted base alchemical component (substitute for Nether Wart)                                | Craft                                |
+| Sulfur / Mercury / Salt | Primal Principles, smelted from raw materials                                                   | Smelt                                |
+| Claw                    | Brewing ingredient                                                                              | Drop (Cat, Wolf, Ocelot)             |
+| Bat Wing                | Brewing ingredient                                                                              | Drop (Bat)                           |
+| Zombie Brain            | Brewing ingredient + edible (grants Brain Washing)                                              | Drop (Zombie, Zombie Villager, Husk) |
+| Zombie Lung             | Brewing ingredient + edible (grants Asthma)                                                     | Drop (Zombie, Zombie Villager, Husk) |
+| Witch's Finger          | Edible                                                                                          | Drop (Witch)                         |
+| Syringe                 | Extract/inject potion effects from/to entities; if no potions effect is found, give a blood bag | Craft                                |
+| Blood Bag               | Stores blood, places Blood Trail blocks                                                         | Syringe use                          |
+| Charged Copper          | Brewing ingredient                                                                              | Unknown                              |
+| Oxidation Fragment      | Brewing ingredient                                                                              | Unknown                              |
+
+
+## Artifacts
+
+| Artifacts                | Description                                                                                                            |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------|
-| Materia Prima            | Enchanted base alchemical component (substitute for Nether Wart)                                                       |
-| Sulfur / Mercury / Salt  | Primal Principles, smelted from raw materials                                                                          |
-| Claw                     | Brewing ingredient                                                                                                     |
-| Bat Wing                 | Brewing ingredient                                                                                                     |
-| Zombie Brain             | Brewing ingredient + edible (grants Brain Washing)                                                                     |
-| Zombie Lung              | Brewing ingredient + edible (grants Asthma)                                                                            |
-| Witch's Finger           | Edible                                                                                                                 |
-| Syringe                  | Extract/inject potion effects from/to entities; if no potions effect is found, give a blood bag                        |
-| Blood Bag                | Stores blood, places Blood Trail blocks                                                                                |
-| Charged Copper           | Brewing ingredient                                                                                                     |
-| Oxidation Fragment       | Brewing ingredient                                                                                                     |
 | Empty Talisman           | Base for charged talisman                                                                                              |
 | Charged Talisman         | Overflowing with soul energy                                                                                           |
 | Alchemical Bag           | Give you access to a pocket dimension where you can store anything                                                     |

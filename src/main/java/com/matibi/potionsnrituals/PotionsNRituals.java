@@ -22,6 +22,7 @@ import com.matibi.potionsnrituals.potion.ModPotions;
 import com.matibi.potionsnrituals.recipe.ModRecipeSerializer;
 import com.matibi.potionsnrituals.ritual.RitualManager;
 import com.matibi.potionsnrituals.ritual.RitualTriggerManager;
+import com.matibi.potionsnrituals.util.ModMobDrops;
 import com.matibi.potionsnrituals.util.ModUtils;
 import com.matibi.potionsnrituals.util.TickManager;
 import com.matibi.potionsnrituals.world.data.ModAttachments;
@@ -73,5 +74,6 @@ public class PotionsNRituals implements ModInitializer {
 		DisorientVillagerHandler.register();
 
 		ActiveEffectHandler.register();
+		ModMobDrops.register();
 	}
 }
