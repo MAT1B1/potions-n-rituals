@@ -73,6 +73,34 @@ public class CitrinitasBookItem extends CustomBookItem {
                                                 "book.potions-n-rituals.page.citrinitas.seal_nether.desc"
                                         )
                                 )
+                                .subChapter("book.potions-n-rituals.page.citrinitas.phoenix_quill",  sub ->
+                                        BookUtils.createRitualChapter(sub,
+                                                "book.potions-n-rituals.page.citrinitas.phoenix_quill",
+                                                "phoenix_quill_ritual",
+                                                "book.potions-n-rituals.page.citrinitas.phoenix_quill.desc"
+                                        )
+                                )
+                                .subChapter("book.potions-n-rituals.page.citrinitas.perm_health",  sub ->
+                                        BookUtils.createRitualChapter(sub,
+                                                "book.potions-n-rituals.page.citrinitas.perm_health",
+                                                "potion_perm_health_ritual",
+                                                "book.potions-n-rituals.page.citrinitas.perm_health.desc"
+                                        )
+                                )
+                                .subChapter("book.potions-n-rituals.page.citrinitas.perm_strength",  sub ->
+                                        BookUtils.createRitualChapter(sub,
+                                                "book.potions-n-rituals.page.citrinitas.perm_strength",
+                                                "potion_perm_strength_ritual",
+                                                "book.potions-n-rituals.page.citrinitas.perm_strength.desc"
+                                        )
+                                )
+                                .subChapter("book.potions-n-rituals.page.citrinitas.perm_speed",  sub ->
+                                        BookUtils.createRitualChapter(sub,
+                                                "book.potions-n-rituals.page.citrinitas.perm_speed",
+                                                "potion_perm_speed_ritual",
+                                                "book.potions-n-rituals.page.citrinitas.perm_speed.desc"
+                                        )
+                                )
                         )
         );
     }

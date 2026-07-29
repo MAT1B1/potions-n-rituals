@@ -356,6 +356,14 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.citrinitas.nether_gate.desc", "Ouvre un portail vers le Nether et vous y téléporte.");
         t.add("book.potions-n-rituals.page.citrinitas.seal_nether", "Sceau du Nether");
         t.add("book.potions-n-rituals.page.citrinitas.seal_nether.desc", "Scelle le Nether pour empêcher tout accès.");
+        t.add("book.potions-n-rituals.page.citrinitas.phoenix_quill", "Plume de Phénix");
+        t.add("book.potions-n-rituals.page.citrinitas.phoenix_quill.desc", "Invoque une plume enflammée capable d'exécuter des commandes au prix d'un terrible coût.");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_health", "Élixir de Vie Permanent");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_health.desc", "Un rituel qui confère une augmentation permanente des cœurs maximaux.");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_strength", "Élixir de Force Permanent");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_strength.desc", "Un rituel qui augmente de façon permanente la puissance de vos coups.");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_speed", "Élixir de Vitesse Permanent");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_speed.desc", "Un rituel qui accroît définitivement votre vitesse de déplacement.");
 
         // --- AJOUTS ALBEDO (AlbedoBookItem) ---
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", "Chemin vers le Citrinitas");
@@ -741,6 +749,14 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.citrinitas.nether_gate.desc", "Opens a portal to the Nether and teleports you there.");
         t.add("book.potions-n-rituals.page.citrinitas.seal_nether", "Seal the Nether");
         t.add("book.potions-n-rituals.page.citrinitas.seal_nether.desc", "Seals the Nether to prevent any access.");
+        t.add("book.potions-n-rituals.page.citrinitas.phoenix_quill", "Phoenix Quill");
+        t.add("book.potions-n-rituals.page.citrinitas.phoenix_quill.desc", "Conjures a flaming quill that can execute commands at a terrible cost.");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_health", "Permanent Health Elixir");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_health.desc", "A ritual that grants a permanent increase to your maximum hearts.");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_strength", "Permanent Strength Elixir");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_strength.desc", "A ritual that permanently increases the power of your melee strikes.");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_speed", "Permanent Speed Elixir");
+        t.add("book.potions-n-rituals.page.citrinitas.perm_speed.desc", "A ritual that permanently increases your movement speed.");
 
         // --- AJOUTS ALBEDO (AlbedoBookItem) ---
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", "Path to Citrinitas");
