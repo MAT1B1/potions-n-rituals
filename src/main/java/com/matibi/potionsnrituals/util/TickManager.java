@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class TickManager {
 
@@ -28,8 +27,13 @@ public class TickManager {
         CONDITIONAL_TASKS.add(new ConditionalTask(condition, task));
     }
 
-    public static void registerUntil(Predicate<MinecraftServer> condition, Consumer<MinecraftServer> task) {
-        CONDITIONAL_TASKS.add(new ConditionalTask(() -> false, task));
+    public static void runLater(int delayTicks, Consumer<MinecraftServer> task) {
+        final int[] ticksRemaining = { delayTicks };
+
+        registerUntil(() -> {
+            ticksRemaining[0]--;
+            return ticksRemaining[0] <= 0;
+        }, task);
     }
 
     public static void initialize() {

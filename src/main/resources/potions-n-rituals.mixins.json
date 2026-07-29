@@ -34,6 +34,7 @@
     "effect.XpLife.XpLifeMixin",
     "lock.LockExplosionMixin",
     "lock.LockMiningMixin",
+    "LightningRodMixin",
     "lock.LockMixin",
     "world.LivingEntityMixin"
   ],

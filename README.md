@@ -27,14 +27,16 @@ This Mod is a rework of **The Alchemist's Touch**
 ### Main Features
 - **55+ new potions** with new unique effects.
 - **Alchemical Stones**: apply some effects to the **terrain**.
-- **New Cauldron uses**: mix up to 3 potions into one multi-effect brew.
-- **Imbued Weapons**: apply a potion effect for a **number of hits**.
-- **Potion-infused food**: consume enchanted meals to gain effects.
-- **Stackable potions** up to 16 units.
+- New potions uses:
+  - Mix up to 3 potions into a cauldron to get a multi-effect brew.
+  - **Imbued Weapons**: apply a potion effect for a **number of hits**.
+  - **Potion-infused food**: consume enchanted meals to gain effects.
+  - **Stackable potions** up to 16 units.
 - **Lava buckets** can fuel brewing stands (less efficient than blaze powder).
 - New creation methods: **Rituals** (it's data-driven if you want to add some new ones).
 - **Artifacts** that can do all sort of powerful things. Like the **Phoenix Quill** (A pretty op item): write and execute commands at the cost of health and xp 
-(I don't really know how to balance it, but I eally like it)
+(I don't really know how to balance it, but I really like it)
+- 5 **In-game Book** to help you progress through the mod
 - **Fully configurable** via YACL + ModMenu.
 
 <div align="center">
@@ -308,19 +310,19 @@ Five in-game books with custom GUI, recipes, lore, and illustrations - no wiki r
 
 ## Special Items
 
-| Item                    | Description                                                                                     | Obtain methods                           |
-|-------------------------|-------------------------------------------------------------------------------------------------|------------------------------------------|
-| Materia Prima           | Enchanted base alchemical component (substitute for Nether Wart)                                | Craft                                    |
-| Sulfur / Mercury / Salt | Primal Principles, smelted from raw materials                                                   | Smelt                                    |
-| Claw                    | Brewing ingredient                                                                              | Drop (Cat, Wolf, Ocelot)                 |
-| Bat Wing                | Brewing ingredient                                                                              | Drop (Bat)                               |
-| Zombie Brain            | Brewing ingredient + edible (grants Brain Washing)                                              | Drop (Zombie, Zombie Villager, Husk)     |
-| Zombie Lung             | Brewing ingredient + edible (grants Asthma)                                                     | Drop (Zombie, Zombie Villager, Husk)     |
-| Witch's Finger          | Edible                                                                                          | Drop (Witch)                             |
-| Syringe                 | Extract/inject potion effects from/to entities; if no potions effect is found, give a blood bag | Craft                                    |
-| Blood Bag               | Stores blood, places Blood Trail blocks                                                         | Syringe use                              |
-| Charged Copper          | Brewing ingredient                                                                              | Unknown                                  |
-| Oxidation Fragment      | Brewing ingredient + oxidize copper                                                             | Using an axe on an oxidized copper block |
+| Item                    | Description                                                                                     | Obtain methods                               |
+|-------------------------|-------------------------------------------------------------------------------------------------|----------------------------------------------|
+| Materia Prima           | Enchanted base alchemical component (substitute for Nether Wart)                                | Craft                                        |
+| Sulfur / Mercury / Salt | Primal Principles, smelted from raw materials                                                   | Smelt                                        |
+| Claw                    | Ingredient                                                                                      | Drop (Cat, Wolf, Ocelot)                     |
+| Bat Wing                | Ingredient                                                                                      | Drop (Bat)                                   |
+| Zombie Brain            | Ingredient + edible (grants Brain Washing)                                                      | Drop (Zombie, Zombie Villager, Husk)         |
+| Zombie Lung             | Ingredient + edible (grants Asthma)                                                             | Drop (Zombie, Zombie Villager, Husk)         |
+| Witch's Finger          | Ingredient                                                                                      | Drop (Witch)                                 |
+| Syringe                 | Extract/inject potion effects from/to entities; if no potions effect is found, give a blood bag | Craft                                        |
+| Blood Bag               | Stores blood, places Blood Trail blocks                                                         | Syringe use                                  |
+| Charged Copper          | Ingredient                                                                                      | Spawn when lightning strikes a lightning rod |
+| Oxidation Fragment      | Ingredient + oxidize copper                                                                     | Using an axe on an oxidized copper block     |
 
 
 ## Artifacts
