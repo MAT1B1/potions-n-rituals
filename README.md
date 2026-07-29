@@ -37,6 +37,9 @@ This Mod is a rework of **The Alchemist's Touch**
 - **Artifacts** that can do all sort of powerful things. Like the **Phoenix Quill** (A pretty op item): write and execute commands at the cost of health and xp 
 (I don't really know how to balance it, but I really like it)
 - 5 **In-game Book** to help you progress through the mod
+- **Gameplay changes**:
+  - You can't go to the Nether without a Ritual (You can unseal it it-game to get access to nether portal again)
+  - When you wear a piece of metal armor during a thunderstorm, you are more likely to be struck by lightning
 - **Fully configurable** via YACL + ModMenu.
 
 <div align="center">

@@ -221,6 +221,22 @@ public class ModConfigScreen implements ModMenuApi {
                                         .build())
                                 .build())
 
+                        // ─── Lightning Attractor ──────────────────────────────────────────────
+                        .group(OptionGroup.createBuilder()
+                                .name(Component.translatable("group.potions-n-rituals.lightning_attractor"))
+                                .collapsed(true)
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Component.translatable("option.potions-n-rituals.misc.lightning_attractor_min_threshold"))
+                                        .binding(60, () -> ModConfig.get().lightning_attractor_min_threshold, v -> ModConfig.get().lightning_attractor_min_threshold = v)
+                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Component.translatable("option.potions-n-rituals.misc.lightning_attractor_max_threshold"))
+                                        .binding(400, () -> ModConfig.get().lightning_attractor_max_threshold, v -> ModConfig.get().lightning_attractor_max_threshold = v)
+                                        .controller(IntegerFieldControllerBuilder::create)
+                                        .build())
+                                .build())
+
                         .build())
 
                 // ═══════════════════════════════════════════════════════════

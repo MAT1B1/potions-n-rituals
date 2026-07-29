@@ -1,67 +1,57 @@
 package com.matibi.potionsnrituals.ritual;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.RegistryOps;
-import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.jspecify.annotations.NonNull;
 
-import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RitualManager extends SimpleJsonResourceReloadListener<Ritual> {
+public class RitualManager extends SimpleJsonResourceReloadListener<JsonElement> {
 
     private static final Map<Identifier, Ritual> RITUALS = new HashMap<>();
+    private static final Map<Identifier, JsonElement> RAW_RITUALS = new HashMap<>();
     private static final FileToIdConverter CONVERTER = FileToIdConverter.json("rituals");
-    private static final HolderLookup.Provider LOOKUP = VanillaRegistries.createLookup();
 
     public RitualManager() {
-        super(Ritual.CODEC, CONVERTER);
+        super(ExtraCodecs.JSON, CONVERTER);
     }
 
     @Override
-    protected @NonNull Map<Identifier, Ritual> prepare(@NonNull ResourceManager manager, @NonNull ProfilerFiller profiler) {
-        Map<Identifier, Ritual> map = new HashMap<>();
-        RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, LOOKUP);
-
-        for (Map.Entry<Identifier, Resource> entry : CONVERTER.listMatchingResources(manager).entrySet()) {
-            Identifier fileId = entry.getKey();
-            Identifier id = CONVERTER.fileToId(fileId);
-            try (Reader reader = entry.getValue().openAsReader()) {
-                JsonElement json = JsonParser.parseReader(reader);
-                DataResult<Ritual> result = Ritual.CODEC.parse(ops, json);
-                result.error().ifPresentOrElse(
-                        err -> PotionsNRituals.LOGGER.error("Rituel invalide {} : {}", id, err.message()),
-                        () -> map.put(id, result.result().orElseThrow())
-                );
-            } catch (Exception e) {
-                PotionsNRituals.LOGGER.error("Erreur lecture rituel {}", id, e);
-            }
-        }
-        return map;
+    protected void apply(@NonNull Map<Identifier, JsonElement> parsed, @NonNull ResourceManager manager, @NonNull ProfilerFiller profiler) {
+        RAW_RITUALS.clear();
+        RAW_RITUALS.putAll(parsed);
+        PotionsNRituals.LOGGER.info("Fichiers JSON des rituels mis en cache ({}). En attente du registre serveur...", RAW_RITUALS.size());
     }
 
-    @Override
-    protected void apply(@NonNull Map<Identifier, Ritual> parsedRituals, @NonNull ResourceManager manager, @NonNull ProfilerFiller profiler) {
+    public static void decodeRituals(HolderLookup.Provider lookup) {
         RITUALS.clear();
-        RITUALS.putAll(parsedRituals);
+
+        RegistryOps<JsonElement> ops = RegistryOps.create(JsonOps.INSTANCE, lookup);
+
+        for (Map.Entry<Identifier, JsonElement> entry : RAW_RITUALS.entrySet()) {
+            DataResult<Ritual> result = Ritual.CODEC.parse(ops, entry.getValue());
+            result.error().ifPresentOrElse(
+                    err -> PotionsNRituals.LOGGER.error("Rituel invalide {} : {}", entry.getKey(), err.message()),
+                    () -> RITUALS.put(entry.getKey(), result.result().orElseThrow())
+            );
+        }
 
         if (RITUALS.isEmpty())
-            PotionsNRituals.LOGGER.error("Aucun rituels chargé");
+            PotionsNRituals.LOGGER.error("Aucun rituel n'a pu être décodé !");
         else
-            PotionsNRituals.LOGGER.info("Chargement de {} rituels terminé !", RITUALS.size());
+            PotionsNRituals.LOGGER.info("Décodage de {} rituels terminé avec succès !", RITUALS.size());
     }
 
     public static Map<Identifier, Ritual> getAllRituals() {

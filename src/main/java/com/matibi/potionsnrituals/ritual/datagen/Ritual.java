@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jspecify.annotations.NonNull;
 
@@ -34,14 +35,18 @@ public record Ritual(
 
     public record Result(
             Optional<String> item,
+            Optional<ItemStack> itemStack,
             Optional<String> block,
+            Optional<List<ItemStack>> containerItems,
             Optional<String> entity,
             Optional<String> custom,
             Optional<Integer> count
     ) {
         public static final Codec<Result> CODEC = RecordCodecBuilder.create(inst -> inst.group(
                 Codec.STRING.optionalFieldOf("item").forGetter(Result::item),
+                ItemStack.CODEC.optionalFieldOf("item_stack").forGetter(Result::itemStack),
                 Codec.STRING.optionalFieldOf("block").forGetter(Result::block),
+                ItemStack.CODEC.listOf().optionalFieldOf("container_items").forGetter(Result::containerItems),
                 Codec.STRING.optionalFieldOf("entity").forGetter(Result::entity),
                 Codec.STRING.optionalFieldOf("custom").forGetter(Result::custom),
                 Codec.INT.optionalFieldOf("count").forGetter(Result::count)
@@ -52,7 +57,7 @@ public record Ritual(
         IGNITE("ignite"),
         KILL("kill"),
         SUICIDE("suicide"),
-        THUNDERSTRIKE("thunderstrike"),
+        THUNDER_STRIKE("thunder_strike"),
         MOONLIGHT("moonlight");
 
         public static final Codec<Catalysts> CODEC = StringRepresentable.fromEnum(Catalysts::values);
@@ -75,7 +80,6 @@ public record Ritual(
 
     public enum ConditionTypes implements StringRepresentable {
         WEATHER("weather"),
-        MOONPHASE("moonphase"),
         HEALTH("health"),
         DIMENSION("dimension"),
         BRIGHTNESS("brightness"),

@@ -88,6 +88,10 @@ public class ModConfig {
     @SerialEntry public int pocket_dimension_length = 3;
     @SerialEntry public int pocket_dimension_height = 3;
 
+    // ── Lightning Attractor ─────────────────────────────────────────────────────────────
+    @SerialEntry public int lightning_attractor_min_threshold = 20 * 3;
+    @SerialEntry public int lightning_attractor_max_threshold = 20 * 20;
+
     // ── Mob Effect ──────────────────────────────────────────────────────────────────────
 
     // ── Ghost Walk ────────────────────────────────────────────────────────────

@@ -26,6 +26,10 @@ public class ModConfigLanguageHelper {
         t.add("option.potions-n-rituals.misc.pocket_dimension_width", "Largeur de la dimension de poche");
         t.add("option.potions-n-rituals.misc.pocket_dimension_length", "Longueur de la dimension de poche");
         t.add("option.potions-n-rituals.misc.pocket_dimension_height", "Hauteur de la dimension de poche");
+        t.add("option.potions-n-rituals.misc.lightning_attractor_min_threshold", "Seuil min d'attraction de foudre (ticks)");
+        t.add("option.potions-n-rituals.misc.lightning_attractor_max_threshold", "Seuil max d'attraction de foudre (ticks)");
+
+        t.add("group.potions-n-rituals.lightning_attractor", "Attracteur de foudre");
 
         // Écran ModConfig — Options (ONGLET 1)
         t.add("option.potions-n-rituals.syringe.damage", "Dégâts");
@@ -206,6 +210,10 @@ public class ModConfigLanguageHelper {
         t.add("option.potions-n-rituals.misc.pocket_dimension_width", "Pocket Dimension Width");
         t.add("option.potions-n-rituals.misc.pocket_dimension_length", "Pocket Dimension Length");
         t.add("option.potions-n-rituals.misc.pocket_dimension_height", "Pocket Dimension Height");
+        t.add("option.potions-n-rituals.misc.lightning_attractor_min_threshold", "Min Lightning Attractor Threshold (ticks)");
+        t.add("option.potions-n-rituals.misc.lightning_attractor_max_threshold", "Max Lightning Attractor Threshold (ticks)");
+
+        t.add("group.potions-n-rituals.lightning_attractor", "Lightning Attractor");
 
         // ModConfig Screen — Options (TAB 1)
         t.add("option.potions-n-rituals.syringe.damage", "Damage");

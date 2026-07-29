@@ -25,10 +25,12 @@ import com.matibi.potionsnrituals.ritual.RitualTriggerManager;
 import com.matibi.potionsnrituals.util.ModMobDrops;
 import com.matibi.potionsnrituals.util.ModUtils;
 import com.matibi.potionsnrituals.util.TickManager;
+import com.matibi.potionsnrituals.world.LightningAttractor;
 import com.matibi.potionsnrituals.world.data.ModAttachments;
 import com.matibi.potionsnrituals.world.dimension.ModDimensions;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.minecraft.server.packs.PackType;
 import org.slf4j.Logger;
@@ -59,12 +61,20 @@ public class PotionsNRituals implements ModInitializer {
 		ModAttachments.register();
 		ModCommands.register();
 		TickManager.initialize();
+		LightningAttractor.register();
 
 		ResourceLoader.get(PackType.SERVER_DATA)
 				.registerReloadListener(
 						ModUtils.id("rituals_manager"),
 						new RitualManager()
 				);
+
+		ServerLifecycleEvents.SERVER_STARTING.register(server ->
+				RitualManager.decodeRituals(server.registryAccess()));
+		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, _, success) -> {
+			if (success)
+				RitualManager.decodeRituals(server.registryAccess());
+		});
 
 		TalismanItem.registerEvents();
 		LockItem.blockChest();

@@ -13,13 +13,11 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.MoonPhase;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,7 +48,7 @@ public class RitualTriggerManager {
 
         ServerEntityEvents.ENTITY_LOAD.register((entity, level) -> {
             if (entity instanceof LightningBolt lightning && level instanceof ServerLevel)
-                RitualTriggerManager.tryTriggerRitual(level, lightning.blockPosition(), Ritual.Catalysts.THUNDERSTRIKE);
+                RitualTriggerManager.tryTriggerRitual(level, lightning.blockPosition(), Ritual.Catalysts.THUNDER_STRIKE);
         });
     }
 
@@ -173,12 +171,6 @@ public class RitualTriggerManager {
                         default -> !level.isRaining() && !level.isThundering();
                     };
                     if (!match) return false;
-                }
-                case MOONPHASE -> {
-                    int target = params.get("phase").getAsInt();
-                    MoonPhase currentPhase = serverLevel.environmentAttributes()
-                            .getValue(EnvironmentAttributes.MOON_PHASE, pos);
-                    if (currentPhase.index() != target) return false;
                 }
                 case HEALTH -> {
                     if (player == null) return false;

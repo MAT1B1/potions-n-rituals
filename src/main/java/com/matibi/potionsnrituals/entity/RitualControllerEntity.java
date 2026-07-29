@@ -19,6 +19,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -123,11 +124,31 @@ public class RitualControllerEntity extends Entity {
                     Containers.dropItemStack(serverLevel, this.getX(), this.getY(), this.getZ(), new ItemStack(item, count));
                 });
 
+                result.itemStack().ifPresent(stack -> {
+                    ItemStack dropStack = stack.copy();
+                    if (result.count().isPresent())
+                        dropStack.setCount(result.count().get());
+                    Containers.dropItemStack(serverLevel, this.getX(), this.getY(), this.getZ(), dropStack);
+                });
+
                 result.block().ifPresent(id -> {
                     Optional<Holder.Reference<Block>> optBlock = BuiltInRegistries.BLOCK.get(Identifier.parse(id));
                     if (optBlock.isEmpty()) return;
                     Block block = optBlock.get().value();
                     serverLevel.setBlockAndUpdate(this.centerPos, block.defaultBlockState());
+
+                    result.containerItems().ifPresent(items -> {
+                        BlockEntity be = serverLevel.getBlockEntity(this.centerPos);
+                        if (be instanceof Container container) {
+                            int slot = 0;
+                            for (ItemStack itemToInsert : items)
+                                if (slot < container.getContainerSize()) {
+                                    container.setItem(slot, itemToInsert.copy());
+                                    slot++;
+                                }
+                        }
+                    });
+
                     if (count > 1) {
                         ItemStack dropStack = new ItemStack(block, count - 1);
                         Block.popResource(serverLevel, this.centerPos.above(), dropStack);

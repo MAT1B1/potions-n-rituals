@@ -7,14 +7,20 @@ import com.matibi.potionsnrituals.ritual.datagen.Ritual;
 import com.matibi.potionsnrituals.ritual.datagen.RitualRecipeProvider;
 import com.matibi.potionsnrituals.util.ModUtils;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
+
+import java.util.concurrent.CompletableFuture;
 
 public class ModRitualProvider extends RitualRecipeProvider {
 
-    public ModRitualProvider(FabricPackOutput output) {
-        super(output);
+    public ModRitualProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(output, registriesFuture);
     }
 
     @Override
@@ -68,7 +74,6 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .define('S', ModBlocks.BLOOD_TRAIL)
                 .catalyst(Ritual.Catalysts.KILL)
                 .time(13000, 23000)
-                .moonphase(RitualBuilder.MOONPHASE.NO_MOON)
                 .save();
 
         addRitual("summon_dawn")
@@ -119,10 +124,62 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .define('B', ModBlocks.BLOOD_TRAIL)
                 .define('N', Items.NETHER_STAR)
                 .health(0, 3)
-                .xp(50, 500)
+                .xp(50, Float.MAX_VALUE)
                 .time(18000, 20000)
                 .weather(RitualBuilder.WEATHER.THUNDER)
                 .catalyst(Ritual.Catalysts.IGNITE)
+                .save();
+
+        addRitual(Items.POTION, 1, "perm_health")
+                .component(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.PERM_HEALTH))
+                .pattern("F R F")
+                .pattern(" BBB ")
+                .pattern("RBNBR")
+                .pattern(" BBB ")
+                .pattern("F R F")
+                .define('N', Items.NETHER_STAR)
+                .define('F', ModItems.WITCH_S_FINGER)
+                .define('R', ModUtils.potionIngredient((Potions.STRONG_HEALING)))
+                .define('B', ModBlocks.BLOOD_TRAIL)
+                .health(9, Float.MAX_VALUE)
+                .xp(50, Float.MAX_VALUE)
+                .time(0, 12000)
+                .weather(RitualBuilder.WEATHER.CLEAR)
+                .catalyst(Ritual.Catalysts.KILL)
+                .save();
+
+        addRitual(Items.POTION, 1, "perm_strength")
+                .component(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.PERM_STRENGTH))
+                .pattern("F R F")
+                .pattern(" BBB ")
+                .pattern("RBNBR")
+                .pattern(" BBB ")
+                .pattern("F R F")
+                .define('N', Items.NETHER_STAR)
+                .define('F', ModItems.WITCH_S_FINGER)
+                .define('R', ModUtils.potionIngredient((Potions.STRONG_STRENGTH)))
+                .define('B', ModBlocks.BLOOD_TRAIL)
+                .xp(50, Float.MAX_VALUE)
+                .time(0, 12000)
+                .weather(RitualBuilder.WEATHER.THUNDER)
+                .catalyst(Ritual.Catalysts.IGNITE)
+                .save();
+
+        addRitual(Items.POTION, 1, "perm_speed")
+                .component(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.PERM_SPEED))
+                .pattern("F R F")
+                .pattern(" BBB ")
+                .pattern("RBNBR")
+                .pattern(" BBB ")
+                .pattern("F R F")
+                .define('N', Items.NETHER_STAR)
+                .define('F', ModItems.WITCH_S_FINGER)
+                .define('R', ModUtils.potionIngredient((Potions.STRONG_SWIFTNESS)))
+                .define('B', ModBlocks.BLOOD_TRAIL)
+                .xp(50, Float.MAX_VALUE)
+                .time(0, 12000)
+                .weather(RitualBuilder.WEATHER.THUNDER)
+                .catalyst(Ritual.Catalysts.THUNDER_STRIKE)
                 .save();
     }
 }
