@@ -128,16 +128,24 @@ public class RitualControllerEntity extends Entity {
                     if (optBlock.isEmpty()) return;
                     Block block = optBlock.get().value();
                     serverLevel.setBlockAndUpdate(this.centerPos, block.defaultBlockState());
+                    if (count > 1) {
+                        ItemStack dropStack = new ItemStack(block, count - 1);
+                        Block.popResource(serverLevel, this.centerPos.above(), dropStack);
+                    }
                 });
 
                 result.entity().ifPresent(id -> {
                     Optional<Holder.Reference<EntityType<?>>> optEntity = BuiltInRegistries.ENTITY_TYPE.get(Identifier.parse(id));
                     if (optEntity.isEmpty()) return;
                     EntityType<?> type = optEntity.get().value();
-                    var entity = type.create(serverLevel, EntitySpawnReason.SPAWNER);
-                    if (entity == null) return;
-                    entity.setPos(this.getX(), this.getY(), this.getZ());
-                    serverLevel.addFreshEntity(entity);
+
+                    for (int i = 0; i < count; i++) {
+                        var entity = type.create(serverLevel, EntitySpawnReason.SPAWNER);
+                        if (entity != null) {
+                            entity.setPos(this.getX(), this.getY(), this.getZ());
+                            serverLevel.addFreshEntity(entity);
+                        }
+                    }
                 });
 
                 serverLevel.sendParticles(ParticleTypes.ENCHANT, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);

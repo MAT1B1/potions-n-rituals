@@ -19,7 +19,7 @@ public class ModRitualProvider extends RitualRecipeProvider {
 
     @Override
     protected void configure() {
-        addRitual(EntityTypes.SKELETON_HORSE, 1)
+        addRitual(EntityTypes.SKELETON_HORSE, 3)
                 .duration(20 * 60)
                 .pattern("  I  ")
                 .pattern("  S  ")
