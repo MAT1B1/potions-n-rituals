@@ -100,6 +100,7 @@ Every potion starts with an **Awkward Potion** unless stated otherwise.
 | Berserk              | Awkward                   | Torchflower            | Long, Strong |
 | Giant                | Awkward                   | Bone Meal              | Long, Strong |
 | Dwarfism             | Giant                     | Fermented Spider Eye   | Long, Strong |
+| Empathy              | Thorns                    | Fermented Spider Eye   | Long, Strong |
 | Photosynthesis       | Awkward                   | Leaf Litter            | Long, Strong |
 | Magnetism            | Awkward                   | Iron Ingot             | Long, Strong |
 | Ghost Walk           | Awkward                   | Ghast Tear             | Long         |
@@ -156,6 +157,8 @@ Every potion starts with an **Awkward Potion** unless stated otherwise.
 ![Séparateur Simple](asset/separation_bar.png)
 
 ## Effects Breakdown
+
+![All effect image](asset/all_effect.png)
 
 | Effect               | Type       | Description                                                                                                                                                                    |
 |----------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

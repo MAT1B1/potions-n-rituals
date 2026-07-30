@@ -107,6 +107,10 @@ public class ModBookLanguageHelper {
                 "\nAttention où vous mettez les pieds !\n\nVous faites maintenant §33 pommes§r de haut.",
                 "Réduit drastiquement votre taille. Vous pouvez vous faufiler partout, mais votre allonge est ridicule.",
                 "Il suffit de corrompre une potion de §7géant§r avec un §7œil d'araignée fermenté§r pour inverser la croissance.");
+        registerPotionLines(t, "empathy",
+                "\nVotre douleur est la mienne...",
+                "Vous subissez une partie des dégâts que vous infligez aux autres.\n\n§4L'empathie a un prix.§r",
+                "Corrompez une potion d'§7épines§r avec un §7œil d'araignée fermenté§r pour retourner la souffrance contre son auteur.");
         registerPotionLines(t, "frost",
                 "\nVos articulations se figent.\n\nIl fait froid, non ?",
                 "Inflige des dégâts de froid continus et ralentit considérablement les mouvements de la cible.",
@@ -502,6 +506,10 @@ public class ModBookLanguageHelper {
                 "\nWatch where you step!\n\nYou are now §3three apples§r tall.",
                 "Drastically reduces your size. You can sneak in anywhere, but your reach is ridiculous.",
                 "It is enough to corrupt a §7giant potion§r with a §7fermented spider eye§r to reverse the growth.");
+        registerPotionLines(t, "empathy",
+                "\nYour pain is mine...",
+                "You take a portion of the damage you deal to others.\n\n§4Empathy comes at a cost.§r",
+                "Corrupt a §7thorns potion§r with a §7fermented spider eye§r to turn suffering back on its author.");
         registerPotionLines(t, "frost",
                 "\nYour joints freeze up.\n\nIt's cold, isn't it?",
                 "Inflicts continuous cold damage and drastically slows the target's movements.",

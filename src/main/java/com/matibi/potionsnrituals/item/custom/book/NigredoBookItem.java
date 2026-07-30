@@ -131,6 +131,12 @@ public class NigredoBookItem extends CustomBookItem {
                                                 "book.potions-n-rituals.page.dwarf.explanation",
                                                 "book.potions-n-rituals.page.dwarf.brew")
                                 )
+                                .subChapter(BookUtils.getEffectName(ModPotions.EMPATHY), sub ->
+                                        BookUtils.createPotionChapter(sub, ModPotions.EMPATHY,
+                                                "book.potions-n-rituals.page.empathy.resume",
+                                                "book.potions-n-rituals.page.empathy.explanation",
+                                                "book.potions-n-rituals.page.empathy.brew")
+                                )
                                 .subChapter(BookUtils.getEffectName(ModPotions.FROST), sub ->
                                         BookUtils.createPotionChapter(sub, ModPotions.FROST,
                                                 "book.potions-n-rituals.page.frost.resume",

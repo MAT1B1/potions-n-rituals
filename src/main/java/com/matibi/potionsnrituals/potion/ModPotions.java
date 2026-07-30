@@ -212,7 +212,11 @@ public class ModPotions {
             STRONG_MAGNETISM = reg(ModEffects.MAGNETISM, ModConfig.get().dur_basic, 1, "magnetism", "strong_magnetism"),
 
             REALITY_CHECK = reg(ModEffects.REALITY_CHECK, ModConfig.get().dur_basic, 0, "reality_check", "reality_check"),
-            LONG_REALITY_CHECK = reg(ModEffects.REALITY_CHECK, ModConfig.get().dur_long, 0, "reality_check", "long_reality_check");
+            LONG_REALITY_CHECK = reg(ModEffects.REALITY_CHECK, ModConfig.get().dur_long, 0, "reality_check", "long_reality_check"),
+
+            EMPATHY = reg(ModEffects.EMPATHY, ModConfig.get().dur_short, 0, "empathy", "empathy"),
+            LONG_EMPATHY = reg(ModEffects.EMPATHY, ModConfig.get().dur_long, 0, "empathy", "long_empathy"),
+            STRONG_EMPATHY = reg(ModEffects.EMPATHY, ModConfig.get().dur_short, 1, "empathy", "strong_empathy");
 
     public static void register() {
         PotionsNRituals.LOGGER.info("Registering potions for " + PotionsNRituals.MOD_ID);
@@ -294,6 +298,7 @@ public class ModPotions {
             addMix(builder, Potions.AWKWARD, Items.ANVIL, ModPotions.REALITY_CHECK);
             addMix(builder, ModPotions.ALCOHOL, Items.FERMENTED_SPIDER_EYE, ModPotions.CLUMSINESS);
             addMix(builder, Potions.AWKWARD, ModItems.ZOMBIE_LUNG, ModPotions.ASTHMA);
+            addMix(builder, ModPotions.THORNS, Items.FERMENTED_SPIDER_EYE, ModPotions.EMPATHY);
 
             // version longue
             addLong(builder, ModPotions.LEVITATION, ModPotions.LONG_LEVITATION);
@@ -345,6 +350,8 @@ public class ModPotions {
             addLong(builder, ModPotions.MAGNETISM, ModPotions.LONG_MAGNETISM);
             addLong(builder, ModPotions.MIDAS, ModPotions.LONG_MIDAS);
             addLong(builder, ModPotions.REALITY_CHECK, ModPotions.LONG_REALITY_CHECK);
+            addLong(builder, ModPotions.EMPATHY, ModPotions.LONG_EMPATHY);
+            addMix(builder, ModPotions.LONG_THORNS, Items.FERMENTED_SPIDER_EYE, ModPotions.LONG_EMPATHY);
 
             // version strong
             addStrong(builder, ModPotions.ALCOHOL, ModPotions.STRONG_ALCOHOL);
@@ -370,6 +377,9 @@ public class ModPotions {
             addStrong(builder, ModPotions.XP_REDUCTION, ModPotions.STRONG_XP_REDUCTION);
             addStrong(builder, ModPotions.HYDROPHOBIA, ModPotions.STRONG_HYDROPHOBIA);
             addStrong(builder, ModPotions.MAGNETISM, ModPotions.STRONG_MAGNETISM);
+            addStrong(builder, ModPotions.EMPATHY, ModPotions.STRONG_EMPATHY);
+            addMix(builder, ModPotions.STRONG_THORNS, Items.FERMENTED_SPIDER_EYE, ModPotions.STRONG_EMPATHY);
+
         });
     }
 
