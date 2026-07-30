@@ -388,6 +388,8 @@ Five in-game books with custom GUI, recipes, lore, and illustrations - no wiki r
 
 **Potions & Rituals** is built for **Minecraft 26.2** with **Fabric**. It requires [Fabric API](https://modrinth.com/mod/fabric-api).
 
+You are free to add Potions & Rituals to any modpack, and to use any of the mod idea for your own mod.
+
 *Alchemy isn't just a craft. It's a transformation.*
 
 
