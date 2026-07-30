@@ -33,8 +33,8 @@ This Mod is a rework of **The Alchemist's Touch**
   - **Potion-infused food**: consume enchanted meals to gain effects.
   - **Stackable potions** up to 16 units.
 - **Lava buckets** can fuel brewing stands (less efficient than blaze powder).
-- New creation methods: **Rituals** (it's data-driven if you want to add some new ones).
-- **Artifacts** that can do all sort of powerful things. Like the **Phoenix Quill** (A pretty op item): write and execute commands at the cost of health and xp 
+- **10+ Rituals** (it's data-driven if you want to add some new ones).
+- **10+ Artifacts** that can do all sort of powerful things. Like the **Phoenix Quill** (A pretty op item): write and execute commands at the cost of health and xp 
 (I don't really know how to balance it, but I really like it)
 - 5 **In-game Book** to help you progress through the mod
 - **Gameplay changes**:
@@ -276,17 +276,22 @@ Each ritual defines:
 
 <div align="center">
 
-| Ritual         | Catalyst               | Pattern                           | Result                                          |
-|----------------|------------------------|-----------------------------------|-------------------------------------------------|
-| Skeleton Horse | Kill a skeleton horse  | Blood Trail + Bones               | Spawns a skeletal steed                         |
-| Ancient Debris | Ignite                 | Blood Trail + Diamond Blocks      | Spawns ancient debris                           |
-| Random Effect  | Ignite                 | Single Potion on pedestal         | Gives a random effect                           |
-| Thunderstorm   | Ignite                 | Water Buckets + Iron Block        | Summons a thunderstorm                          |
-| Echo Shard     | Kill, night + new moon | Amethyst Shards + Blood Trail     | Spawns echo shards                              |
-| Summon Dawn    | Ignite                 | Glowstone Dust + Sunflower        | Sets time to dawn                               |
-| Nether Gate    | Kill in Overworld      | Blood Trail pattern               | Teleports player to Nether with Ghost Walk      |
-| Seal Nether    | Ignite                 | Blood Trail + Nether Seal Breaker | Seals the Nether permanently (world attachment) |
-| Phoenix Quill  | Ignite                 | Nether Star + Resurrection Potion | Craft a Phoenix Quill (low HP, night, thunder)  |
+| Ritual                       | Catalyst       | Conditions                                                          | Result                                     |
+|------------------------------|----------------|---------------------------------------------------------------------|--------------------------------------------|
+| Skeleton Horse               | Kill           | —                                                                   | Spawns a skeletal steed                    |
+| Ancient Debris               | Ignite         | —                                                                   | Spawns ancient debris                      |
+| Random Effect                | Ignite         | —                                                                   | Gives a random effect                      |
+| Thunderstorm                 | Ignite         | Height: 120–321                                                     | Summons a thunderstorm                     |
+| Echo Shard                   | Kill           | Time: night                                                         | Spawns echo shards                         |
+| Summon Dawn                  | Ignite         | —                                                                   | Sets time to dawn                          |
+| Nether Gate                  | Kill           | Dimension: Overworld                                                | Teleports player to Nether with Ghost Walk |
+| Seal Nether                  | Ignite         | —                                                                   | Seals the Nether permanently               |
+| Phoenix Quill                | Ignite         | - Health: ≤3,<br>- XP: ≥50,<br>- Time: night,<br>- Weather: thunder | Crafts a Phoenix Quill                     |
+| Elixir of Permanent Health   | Kill           | - Health: ≥9,<br>- XP: ≥50,<br>- Time: day,<br>- Weather: clear     | Spawns Elixir of Permanent Health          |
+| Elixir of Permanent Strength | Ignite         | - XP: ≥50,<br>- Time: day,<br>- Weather: thunder                    | Spawns Elixir of Permanent Strength        |
+| Elixir of Permanent Speed    | Thunder strike | - XP: ≥50,<br>- Time: day,<br>- Weather: thunder                    | Spawns Elixir of Permanent Speed           |
+| Infinity                     | Ignite         | XP: ≥30                                                             | Spawns Potion of Infinity                  |
+
 
 </div>
 

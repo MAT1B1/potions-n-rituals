@@ -49,11 +49,11 @@ public class RitualActions {
                 var allEffects = BuiltInRegistries.MOB_EFFECT.stream().toList();
                 MobEffect chosenHolder = allEffects
                         .get(level.getRandom().nextInt(allEffects.size()));
-                player.addEffect(new MobEffectInstance(Holder.direct(chosenHolder), ModConfig.get().dur_short, 0));
+                int duration = chosenHolder.isInstantaneous() ? ModConfig.get().dur_instant : ModConfig.get().dur_short;
+                player.addEffect(new MobEffectInstance(Holder.direct(chosenHolder), duration, 0));
                 level.playSound(null, player.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.5f, 1.0f);
             }
         });
-
         register("summon_thunderstorm", (level, entity, _, _) -> {
             if (level instanceof ServerLevel serverLevel) {
                 serverLevel.getServer().setWeatherParameters(0, 6000, true, true);
@@ -62,7 +62,6 @@ public class RitualActions {
                     level.playSound(null, player.blockPosition(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER, 1.0f, 1.0f);
             }
         });
-
         register("summon_dawn", (level, entity, _, _) -> {
             if (level instanceof ServerLevel serverLevel) {
                 serverLevel.dimensionType().defaultClock().ifPresent(clock ->

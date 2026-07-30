@@ -8,7 +8,7 @@ import com.matibi.potionsnrituals.item.custom.alchemicalStone.AlchemicalStoneIte
 import com.matibi.potionsnrituals.item.custom.book.*;
 import com.matibi.potionsnrituals.item.custom.OxidationFragmentItem;
 import com.matibi.potionsnrituals.item.custom.talisman.CaptureSphereItem;
-import com.matibi.potionsnrituals.item.custom.syringe.SyringeItem;
+import com.matibi.potionsnrituals.item.custom.SyringeItem;
 import com.matibi.potionsnrituals.item.custom.talisman.*;
 import com.matibi.potionsnrituals.util.BookUtils;
 import com.matibi.potionsnrituals.util.ModUtils;

@@ -101,6 +101,13 @@ public class CitrinitasBookItem extends CustomBookItem {
                                                 "book.potions-n-rituals.page.citrinitas.perm_speed.desc"
                                         )
                                 )
+                                .subChapter("book.potions-n-rituals.page.citrinitas.infinity",  sub ->
+                                        BookUtils.createRitualChapter(sub,
+                                                "book.potions-n-rituals.page.citrinitas.infinity",
+                                                "potion_infinity_ritual",
+                                                "book.potions-n-rituals.page.citrinitas.infinity.desc"
+                                        )
+                                )
                         )
         );
     }

@@ -181,5 +181,17 @@ public class ModRitualProvider extends RitualRecipeProvider {
                 .weather(RitualBuilder.WEATHER.THUNDER)
                 .catalyst(Ritual.Catalysts.THUNDER_STRIKE)
                 .save();
+
+        addRitual(Items.POTION, 1, "infinity")
+                .component(DataComponents.POTION_CONTENTS, new PotionContents(ModPotions.INFINITY))
+                .pattern("BBB")
+                .pattern("BFB")
+                .pattern("BBB")
+                .define('F', ModItems.WITCH_S_FINGER)
+                .define('R', ModUtils.potionIngredient((Potions.STRONG_SWIFTNESS)))
+                .define('B', ModBlocks.BLOOD_TRAIL)
+                .xp(30, Float.MAX_VALUE)
+                .catalyst(Ritual.Catalysts.IGNITE)
+                .save();
     }
 }

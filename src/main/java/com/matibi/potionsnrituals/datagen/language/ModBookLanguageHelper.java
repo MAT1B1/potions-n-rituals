@@ -364,6 +364,8 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.citrinitas.perm_strength.desc", "Un rituel qui augmente de façon permanente la puissance de vos coups.");
         t.add("book.potions-n-rituals.page.citrinitas.perm_speed", "Élixir de Vitesse Permanent");
         t.add("book.potions-n-rituals.page.citrinitas.perm_speed.desc", "Un rituel qui accroît définitivement votre vitesse de déplacement.");
+        t.add("book.potions-n-rituals.page.citrinitas.infinity", "Infini");
+        t.add("book.potions-n-rituals.page.citrinitas.infinity.desc", "Un rituel qui confère une potion avec l'effet Infinity.");
 
         // --- AJOUTS ALBEDO (AlbedoBookItem) ---
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", "Chemin vers le Citrinitas");
@@ -757,6 +759,8 @@ public class ModBookLanguageHelper {
         t.add("book.potions-n-rituals.page.citrinitas.perm_strength.desc", "A ritual that permanently increases the power of your melee strikes.");
         t.add("book.potions-n-rituals.page.citrinitas.perm_speed", "Permanent Speed Elixir");
         t.add("book.potions-n-rituals.page.citrinitas.perm_speed.desc", "A ritual that permanently increases your movement speed.");
+        t.add("book.potions-n-rituals.page.citrinitas.infinity", "Infinity");
+        t.add("book.potions-n-rituals.page.citrinitas.infinity.desc", "A ritual that grants a potion with the effect Infinity.");
 
         // --- AJOUTS ALBEDO (AlbedoBookItem) ---
         t.add("book.potions-n-rituals.page.alchemy_guide_albedo.chapter.path", "Path to Citrinitas");

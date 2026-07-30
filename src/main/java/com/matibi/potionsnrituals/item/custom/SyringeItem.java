@@ -1,4 +1,4 @@
-package com.matibi.potionsnrituals.item.custom.syringe;
+package com.matibi.potionsnrituals.item.custom;
 
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.item.ModItems;
