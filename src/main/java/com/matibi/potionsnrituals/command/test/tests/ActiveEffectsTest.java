@@ -2,7 +2,6 @@ package com.matibi.potionsnrituals.command.test.tests;
 
 import com.matibi.potionsnrituals.command.test.TestResult;
 import com.matibi.potionsnrituals.command.test.TestSuite;
-import com.matibi.potionsnrituals.effect.ActiveEffect;
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.effect.custom.active.ActiveTeleportationEffect;
 import com.matibi.potionsnrituals.effect.custom.active.LoveEffect;

@@ -46,10 +46,6 @@ public record TestResult(TestStatus status, Component message) {
         return error(Component.literal(message));
     }
 
-    public static TestResult skipped(Component message) {
-        return new TestResult(TestStatus.SKIPPED, message);
-    }
-
     public static TestResult pending(Component message) {
         return new TestResult(TestStatus.PENDING, message);
     }
