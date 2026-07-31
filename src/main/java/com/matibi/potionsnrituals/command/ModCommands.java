@@ -1,5 +1,6 @@
 package com.matibi.potionsnrituals.command;
 
+import com.matibi.potionsnrituals.command.test.TestCommand;
 import com.matibi.potionsnrituals.world.dimension.ModDimensions;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
@@ -16,9 +17,10 @@ import net.minecraft.world.level.Level;
 public class ModCommands {
 
     public static void register() {
-        CommandRegistrationCallback.EVENT.register((dispatcher, _, _) ->
-            registerSpiritCommand(dispatcher)
-        );
+        CommandRegistrationCallback.EVENT.register((dispatcher, _, _) -> {
+            registerSpiritCommand(dispatcher);
+            TestCommand.register(dispatcher);
+        });
     }
 
     private static void registerSpiritCommand(CommandDispatcher<CommandSourceStack> dispatcher) {

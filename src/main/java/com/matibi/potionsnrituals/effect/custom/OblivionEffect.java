@@ -44,9 +44,8 @@ public class OblivionEffect extends MobEffect {
 
         for (int i = 0; i < count; i++) {
             int slot = random.nextInt(inventory.getContainerSize());
-            if (!inventory.getItem(slot).isEmpty()) {
-                player.drop(inventory.getItem(slot).split(1), true);
-            }
+            if (!inventory.getItem(slot).isEmpty())
+                player.drop(inventory.getItem(slot), true);
         }
     }
 }

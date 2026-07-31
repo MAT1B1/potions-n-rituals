@@ -2,6 +2,7 @@ package com.matibi.potionsnrituals.effect.custom;
 
 import com.matibi.potionsnrituals.effect.ModEffects;
 import com.matibi.potionsnrituals.util.ModUtils;
+import com.matibi.potionsnrituals.util.TickManager;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -58,18 +59,24 @@ public class BerserkEffect extends MobEffect {
 
     @Override
     public void onMobRemoved(@NonNull ServerLevel level, @NonNull LivingEntity mob, int amplifier, Entity.@NonNull RemovalReason reason) {
-        mob.removeEffect(MobEffects.NIGHT_VISION);
-        if (!mob.isDeadOrDying())
-            mob.addEffect(new MobEffectInstance(ModEffects.AFTERMATH, 20 * 10));
         super.onMobRemoved(level, mob, amplifier, reason);
+        TickManager.runLater(1, _ -> {
+            mob.removeEffect(MobEffects.NIGHT_VISION);
+            if (!mob.isDeadOrDying())
+                mob.addEffect(new MobEffectInstance(ModEffects.AFTERMATH, 20 * 10));
+        });
     }
 
     @Override
     public void onEffectRemoved(@NonNull MobEffectInstance effectInstance, @NonNull LivingEntity entity) {
-        entity.removeEffect(MobEffects.NIGHT_VISION);
-        if (!entity.isDeadOrDying())
-            entity.addEffect(new MobEffectInstance(ModEffects.AFTERMATH, 20 * 10));
         super.onEffectRemoved(effectInstance, entity);
+        var level = entity.level();
+        if (!(level instanceof ServerLevel)) return;
+        TickManager.runLater(1, _ -> {
+            entity.removeEffect(MobEffects.NIGHT_VISION);
+            if (!entity.isDeadOrDying())
+                entity.addEffect(new MobEffectInstance(ModEffects.AFTERMATH, 20 * 10));
+        });
     }
 
     @Override

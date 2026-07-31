@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.jspecify.annotations.NonNull;
 
@@ -37,13 +36,9 @@ public class AftermathEffect extends MobEffect {
         super.onEffectRemoved(effectInstance, entity);
         ServerLevel world = Objects.requireNonNull(entity.level().getServer())
                 .getLevel(ServerLevel.OVERWORLD);
-        if (world != null)
-            entity.hurtServer(world, world.damageSources().magic(), entity.getMaxHealth());
-    }
+        float half = entity.getMaxHealth() * ModConfig.get().health_required_after_aftermath;
 
-    @Override
-    public void onMobRemoved(@NonNull ServerLevel level, @NonNull LivingEntity mob, int amplifier, Entity.@NonNull RemovalReason reason) {
-        super.onMobRemoved(level, mob, amplifier, reason);
-        mob.hurtServer(level, level.damageSources().magic(), mob.getMaxHealth());
+        if (world != null && entity.getHealth() <= half)
+            entity.hurtServer(world, world.damageSources().magic(), Float.MAX_VALUE);
     }
 }

@@ -3,6 +3,7 @@ package com.matibi.potionsnrituals;
 import com.matibi.potionsnrituals.block.ModBlockEntities;
 import com.matibi.potionsnrituals.block.ModBlocks;
 import com.matibi.potionsnrituals.command.ModCommands;
+import com.matibi.potionsnrituals.command.test.ModTests;
 import com.matibi.potionsnrituals.config.ModConfig;
 import com.matibi.potionsnrituals.datacomponent.ModDataComponents;
 import com.matibi.potionsnrituals.effect.ModEffects;
@@ -60,6 +61,7 @@ public class PotionsNRituals implements ModInitializer {
 		ModDimensions.register();
 		ModAttachments.register();
 		ModCommands.register();
+		ModTests.registerAll();
 		TickManager.initialize();
 		LightningAttractor.register();
 

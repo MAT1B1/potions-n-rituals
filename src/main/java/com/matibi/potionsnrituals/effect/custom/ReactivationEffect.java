@@ -11,6 +11,8 @@ import net.minecraft.world.entity.LivingEntity;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Collection;
+
 public class ReactivationEffect extends MobEffect {
     public ReactivationEffect() {
         super(MobEffectCategory.NEUTRAL, 0x7F00FF);
@@ -23,7 +25,8 @@ public class ReactivationEffect extends MobEffect {
 
     @Override
     public void applyInstantaneousEffect(@NonNull ServerLevel level, @Nullable Entity source, @Nullable Entity owner, LivingEntity mob, int amplification, double scale) {
-        for (MobEffectInstance instance : mob.getActiveEffects()) {
+        Collection<MobEffectInstance> snapshot = mob.getActiveEffects();
+        for (MobEffectInstance instance : snapshot) {
             if (instance.getEffect().value() == this || instance.getEffect().equals(ModEffects.RESURRECTION))
                 continue;
 
