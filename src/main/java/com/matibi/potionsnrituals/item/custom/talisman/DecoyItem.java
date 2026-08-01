@@ -68,7 +68,7 @@ public class DecoyItem extends Item {
 
             int[] tickCounter = {0};
 
-            TickManager.registerUntil(
+            TickManager.registerWhile(
                 mannequin::isAlive,
                 _ -> {
                     tickCounter[0]++;

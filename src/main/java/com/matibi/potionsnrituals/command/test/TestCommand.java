@@ -1,6 +1,6 @@
 package com.matibi.potionsnrituals.command.test;
 
-import com.matibi.potionsnrituals.util.TickManager;
+import com.matibi.potionsnrituals.PotionsNRituals;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -8,178 +8,195 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.GameType;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.function.Consumer;
 
 public class TestCommand {
 
-    private static final Component HEADER = Component.literal("§6§m        §r §6§lPNR Test Suite §6§m        §r");
-    private static final Component FOOTER = Component.literal("§6§m                                §r");
-
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("pnr")
-                .then(Commands.literal("test")
-                        .requires(CommandSourceStack::isPlayer)
-                        .then(Commands.literal("list")
-                                .executes(TestCommand::list))
-                        .then(Commands.literal("run")
-                                .then(Commands.argument("id", StringArgumentType.greedyString())
-                                        .suggests((_, builder) -> {
-                                            for (TestSuite t : ModTests.getAll())
-                                                builder.suggest(t.id());
-                                            return builder.buildFuture();
-                                        })
-                                        .executes(TestCommand::runSingle)))
-                        .then(Commands.literal("run-all")
-                                .executes(TestCommand::runAll))
-                        .then(Commands.literal("category")
-                                .then(Commands.argument("name", StringArgumentType.word())
-                                        .suggests((_, builder) -> {
-                                            for (String cat : ModTests.getCategories())
-                                                builder.suggest(cat);
-                                            return builder.buildFuture();
-                                        })
-                                        .executes(TestCommand::runCategory)))));
+        dispatcher.register(Commands.literal("pnr-test")
+                .requires(CommandSourceStack::isPlayer)
+                .then(Commands.literal("run")
+                        .executes(TestCommand::runAllTests))
+                .then(Commands.literal("list")
+                        .executes(TestCommand::listTests))
+                .then(Commands.literal("reload")
+                        .executes(TestCommand::reloadTests))
+                .then(Commands.argument("name", StringArgumentType.string())
+                        .executes(TestCommand::runSingleTest))
+        );
     }
 
-    private static int list(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-        ServerPlayer player = ctx.getSource().getPlayerOrException();
-        Collection<TestSuite> tests = ModTests.getAll();
-
-        player.sendSystemMessage(HEADER);
-        player.sendSystemMessage(Component.literal("§7" + tests.size() + " tests disponibles :"));
-
-        String currentCat = "";
-        for (TestSuite t : tests) {
-            if (!t.category().equals(currentCat)) {
-                currentCat = t.category();
-                player.sendSystemMessage(Component.literal(" §8[" + currentCat + "]§r"));
-            }
-            player.sendSystemMessage(Component.literal("  §e" + t.id() + "§7 - " + t.description()));
-        }
-        player.sendSystemMessage(FOOTER);
-        return ModTests.count();
+    private static boolean isOp(ServerPlayer player) {
+        return player.isCreative();
     }
 
-    private static int runSingle(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-        ServerPlayer player = ctx.getSource().getPlayerOrException();
-        ServerLevel level = player.level();
-
-        String id = StringArgumentType.getString(ctx, "id");
-        TestSuite test = ModTests.get(id);
-
-        if (test == null) {
-            player.sendSystemMessage(Component.literal("§cTest introuvable : " + id));
+    private static int reloadTests(CommandContext<CommandSourceStack> context) {
+        ServerPlayer player;
+        try {
+            player = context.getSource().getPlayerOrException();
+        } catch (CommandSyntaxException e) {
+            context.getSource().sendFailure(Component.literal("§cMust be run by a player"));
             return 0;
         }
 
-        player.sendSystemMessage(Component.literal("§e▶ Running " + test.id() + "..."));
-        TestResult result = executeTest(test, level, player);
-        player.sendSystemMessage(result.formatted());
-        return result.status() == TestStatus.PASS ? 1 : 0;
+        if (!isOp(player)) {
+            player.sendSystemMessage(Component.literal("§cYou must be an operator to run tests"));
+            return 0;
+        }
+
+        TestRegistry.clear();
+        ModTests.registerAll();
+        player.sendSystemMessage(Component.literal("§aTest registry reloaded: " + TestRegistry.getAll().size() + " tests registered"));
+        return 1;
     }
 
-    private static int runAll(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-        ServerPlayer player = ctx.getSource().getPlayerOrException();
-        ServerLevel level = player.level();
+    private static int runAllTests(CommandContext<CommandSourceStack> context) {
+        ServerPlayer player;
+        try {
+            player = context.getSource().getPlayerOrException();
+        } catch (CommandSyntaxException e) {
+            context.getSource().sendFailure(Component.literal("§cMust be run by a player"));
+            return 0;
+        }
 
-        player.sendSystemMessage(HEADER);
-        return runTests(player, level, ModTests.getAll());
-    }
+        if (!isOp(player)) {
+            player.sendSystemMessage(Component.literal("§cYou must be an operator to run tests"));
+            return 0;
+        }
 
-    private static int runCategory(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-        ServerPlayer player = ctx.getSource().getPlayerOrException();
-        ServerLevel level = player.level();
-
-        String category = StringArgumentType.getString(ctx, "name");
-        List<TestSuite> tests = ModTests.getByCategory(category);
-
+        List<TestEntry> tests = new ArrayList<>(TestRegistry.getAll());
         if (tests.isEmpty()) {
-            player.sendSystemMessage(Component.literal("§cAucun test trouvé pour la catégorie : " + category));
+            player.sendSystemMessage(Component.literal("§eNo tests registered"));
+            return 1;
+        }
+
+        player.sendSystemMessage(Component.literal("§6Running " + tests.size() + " test(s)..."));
+        runSequential(player, tests, 0, new ArrayList<>(), results -> {
+            int passed = (int) results.stream().filter(TestResult::passed).count();
+            int failed = results.size() - passed;
+            player.sendSystemMessage(Component.literal(
+                    String.format("§6Tests complete: §a%d passed §c%d failed", passed, failed)));
+        });
+        return 1;
+    }
+
+    private static int runSingleTest(CommandContext<CommandSourceStack> context) {
+        ServerPlayer player;
+        try {
+            player = context.getSource().getPlayerOrException();
+        } catch (CommandSyntaxException e) {
+            context.getSource().sendFailure(Component.literal("§cMust be run by a player"));
             return 0;
         }
 
-        player.sendSystemMessage(Component.literal("§e▶ Running category: " + category));
-        return runTests(player, level, tests);
-    }
-
-    private static int runTests(ServerPlayer player, ServerLevel level, Collection<TestSuite> tests) {
-        TestAssert.clearAsyncResults();
-        List<String> pendingIds = new ArrayList<>();
-        List<TestSuite> testList = List.copyOf(tests);
-        List<TestResult> results = new ArrayList<>(testList.size());
-
-        for (TestSuite test : testList) {
-            TestResult result = executeTest(test, level, player);
-            results.add(result);
-            if (result.status() == TestStatus.PENDING) {
-                pendingIds.add(test.id());
-            }
+        if (!isOp(player)) {
+            player.sendSystemMessage(Component.literal("§cYou must be an operator to run tests"));
+            return 0;
         }
 
-        Runnable displayAll = () -> {
-            int passed = 0, failed = 0, errors = 0;
-            for (int i = 0; i < results.size(); i++) {
-                if (results.get(i).status() == TestStatus.PENDING) {
-                    TestResult real = TestAssert.consumeAsyncResult(testList.get(i).id());
-                    results.set(i, real);
-                }
-                player.sendSystemMessage(results.get(i).formatted());
-                switch (results.get(i).status()) {
-                    case PASS -> passed++;
-                    case FAIL -> failed++;
-                    case ERROR -> errors++;
-                }
-            }
-            sendSummary(player, passed, failed, errors);
+        String name = StringArgumentType.getString(context, "name");
+        TestRegistry.get(name).ifPresentOrElse(
+                test -> runTest(player, test, result -> {
+                    String msg = result.passed()
+                            ? "§a" + test.name()
+                            : "§c" + test.name() + " fail: " + result.message();
+                    player.sendSystemMessage(Component.literal(msg));
+                }),
+                () -> player.sendSystemMessage(Component.literal("§cTest not found: " + name))
+        );
+        return 1;
+    }
+
+    private static int listTests(CommandContext<CommandSourceStack> context) {
+        ServerPlayer player;
+        try {
+            player = context.getSource().getPlayerOrException();
+        } catch (CommandSyntaxException e) {
+            context.getSource().sendFailure(Component.literal("§cMust be run by a player"));
+            return 0;
+        }
+
+        if (!isOp(player)) {
+            player.sendSystemMessage(Component.literal("§cYou must be an operator to run tests"));
+            return 0;
+        }
+
+        List<TestEntry> tests = new ArrayList<>(TestRegistry.getAll());
+        if (tests.isEmpty()) {
+            player.sendSystemMessage(Component.literal("§eNo tests registered"));
+            return 1;
+        }
+
+        player.sendSystemMessage(Component.literal("§6Registered tests (" + tests.size() + "):"));
+        for (TestEntry test : tests) {
+            String type = test.isAsync() ? "§e[async]" : "§7[sync]";
+            player.sendSystemMessage(Component.literal("  " + type + " §f" + test.name()));
+        }
+        return 1;
+    }
+
+    private static void runSequential(ServerPlayer player, List<TestEntry> tests, int index,
+                                      List<TestResult> results, Consumer<List<TestResult>> onComplete) {
+        if (index >= tests.size()) {
+            onComplete.accept(results);
+            return;
+        }
+
+        TestEntry test = tests.get(index);
+        TestContext ctx = new TestContext(
+                player,
+                player.level().getServer(),
+                player.level(),
+                new TestHelper(player)
+        );
+
+        Consumer<TestResult> onTestComplete = result -> {
+            String msg = result.passed()
+                    ? "§a" + test.name()
+                    : "§c" + test.name() + " fail: " + result.message();
+            player.sendSystemMessage(Component.literal(msg));
+
+            results.add(result);
+            runSequential(player, tests, index + 1, results, onComplete);
         };
 
-        if (pendingIds.isEmpty()) {
-            displayAll.run();
-        } else {
-            TickManager.registerUntil(
-                    () -> pendingIds.stream().allMatch(TestAssert::hasAsyncResult),
-                    _ -> displayAll.run());
+        try {
+            if (test.isAsync()) {
+                test.async().run(ctx, onTestComplete);
+            } else {
+                onTestComplete.accept(test.sync().run(ctx));
+            }
+        } catch (TestHelper.TestAssertionError e) {
+            onTestComplete.accept(TestResult.fail(e.getMessage()));
+        } catch (Exception e) {
+            PotionsNRituals.LOGGER.error("Test {} threw exception", test.name(), e);
+            onTestComplete.accept(TestResult.fail("Exception: " + e.getClass().getSimpleName() + " - " + e.getMessage()));
         }
-
-        return 0;
     }
 
-    private static void sendSummary(ServerPlayer player, int passed, int failed, int errors) {
-        Component summary = Component.literal("§7Résultats : §a" + passed + " passé§f"
-                + (failed > 0 ? ", §c" + failed + " échoué" : "")
-                + (errors > 0 ? ", §e" + errors + " erreur" : ""));
-        player.sendSystemMessage(summary);
-        player.sendSystemMessage(FOOTER);
-    }
-
-    private static TestResult executeTest(TestSuite test, ServerLevel level, ServerPlayer player) {
-        boolean wasCreative = player.isCreative();
-        boolean wasSpectator = player.isSpectator();
-        player.setGameMode(GameType.SURVIVAL);
+    private static void runTest(ServerPlayer player, TestEntry test, Consumer<TestResult> callback) {
+        TestContext ctx = new TestContext(
+                player,
+                player.level().getServer(),
+                player.level(),
+                new TestHelper(player)
+        );
 
         try {
-            TestAssert.clearPlayer(player);
-            return test.run(level, player);
-        } catch (AssertionError e) {
-            return TestResult.fail(Component.literal(test.id() + " : " + e.getMessage()));
-        } catch (Exception e) {
-            return TestResult.error(Component.literal(test.id() + " : §7" + e.getClass().getSimpleName() + " - " + e.getMessage()));
-        } finally {
-            if (player.isDeadOrDying()) {
-                player.setHealth(player.getMaxHealth());
-                player.teleportTo(level, player.getX(), player.getY(), player.getZ(), Set.of(), player.getYRot(), player.getXRot(), true);
+            if (test.isAsync()) {
+                test.async().run(ctx, callback);
+            } else {
+                callback.accept(test.sync().run(ctx));
             }
-            if (wasCreative)
-                player.setGameMode(GameType.CREATIVE);
-            else if (wasSpectator)
-                player.setGameMode(GameType.SPECTATOR);
+        } catch (TestHelper.TestAssertionError e) {
+            callback.accept(TestResult.fail(e.getMessage()));
+        } catch (Exception e) {
+            PotionsNRituals.LOGGER.error("Test {} threw exception", test.name(), e);
+            callback.accept(TestResult.fail("Exception: " + e.getClass().getSimpleName() + " - " + e.getMessage()));
         }
     }
 }

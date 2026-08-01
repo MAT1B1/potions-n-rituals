@@ -17,11 +17,8 @@ public class TickManager {
     private record RepeatTask(BooleanSupplier condition, Consumer<MinecraftServer> action) implements TickTask {
         @Override
         public boolean tick(MinecraftServer server) {
-            if (condition.getAsBoolean()) {
-                action.accept(server);
-                return true;
-            }
-            return false;
+            action.accept(server);
+            return condition.getAsBoolean();
         }
     }
 
@@ -47,7 +44,7 @@ public class TickManager {
 
     private static final List<TickTask> TASKS = new ArrayList<>();
 
-    public static void registerUntil(BooleanSupplier condition, Consumer<MinecraftServer> task) {
+    public static void registerWhile(BooleanSupplier condition, Consumer<MinecraftServer> task) {
         TASKS.add(new RepeatTask(condition, task));
     }
 
