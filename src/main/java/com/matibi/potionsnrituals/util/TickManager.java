@@ -18,7 +18,7 @@ public class TickManager {
         @Override
         public boolean tick(MinecraftServer server) {
             action.accept(server);
-            return condition.getAsBoolean();
+            return !condition.getAsBoolean();
         }
     }
 

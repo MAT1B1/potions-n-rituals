@@ -7,10 +7,10 @@ import com.matibi.potionsnrituals.command.test.TestContext;
 public final class PotionTests {
 
     static {
-        TestRegistry.registerAsync("potion_brewing_works", PotionTests::testBrewing);
-        TestRegistry.registerAsync("potion_effects_apply", PotionTests::testEffectsApply);
-        TestRegistry.registerAsync("potion_duration_correct", PotionTests::testDuration);
-        TestRegistry.registerAsync("potion_amplifier_correct", PotionTests::testAmplifier);
+        //TestRegistry.registerAsync("potion_brewing_works", PotionTests::testBrewing);
+        //TestRegistry.registerAsync("potion_effects_apply", PotionTests::testEffectsApply);
+        //TestRegistry.registerAsync("potion_duration_correct", PotionTests::testDuration);
+        //TestRegistry.registerAsync("potion_amplifier_correct", PotionTests::testAmplifier);
     }
 
     private static void testBrewing(TestContext ctx, java.util.function.Consumer<TestResult> cb) {

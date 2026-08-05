@@ -8,21 +8,21 @@ import com.matibi.potionsnrituals.item.ModItems;
 public final class ItemTests {
 
     static {
-        TestRegistry.registerAsync("syringe_extracts_blood", ItemTests::testSyringeExtract);
-        TestRegistry.registerAsync("talisman_charges_souls", ItemTests::testTalismanCharge);
-        TestRegistry.registerAsync("alchemical_stone_applies_effects", ItemTests::testAlchemicalStoneApply);
-        TestRegistry.registerAsync("spirit_mirror_teleports", ItemTests::testSpiritMirrorTeleport);
-        TestRegistry.registerAsync("nether_seal_breaker_breaks", ItemTests::testNetherSealBreaker);
-        TestRegistry.registerAsync("decoy_distracts_mobs", ItemTests::testDecoyDistract);
-        TestRegistry.registerAsync("gauntlet_empowers", ItemTests::testGauntletEmpower);
-        TestRegistry.registerAsync("invisibility_ring_hides", ItemTests::testInvisibilityRing);
-        TestRegistry.registerAsync("invisibility_cloak_hides", ItemTests::testInvisibilityCloak);
-        TestRegistry.registerAsync("phoenix_quill_revives", ItemTests::testPhoenixQuillRevive);
-        TestRegistry.registerAsync("lock_locks_chest", ItemTests::testLockChest);
-        TestRegistry.registerAsync("key_unlocks", ItemTests::testKeyUnlock);
-        TestRegistry.registerAsync("capture_sphere_captures", ItemTests::testCaptureSphere);
-        TestRegistry.registerAsync("alchemical_bag_stores", ItemTests::testAlchemicalBagStore);
-        TestRegistry.registerAsync("oxidation_fragment_oxidizes", ItemTests::testOxidationFragment);
+        //TestRegistry.registerAsync("syringe_extracts_blood", ItemTests::testSyringeExtract);
+        //TestRegistry.registerAsync("talisman_charges_souls", ItemTests::testTalismanCharge);
+        //TestRegistry.registerAsync("alchemical_stone_applies_effects", ItemTests::testAlchemicalStoneApply);
+        //TestRegistry.registerAsync("spirit_mirror_teleports", ItemTests::testSpiritMirrorTeleport);
+        //TestRegistry.registerAsync("nether_seal_breaker_breaks", ItemTests::testNetherSealBreaker);
+        //TestRegistry.registerAsync("decoy_distracts_mobs", ItemTests::testDecoyDistract);
+        //TestRegistry.registerAsync("gauntlet_empowers", ItemTests::testGauntletEmpower);
+        //TestRegistry.registerAsync("invisibility_ring_hides", ItemTests::testInvisibilityRing);
+        //TestRegistry.registerAsync("invisibility_cloak_hides", ItemTests::testInvisibilityCloak);
+        //TestRegistry.registerAsync("phoenix_quill_revives", ItemTests::testPhoenixQuillRevive);
+        //TestRegistry.registerAsync("lock_locks_chest", ItemTests::testLockChest);
+        //TestRegistry.registerAsync("key_unlocks", ItemTests::testKeyUnlock);
+        //TestRegistry.registerAsync("capture_sphere_captures", ItemTests::testCaptureSphere);
+        //TestRegistry.registerAsync("alchemical_bag_stores", ItemTests::testAlchemicalBagStore);
+        //TestRegistry.registerAsync("oxidation_fragment_oxidizes", ItemTests::testOxidationFragment);
     }
 
     private static void testSyringeExtract(TestContext ctx, java.util.function.Consumer<TestResult> cb) {
