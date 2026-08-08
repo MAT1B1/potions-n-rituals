@@ -97,7 +97,8 @@ public record TestHelper(ServerPlayer player) {
     }
 
     public void clearEffects() {
-        player.getActiveEffects().clear();
+        for (MobEffectInstance instance : List.copyOf(player.getActiveEffects()))
+            player.removeEffect(instance.getEffect());
     }
 
     public void clearInventory() {

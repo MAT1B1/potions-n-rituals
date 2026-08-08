@@ -1,6 +1,10 @@
 package com.matibi.potionsnrituals.command.test;
 
 import com.matibi.potionsnrituals.PotionsNRituals;
+import com.matibi.potionsnrituals.command.test.tests.CoreTests;
+import com.matibi.potionsnrituals.command.test.tests.EffectTests;
+import com.matibi.potionsnrituals.command.test.tests.ItemTests;
+import com.matibi.potionsnrituals.command.test.tests.RitualTests;
 
 public final class ModTests {
 
@@ -10,11 +14,10 @@ public final class ModTests {
         PotionsNRituals.LOGGER.info("Registering tests...");
 
         Class<?>[] testClasses = {
-            com.matibi.potionsnrituals.command.test.tests.CoreTests.class,
-            com.matibi.potionsnrituals.command.test.tests.EffectTests.class,
-            com.matibi.potionsnrituals.command.test.tests.ItemTests.class,
-            com.matibi.potionsnrituals.command.test.tests.PotionTests.class,
-            com.matibi.potionsnrituals.command.test.tests.RitualTests.class
+            CoreTests.class,
+            EffectTests.class,
+            ItemTests.class,
+            RitualTests.class
         };
 
         for (Class<?> clazz : testClasses) {

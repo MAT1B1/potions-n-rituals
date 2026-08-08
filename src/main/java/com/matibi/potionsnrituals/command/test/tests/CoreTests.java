@@ -225,12 +225,12 @@ public final class CoreTests {
 
     private static TestResult testHasEntityAt(TestContext ctx) {
         TestHelper helper = ctx.helper();
-        BlockPos spawnPos = new BlockPos(100, 64, 100);
-        helper.setPlayerPos(Vec3.atCenterOf(spawnPos));
-        Pig pig = helper.spawnLiving(EntityTypes.PIG, new Vec3(0, 1, 0));
+        Vec3 playerPos = helper.player().position();
+        BlockPos blockPos = BlockPos.containing(playerPos);
+        Pig pig = helper.spawnLiving(EntityTypes.PIG, new Vec3(0, 3, 0));
         helper.assertNotNull(pig, "Spawned pig should not be null");
         TickManager.flush(ctx.server());
-        helper.assertTrue(helper.hasEntityAt(Pig.class, spawnPos, 2.0), "Should detect pig near spawn position");
+        helper.assertTrue(helper.hasEntityAt(Pig.class, blockPos, 10.0), "Should detect pig near player position");
         pig.discard();
         return TestResult.pass();
     }

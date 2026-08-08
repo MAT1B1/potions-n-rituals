@@ -2,6 +2,8 @@ package com.matibi.potionsnrituals.util;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.MinecraftServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 
 public class TickManager {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TickManager.class);
 
     private interface TickTask {
         boolean tick(MinecraftServer server);
@@ -64,8 +67,12 @@ public class TickManager {
         List<TickTask> snapshot = List.copyOf(TASKS);
         TASKS.clear();
         for (TickTask task : snapshot) {
-            if (!task.tick(server)) {
-                TASKS.add(task);
+            try {
+                if (!task.tick(server)) {
+                    TASKS.add(task);
+                }
+            } catch (Exception e) {
+                LOGGER.error("TickManager task threw exception: {}", e.getMessage());
             }
         }
     }

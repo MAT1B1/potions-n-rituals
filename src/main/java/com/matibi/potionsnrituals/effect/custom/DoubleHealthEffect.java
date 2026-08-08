@@ -21,16 +21,16 @@ public class DoubleHealthEffect extends MobEffect {
     }
 
     @Override
+    public boolean shouldApplyEffectTickThisTick(int tickCount, int amplification) {
+        return true;
+    }
+
+    @Override
     public void applyInstantaneousEffect(@NonNull ServerLevel level, @Nullable Entity effectEntity,
                                         @Nullable Entity attacker, @NonNull LivingEntity target,
                                         int amplifier, double proximity) {
         applyDoubleHealth(target, amplifier);
         super.applyInstantaneousEffect(level, effectEntity, attacker, target, amplifier, proximity);
-    }
-
-    @Override
-    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        return duration == 1;
     }
 
     @Override

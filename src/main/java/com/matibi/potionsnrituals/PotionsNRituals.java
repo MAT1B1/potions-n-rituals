@@ -30,9 +30,9 @@ import com.matibi.potionsnrituals.world.LightningAttractor;
 import com.matibi.potionsnrituals.world.data.ModAttachments;
 import com.matibi.potionsnrituals.world.dimension.ModDimensions;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

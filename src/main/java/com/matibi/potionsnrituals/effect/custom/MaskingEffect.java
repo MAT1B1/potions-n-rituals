@@ -21,9 +21,23 @@ public class MaskingEffect extends MobEffect {
     }
 
     @Override
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+        return true;
+    }
+
+    @Override
+    public boolean applyEffectTick(@NonNull ServerLevel world, @NonNull LivingEntity entity, int amplifier) {
+        applyMasking(entity);
+        return super.applyEffectTick(world, entity, amplifier);
+    }
+
+    @Override
     public void applyInstantaneousEffect(@NonNull ServerLevel level, @Nullable Entity source, @Nullable Entity owner, @NonNull LivingEntity mob, int amplification, double scale) {
         super.applyInstantaneousEffect(level, source, owner, mob, amplification, scale);
+        applyMasking(mob);
+    }
 
+    private static void applyMasking(LivingEntity mob) {
         List<MobEffectInstance> effects = mob.getActiveEffects().stream()
                 .filter(e -> !e.getEffect().equals(ModEffects.MASKING)
                         && !e.getEffect().equals(ModEffects.RESURRECTION))
@@ -38,7 +52,6 @@ public class MaskingEffect extends MobEffect {
                 .toList();
 
         effects.forEach(e -> mob.removeEffect(e.getEffect()));
-
         effects.forEach(mob::addEffect);
     }
 }

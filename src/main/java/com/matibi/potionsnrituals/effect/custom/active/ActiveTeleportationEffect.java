@@ -39,7 +39,6 @@ public class ActiveTeleportationEffect extends MobEffect implements ActiveEffect
                 serverPlayer.getXRot(),
                 false
         );
-        world.broadcastEntityEvent(serverPlayer, (byte) 46);
         return true;
     }
 

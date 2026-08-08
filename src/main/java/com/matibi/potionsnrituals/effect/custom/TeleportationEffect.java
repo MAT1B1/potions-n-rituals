@@ -5,7 +5,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
@@ -28,7 +27,7 @@ public class TeleportationEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(@NonNull ServerLevel world, @NonNull LivingEntity entity, int amplifier) {
-        applyEffect(world, null, null, entity, amplifier, 1.0D);
+        applyEffect(world, entity, amplifier);
         return super.applyEffectTick(world, entity, amplifier);
     }
 
@@ -37,11 +36,11 @@ public class TeleportationEffect extends MobEffect {
 
     @Override
     public void applyInstantaneousEffect(@NonNull ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, @NonNull LivingEntity target, int amplifier, double proximity) {
-        applyEffect(world, effectEntity, attacker, target, amplifier, proximity);
+        applyEffect(world, target, amplifier);
         super.applyInstantaneousEffect(world, effectEntity, attacker, target, amplifier, proximity);
     }
 
-    private static void applyEffect(ServerLevel world, @Nullable Entity effectEntity, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
+    private static void applyEffect(ServerLevel world, LivingEntity target, int amplifier) {
         if (target instanceof ServerPlayer sp && amplifier > 0) {
             var respawn = sp.getRespawnConfig();
 
@@ -54,7 +53,6 @@ public class TeleportationEffect extends MobEffect {
                     double y = p.getY();
                     double z = p.getZ() + 0.5;
                     sp.teleportTo(targetWorld, x, y + 1, z, Set.of(), sp.getYRot(), sp.getXRot(), false);
-                    world.broadcastEntityEvent(sp, (byte) 46);
                     return;
                 }
             }
@@ -69,11 +67,9 @@ public class TeleportationEffect extends MobEffect {
             double newX = target.getX() + dx;
             double newZ = target.getZ() + dz;
 
-            int startY = Mth.floor(target.getY());
+            BlockPos.MutableBlockPos targetPos = new BlockPos.MutableBlockPos(newX, world.getMaxY(), newZ);
 
-            BlockPos.MutableBlockPos targetPos = new BlockPos.MutableBlockPos(newX, startY, newZ);
-
-            while (targetPos.getY() > world.getMinSectionY() && targetPos.getY() < startY + 8) {
+            while (targetPos.getY() > world.getMinSectionY()) {
                 if (world.getBlockState(targetPos).isAir())
                     targetPos.move(Direction.DOWN);
                 else
@@ -85,7 +81,6 @@ public class TeleportationEffect extends MobEffect {
                     world.getBlockState(targetPos.above(2)).isAir()) {
 
                 target.teleportTo(newX, targetPos.getY() + 1, newZ);
-                world.broadcastEntityEvent(target, (byte) 46);
                 return;
             }
         }
