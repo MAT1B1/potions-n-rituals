@@ -4,8 +4,12 @@ import com.matibi.potionsnrituals.command.test.TestRegistry;
 import com.matibi.potionsnrituals.command.test.TestResult;
 import com.matibi.potionsnrituals.command.test.TestContext;
 import com.matibi.potionsnrituals.command.test.TestHelper;
+import com.matibi.potionsnrituals.effect.ActiveEffect;
 import com.matibi.potionsnrituals.effect.ModEffects;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Consumer;
@@ -15,10 +19,10 @@ public final class EffectTests {
 
     static {
         // Active effects (keybind-triggered)
-        /*TestRegistry.registerAsync("zeus_lightning_strikes", EffectTests::testZeusLightning);
+        TestRegistry.registerAsync("zeus_lightning_strikes", EffectTests::testZeusLightning);
         TestRegistry.registerAsync("medusa_petrifies", EffectTests::testMedusaPetrify);
         TestRegistry.registerAsync("active_tp_teleports", EffectTests::testActiveTeleport);
-        TestRegistry.registerAsync("love_effect_applies", EffectTests::testLoveEffect);*/
+        TestRegistry.registerAsync("love_effect_applies", EffectTests::testLoveEffect);
 
         // Terrain effects (alchemical stone)
         /*TestRegistry.registerAsync("alchemist_transmutes_coal", EffectTests::testAlchemistTransmute);
@@ -79,23 +83,67 @@ public final class EffectTests {
     // Active effect tests
 
     private static void testZeusLightning(TestContext ctx, Consumer<TestResult> cb) {
-        ctx.helper().giveEffect(ModEffects.ZEUS_BENEDICTION, 200, 0);
-        ctx.helper().waitTicks(1, () -> cb.accept(TestResult.pass()));
+        TestHelper helper = ctx.helper();
+        helper.clearEffects();
+        helper.giveEffect(ModEffects.ZEUS_BENEDICTION, 200, 0);
+        helper.setPlayerLook(0, 90); // face south, look straight down
+        boolean result = ((ActiveEffect) ModEffects.ZEUS_BENEDICTION.value()).useOnKeybind(helper.level(), helper.player(), 0, 0);
+        helper.assertTrue(result, "Zeus useOnKeybind should return true when ground in sight");
+        helper.waitTicks(2, () -> {
+            BlockPos groundPos = helper.player().blockPosition().below();
+            helper.assertTrue(helper.hasEntityAt(LightningBolt.class, groundPos, 5.0), "LightningBolt should spawn below player");
+            helper.clearEffects();
+            cb.accept(TestResult.pass());
+        });
     }
 
     private static void testMedusaPetrify(TestContext ctx, Consumer<TestResult> cb) {
-        ctx.helper().giveEffect(ModEffects.MEDUSA_BENEDICTION, 200, 0);
-        ctx.helper().waitTicks(1, () -> cb.accept(TestResult.pass()));
+        TestHelper helper = ctx.helper();
+        helper.clearEffects();
+        helper.giveEffect(ModEffects.MEDUSA_BENEDICTION, 200, 0);
+        helper.setPlayerLook(0, 0); // face south, horizontal
+        var zombie = helper.spawnLiving(EntityTypes.ZOMBIE, new Vec3(0, 0, 10));
+        helper.waitTicks(1, () -> {
+            boolean result = ((ActiveEffect) ModEffects.MEDUSA_BENEDICTION.value()).useOnKeybind(helper.level(), helper.player(), 0, 0);
+            helper.assertTrue(result, "Medusa useOnKeybind should return true when target in sight");
+            helper.assertTrue(helper.hasEffect(zombie, ModEffects.PETRIFICATION, 100), "Zombie should have PETRIFICATION effect");
+            zombie.discard();
+            helper.clearEffects();
+            cb.accept(TestResult.pass());
+        });
     }
 
     private static void testActiveTeleport(TestContext ctx, Consumer<TestResult> cb) {
-        ctx.helper().giveEffect(ModEffects.ACTIVE_TP, 200, 0);
-        ctx.helper().waitTicks(1, () -> cb.accept(TestResult.pass()));
+        TestHelper helper = ctx.helper();
+        helper.clearEffects();
+        helper.giveEffect(ModEffects.ACTIVE_TP, 200, 0);
+        Vec3 startPos = helper.player().position();
+        helper.setPlayerLook(0, 90); // face south, look straight down
+        boolean result = ((ActiveEffect) ModEffects.ACTIVE_TP.value()).useOnKeybind(helper.level(), helper.player(), 0, 0);
+        helper.assertTrue(result, "Active TP useOnKeybind should return true when ground in sight");
+        helper.waitTicks(1, () -> {
+            helper.assertTrue(helper.player().position().distanceTo(startPos) > 1.0, "Player should have teleported away from original position");
+            helper.clearEffects();
+            cb.accept(TestResult.pass());
+        });
     }
 
     private static void testLoveEffect(TestContext ctx, Consumer<TestResult> cb) {
-        ctx.helper().giveEffect(ModEffects.LOVE, 200, 0);
-        ctx.helper().waitTicks(1, () -> cb.accept(TestResult.pass()));
+        TestHelper helper = ctx.helper();
+        helper.clearEffects();
+        helper.setPlayerPos(new Vec3(0, 200, 0));
+        helper.giveEffect(ModEffects.LOVE, 200, 0);
+        helper.setPlayerLook(0, 5); // face south, look slightly downward
+        var cow = helper.spawnLiving(EntityTypes.COW, new Vec3(0, 0, 5));
+        helper.waitTicks(1, () -> {
+            boolean result = ((ActiveEffect) ModEffects.LOVE.value()).useOnKeybind(helper.level(), helper.player(), 0, 0);
+            helper.assertTrue(result, "Love useOnKeybind should return true when breedable target in sight");
+            helper.assertTrue(helper.hasEffect(helper.player(), ModEffects.PREGNANT, 100), "Player should have PREGNANT effect after love trigger");
+            helper.assertFalse(helper.hasEffect(helper.player(), ModEffects.LOVE, 1), "Player should no longer have LOVE effect after trigger");
+            cow.discard();
+            helper.clearEffects();
+            cb.accept(TestResult.pass());
+        });
     }
 
     // === Simple sync effect tests ===
