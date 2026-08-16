@@ -6,6 +6,7 @@ import com.matibi.potionsnrituals.command.test.TestContext;
 import com.matibi.potionsnrituals.command.test.TestHelper;
 import com.matibi.potionsnrituals.util.TickManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.pig.Pig;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Set;
 import java.util.function.Consumer;
 
 public final class CoreTests {
@@ -182,17 +184,27 @@ public final class CoreTests {
 
     private static TestResult testSetPlayerPosVec3(TestContext ctx) {
         TestHelper helper = ctx.helper();
+        ServerPlayer player = helper.player();
+        Vec3 originalPos = player.position();
+        float originalYaw = player.getYRot();
+        float originalPitch = player.getXRot();
         Vec3 target = new Vec3(10, 64, -5);
         helper.setPlayerPos(target);
         helper.assertTrue(helper.playerAt(target, 0.1), "Player should be at the set position");
+        player.teleportTo(player.level(), originalPos.x, originalPos.y, originalPos.z, Set.of(), originalYaw, originalPitch, true);
         return TestResult.pass();
     }
 
     private static TestResult testSetPlayerPosBlock(TestContext ctx) {
         TestHelper helper = ctx.helper();
+        ServerPlayer player = helper.player();
+        Vec3 originalPos = player.position();
+        float originalYaw = player.getYRot();
+        float originalPitch = player.getXRot();
         BlockPos target = new BlockPos(20, 70, 15);
         helper.setPlayerPos(target);
         helper.assertTrue(helper.playerAt(Vec3.atCenterOf(target), 0.1), "Player should be at the center of the set block position");
+        player.teleportTo(player.level(), originalPos.x, originalPos.y, originalPos.z, Set.of(), originalYaw, originalPitch, true);
         return TestResult.pass();
     }
 

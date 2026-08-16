@@ -66,10 +66,11 @@ public class TeleportationEffect extends MobEffect {
 
             double newX = target.getX() + dx;
             double newZ = target.getZ() + dz;
+            double startY = target.getY();
 
             BlockPos.MutableBlockPos targetPos = new BlockPos.MutableBlockPos(newX, world.getMaxY(), newZ);
 
-            while (targetPos.getY() > world.getMinSectionY()) {
+            while (targetPos.getY() > world.getMinSectionY() && Math.abs(targetPos.getY() - startY) <= 8) {
                 if (world.getBlockState(targetPos).isAir())
                     targetPos.move(Direction.DOWN);
                 else

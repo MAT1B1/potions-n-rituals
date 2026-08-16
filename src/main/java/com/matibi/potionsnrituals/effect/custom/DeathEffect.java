@@ -73,7 +73,6 @@ public class DeathEffect extends MobEffect {
             target.hurtServer(world, world.damageSources().mobAttack(livingAttacker), Float.MAX_VALUE);
         else
             target.hurtServer(world, world.damageSources().magic(), Float.MAX_VALUE);
-
     }
 
     private static boolean isBoss(LivingEntity e) {

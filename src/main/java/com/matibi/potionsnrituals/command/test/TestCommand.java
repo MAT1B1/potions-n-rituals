@@ -9,9 +9,11 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class TestCommand {
@@ -30,8 +32,8 @@ public class TestCommand {
         );
     }
 
-    private static boolean isOp(ServerPlayer player) {
-        return player.isCreative();
+    private static boolean isSurvival(ServerPlayer player) {
+        return !player.isCreative();
     }
 
     private static int reloadTests(CommandContext<CommandSourceStack> context) {
@@ -43,7 +45,7 @@ public class TestCommand {
             return 0;
         }
 
-        if (!isOp(player)) {
+        if (isSurvival(player)) {
             player.sendSystemMessage(Component.literal("§cYou must be an operator to run tests"));
             return 0;
         }
@@ -63,7 +65,7 @@ public class TestCommand {
             return 0;
         }
 
-        if (!isOp(player)) {
+        if (isSurvival(player)) {
             player.sendSystemMessage(Component.literal("§cYou must be an operator to run tests"));
             return 0;
         }
@@ -74,12 +76,17 @@ public class TestCommand {
             return 1;
         }
 
+        Vec3 originalPos = player.position();
+        float originalYaw = player.getYRot();
+        float originalPitch = player.getXRot();
+
         player.sendSystemMessage(Component.literal("§6Running " + tests.size() + " test(s)..."));
         runSequential(player, tests, 0, new ArrayList<>(), results -> {
             int passed = (int) results.stream().filter(TestResult::passed).count();
             int failed = results.size() - passed;
             player.sendSystemMessage(Component.literal(
                     String.format("§6Tests complete: §a%d passed §c%d failed", passed, failed)));
+            player.teleportTo(player.level(), originalPos.x, originalPos.y, originalPos.z, Set.of(), originalYaw, originalPitch, true);
         });
         return 1;
     }
@@ -93,7 +100,7 @@ public class TestCommand {
             return 0;
         }
 
-        if (!isOp(player)) {
+        if (isSurvival(player)) {
             player.sendSystemMessage(Component.literal("§cYou must be an operator to run tests"));
             return 0;
         }
@@ -120,7 +127,7 @@ public class TestCommand {
             return 0;
         }
 
-        if (!isOp(player)) {
+        if (isSurvival(player)) {
             player.sendSystemMessage(Component.literal("§cYou must be an operator to run tests"));
             return 0;
         }
@@ -165,11 +172,10 @@ public class TestCommand {
         };
 
         try {
-            if (test.isAsync()) {
+            if (test.isAsync())
                 test.async().run(ctx, onTestComplete);
-            } else {
+            else
                 onTestComplete.accept(test.sync().run(ctx));
-            }
         } catch (TestHelper.TestAssertionError e) {
             onTestComplete.accept(TestResult.fail(e.getMessage()));
         } catch (Exception e) {
@@ -187,11 +193,10 @@ public class TestCommand {
         );
 
         try {
-            if (test.isAsync()) {
+            if (test.isAsync())
                 test.async().run(ctx, callback);
-            } else {
+            else
                 callback.accept(test.sync().run(ctx));
-            }
         } catch (TestHelper.TestAssertionError e) {
             callback.accept(TestResult.fail(e.getMessage()));
         } catch (Exception e) {
