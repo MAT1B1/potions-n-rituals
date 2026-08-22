@@ -1,6 +1,6 @@
 <div align="center">
 
-# Potions & Rituals
+![Séparateur Principal](asset/potionsNrituals.png)
 
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Minecraft](https://img.shields.io/badge/minecraft-26.2-blue)
