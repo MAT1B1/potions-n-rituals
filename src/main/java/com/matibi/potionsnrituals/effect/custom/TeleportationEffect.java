@@ -1,7 +1,8 @@
 package com.matibi.potionsnrituals.effect.custom;
 
+import com.matibi.potionsnrituals.PotionsNRituals;
 import com.matibi.potionsnrituals.config.ModConfig;
-import net.minecraft.core.Direction;
+import com.matibi.potionsnrituals.util.ModUtils;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -58,32 +59,9 @@ public class TeleportationEffect extends MobEffect {
             }
         }
 
-        for (int i = 0; i < ModConfig.get().tp_max_try; i++) {
-            double radius = 8.0 + world.getRandom().nextDouble() * 8.0;
-            double angle = world.getRandom().nextDouble() * 2 * Math.PI;
-            double dx = Math.cos(angle) * radius;
-            double dz = Math.sin(angle) * radius;
-
-            double newX = target.getX() + dx;
-            double newZ = target.getZ() + dz;
-            double startY = target.getY();
-
-            BlockPos.MutableBlockPos targetPos = new BlockPos.MutableBlockPos(newX, world.getMaxY(), newZ);
-
-            while (targetPos.getY() > world.getMinSectionY() && Math.abs(targetPos.getY() - startY) <= 8) {
-                if (world.getBlockState(targetPos).isAir())
-                    targetPos.move(Direction.DOWN);
-                else
-                    break;
-            }
-
-            if (!world.getBlockState(targetPos).isAir() &&
-                    world.getBlockState(targetPos.above()).isAir() &&
-                    world.getBlockState(targetPos.above(2)).isAir()) {
-
-                target.teleportTo(newX, targetPos.getY() + 1, newZ);
-                return;
-            }
-        }
+        if (ModUtils.randomTeleport(world, target, 8.0 + world.getRandom().nextDouble() * 8.0, ModConfig.get().tp_max_try))
+            PotionsNRituals.LOGGER.info("Teleporting {}", target.getDisplayName().getString());
+        else
+            PotionsNRituals.LOGGER.warn("{} did not teleport", target.getDisplayName().getString());
     }
 }

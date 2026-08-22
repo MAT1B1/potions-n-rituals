@@ -397,8 +397,32 @@ You are free to add Potions & Rituals to any modpack, and to use any of the mod 
 
 ![Séparateur Principal](asset/separation_bar.png)
 
+## AI usage
+
 </div>
 
+> this section is here to explain how I used AI for this mod.
+> I know some of you don't like AI at all, but it is pretty useful 
+> when you have a large amount of tiny things to change and it make 
+> things faster. If the mod is not up to date, it will not be because 
+> of AI, but either I'm focused on my CS career either I'm not anymore
+> interesting in making minecraft mods
+
+What I used AI for:
+* Place all constant variables in the modmenu screen
+* Translation
+* Part of the code (Just to be fast, when you need to make a change on 50+ files for a name change, it's a bit boring)
+
+What I did not used AI for:
+* Textures (I used Pinterest for some ideas, if you find something too close to your artwork dm me)
+* All the code
+
+<div align="center">
+
+![Séparateur Principal](asset/separate_simple.png)
+
 ## Got feedback or ideas?
+
+</div>
 
 - Email: [matibi.mods@gmail.com](mailto:matibi.mods@gmail.com)
