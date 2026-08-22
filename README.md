@@ -309,11 +309,11 @@ Each ritual defines:
 </div>
 
 Five in-game books with custom GUI, recipes, lore, and illustrations - no wiki required:
-1. **Magnus Opus: The Foundations of Alchemy** - introduction to the four stages
-2. **Nigredo: Chronicles of Chaos** - all custom potion recipes
-3. **Albedo: Vessel of Order** - talismans, artifacts, Alchemical Stones
-4. **Citrinitas: Anchor of Enlightenment** - ritual documentation
-5. **Rubedo: Apex of Mastery** - grand rituals
+1. **Magnus Opus: The Foundations of Alchemy** - introduction to the four stages - obtention through cleric trades 
+2. **Nigredo: Chronicles of Chaos** - all custom potion recipes - obtention with achievement
+3. **Albedo: Vessel of Order** - talismans, artifacts, Alchemical Stones - obtention with achievement
+4. **Citrinitas: Anchor of Enlightenment** - ritual documentation - obtention with achievement
+5. **Rubedo: Apex of Mastery** - grand rituals - obtention with achievement
 
 <div align="center">
 
@@ -396,6 +396,17 @@ You are free to add Potions & Rituals to any modpack, and to use any of the mod 
 <div align="center">
 
 ![Séparateur Principal](asset/separation_bar.png)
+
+## Coming next...
+
+</div>
+
+* Player aging and dying of old age (reset the spawn point)
+* Philosopher's Stone to become 'immortal' (young forever)
+
+<div align="center">
+
+![Séparateur Principal](asset/separate_simple.png)
 
 ## AI usage
 
