@@ -41,12 +41,11 @@ public class ModUtils {
         for (int attempt = 0; attempt < maxAttempt; attempt++) {
             double xx = target.getX() + (target.getRandom().nextDouble() - 0.5) * diameter;
             double yy = Mth.clamp(
-                    target.getY() + (target.getRandom().nextDouble() - 0.5) * diameter, level.getMinY(), level.getMinY() + ((ServerLevel)level).getLogicalHeight() - 1
+                    target.getY() + (target.getRandom().nextDouble() - 0.5) * diameter, level.getMinY(), level.getMinY() + level.getLogicalHeight() - 1
             );
             double zz = target.getZ() + (target.getRandom().nextDouble() - 0.5) * diameter;
-            if (target.isPassenger()) {
+            if (target.isPassenger())
                 target.stopRiding();
-            }
 
             Vec3 oldPos = target.position();
             if (target.randomTeleport(xx, yy, zz, true)) {
