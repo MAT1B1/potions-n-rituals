@@ -1,4 +1,4 @@
-# 📜 Système de Miasme & Résidus Alchimiques
+# Système de Miasme & Résidus Alchimiques
 
 ---
 
@@ -20,9 +20,9 @@ Le **Miasme** représente la pollution magique et la saturation toxique liées �
 * **Flétrissement :** S'il reste au sol trop longtemps, il détruit les fleurs et transforme l'herbe adjacente en terre stérile.
 
 ### C. Manipulation & Sécurité
-* ❌ **Destruction à main nue (Critique) :** Casser le bloc sans outil adapté libère un nuage concentré qui inflige instantanément **+80% à +90% de Miasme** au joueur.
+* **Destruction à main nue (Critique) :** Casser le bloc sans outil adapté libère un nuage concentré qui inflige instantanément **+80% à +90% de Miasme** au joueur.
 *  **Collecte sécurisée :** Faire un **clic droit avec une Fiole Vide (*Glass Bottle*)** retire proprement le bloc et donne une **Fiole de Résidu Miasmatique** (*Miasmatic Flask*).
-* 🗑️ **Élimination :** Jeter la fiole dans la lave, le feu ou un cactus pour s'en débarrasser définitivement.
+* **Élimination :** Jeter la fiole dans la lave, le feu ou un cactus pour s'en débarrasser définitivement.
 
 ---
 
