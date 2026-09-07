@@ -422,11 +422,10 @@ You are free to add Potions & Rituals to any modpack, and to use any of the mod 
 What I used AI for:
 * Place all constant variables in the modmenu screen
 * Translation
-* Part of the code (Just to be fast, when you need to make a change on 50+ files for a name change, it's a bit boring)
+* Part of the code
 
 What I did not used AI for:
 * Textures (I used Pinterest for some ideas, if you find something too close to your artwork dm me)
-* All the code
 
 <div align="center">
 
